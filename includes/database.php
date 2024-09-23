@@ -1,1 +1,1 @@
-// Connexion to MySQL database
+<!-- MySQL database -->

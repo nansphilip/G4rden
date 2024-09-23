@@ -1,2 +1,2 @@
-// User class
-// Admin class that extends User class
+<!-- User class -->
+<!-- Admin class that extends User class -->

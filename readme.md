@@ -28,3 +28,13 @@ The MVC pattern is base on an `index.php` file that loads the `router.php` file.
 The `router.php` file finds the corresponding controller and executes it.
 
 The controller communicates with a model if necessary, and the sends the view to the client.
+
+
+## Branch and commits
+
+- Branch:
+    - new feature: `feature/new-feature-name`
+    - bug fix: `fix/fix-bug-description`
+- Commits:
+    - feature: `feat: new feature`
+    - fix: `fix: fix bug`
