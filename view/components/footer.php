@@ -1,0 +1,1 @@
+// Footer for each page
