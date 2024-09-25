@@ -1,15 +1,17 @@
-<!-- Index router -->
-
 <?php
 
+/**
+ * Index router
+ * Redirects requests to the corresponding controller,
+ * and handles errors not previously handled.
+ */
 try {
+    // Environment
+    define('ENVIRONMENT', getenv('ENV'));
+
     // Imports
     require_once ("includes/app.php");
     require_once ("includes/database.php");
-
-    // Environment
-    define('ENVIRONMENT', 'DEV');
-    // define('ENVIRONMENT', 'PROD');
 
     // Router
     if (isset($_GET['p'])) {

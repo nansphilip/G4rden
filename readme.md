@@ -4,11 +4,41 @@ A minimalist PHP framework based on MVC pattern.
 
 ## Installation
 
+1. Programs
+
 - Install PHP 8.3
 - Install MySQL
-- Allow PHP PDO extension
-- Create a database named `g4rden-db`
-- Create an user named `g4rden-user` with password `g4rden-password`
+
+1. Database
+
+- Allow `PHP PDO extension` :
+  - Find your PHP installation directory
+  - Rename `pdo.ini-development` to `pdo.ini`
+  - Open `pdo.ini`: uncomment `extension=pdo_mysql` and `:extension_dir = "ext"`
+- Create a database and an user with privileges (follow `/sql/database.sql`)
+- Add tables and some data (follow `/sql/tables.sql` and `/sql/data.sql`)
+- Insert data into tables (follow `/sql/data.sql`)
+
+1. Files
+
+- Add an `.env` file with the following content:
+
+```
+# Environnement setup
+ENV=DEV
+
+# MySQL Database
+MYSQL_HOST=localhost
+MYSQL_NAME=g4rden-db
+MYSQL_USER=g4rden-user
+MYSQL_PASS=g4rden-password
+```
+
+1. Run the project
+
+```
+php -S localhost:8000
+```
 
 ## Conventions
 
@@ -18,7 +48,7 @@ A minimalist PHP framework based on MVC pattern.
   - `snake_case.php` for other files
 - Classes: `PascalCase`
 - Methods and functions: `camelCase()`
-- Variables: `$snakeCase`
+- Variables: `$camelCase`
 - Constants: `UPPER_SNAKE_CASE`
 
 ## Usage
@@ -35,6 +65,7 @@ The controller communicates with a model if necessary, and the sends the view to
 - Branch:
     - new feature: `feature/new-feature-name`
     - bug fix: `fix/fix-bug-description`
+
 - Commits:
     - feature: `feat: new feature`
     - fix: `fix: fix bug`

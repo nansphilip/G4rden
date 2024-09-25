@@ -1,9 +1,12 @@
-<!-- Home controller -->
-
 <?php
+// Home controller
+
 // Includes required models
 
 // Prepare data for the view
+
+// List of variables to inject in the view
+$varToInject = [];
 
 // Set page meta data
 App::setPageTitle("Home");
@@ -11,7 +14,7 @@ App::setPageDescription("Welcome to G4rden");
 App::setPageFavicon("world.png");
 
 // Load the view
-App::loadCssFiles(["home", "global"]);
-App::loadJsFiles(["home", "global"]);
-App::loadViewFile("home");
+App::loadCssFiles(["home"]);
+App::loadJsFiles(["home"]);
+App::loadViewFile("home", $varToInject);
 ?>
