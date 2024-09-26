@@ -85,10 +85,12 @@ class App
             ${$variable} = $value;
         }
 
+        // Start buffering
         ob_start();
 
         require_once("view/$view.php");
 
+        // End buffering, and return the output
         ob_end_flush();
     }
 }

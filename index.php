@@ -10,8 +10,8 @@ try {
     define('ENVIRONMENT', getenv('ENV'));
 
     // Imports
-    require_once ("includes/app.php");
-    require_once ("includes/database.php");
+    require_once ("includes/App.php");
+    require_once ("includes/Database.php");
 
     // Router
     if (isset($_GET['p'])) {
