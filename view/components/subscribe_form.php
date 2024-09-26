@@ -1,21 +1,33 @@
 <form action="" method="post">
-    <label for="name">Nom: </label>
-    <input name="name" type="text"><br>
+    <div class="flex justify-between">
+        <label for="name">Nom: </label>
+        <input name="name" type="text">
+    </div>
 
-    <label for="surname">Prénom: </label>
-    <input name="surname" type="text"><br>
+    <div class="flex justify-between">
+        <label for="surname">Prénom: </label>
+        <input name="surname" type="text">
+    </div>
 
-    <label for="username">Pseudo: </label>
-    <input name="username" type="text"><br>
+    <div class="flex justify-between">
+        <label for="username">Pseudo: </label>
+        <input name="username" type="text">
+    </div>
 
-    <label for="mail">E-mail: </label>
-    <input name="mail" type="mail"><br>
+    <div class="flex justify-between">
+        <label for="mail">E-mail: </label>
+        <input name="mail" type="mail">
+    </div>
 
-    <label for="password">Mot de passe: </label>
-    <input name="password" type="password"><br>
+    <div class="flex justify-between">
+        <label for="password">Mot de passe: </label>
+        <input name="password" type="password">
+    </div>
 
-    <label for="passwordConfirm">Confirmer le mot de passe: </label>
-    <input name="passwordConfirm" type="password"><br>
+    <div class="flex justify-between">
+        <label for="passwordConfirm">Confirmer le mot de passe: </label>
+        <input name="passwordConfirm" type="password">
+    </div>
 
     <button type="submit" name="subscribe">S'inscrire</button>
 </form>
