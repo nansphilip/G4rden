@@ -10,16 +10,22 @@
 class User
 {
     public $id;
+    public $name;
+    public $surname;
     public $username;
     public $password;
     public $user_type;
+    public $mail;
 
-    public function __construct($id, $username, $password, $user_type)
+    public function __construct($id, $name, $surname, $username, $password, $user_type, $mail)
     {
         $this->id = $id;
+        $this->name = $name;
+        $this->surname = $surname;
         $this->username = $username;
         $this->password = $password;
         $this->user_type = $user_type;
+        $this->mail = $mail;
     }
 
     /**
@@ -29,13 +35,16 @@ class User
      * @param string $user_type
      * @return associated_array of the user
      */
-    public function addUser($username, $password, $user_type)
+    public function addUser($name, $surname, $username, $password, $user_type, $mail)
     {
-        $sql = "INSERT INTO User (username, password, user_type) VALUES (:username, :password, :user_type)";
+        $sql = "INSERT INTO User (name, surname, username, password, user_type, mail) VALUES (:name, :surname, :username, :password, :user_type, :mail)";
         $query = Database::queryAssoc($sql, [
+            ':name' => $name,
+            ':surname' => $surname,
             ':username' => $username,
             ':password' => $password,
-            ':user_type' => $user_type
+            ':user_type' => $user_type,
+            ':mail' => $mail
         ]);
         return $query[0];
     }
@@ -129,6 +138,15 @@ class Admin extends User
         $sql = "SELECT * FROM User WHERE user_type = :user_type";
         $query = Database::queryAssoc($sql, [
             ':user_type' => $user_type
+        ]);
+        return $query[0];
+    }
+
+    public function getUserMail($mail)
+    {
+        $sql = "SELECT * FROM User WHERE mail = :mail";
+        $query = Database::queryAssoc($sql, [
+            ':mail' => $mail
         ]);
         return $query[0];
     }

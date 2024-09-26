@@ -3,7 +3,7 @@
 //Check if $_POST exists and the user clicked on the submit button
 if (isset($_POST['subscribe'])) {
     //Check if all fields are filled
-    if (isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['pseudo']) && isset($_POST['mail']) && isset($_POST['password']) && isset($_POST['passwordConfirm'])) {
+    if (isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['username']) && isset($_POST['mail']) && isset($_POST['password']) && isset($_POST['passwordConfirm'])) {
         //Check if email is ok
         if (filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)) {
             //Check if password is ok
@@ -24,25 +24,42 @@ if (isset($_POST['subscribe'])) {
             exit();
         }
     }
-}
 
 //Banalize data
 $name = htmlspecialchars($_POST['name'],ENT_QUOTES,'UTF-8');
 $surname = htmlspecialchars($_POST['surname'],ENT_QUOTES,'UTF-8');
-$pseudo = htmlspecialchars($_POST['pseudo'],ENT_QUOTES,'UTF-8');
+$username = htmlspecialchars($_POST['username'],ENT_QUOTES,'UTF-8');
 $mail = htmlspecialchars($_POST['mail'],ENT_QUOTES,'UTF-8');
 $password = htmlspecialchars($_POST['password'],ENT_QUOTES,'UTF-8');
 $passwordConfirm = htmlspecialchars($_POST['passwordConfirm'],ENT_QUOTES,'UTF-8');
     
-//vérifier que le user existe pas encore
-//Check if the username is available and there is no user with the same email
+//Check if the username is available
 require_once("model/User.php");
-$user = Admin::getUserByUsername($pseudo);
+$admin = new Admin('1', 'Admin', 'Admin', 'admin', 'admin', 'ADMIN', 'admin@g4rden.com');
+$isUserAvailable = $admin->getUserByUsername($username);
+if ($isUserAvailable) {
+    echo "Ce username est déjà utilisé";
+    exit();
+}
+
+echo "Name: " . $name . "<br>";
+echo "Surname: " . $surname . "<br>";
+echo "username: " . $username . "<br>";
+echo "Mail: " . $mail . "<br>";
+echo "Password: " . $password . "<br>";
+echo "PasswordConfirm: " . $passwordConfirm . "<br>";
+
+//Check if the email is available and there is no user with the same email
+$isEmailAvailable = $admin->getUserMail($mail);
+if ($isEmailAvailable) {
+    echo "Ce mail est déjà utilisé";
+    exit();
+}
 
 //hasher le mdp 
 
 //si tout est ok ajout user en BASE 
-
+}
 //rediriger vers la page d'accueil en étant connecté
 
 

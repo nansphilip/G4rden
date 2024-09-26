@@ -5,8 +5,8 @@
     <label for="surname">Prénom: </label>
     <input name="surname" type="text"><br>
 
-    <label for="pseudo">Pseudo: </label>
-    <input name="pseudo" type="text"><br>
+    <label for="username">Pseudo: </label>
+    <input name="username" type="text"><br>
 
     <label for="mail">E-mail: </label>
     <input name="mail" type="mail"><br>
