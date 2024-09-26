@@ -9,14 +9,17 @@ A minimalist PHP framework based on MVC pattern.
 - Install PHP 8.3
 - Install MySQL
 
-1. Database
+1. PHP Config (for Windows)
 
 - Allow `PHP PDO extension` :
   - Find your PHP installation directory
   - Rename `pdo.ini-development` to `pdo.ini`
-  - Open `pdo.ini`: uncomment `extension=pdo_mysql` and `:extension_dir = "ext"`
+  - Open `pdo.ini`: uncomment `extension=pdo_mysql` and `extension_dir = "ext"`
+
+1. Database
+
 - Create a database and an user with privileges (follow `/sql/database.sql`)
-- Add tables and some data (follow `/sql/tables.sql` and `/sql/data.sql`)
+- Add tables (follow `/sql/tables.sql`)
 - Insert data into tables (follow `/sql/data.sql`)
 
 1. Files
