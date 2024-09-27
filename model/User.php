@@ -126,9 +126,27 @@ class Admin extends User
         $query = Database::queryAssoc($sql, [
             ':username' => $username
         ]);
-        return $query[0];
+        if(!$query) {
+            return false;
+        } else {
+            return $query[0];
+        }
     }
 
+    /**
+     * Checks if an user exists by his username.
+     * @param string $username
+     * @return associated_array of the user
+     */
+    public function isUsernameAvailable($username)
+    {
+        $sql = "SELECT * FROM User WHERE username = :username";
+        $query = Database::queryAssoc($sql, [
+            ':username' => $username
+        ]);
+        return false;
+    }
+  
     /**
      * Gets all users by their user_type.
      * @return array of associated_arrays of users
@@ -148,7 +166,11 @@ class Admin extends User
         $query = Database::queryAssoc($sql, [
             ':mail' => $mail
         ]);
-        return $query[0];
+        if(!$query) {
+            return false;
+        } else {
+            return $query[0];
+        }
     }
 
     /**
