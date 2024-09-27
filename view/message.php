@@ -20,7 +20,7 @@ require_once("view/components/header.php");
         ?>
     </pre>
     <?php
-    require_once("view/reply.php");
+    require_once("view/components/reply_form.php");
     ?>
     <?php
     foreach ($userMessageList as $userMessage) {
