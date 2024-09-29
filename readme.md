@@ -45,37 +45,7 @@ php -S localhost:8000
 
 ## Production
 
-1. Alwaysdata
-
-- Create an account
-- Create a website
-- In SFTP settings, allow and add a password
-
-1. Install SFTP extension
-
-- Create a folder `.vscode`
-- Create a file `.vscode/settings.json` with the following content:
-
-```
-{
-  "name": "G4rden",
-  "host": "ssh-your-username.alwaysdata.net",
-  "protocol": "sftp",
-  "port": 22,
-  "username": "your-username",
-  "password": "your-password",
-  "remotePath": "/home/your-username/www/",
-  "uploadOnSave": true,
-  "ignore": [
-      "**/.vscode/**",
-      "**/.git/**",
-      "**/.DS_Store",
-      "**/.env"
-  ]
-}
-```
-- Launch `SFTP: Sync Local -> Remote`
-
+Work in progress...
 
 ## Conventions
 
