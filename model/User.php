@@ -10,16 +10,22 @@
 class User
 {
     public $id;
+    public $name;
+    public $surname;
     public $username;
     public $password;
     public $user_type;
+    public $mail;
 
-    public function __construct($id, $username, $password, $user_type)
+    public function __construct($id, $name, $surname, $username, $password, $user_type, $mail)
     {
         $this->id = $id;
+        $this->name = $name;
+        $this->surname = $surname;
         $this->username = $username;
         $this->password = $password;
         $this->user_type = $user_type;
+        $this->mail = $mail;
     }
 
     /**
@@ -29,15 +35,18 @@ class User
      * @param string $user_type
      * @return associated_array of the user
      */
-    public function addUser($username, $password, $user_type)
+    public function addUser($name, $surname, $username, $password, $user_type, $mail)
     {
-        $sql = "INSERT INTO User (username, password, user_type) VALUES (:username, :password, :user_type)";
-        $query = Database::queryAssoc($sql, [
+        $sql = "INSERT INTO User (name, surname, username, password, user_type, mail) VALUES (:name, :surname, :username, :password, :user_type, :mail)";
+        $query = Database::queryAssocBool($sql, [
+            ':name' => $name,
+            ':surname' => $surname,
             ':username' => $username,
             ':password' => $password,
-            ':user_type' => $user_type
+            ':user_type' => $user_type,
+            ':mail' => $mail
         ]);
-        return $query[0];
+        return $query;
     }
 
     /**
@@ -65,13 +74,13 @@ class User
     public function updateUserUsernameById($id, $username, $password, $user_type)
     {
         $sql = "UPDATE User SET username = :username, password = :password, user_type = :user_type WHERE id = :id";
-        $query = Database::queryAssoc($sql, [
+        $query = Database::queryAssocBool($sql, [
             ':id' => $id,
             ':username' => $username,
             ':password' => $password,
             ':user_type' => $user_type
         ]);
-        return $query[0];
+        return $query;
     }
 
     /**
@@ -83,10 +92,11 @@ class User
     public function updateUserPasswordById($id, $password)
     {
         $sql = "UPDATE User SET password = :password WHERE id = :id";
-        $query = Database::queryAssoc($sql, [
+        $query = Database::queryAssocBool($sql, [
             ':id' => $id,
             ':password' => $password
         ]);
+        return $query;
     }
 
     /**
@@ -97,10 +107,10 @@ class User
     public function deleteUser($id)
     {
         $sql = "DELETE FROM User WHERE id = :id";
-        $query = Database::queryAssoc($sql, [
+        $query = Database::queryAssocBool($sql, [
             ':id' => $id
         ]);
-        return $query[0];
+        return $query;
     }
 }
 
@@ -117,9 +127,31 @@ class Admin extends User
         $query = Database::queryAssoc($sql, [
             ':username' => $username
         ]);
-        return $query[0];
+        if(!$query) {
+            return false;
+        } else {
+            return $query[0];
+        }
     }
 
+    /**
+     * Checks if an user exists by his username.
+     * @param string $username
+     * @return true if the username if avalaible, false otherwise
+     */
+    public function isUsernameAvailable($username)
+    {
+        $sql = "SELECT * FROM User WHERE username = :username";
+        $query = Database::queryAssoc($sql, [
+            ':username' => $username
+        ]);
+        if(is_null($query)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+  
     /**
      * Gets all users by their user_type.
      * @return array of associated_arrays of users
@@ -131,6 +163,37 @@ class Admin extends User
             ':user_type' => $user_type
         ]);
         return $query[0];
+    }
+
+    public function getUserMail($mail)
+    {
+        $sql = "SELECT * FROM User WHERE mail = :mail";
+        $query = Database::queryAssoc($sql, [
+            ':mail' => $mail
+        ]);
+        if(!$query) {
+            return false;
+        } else {
+            return $query[0];
+        }
+    }
+
+    /**
+     * Checks if an user exists by his mail.
+     * @param string $mail
+     * @return true if the mail if avalaible, false otherwise           
+     */
+    public function isMailAvailable($mail)
+    {
+        $sql = "SELECT * FROM User WHERE mail = :mail";
+        $query = Database::queryAssoc($sql, [
+            ':mail' => $mail
+        ]);
+        if(is_null($query)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
