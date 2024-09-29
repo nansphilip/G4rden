@@ -12,13 +12,13 @@ require_once("view/components/header.php");
 
     <pre>
         <?php
-        // print_r($userList);
-        // print_r($messageList);
-        // print_r($userMessageList);
+        if (isset($username)) {
+            echo "User added: " . $username;
+        }
         ?>
     </pre>
 
-    
+
     <?php
     require_once("view/components/subscribe_form.php");
     ?>

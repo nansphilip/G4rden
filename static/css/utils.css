@@ -17,3 +17,7 @@
 .justify-between {
     justify-content: space-between;
 }
+
+.gap-2 {
+    gap: 1rem;
+}
