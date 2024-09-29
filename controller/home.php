@@ -14,7 +14,7 @@ App::setPageDescription("Welcome to G4rden");
 App::setPageFavicon("world.png");
 
 // Load the view
-App::loadCssFiles(["home"]);
+App::loadCssFiles(["home"], ["backToTop"]);
 App::loadJsFiles(["home"]);
 App::loadViewFile("home", $varToInject);
 ?>

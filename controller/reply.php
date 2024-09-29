@@ -5,6 +5,9 @@
 require_once ("models/Users.php");
 require_once ("models/Message.php");
 
+$reply = $content;
+
+
 session_start();
 
 if (isset($_SESSION['user_id'])) {
