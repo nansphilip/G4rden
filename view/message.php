@@ -3,7 +3,7 @@
 
 <?php
 // Includes the header
-require_once("view/components/header.php");
+require_once "view/components/header.php";
 ?>
 
 <main>
@@ -37,5 +37,5 @@ require_once("view/components/header.php");
 
 <?php
 // Includes the footer
-require_once("view/components/footer.php");
+require_once "view/components/footer.php";
 ?>

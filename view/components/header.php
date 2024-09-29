@@ -40,6 +40,6 @@
     <header>
         <h1 class="logo-title"><a href="/index.php?p=home">G4rden</a></h1>
         <?php
-        require_once("view/components/navigation.php");
+        require_once "view/components/navigation.php";
         ?>
     </header>
