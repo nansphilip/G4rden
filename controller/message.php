@@ -2,10 +2,10 @@
 // Message controller
 
 // Includes required models
-require_once("model/User.php");
+require_once "model/User.php";
 $userList = Admin::getAll();
 
-require_once("model/Message.php");
+require_once "model/Message.php";
 $messageList = Message::getAll();
 
 // Prepare data for the view

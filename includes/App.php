@@ -88,7 +88,7 @@ class App
         // Start buffering
         ob_start();
 
-        require_once("view/$view.php");
+        require_once "view/$view.php";
 
         // End buffering, and return the output
         ob_end_flush();

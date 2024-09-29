@@ -43,6 +43,10 @@ MYSQL_PASS=g4rden-password
 php -S localhost:8000
 ```
 
+## Production
+
+Work in progress...
+
 ## Conventions
 
 - Folders: `snake_case`

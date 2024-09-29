@@ -10,8 +10,8 @@ try {
     define('ENVIRONMENT', getenv('ENV'));
 
     // Imports
-    require_once ("includes/App.php");
-    require_once ("includes/Database.php");
+    require_once "includes/App.php";
+    require_once "includes/Database.php";
 
     // Router
     if (isset($_GET['p'])) {
@@ -47,6 +47,6 @@ try {
          echo $e->getMessage();
     } else {
         // Todo : test this controller
-        require_once("controller/error.php");
+        require_once "controller/error.php";
     }
 }
