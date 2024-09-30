@@ -33,14 +33,14 @@ class User
      * @param string $user_type
      * @return associated_array of the user
      */
-    public function addUser()
+    public function addUser($hashedPassword)
     {
-        $sql = "INSERT INTO User (lastname, firstname, username, password, user_type) VALUES (:lastname, :firstname, :username, :password, :user_type)";
+        $sql = "INSERT INTO User (lastname, firstname, username, password, user_type) VALUES (:lastname, :firstname, :username, :hashedPassword, :user_type)";
         $query = Database::queryAssocBool($sql, [
             ':lastname' => $this->lastname,
             ':firstname' => $this->firstname,
             ':username' => $this->username,
-            ':password' => $this->password,
+            ':hashedPassword' => $hashedPassword,
             ':user_type' => $this->user_type,
         ]);
         return $query;
