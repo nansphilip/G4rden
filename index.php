@@ -26,7 +26,7 @@ try {
     }
 
     // Select a controller
-    $controllerPath = "controller/$page.php";
+    $controllerPath = "controller/$page-controller.php";
 
     // Call the controller
     if (file_exists($controllerPath)) {
