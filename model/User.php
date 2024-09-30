@@ -133,6 +133,12 @@ class Admin extends User
         return $query[0];
     }
 
+    public static function getLastUser() {
+        $sql = "SELECT * FROM User ORDER BY id DESC LIMIT 1";
+        $query = Database::queryAssoc($sql);
+        return $query[0];
+    }
+
     /**
      * Gets all users.
      * @return array of associated_arrays of users
