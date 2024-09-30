@@ -12,9 +12,11 @@ require_once "view/components/header.php";
 
     <pre>
         <?php
-        print_r($lastUser);
+        // print_r($lastUser);
         ?>
     </pre>
+
+    <button onclick="console.log('getLastUser')">Get last user</button>
 
 </main>
 

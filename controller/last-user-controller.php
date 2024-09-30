@@ -3,14 +3,14 @@
 
 // Includes required models
 require_once "model/User.php";
-$lastUser = Admin::getLastUser();
+// $lastUser = Admin::getLastUser();
 
 // Prepare data for the view
 
 
 // List of variables to inject in the view
 $varToInject = [
-    "lastUser" => $lastUser,
+    // "lastUser" => $lastUser,
 ];
 
 // Set page meta data
@@ -20,5 +20,5 @@ App::setPageFavicon("world.png");
 
 // Load the view
 App::loadCssFiles(["utils"]);
-// App::loadJsFiles(["last-user"]);
+App::loadJsFiles(["last-user"]);
 App::loadViewFile("last-user", $varToInject);
