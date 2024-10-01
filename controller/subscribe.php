@@ -10,55 +10,6 @@
 //     echo "Connexion ko";
 // }
 
-/*
-    Nans : On peut marquer les champs comme "required"
-*/
-// Check if all fields are filled
-// if (!(isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['passwordConfirm']))) {
-//     echo "A field is empty";
-//     goto view;
-// }
-
-/* Nans : attention, on préfère ne jamais expliquer à l'utilisateur la raison d'une erreur !
-    Le risque serait qu'un utilisateur malveillant teste si un email existe chez nous,
-    alors que nous souhaitons que les emails de nos clients restent privés
-    */
-// } else {
-// If email is not ok, display an error message
-// echo "Your email is not valid";
-// goto view;
-// }
-
-/**
- * Check if:
- * - email is ok
- * - password length is ok
- * - passwords and passwordConfirm are the same
- */
-
-//echo les données
-// echo "Name: " . $name . "<br>";
-// echo "Surname: " . $surname . "<br>";
-// echo "username: " . $username . "<br>";
-// echo "email: " . $email . "<br>";
-// echo "Password: " . $password . "<br>";
-// echo "PasswordConfirm: " . $passwordConfirm . "<br>";
-
-
-//Send email to the user to confirm his subscription 
-//(je sais pas encore si on envoie un lien de confirmation ou un numéro à entrer sur le site)
-// $to = 'theolemayne@gmail.com';
-// $subject = 'G4rden - Confirm your email ';
-// $message = '<html><body><p>Hello,</p><p>You have successfully subscribed to G4rden.</p><p>Your username is ' . $username . '</p><p>To confirm your subscription, </p></body></html>';
-// $headers = 'From: G4rden <noreply@g4rden.com>' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
-// if ($email = mail($to, $subject, $message, $headers)) {
-//     echo "Email sent";
-// }
-
-
-
-
-
 // Subscribe controller
 
 // Includes required models
@@ -80,7 +31,7 @@ function createUser()
     }
 
     // If password is not ok, return null
-    if (!(strlen($password) >= 8) && !($password == $passwordConfirm)) {
+    if (!(strlen($password) >= 8) || ($password != $passwordConfirm)) {
         error_log("Password is not ok");
         return null;
     }

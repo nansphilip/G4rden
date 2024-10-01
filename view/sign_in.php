@@ -8,7 +8,7 @@ require_once("view/components/header.php");
 
 <main>
     <h2><?= App::$pageTitle; ?></h2>
-    <p>Enter your username or email and your password to sign in. <a href="index.php?p=home">Click here to go back home.</a></p>
+    <p>Enter your username and your password to sign in. <a href="index.php?p=home">Click here to go back home.</a></p>
 
     <pre>
         <?php
