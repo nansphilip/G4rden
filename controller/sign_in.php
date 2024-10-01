@@ -26,7 +26,6 @@ function createUser(){
 
     //$admin->deleteUser('1');
 
-    //echo "username: ". $username . " password: ". $password . " hashedpassword: ". $userPassword;
     //Check if the password is correct
     if (password_verify($password, $userPassword)) {
         //Insert user data onto his session
