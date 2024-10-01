@@ -21,13 +21,13 @@ class Message
      * @param int $userId
      * @return associated_array of the message
      */
-    public function addMessage($content, $date, $userId)
+    public function addMessage()
     {
         $sql = "INSERT INTO Message (content, date, userId) VALUES (:content, :date, :userId)";
         $query = Database::queryAssoc($sql, [
-            ':content' => $content,
-            ':date' => $date,
-            ':userId' => $userId
+            ':content' => $this->content,
+            ':date' => $this->date,
+            ':userId' => $this->userId
         ]);
         return $query[0];
     }
