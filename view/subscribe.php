@@ -1,4 +1,5 @@
-<?php // Message view 
+<?php
+// Message view 
 ?>
 
 <?php
