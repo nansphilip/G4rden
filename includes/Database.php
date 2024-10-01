@@ -23,7 +23,7 @@ class Database
         $user = $env['MYSQL_USER'];
         $pass = $env['MYSQL_PASS'];
 
-        error_log("Connection string: $dsn");
+        // error_log("Connection string: $dsn");
 
         try {
             // Create a new PDO connection
