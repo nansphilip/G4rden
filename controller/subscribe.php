@@ -1,15 +1,5 @@
 <?php
 
-//Test connexion
-// $username = "theo";
-// $password = "chevallier";
-// $passwordVerify = "$2y$10$/ZI9lXq1IgOCPzCGdfRyJ.Y4KPS93DFDqLnwfN8f8ktszwvdMANUm";
-// if(password_verify($password, $passwordVerify)){
-//     echo "Connexion ok";
-// } else {
-//     echo "Connexion ko";
-// }
-
 // Subscribe controller
 
 // Includes required models
@@ -60,7 +50,9 @@ function createUser()
 
 
 // List of variables to inject in the view
-isset($isUserCreated) ? $varToInject = ["username" => $isUserCreated] : $varToInject = [];
+isset($isUserCreated)
+    ? $varToInject = ["username" => $isUserCreated]
+    : $varToInject = [];
 
 // Set page meta data
 App::setPageTitle("Subscribe");

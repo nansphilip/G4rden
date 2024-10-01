@@ -30,6 +30,10 @@ A minimalist PHP framework based on MVC pattern.
 # Environnement setup
 ENV=DEV
 
+# Server path if needed
+# ex: PATH="/MyProjects"
+PATH=""
+
 # MySQL Database
 MYSQL_HOST=localhost
 MYSQL_NAME=g4rden-db

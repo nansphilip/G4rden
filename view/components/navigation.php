@@ -1,5 +1,8 @@
-<?php $env = parse_ini_file(".env");
-$PATH = $env['PATH']; ?>
+<?php 
+    //Navigation bar
+    $env = parse_ini_file(".env");
+    $PATH = $env['PATH']; 
+?>
 
 <nav class="nav-bar">
     <?php 
