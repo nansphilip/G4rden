@@ -1,12 +1,10 @@
-import AsyncRouter from "./async-router.js";
+import AsyncRouter from "/static/js/async-router.js";
 
 export const getLastUser = async () => {
-    // try {
-    //     const response = await fetch("/index.php?p=last-user");
-    //     const data = await response.json();
-    //     return data;
-    // } catch (error) {
-    //     console.error(error);
-    // }
-    console.log("getLastUser");
+    try {
+        return await AsyncRouter("/index.php?p=last-user");
+    } catch (error) {
+        console.error(error);
+        return "error";
+    }
 }
