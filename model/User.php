@@ -4,7 +4,7 @@
 <?php
 /**
  * User class
- * An User has an ID, a username, a password and a user_type.
+ * An User has an ID, a username, a password and a userType.
  * It also has methods to add, get, update and delete users.
  */
 class User
@@ -14,34 +14,34 @@ class User
     public $firstname;
     public $username;
     public $password;
-    public $user_type;
+    public $userType;
 
-    public function __construct($id, $lastname, $firstname, $username, $password, $user_type)
+    public function __construct($id, $lastname, $firstname, $username, $password, $userType)
     {
         $this->id = $id;
         $this->lastname = $lastname;
         $this->firstname = $firstname;
         $this->username = $username;
         $this->password = $password;
-        $this->user_type = $user_type;
+        $this->userType = $userType;
     }
 
     /**
      * Adds a new user to the database.
      * @param string $username
      * @param string $password
-     * @param string $user_type
+     * @param string $userType
      * @return associated_array of the user
      */
     public function addUser($hashedPassword)
     {
-        $sql = "INSERT INTO User (lastname, firstname, username, password, user_type) VALUES (:lastname, :firstname, :username, :hashedPassword, :user_type)";
+        $sql = "INSERT INTO User (lastname, firstname, username, password, userType) VALUES (:lastname, :firstname, :username, :hashedPassword, :userType)";
         $query = Database::queryAssocBool($sql, [
             ':lastname' => $this->lastname,
             ':firstname' => $this->firstname,
             ':username' => $this->username,
             ':hashedPassword' => $hashedPassword,
-            ':user_type' => $this->user_type,
+            ':userType' => $this->userType,
         ]);
         return $query;
     }
@@ -60,7 +60,7 @@ class User
         if(!$query) {
             return false;
         } else {
-            return $query[0]['id'];
+            return $query[0];
         }
     }
 
@@ -105,17 +105,17 @@ class User
      * @param int $id
      * @param string $username
      * @param string $password
-     * @param string $user_type
+     * @param string $userType
      * @return associated_array of the user
      */
-    public function updateUserUsernameById($id, $username, $password, $user_type)
+    public function updateUserUsernameById($id, $username, $password, $userType)
     {
-        $sql = "UPDATE User SET username = :username, password = :password, user_type = :user_type WHERE id = :id";
+        $sql = "UPDATE User SET username = :username, password = :password, userType = :userType WHERE id = :id";
         $query = Database::queryAssocBool($sql, [
             ':id' => $id,
             ':username' => $username,
             ':password' => $password,
-            ':user_type' => $user_type
+            ':userType' => $userType
         ]);
         return $query;
     }
@@ -212,14 +212,14 @@ class Admin extends User
     }
 
     /**
-     * Gets all users by their user_type.
+     * Gets all users by their userType.
      * @return array of associated_arrays of users
      */
-    public function getUsersByUserType($user_type)
+    public function getUsersByUserType($userType)
     {
-        $sql = "SELECT * FROM User WHERE user_type = :user_type";
+        $sql = "SELECT * FROM User WHERE userType = :userType";
         $query = Database::queryAssoc($sql, [
-            ':user_type' => $user_type
+            ':userType' => $userType
         ]);
         return $query[0];
     }
