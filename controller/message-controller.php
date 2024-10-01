@@ -3,38 +3,18 @@
 
 // Includes required models
 require_once "model/User.php";
-$userList = Admin::getAll();
-
-require_once "model/Message.php";
-$messageList = Message::getAll();
+require_once("model/Message.php");
 
 // Prepare data for the view
-
-// Associate the messages with the users
-foreach ($messageList as $message) {
-    foreach ($userList as $user) {
-        if ($user['id'] == $message['user_id']) {
-            $username = $user['username'];
-            break;
-        } else {
-            $username = "Unknown";
-        }
-    }
-
-    // Rewrite the message list with the corresponding username
-    $userMessageList[] = [
-        "id" => $message['id'],
-        "username" => $username,
-        "message" => $message['content'],
-        "date" => date_format(new DateTime($message['date']), 'j F Y')
-    ];
-}
+$userList = Admin::getAll();
+$messageList = Message::getAllMessageJoin();
 
 // List of variables to inject in the view
 $varToInject = [
     // "userList" => $userList,
     // "messageList" => $messageList,
-    "userMessageList" => $userMessageList
+    //"userMessageList" => $userMessageList
+    "userMessageList" => $messageList
 ];
 
 // Set page meta data

@@ -1,4 +1,6 @@
-<?php // Home view ?>
+<?php
+// Home view
+?>
 
 <?php
 // Includes the header
