@@ -39,7 +39,12 @@
 <body>
 
     <header>
-        <h1 class="logo-title"><a href="/index.php?p=home">G4rden</a></h1>
+    <?php
+        //Navigation bar
+        $env = parse_ini_file(".env");
+        $PATH = $env['PATH'];
+        ?>
+        <h1 class="logo-title"><a href="<?php echo $PATH ?>/index.php?p=home">G4rden</a></h1>
         <?php
         require_once "view/components/navigation.php";
         ?>

@@ -21,7 +21,7 @@ function createUser()
     }
 
     // If password is not ok, return null
-    if (!(strlen($password) >= 8) && !($password == $passwordConfirm)) {
+    if (!(strlen($password) >= 8) || ($password != $passwordConfirm)) {
         error_log("Password is not ok");
         return null;
     }
