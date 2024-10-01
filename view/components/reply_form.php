@@ -1,10 +1,11 @@
-    <form method="post" action="">
+
+    <form method="post" action="controller/reply.php">
         <p>
             <label for="reply">Répondre</label>
-            <textarea name="reply" rows="3" cols="100" placeholder="Poste ta merde ici"></textarea>
+            <textarea name="reply_content" rows="3" cols="100" placeholder="Poste ta merde ici"></textarea>
         </p>
 
         <p>
-            <button type="submit" name="reply">Répondre</button>
+            <button type="submit" name="submit_reply">Répondre</button>
         </p>
     </form>

@@ -15,6 +15,6 @@ function scrollFunction() {
 function backToTop() {
     window.scrollTo({
         top: 0,
-        behavior: 'smooth' // DÃ©filement fluide
+        behavior: 'smooth' // Défilement fluide
     });
 }
