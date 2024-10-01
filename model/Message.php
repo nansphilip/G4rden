@@ -4,30 +4,30 @@ class Message
     public $id;
     public $content;
     public $date;
-    public $user_id;
+    public $userId;
 
-    public function __construct($id, $content, $date, $user_id)
+    public function __construct($id, $content, $date, $userId)
     {
         $this->id = $id;
         $this->content = $content;
         $this->date = $date;
-        $this->user_id = $user_id;
+        $this->userId = $userId;
     }
 
     /**
      * Adds a new message to the database.
      * @param string $content
      * @param string $date
-     * @param int $user_id
+     * @param int $userId
      * @return associated_array of the message
      */
-    public function addMessage($content, $date, $user_id)
+    public function addMessage($content, $date, $userId)
     {
-        $sql = "INSERT INTO Message (content, date, user_id) VALUES (:content, :date, :user_id)";
+        $sql = "INSERT INTO Message (content, date, userId) VALUES (:content, :date, :userId)";
         $query = Database::queryAssoc($sql, [
             ':content' => $content,
             ':date' => $date,
-            ':user_id' => $user_id
+            ':userId' => $userId
         ]);
         return $query[0];
     }
@@ -63,21 +63,21 @@ class Message
      */
     public static function getAllMessageJoin()
     {
-        $sql = "SELECT m.id as id, u.username as username, m.content as message, m.date as date FROM message m INNER JOIN user u ON u.id = m.user_id";
+        $sql = "SELECT m.id as id, u.username as username, m.content as message, m.date as date FROM message m INNER JOIN user u ON u.id = m.userId";
         $query = Database::queryAssoc($sql);
         return $query;
     }
 
     /**
-     * Gets all messages by their user_id.
-     * @param int $user_id
+     * Gets all messages by their userId.
+     * @param int $userId
      * @return array of associated_arrays of messages
      */
-    public function getMessagesByUserId($user_id)
+    public function getMessagesByUserId($userId)
     {
-        $sql = "SELECT * FROM Message WHERE user_id = :user_id";
+        $sql = "SELECT * FROM Message WHERE userId = :userId";
         $query = Database::queryAssoc($sql, [
-            ':user_id' => $user_id
+            ':userId' => $userId
         ]);
         return $query;
     }
