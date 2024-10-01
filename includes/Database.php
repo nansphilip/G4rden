@@ -47,33 +47,36 @@ class Database
      */
     public static function queryAssoc($sqlQuery, $bindVariableList = [])
     {
-
-        // If database connection doesn't exist, create it
-        if (!self::$connection) {
-            self::init();
-        }
-
-        // Prepare the SQL query
-        $statement = self::$connection->prepare($sqlQuery);
-
-        // Bind the variables variable to the query
-        if ($bindVariableList != null) {
-            foreach ($bindVariableList as $key => $variable) {
-                $statement->bindValue($key, $variable);
+        try {
+            // If database connection doesn't exist, create it
+            if (!self::$connection) {
+                self::init();
             }
+
+            // Prepare the SQL query
+            $statement = self::$connection->prepare($sqlQuery);
+
+            // Bind the variables variable to the query
+            if ($bindVariableList != null) {
+                foreach ($bindVariableList as $key => $variable) {
+                    $statement->bindValue($key, $variable);
+                }
+            }
+
+            // Execute the query
+            $statement->execute();
+
+            // Stores the data in an associative array if result is not empty
+            if ($statement->rowCount() > 0) {
+                $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+                return $data;
+            }
+
+            // Return null if result is empty
+            return null;
+        } catch (PDOException $e) {
+            error_log("Query failed:" . $e->getMessage());
         }
-
-        // Execute the query
-        $statement->execute();
-
-        // Stores the data in an associative array if result is not empty
-        if ($statement->rowCount() > 0) {
-            $data = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $data;
-        }
-
-        // Return null if result is empty
-        return null;
     }
 
     /**
@@ -84,25 +87,24 @@ class Database
      */
     public static function queryAssocBool($sqlQuery, $bindVariableList = [])
     {
-
-        // If database connection doesn't exist, create it
-        if (!self::$connection) {
-            self::init();
-        }
-
-        // Prepare the SQL query
-        $statement = self::$connection->prepare($sqlQuery);
-
-        // Bind the variables variable to the query
-        if ($bindVariableList != null) {
-            foreach ($bindVariableList as $key => $variable) {
-                $statement->bindValue($key, $variable);
+        try {
+            // If database connection doesn't exist, create it
+            if (!self::$connection) {
+                self::init();
             }
+            // Prepare the SQL query
+            $statement = self::$connection->prepare($sqlQuery);
+            // Bind the variables variable to the query
+            if ($bindVariableList != null) {
+                foreach ($bindVariableList as $key => $variable) {
+                    $statement->bindValue($key, $variable);
+                }
+            }
+            // Execute the query
+            $statement->execute();
+            return $statement;
+        } catch (PDOException $e) {
+            error_log("Query failed:" . $e->getMessage());
         }
-
-        // Execute the query
-        $statement->execute();
-
-        return $statement;
     }
 }

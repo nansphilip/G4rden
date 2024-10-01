@@ -5,7 +5,7 @@ CREATE TABLE `user` (
     `lastname` varchar(50) NOT NULL,
     `username` varchar(50) NOT NULL UNIQUE,
     `password` varchar(255) NOT NULL,
-    `user_type` ENUM('USER', 'ADMIN') NOT NULL DEFAULT 'USER'
+    `userType` ENUM('USER', 'ADMIN') NOT NULL DEFAULT 'USER'
 );
 
 -- Creates message table
@@ -13,6 +13,6 @@ CREATE TABLE `message` (
     `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `content` TEXT(3000) NOT NULL,
     `date` datetime NOT NULL,
-    `user_id` int NOT NULL,
-    FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+    `userId` int NOT NULL,
+    FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
 );
