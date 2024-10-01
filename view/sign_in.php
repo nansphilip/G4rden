@@ -9,19 +9,19 @@ require_once("view/components/header.php");
 
 <main>
     <h2><?= App::$pageTitle; ?></h2>
-    <p>Subscribe by filling the form below. <a href="index.php?p=home">Click here to go back home.</a></p>
+    <p>Enter your username or email and your password to sign in. <a href="index.php?p=home">Click here to go back home.</a></p>
 
     <pre>
         <?php
-        if (isset($username)) {
-            echo "User added: " . $username;
-        }
+        // print_r($userList);
+        // print_r($messageList);
+        // print_r($userMessageList);
         ?>
     </pre>
 
-
+    
     <?php
-    require_once("view/components/subscribe_form.php");
+    require_once("view/components/sign_in_form.php");
     ?>
 
 
