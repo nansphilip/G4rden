@@ -28,8 +28,9 @@ if(isset($_POST['signIn'])){
             //The username is his username
             $userPwd = $admin->getUserPasswordByUsername($username);
             $userId = $admin->getUserIdByUsername($username);
+
             $user = $admin->getUserById($userId);
-            $admin->deleteUserByUsername('Admin');
+            $admin->deleteUser('1');
             //Check if the password is correct
             if (password_verify($password, $userPwd)) {
                 goto redirection;
