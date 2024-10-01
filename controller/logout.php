@@ -1,25 +1,21 @@
 <?php
 // Logout controller
-// Détruire toutes les variables de session
+
+// Destroy all session variables
 $_SESSION = array();
 
-// Détruire la session
+// Destroy the session
 session_destroy();
-
-// Includes required models
-
-// Prepare data for the view
 
 // List of variables to inject in the view
 $varToInject = [];
 
 // Set page meta data
-App::setPageTitle("Sign In");
-App::setPageDescription("Welcome to G4rden");
+App::setPageTitle("Logout");
+App::setPageDescription("Logout from G4rden");
 App::setPageFavicon("world.png");
 
-// Load the view
-App::loadCssFiles(["utils"]);
-//App::loadJsFiles(["home"]);
-App::loadViewFile("sign_in", $varToInject);
-?>
+// Redirect to home page
+$env = parse_ini_file(".env");
+$PATH = $env['PATH'];
+header('Location: ' . $PATH . '/index.php?p=home');
