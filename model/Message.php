@@ -58,6 +58,17 @@ class Message
     }
 
     /**
+     * Gets all messages with join SQL query
+     * @return array of associated_arrays of messages
+     */
+    public static function getAllMessageJoin()
+    {
+        $sql = "SELECT m.id as id, u.username as username, m.content as message, m.date as date FROM message m INNER JOIN user u ON u.id = m.user_id";
+        $query = Database::queryAssoc($sql);
+        return $query;
+    }
+
+    /**
      * Gets all messages by their user_id.
      * @param int $user_id
      * @return array of associated_arrays of messages
