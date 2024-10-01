@@ -31,7 +31,7 @@ try {
     // Call the controller
     if (file_exists($controllerPath)) {
         // Start session
-        // session_start();
+        session_start();
 
         // Load the controller
         require_once ($controllerPath);

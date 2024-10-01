@@ -60,7 +60,47 @@ class User
         $query = Database::queryAssoc($sql, [
             ':id' => $id
         ]);
-        return $query[0];
+        if(!$query) {
+            return false;
+        } else {
+            return $query[0]['id'];
+        }
+    }
+
+    /**
+     * Gets an id user by his email.
+     * @param string $mail
+     * @return int
+     */
+    public function getUserIdByMail($mail)
+    {
+        $sql = "SELECT id FROM User WHERE mail = :mail";
+        $query = Database::queryAssoc($sql, [
+            ':mail' => $mail
+        ]);
+        if(!$query) {
+            return false;
+        } else {
+            return $query[0]['id'];
+        }
+    }
+
+    /**
+     * Gets an id user by his username.
+     * @param string $username
+     * @return int
+     */
+    public function getUserIdByUsername($username)
+    {
+        $sql = "SELECT id FROM User WHERE username = :username";
+        $query = Database::queryAssoc($sql, [
+            ':username' => $username
+        ]);
+        if(!$query) {
+            return false;
+        } else {
+            return $query[0]['id'];
+        }
     }
 
     /**
@@ -102,13 +142,27 @@ class User
     /**
      * Deletes an user by his id.
      * @param int $id
-     * @return associated_array of the user
+     * @return boolean if the user has been deleted
      */
     public function deleteUser($id)
     {
         $sql = "DELETE FROM User WHERE id = :id";
         $query = Database::queryAssocBool($sql, [
             ':id' => $id
+        ]);
+        return $query;
+    }
+
+    /**
+     * Deletes an user by his username.
+     * @param int $id
+     * @return boolean if the user has been deleted
+     */
+    public function deleteUserByUsername($username)
+    {
+        $sql = "DELETE FROM User WHERE username = :username";
+        $query = Database::queryAssocBool($sql, [
+            ':username' => $username
         ]);
         return $query;
     }
@@ -205,6 +259,42 @@ class Admin extends User
         $sql = "SELECT * FROM User";
         $query = Database::queryAssoc($sql);
         return $query;
+    }
+
+    /**
+     * Get the user password by his mail
+     * @param string $mail
+     * @return string   
+     */ 
+    public function getUserPasswordByMail($mail)
+    {
+        $sql = "SELECT password FROM User WHERE mail = :mail";
+        $query = Database::queryAssoc($sql, [
+            ':mail' => $mail
+        ]);
+        if(!$query) {
+            return false;
+        } else {
+            return $query[0]['password'];
+        }
+    }
+
+    /**
+     * Get the user password by his username
+     * @param string $username
+     * @return string   
+     */ 
+    public function getUserPasswordByUsername($username)
+    {
+        $sql = "SELECT password FROM User WHERE username = :username";
+        $query = Database::queryAssoc($sql, [
+            ':username' => $username
+        ]);
+        if(!$query) {
+            return false;
+        } else {
+            return $query[0]['password'];
+        }
     }
 }
 ?>
