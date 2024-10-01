@@ -1,1 +1,3 @@
-<?php // Error view ?>
+<?php
+// Error view
+?>
