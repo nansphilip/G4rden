@@ -1,5 +1,4 @@
 <?php
-
 // Subscribe controller
 
 // Includes required models
@@ -26,9 +25,12 @@ function createUser()
         return null;
     }
 
+    // Hash the password
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
     // Instantiate the user
-    $newUser = new User('', $lastname, $firstname, $username, $password, 'USER');
-    $isUserAvailable = $newUser->isUsernameAvailable($username);
+    $newUser = new User('', $lastname, $firstname, $username, $hashedPassword, 'USER');
+    $isUserAvailable = !is_null($newUser->getUserByUsername());
 
     // If the username already exists, return null
     if (!$isUserAvailable) {
@@ -36,11 +38,8 @@ function createUser()
         return null;
     }
 
-    // Hash the password
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
     // Creates the user in the database
-    $newUser->addUser($hashedPassword);
+    $newUser->addUser();
 
     // Return the username
     return $newUser->username;

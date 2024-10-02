@@ -2,7 +2,7 @@
 // Message controller
 //Checks if the user is logged, else redirect to sign in page
 if (!isset($_SESSION['userLogged']) || $_SESSION['userLogged'] !== true) {
-    header("Location: index.php?p=sign_in");
+    header("Location: index.php?p=sign-in");
 }
 
 // Includes required models
@@ -10,8 +10,8 @@ require_once "model/User.php";
 require_once("model/Message.php");
 
 // Prepare data for the view
-$userList = Admin::getAll();
-$messageList = Message::getAllMessageJoin();
+$userList = User::getAll();
+$messageList = Message::getAllMessageJoinedToUser();
 
 // List of variables to inject in the view
 $varToInject = [

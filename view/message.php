@@ -23,7 +23,8 @@ require_once "view/components/header.php";
     foreach ($userMessageList as $userMessage) {
         $username = $userMessage['username'];
         $message = $userMessage['message'];
-        $date = $userMessage['date'];
+        // Todo : date en français ?
+        $date = date_format(new DateTime($userMessage['date']), 'j F Y');
     ?>
         <div class="rounded-box">
             <div class="flex flex-row justify-between">

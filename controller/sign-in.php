@@ -4,27 +4,30 @@
 // Includes required models
 require_once("model/User.php");
 
-// Check if the sign in form has been submitted
+// Check if a form has been submitted
 if (isset($_POST['signIn'])) {
     $isUserCreated = createUser();
 }
 
 function createUser(){
 
-    //Sanitize the data
-    $username = htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8');
-    $password = htmlspecialchars($_POST['password'], ENT_QUOTES, 'UTF-8');
+    $formDataList = ['username', 'password'];
 
-    //Create the object admin
-    $admin = new Admin('1', '', '', 'admin', 'admin', 'ADMIN', '');
+    // Sanitize data and destructure variables
+    foreach ($formDataList as $dataName) {
+        ${$dataName} = htmlspecialchars($_POST[$dataName], ENT_QUOTES, 'UTF-8');
+    }
 
-    $userPassword = $admin->getUserPasswordByUsername($username);
-    $userId = $admin->getUserIdByUsername($username);
+    //Create the object newUser
+    $newUser = new User('', '', '', 'username', 'password', '');
+
+    $userId = $newUser->getUserIdByUsername();
+    $userPassword = $newUser->getUserPasswordByUsername($username);
 
     //Gets all user data for SESSION
-    $user = $admin->getUserById($userId);
+    $user = $newUser->getUserById($userId);
 
-    //$admin->deleteUser('1');
+    //$newUser->deleteUser('1');
 
     //echo "username: ". $username . " password: ". $password . " hashedpassword: ". $userPassword;
     //Check if the password is correct
@@ -58,4 +61,4 @@ App::setPageFavicon("world.png");
 // Load the view
 App::loadCssFiles(["message", "utils"]);
 App::loadJsFiles(["message"]);
-App::loadViewFile("sign_in", $varToInject);
+App::loadViewFile("sign-in", $varToInject);
