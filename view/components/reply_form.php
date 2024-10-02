@@ -6,6 +6,6 @@
         </p>
 
         <p>
-            <button type="submit" name="submit_reply">Répondre</button>
+            <button type="submit" name="content">Répondre</button>
         </p>
     </form>
