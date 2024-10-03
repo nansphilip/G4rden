@@ -16,7 +16,6 @@ try {
     $userList = User::getAll();
     $messageList = Message::getAllMessageJoinedToUser();
 } catch (Exception $e) {
-    error_log("Message -> " . $e->getMessage());
     throw new Exception("Message Controller -> " . $e->getMessage());
 }
 

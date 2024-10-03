@@ -33,7 +33,6 @@ class Database
 
             // Catch database connection errors
         } catch (PDOException $e) {
-            error_log("database -> " . $e->getMessage());
             throw new Exception("database -> " . $e->getMessage());
         }
     }
@@ -74,7 +73,6 @@ class Database
             // Return null if result is empty
             return null;
         } catch (PDOException $e) {
-            error_log("queryAssoc -> " . $e->getMessage());
             throw new Exception("queryAssoc -> " . $e->getMessage());
         }
     }

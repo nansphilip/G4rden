@@ -17,8 +17,7 @@ if (isset($_POST['subscribe'])) {
 
         // If password is not ok, return null
         if (!(strlen($password) >= 8) || ($password != $passwordConfirm)) {
-            error_log("Password is not ok");
-            return null;
+            throw new Exception("Invalid password");
         }
 
         // Hash the password
@@ -32,17 +31,15 @@ if (isset($_POST['subscribe'])) {
 
         // If the username already exists, return null
         if (is_null($newUser)) {
-            error_log("Username already exists");
-            return null;
+            throw new Exception("Username already exists");
         }
 
         // Creates the user in the database
         $newUser->addUser();
 
         // Return the username
-        return $newUser->username;
+        $newUser->username;
     } catch (Exception $e) {
-        error_log("Subscribe Controller -> " . $e->getMessage());
         throw new Exception("Subscribe Controller -> " . $e->getMessage());
     }
 }
