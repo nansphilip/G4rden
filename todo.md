@@ -17,3 +17,7 @@
 ## Models
 
 - [ ] Add php docs
+
+## Env
+
+- [ ] Move PATH constant to index.php
