@@ -36,17 +36,13 @@ class User
     {
         try {
             $sql = "INSERT INTO User (lastname, firstname, username, hashedPassword, userType) VALUES (:lastname, :firstname, :username, :hashedPassword, :userType)";
-            $query = Database::queryAssoc($sql, [
+            Database::queryAssoc($sql, [
                 ':lastname' => $this->lastname,
                 ':firstname' => $this->firstname,
                 ':username' => $this->username,
                 ':hashedPassword' => $this->hashedPassword,
                 ':userType' => $this->userType,
             ]);
-            if (is_null($query)) {
-                return null;
-            }
-            return $query[0];
         } catch (PDOException $e) {
             throw new Exception("addUser -> " . $e->getMessage());
         }

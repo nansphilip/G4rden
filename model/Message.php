@@ -24,15 +24,11 @@ class Message
     {
         try {
             $sql = "INSERT INTO Message (content, date, userId) VALUES (:content, :date, :userId)";
-            $query = Database::queryAssoc($sql, [
+            Database::queryAssoc($sql, [
                 ':content' => $this->content,
                 ':date' => $this->date,
                 ':userId' => $this->userId
             ]);
-            if (is_null($query)) {
-                return null;
-            }
-            return $query[0];
         } catch (PDOException $e) {
             throw new Exception("addMessage -> " . $e->getMessage());
         }
@@ -109,7 +105,8 @@ class Message
                     Message.date as date
                     FROM Message
                     INNER JOIN User
-                    ON User.id = Message.userId";
+                    ON User.id = Message.userId
+                    ORDER BY Message.date DESC";
             $query = Database::queryAssoc($sql);
             return $query;
         } catch (PDOException $e) {
