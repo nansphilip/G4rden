@@ -1,4 +1,5 @@
 <?php
+
 /**
  * App class
  * A minimalist PHP framework based on MVC pattern.
@@ -76,22 +77,25 @@ class App
 
     /**
      * Loads the view file, and injects the given variables
-     * @param string $view
+     * @param string $view file name without the .php extension
      * @param array $variableList to inject in the view
      */
     public static function loadViewFile($view, $variableList = [])
     {
-        foreach ($variableList as $variable => $value) {
-            ${$variable} = $value;
+        try {
+            foreach ($variableList as $variable => $value) {
+                ${$variable} = $value;
+            }
+
+            // Start buffering
+            ob_start();
+
+            require_once "view/$view.php";
+
+            // End buffering, and return the output
+            ob_end_flush();
+        } catch (Error $e) {
+            throw new Error("loadViewFile -> " . $e->getMessage());
         }
-
-        // Start buffering
-        ob_start();
-
-        require_once "view/$view.php";
-
-        // End buffering, and return the output
-        ob_end_flush();
     }
 }
-?>

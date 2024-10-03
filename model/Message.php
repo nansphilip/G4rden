@@ -4,46 +4,141 @@ class Message
     public $id;
     public $content;
     public $date;
-    public $user_id;
+    public $userId;
 
-    public function __construct($id, $content, $date, $user_id)
+    public function __construct($id, $content, $date, $userId)
     {
         $this->id = $id;
         $this->content = $content;
         $this->date = $date;
-        $this->user_id = $user_id;
+        $this->userId = $userId;
     }
+
+
+    // ======================= //
+    // ===== Add methods ===== //
+    // ======================= //
+
 
     /**
      * Adds a new message to the database.
-     * @param string $content
-     * @param string $date
-     * @param int $user_id
-     * @return associated_array of the message
      */
-    public function addMessage($content, $date, $user_id)
+    public function addMessage()
     {
-        $sql = "INSERT INTO Message (content, date, user_id) VALUES (:content, :date, :user_id)";
-        $query = Database::queryAssoc($sql, [
-            ':content' => $content,
-            ':date' => $date,
-            ':user_id' => $user_id
-        ]);
-        return $query[0];
+        try {
+            $sql = "INSERT INTO Message (content, date, userId) VALUES (:content, :date, :userId)";
+            Database::queryAssoc($sql, [
+                ':content' => $this->content,
+                ':date' => $this->date,
+                ':userId' => $this->userId
+            ]);
+        } catch (PDOException $e) {
+            throw new Error("addMessage -> " . $e->getMessage());
+        }
     }
+
+    
+    // ======================= //
+    // ===== Get methods ===== //
+    // ======================= //
+
 
     /**
      * Gets a message by his id.
-     * @param int $id
      * @return associated_array of the message
      */
-    public function getMessageById($id)
+    public function getMessageById()
     {
-        $sql = "SELECT * FROM Message WHERE id = :id";
-        $query = Database::queryAssoc($sql, [
-            ':id' => $id
-        ]);
-        return $query[0];
+        try {
+            $sql = "SELECT * FROM Message WHERE id = :id";
+            $query = Database::queryAssoc($sql, [
+                ':id' => $this->id
+            ]);
+            if (is_null($query)) {
+                return null;
+            }
+            return $query[0];
+        } catch (PDOException $e) {
+            throw new Error("getMessageById -> " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Gets all messages of an user by its id.
+     * @return array of associated_arrays of messages
+     */
+    public function getMessagesByUserId()
+    {
+        try {
+            $sql = "SELECT * FROM Message WHERE userId = :userId";
+            $query = Database::queryAssoc($sql, [
+                ':userId' => $this->userId
+            ]);
+            return $query;
+        } catch (PDOException $e) {
+            throw new Error("getMessagesByUserId -> " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Gets all messages between two dates.
+     * @param string $startDate
+     * @param string $endDate
+     * @return array of associated_arrays of messages
+     */
+    public function getMessagesByDateBetween($startDate, $endDate)
+    {
+        try {
+            $sql = "SELECT * FROM Message WHERE date BETWEEN :startDate AND :endDate";
+            $query = Database::queryAssoc($sql, [
+                ':startDate' => $startDate,
+                ':endDate' => $endDate
+            ]);
+            return $query;
+        } catch (PDOException $e) {
+            throw new Error("getMessagesByDateBetween -> " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Gets all messages with a word or a sentence in their content.
+     * @param string $stringOfContent
+     * @return array of associated_arrays of messages
+     */
+    public static function getMessagesByPeaceOfContent($stringOfContent)
+    {
+        try {
+            $sql = "SELECT * FROM Message WHERE content LIKE :content";
+            $query = Database::queryAssoc($sql, [
+                ':content' => $stringOfContent
+            ]);
+            return $query;
+        } catch (PDOException $e) {
+            throw new Error("getMessagesByPeaceOfContent -> " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Gets all messages associated to their user.
+     * @return array of associated_arrays of messages
+     */
+    public static function getAllMessageJoinedToUser()
+    {
+        try {
+            $sql = "SELECT
+                    User.username as username,
+                    Message.id as id,
+                    Message.content as message,
+                    Message.date as date
+                    FROM Message
+                    INNER JOIN User
+                    ON User.id = Message.userId
+                    ORDER BY Message.date DESC";
+            $query = Database::queryAssoc($sql);
+            return $query;
+        } catch (PDOException $e) {
+            throw new Error("getAllMessageJoinedToUser -> " . $e->getMessage());
+        }
     }
 
     /**
@@ -52,78 +147,42 @@ class Message
      */
     public static function getAll()
     {
-        $sql = "SELECT * FROM Message";
-        $query = Database::queryAssoc($sql);
-        return $query;
+        try {
+            $sql = "SELECT * FROM Message";
+            $query = Database::queryAssoc($sql);
+            return $query;
+        } catch (PDOException $e) {
+            throw new Error("getAll -> " . $e->getMessage());
+        }
     }
 
-    /**
-     * Gets all messages with join SQL query
-     * @return array of associated_arrays of messages
-     */
-    public static function getAllMessageJoin()
-    {
-        $sql = "SELECT m.id as id, u.username as username, m.content as message, m.date as date FROM message m INNER JOIN user u ON u.id = m.user_id";
-        $query = Database::queryAssoc($sql);
-        return $query;
-    }
+
+    // ========================== //
+    // ===== Update methods ===== //
+    // ========================== //
+
+
+    // ========================== //
+    // ===== Delete methods ===== //
+    // ========================== //
+
 
     /**
-     * Gets all messages by their user_id.
-     * @param int $user_id
-     * @return array of associated_arrays of messages
+     * Deletes a message by its id.
      */
-    public function getMessagesByUserId($user_id)
+    public function deleteMessage()
     {
-        $sql = "SELECT * FROM Message WHERE user_id = :user_id";
-        $query = Database::queryAssoc($sql, [
-            ':user_id' => $user_id
-        ]);
-        return $query;
-    }
-
-    /**
-     * Gets all messages by date between two dates.
-     * @param string $startDate
-     * @param string $endDate
-     * @return array of associated_arrays of messages
-     */
-    public function getMessagesByDateBetween($startDate, $endDate)
-    {
-        $sql = "SELECT * FROM Message WHERE date BETWEEN :startDate AND :endDate";
-        $query = Database::queryAssoc($sql, [
-            ':startDate' => $startDate,
-            ':endDate' => $endDate
-        ]);
-        return $query;
-    }
-
-    /**
-     * Gets all messages with a word or a sentence in their content.
-     * @param string $content
-     * @return array of associated_arrays of messages
-     */
-    public function getMessagesByPeaceOfContent($stringOfContent)
-    {
-        $sql = "SELECT * FROM Message WHERE content LIKE :content";
-        $query = Database::queryAssoc($sql, [
-            ':content' => $stringOfContent
-        ]);
-        return $query;
-    }
-
-    /**
-     * Deletes a message by his id.
-     * @param int $id
-     * @return associated_array of the message
-     */
-    public function deleteMessage($id)
-    {
-        $sql = "DELETE FROM Message WHERE id = :id";
-        $query = Database::queryAssoc($sql, [
-            ':id' => $id
-        ]);
-        return $query[0];
+        try {
+            $sql = "DELETE FROM Message WHERE id = :id";
+            $query = Database::queryAssoc($sql, [
+                ':id' => $this->id
+            ]);
+            if (is_null($query)) {
+                return null;
+            }
+            return $query[0];
+        } catch (PDOException $e) {
+            throw new Error("deleteMessage -> " . $e->getMessage());
+        }
     }
 }
-?>

@@ -1,3 +1,4 @@
+-- SQLBook: Code
 -- Creates the database
 CREATE DATABASE `g4rden-db`;
 

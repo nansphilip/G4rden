@@ -7,6 +7,8 @@
 require_once "view/components/header.php";
 ?>
 
+
+
 <main>
     <h2><?= App::$pageTitle; ?></h2>
     <p>Your are consulting G4rden's chat. <a href="index.php?p=home">Click here to go back home.</a></p>
@@ -19,11 +21,18 @@ require_once "view/components/header.php";
         ?>
     </pre>
 
+    <form method="post" action="">
+        <label for="reply">Répondre</label>
+        <textarea id="reply" name="reply" rows="3" cols="100" placeholder="Poste ta merde ici"></textarea>
+        <button type="submit" name="new_message">Répondre</button>
+    </form>
+
     <?php
     foreach ($userMessageList as $userMessage) {
         $username = $userMessage['username'];
         $message = $userMessage['message'];
-        $date = $userMessage['date'];
+        // Todo : date en français ?
+        $date = date_format(new DateTime($userMessage['date']), 'j F Y');
     ?>
         <div class="rounded-box">
             <div class="flex flex-row justify-between">
