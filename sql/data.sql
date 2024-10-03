@@ -1,7 +1,7 @@
 -- SQLBook: Code
 
 -- Inserts users
-INSERT INTO `User` (`lastname`, `firstname`, `username`, `password`, `userType`) VALUES
+INSERT INTO `User` (`lastname`, `firstname`, `username`, `passwordHash`, `userType`) VALUES
 ('Doe', 'John', 'DJohn', 'passwordAlice', 'USER'),
 ('McDonald', 'Walter', 'WMcDonald', 'passwordBob', 'USER'),
 ('Smith', 'Alice', 'ASmith', 'passwordCharlie', 'USER'),

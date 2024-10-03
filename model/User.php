@@ -4,7 +4,7 @@
 <?php
 /**
  * User class
- * An User has an ID, a username, a hashedPassword and a userType.
+ * An User has an ID, a username, a passwordHash and a userType.
  * It also has methods to add, get, update and delete users.
  */
 class User
@@ -13,16 +13,16 @@ class User
     public $lastname;
     public $firstname;
     public $username;
-    public $hashedPassword;
+    public $passwordHash;
     public $userType;
 
-    public function __construct($id, $lastname, $firstname, $username, $hashedPassword, $userType)
+    public function __construct($id, $lastname, $firstname, $username, $passwordHash, $userType)
     {
         $this->id = $id;
         $this->lastname = $lastname;
         $this->firstname = $firstname;
         $this->username = $username;
-        $this->hashedPassword = $hashedPassword;
+        $this->passwordHash = $passwordHash;
         $this->userType = $userType;
     }
 
@@ -38,12 +38,12 @@ class User
     public function addUser()
     {
         try {
-            $sql = "INSERT INTO User (lastname, firstname, username, hashedPassword, userType) VALUES (:lastname, :firstname, :username, :hashedPassword, :userType)";
+            $sql = "INSERT INTO User (lastname, firstname, username, passwordHash, userType) VALUES (:lastname, :firstname, :username, :passwordHash, :userType)";
             Database::queryAssoc($sql, [
                 ':lastname' => $this->lastname,
                 ':firstname' => $this->firstname,
                 ':username' => $this->username,
-                ':hashedPassword' => $this->hashedPassword,
+                ':passwordHash' => $this->passwordHash,
                 ':userType' => $this->userType,
             ]);
         } catch (PDOException $e) {

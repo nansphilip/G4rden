@@ -1,10 +1,11 @@
 <?php
 // Message controller
-// Checks if the user is logged, else redirect to sign in page
+
+// Checks if the user is logged, else redirect to login page
 $env = parse_ini_file(".env");
 $PATH = $env['PATH'];
-if (!isset($_SESSION['userLogged']) || !$_SESSION['userLogged']) {
-    header('Location: ' . $PATH . 'index.php?p=sign_in');
+if (!isset($_SESSION['active'])) {
+    header('Location: ' . $PATH . 'index.php?p=login');
 }
 
 // Includes required models
@@ -45,6 +46,5 @@ App::setPageDescription("G4rden chat");
 App::setPageFavicon("world.png");
 
 // Load the view
-App::loadCssFiles(["message", "utils"]);
-App::loadJsFiles(["message"]);
+App::loadCssFiles(["utils"]);
 App::loadViewFile("message", $varToInject);

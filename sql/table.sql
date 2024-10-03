@@ -5,7 +5,7 @@ CREATE TABLE `User` (
     `firstname` varchar(50) NOT NULL,
     `lastname` varchar(50) NOT NULL,
     `username` varchar(50) NOT NULL UNIQUE,
-    `password` varchar(255) NOT NULL,
+    `passwordHash` varchar(255) NOT NULL,
     `userType` ENUM('USER', 'ADMIN') NOT NULL DEFAULT 'USER'
 );
 

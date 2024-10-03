@@ -76,4 +76,18 @@ class Database
             throw new Exception("queryAssoc -> " . $e->getMessage());
         }
     }
+
+    public static function queryBool($sqlQuery, $bindVariableList = []) {
+        try {
+            $query = self::queryAssoc($sqlQuery, $bindVariableList);
+            
+            if (is_null($query)) {
+                return false;
+            }
+
+            return true;
+        } catch (PDOException $e) {
+            throw new Exception("queryBool -> " . $e->getMessage());
+        }
+    }
 }

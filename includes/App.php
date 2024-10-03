@@ -77,7 +77,7 @@ class App
 
     /**
      * Loads the view file, and injects the given variables
-     * @param string $view
+     * @param string $view file name without the .php extension
      * @param array $variableList to inject in the view
      */
     public static function loadViewFile($view, $variableList = [])
