@@ -7,10 +7,10 @@ require_once "model/User.php";
 
 // Prepare data for the view
 
-
 // List of variables to inject in the view
 $varToInject = [
-    // "lastUser" => $lastUser,
+    "ENVIRONMENT" => $ENVIRONMENT,
+    "PATH" => $PATH
 ];
 
 // Set page meta data

@@ -19,24 +19,25 @@ try {
     if (isset($_GET['p'])) {
         // Page request
         $page = $_GET['p'];
+        // Select a controller
+        $filePath = "controller/$page.php";
     } else if (isset($_GET['a'])) {
         // Ajax request
         $page = $_GET['a'];
+        // Select an async script
+        $filePath = "async/$page.php";
     } else {
         // Default page
-        $page = 'home';
+        $filePath = "controller/home.php";
     }
 
-    // Select a controller
-    $controller = "controller/$page.php";
-
     // Call the controller
-    if (file_exists($controller)) {
+    if (file_exists($filePath)) {
         // Start session
         session_start();
 
         // Load the controller
-        require_once($controller);
+        require_once($filePath);
     } else {
         // Throw an error
         throw new Error("404");
