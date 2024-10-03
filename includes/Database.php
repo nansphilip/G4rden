@@ -29,7 +29,7 @@ class Database
             self::$connection = new PDO($dsn, $user, $pass);
 
             // Set the error mode to Error
-            self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_Error);
+            self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             // Catch database connection errors
         } catch (PDOException $e) {
