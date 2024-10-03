@@ -1,9 +1,6 @@
 <?php
 // Home controller
-//Checks if the user is logged, else redirect to sign in page
-if (!isset($_SESSION['userLogged']) || $_SESSION['userLogged'] !== true) {
-    header("Location: index.php?p=sign_in");
-}
+
 // Includes required models
 
 // Prepare data for the view

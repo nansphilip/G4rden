@@ -1,4 +1,5 @@
 <?php
+
 /**
  * App class
  * A minimalist PHP framework based on MVC pattern.
@@ -81,17 +82,20 @@ class App
      */
     public static function loadViewFile($view, $variableList = [])
     {
-        foreach ($variableList as $variable => $value) {
-            ${$variable} = $value;
+        try {
+            foreach ($variableList as $variable => $value) {
+                ${$variable} = $value;
+            }
+
+            // Start buffering
+            ob_start();
+
+            require_once "view/$view.php";
+
+            // End buffering, and return the output
+            ob_end_flush();
+        } catch (Exception $e) {
+            throw new Exception("loadViewFile -> " . $e->getMessage());
         }
-
-        // Start buffering
-        ob_start();
-
-        require_once "view/$view.php";
-
-        // End buffering, and return the output
-        ob_end_flush();
     }
 }
-?>
