@@ -1,8 +1,10 @@
 <?php
 // Message controller
-//Checks if the user is logged, else redirect to sign in page
-if (!isset($_SESSION['userLogged']) || $_SESSION['userLogged'] !== true) {
-    header("Location: index.php?p=sign_in");
+// Checks if the user is logged, else redirect to sign in page
+$env = parse_ini_file(".env");
+$PATH = $env['PATH'];
+if (!isset($_SESSION['userLogged']) || !$_SESSION['userLogged']) {
+    header('Location: ' . $PATH . 'index.php?p=sign_in');
 }
 
 // Includes required models
@@ -10,14 +12,16 @@ require_once "model/User.php";
 require_once("model/Message.php");
 
 // Prepare data for the view
-$userList = User::getAll();
-$messageList = Message::getAllMessageJoinedToUser();
+try {
+    $userList = User::getAll();
+    $messageList = Message::getAllMessageJoinedToUser();
+} catch (Exception $e) {
+    error_log("Message -> " . $e->getMessage());
+    throw new Exception("Message Controller -> " . $e->getMessage());
+}
 
 // List of variables to inject in the view
 $varToInject = [
-    // "userList" => $userList,
-    // "messageList" => $messageList,
-    //"userMessageList" => $userMessageList
     "userMessageList" => $messageList
 ];
 

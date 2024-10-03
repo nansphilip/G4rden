@@ -12,4 +12,8 @@
 
 ## Frontend
 
-- Create different pages
+- [ ] Create different pages
+
+## Models
+
+- [ ] Add php docs

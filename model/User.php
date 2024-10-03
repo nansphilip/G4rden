@@ -27,114 +27,133 @@ class User
     }
 
 
+    // ======================= //
     // ===== Add methods ===== //
+    // ======================= //
 
 
-    /**
-     * Adds a new user to the database.
-     * @param string $username
-     * @param string $hashedPassword
-     * @param string $userType
-     * @return associated_array of the user
-     */
     public function addUser()
     {
-        $sql = "INSERT INTO User (lastname, firstname, username, hashedPassword, userType) VALUES (:lastname, :firstname, :username, :hashedPassword, :userType)";
-        $query = Database::queryAssocBool($sql, [
-            ':lastname' => $this->lastname,
-            ':firstname' => $this->firstname,
-            ':username' => $this->username,
-            ':hashedPassword' => $this->hashedPassword,
-            ':userType' => $this->userType,
-        ]);
-        return $query;
-    }
-
-
-    // ===== Get methods ===== //
-
-
-    /**
-     * Gets a user by his id.
-     * @param int $id
-     * @return associated_array of the user
-     */
-    public function getUserById()
-    {
-        $sql = "SELECT * FROM User WHERE id = :id";
-        $query = Database::queryAssoc($sql, [
-            ':id' => $this->id
-        ]);
-        if (!$query) {
-            return false;
-        } else {
+        try {
+            $sql = "INSERT INTO User (lastname, firstname, username, hashedPassword, userType) VALUES (:lastname, :firstname, :username, :hashedPassword, :userType)";
+            $query = Database::queryAssoc($sql, [
+                ':lastname' => $this->lastname,
+                ':firstname' => $this->firstname,
+                ':username' => $this->username,
+                ':hashedPassword' => $this->hashedPassword,
+                ':userType' => $this->userType,
+            ]);
+            if (is_null($query)) {
+                return null;
+            }
             return $query[0];
+        } catch (PDOException $e) {
+            error_log("addUser -> " . $e->getMessage());
+            throw new Exception("addUser -> " . $e->getMessage());
         }
     }
 
-    /**
-     * Gets an user by his username.
-     * @param string $username
-     * @return associated_array of the user
-     */
+
+    // ======================= //
+    // ===== Get methods ===== //
+    // ======================= //
+
+
+    public function getUserById()
+    {
+        try {
+            $sql = "SELECT * FROM User WHERE id = :id";
+            $query = Database::queryAssoc($sql, [
+                ':id' => $this->id
+            ]);
+            if (is_null($query)) {
+                return null;
+            }
+            return $query[0];
+        } catch (PDOException $e) {
+            error_log("getUserById -> " . $e->getMessage());
+            throw new Exception("getUserById -> " . $e->getMessage());
+        }
+    }
+
     public function getUserByUsername()
     {
-        $sql = "SELECT * FROM User WHERE username = :username";
-        $query = Database::queryAssoc($sql, [
-            ':username' => $this->username
-        ]);
-        return $query[0];
+        try {
+            $sql = "SELECT * FROM User WHERE username = :username";
+            $query = Database::queryAssoc($sql, [
+                ':username' => $this->username
+            ]);
+            if (is_null($query)) {
+                return null;
+            }
+            return $query[0];
+        } catch (PDOException $e) {
+            error_log("getUserByUsername -> " . $e->getMessage());
+            throw new Exception("getUserByUsername -> " . $e->getMessage());
+        }
     }
-    
-    /**
-     * Gets all users by their userType.
-     * @return array of associated_arrays of users
-     */
+
     public function getUsersByUserType()
     {
-        $sql = "SELECT * FROM User WHERE userType = :userType";
-        $query = Database::queryAssoc($sql, [
-            ':userType' => $this->userType
-        ]);
-        return $query[0];
+        try {
+            $sql = "SELECT * FROM User WHERE userType = :userType";
+            $query = Database::queryAssoc($sql, [
+                ':userType' => $this->userType
+            ]);
+            if (is_null($query)) {
+                return null;
+            }
+            return $query[0];
+        } catch (PDOException $e) {
+            error_log("getUsersByUserType -> " . $e->getMessage());
+            throw new Exception("getUsersByUserType -> " . $e->getMessage());
+        }
     }
 
-    /**
-     * Gets all users.
-     * @return array of associated_arrays of users
-     */
     public static function getAll()
     {
-        $sql = "SELECT * FROM User";
-        $query = Database::queryAssoc($sql);
-        return $query;
+        try {
+            $sql = "SELECT * FROM User";
+            $query = Database::queryAssoc($sql);
+            return $query;
+        } catch (PDOException $e) {
+            error_log("getAll -> " . $e->getMessage());
+            throw new Exception("getAll -> " . $e->getMessage());
+        }
     }
 
 
+    // ========================== //
     // ===== Update methods ===== //
+    // ========================== //
 
 
-
+    // ========================== //
     // ===== Delete methods ===== //
+    // ========================== //
 
 
-    /**
-     * Deletes an user by his id.
-     * @param int $id
-     * @return boolean if the user has been deleted
-     */
     public function deleteUser()
     {
-        $sql = "DELETE FROM User WHERE id = :id";
-        $query = Database::queryAssocBool($sql, [
-            ':id' => $this->id
-        ]);
-        return $query;
+        try {
+            $sql = "DELETE FROM User WHERE id = :id";
+            $query = Database::queryAssoc($sql, [
+                ':id' => $this->id
+            ]);
+            if (is_null($query)) {
+                return null;
+            }
+            return $query[0];
+        } catch (PDOException $e) {
+            error_log("deleteUser -> " . $e->getMessage());
+            throw new Exception("deleteUser -> " . $e->getMessage());
+        }
     }
 }
 
 class Admin extends User
 {
-    // Update methods that require admin privileges
+    // Methods that require admin privileges
+    // Ex: update user privileges
 }
 ?>

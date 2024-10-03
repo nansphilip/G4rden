@@ -33,8 +33,8 @@ class Database
 
             // Catch database connection errors
         } catch (PDOException $e) {
-            error_log("Database connection failed:" . $e->getMessage());
-            die("Database connection failed.");
+            error_log("database -> " . $e->getMessage());
+            throw new Exception("database -> " . $e->getMessage());
         }
     }
 
@@ -74,36 +74,8 @@ class Database
             // Return null if result is empty
             return null;
         } catch (PDOException $e) {
-            error_log("Query failed:" . $e->getMessage());
-        }
-    }
-
-    /**
-     * Prepares and executes a SQL query, and returns the result with a boolean
-     * @param string $sql
-     * @param array $bindList
-     * @return boolean
-     */
-    public static function queryAssocBool($sqlQuery, $bindVariableList = [])
-    {
-        try {
-            // If database connection doesn't exist, create it
-            if (!self::$connection) {
-                self::init();
-            }
-            // Prepare the SQL query
-            $statement = self::$connection->prepare($sqlQuery);
-            // Bind the variables variable to the query
-            if ($bindVariableList != null) {
-                foreach ($bindVariableList as $key => $variable) {
-                    $statement->bindValue($key, $variable);
-                }
-            }
-            // Execute the query
-            $statement->execute();
-            return $statement;
-        } catch (PDOException $e) {
-            error_log("Query failed:" . $e->getMessage());
+            error_log("queryAssoc -> " . $e->getMessage());
+            throw new Exception("queryAssoc -> " . $e->getMessage());
         }
     }
 }

@@ -1,10 +1,8 @@
 <?php
 // Logout controller
 
-// Destroy all session variables
+// Destroy all session variables, and the session
 $_SESSION = array();
-
-// Destroy the session
 session_destroy();
 
 // List of variables to inject in the view

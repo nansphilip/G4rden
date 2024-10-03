@@ -11,7 +11,6 @@ if (isset($_POST['signIn'])) {
 
 function createUser()
 {
-
     $formDataList = ['username', 'password'];
 
     // Sanitize data and destructure variables

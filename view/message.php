@@ -11,14 +11,6 @@ require_once "view/components/header.php";
     <h2><?= App::$pageTitle; ?></h2>
     <p>Your are consulting G4rden's chat. <a href="index.php?p=home">Click here to go back home.</a></p>
 
-    <pre>
-        <?php
-        // print_r($userList);
-        // print_r($messageList);
-        // print_r($userMessageList);
-        ?>
-    </pre>
-
     <?php
     foreach ($userMessageList as $userMessage) {
         $username = $userMessage['username'];
