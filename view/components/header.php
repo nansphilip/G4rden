@@ -39,25 +39,17 @@
 <body>
 
     <header>
-        <?php
-        //Navigation bar
-        $env = parse_ini_file(".env");
-        $PATH = $env['PATH'];
-        ?>
-
-        <h1 class="logo-title"><a href="<?= $PATH ?>/index.php?p=home">G4rden</a></h1>
+        <h1 class="logo-title"><?= "<a href={$PATH}/index.php?p=home>G4rden</a>" ?></h1>
         <nav class="nav-bar">
-
+            <?="<a href={$PATH}/index.php?p=home>Home</a>" ?>
             <?php
-            echo "<a href='{$PATH}/index.php?p=home'>Home</a>";
-
             // Sets the navigation bar depending if the user is logged in or not
             if (isset($_SESSION['active'])) {
-                echo "<a href='{$PATH}/index.php?p=message'>Message</a>";
-                echo "<a href='{$PATH}/index.php?p=logout'>Logout</a>";
+                echo "<a href={$PATH}/index.php?p=message>Message</a>";
+                echo "<a href={$PATH}/index.php?p=logout>Logout</a>";
             } else {
-                echo "<a href='{$PATH}/index.php?p=login'>Login</a>";
-                echo "<a href='{$PATH}/index.php?p=register'>Register</a>";
+                echo "<a href={$PATH}/index.php?p=login>Login</a>";
+                echo "<a href={$PATH}/index.php?p=register>Register</a>";
             }
             ?>
         </nav>

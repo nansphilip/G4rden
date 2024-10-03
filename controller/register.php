@@ -2,10 +2,8 @@
 // Register controller
 
 // Checks if the user is logged, else redirect to login page
-$env = parse_ini_file(".env");
-$PATH = $env['PATH'];
 if (isset($_SESSION['active'])) {
-    header('Location: ' . $PATH . 'index.php?p=message');
+    header("Location: {$PATH}/index.php?p=message");
 }
 
 // Includes required models
@@ -53,13 +51,17 @@ if (isset($_POST['register'])) {
         $_SESSION['active'] = true;
 
         // Redirect to the home page
-        $env = parse_ini_file(".env");
-        $PATH = $env['PATH'];
-        header('Location: ' . $PATH . '/index.php?p=message');
+        header("Location: {$PATH}/index.php?p=message");
     } catch (Exception $e) {
         throw new Exception("Register Controller -> " . $e->getMessage());
     }
 }
+
+// List of variables to inject in the view
+$varToInject = [
+    "ENVIRONMENT" => $ENVIRONMENT,
+    "PATH" => $PATH
+];
 
 // Set page meta data
 App::setPageTitle("Register");
@@ -68,4 +70,4 @@ App::setPageFavicon("world.png");
 
 // Load the view
 App::loadCssFiles(["utils"]);
-App::loadViewFile("register");
+App::loadViewFile("register", $varToInject);

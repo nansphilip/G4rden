@@ -7,7 +7,9 @@
  */
 try {
     // Environment
-    define('ENVIRONMENT', getenv('ENV'));
+    $envFile = parse_ini_file(".env");
+    $ENVIRONMENT = $envFile['ENV'];
+    $PATH = $envFile['PATH'];
 
     // Imports
     require_once "includes/App.php";
@@ -26,18 +28,18 @@ try {
     }
 
     // Select a controller
-    $controllerPath = "controller/$page.php";
+    $controller = "controller/$page.php";
 
     // Call the controller
-    if (file_exists($controllerPath)) {
+    if (file_exists($controller)) {
         // Start session
         session_start();
 
         // Load the controller
-        require_once($controllerPath);
+        require_once($controller);
     } else {
         // Throw an error
-        throw new Exception("Error 404: oh no... This page doesn't exist.");
+        throw new Exception("404");
     }
 } catch (Exception $e) {
     error_log("Global error -> " . $e->getMessage());

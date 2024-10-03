@@ -6,6 +6,4 @@ $_SESSION = array();
 session_destroy();
 
 // Redirect to home page
-$env = parse_ini_file(".env");
-$PATH = $env['PATH'];
-header('Location: ' . $PATH . '/index.php?p=home');
+header("Location: {$PATH}/index.php?p=home");

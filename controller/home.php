@@ -6,7 +6,10 @@
 // Prepare data for the view
 
 // List of variables to inject in the view
-$varToInject = [];
+$varToInject = [
+    "ENVIRONMENT" => $ENVIRONMENT,
+    "PATH" => $PATH
+];
 
 // Set page meta data
 App::setPageTitle("Home");
