@@ -1,13 +1,14 @@
+-- SQLBook: Code
 
 -- Inserts users
-INSERT INTO `user` (`lastname`, `firstname`, `username`, `password`, `userType`) VALUES
+INSERT INTO `User` (`lastname`, `firstname`, `username`, `passwordHash`, `userType`) VALUES
 ('Doe', 'John', 'DJohn', 'passwordAlice', 'USER'),
 ('McDonald', 'Walter', 'WMcDonald', 'passwordBob', 'USER'),
 ('Smith', 'Alice', 'ASmith', 'passwordCharlie', 'USER'),
 ('Johnson', 'Diana', 'DJohnson', 'passwordDiana', 'ADMIN');
 
 -- Inserts messages
-INSERT INTO `message` (`content`, `date`, `userId`) VALUES
+INSERT INTO `Message` (`content`, `date`, `userId`) VALUES
 ('Salut tout le monde, comment ça va ?', '2023-10-01 09:00:00', 3), -- Alice
 ('Ça va bien, merci Alice. Et toi ?', '2023-10-01 09:15:00', 1), -- John
 ('Salut Alice et John, moi aussi ça va.', '2023-10-01 09:30:00', 2), -- Walter

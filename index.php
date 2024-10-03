@@ -34,19 +34,12 @@ try {
         session_start();
 
         // Load the controller
-        require_once ($controllerPath);
+        require_once($controllerPath);
     } else {
         // Throw an error
         throw new Exception("Error 404: oh no... This page doesn't exist.");
     }
-
 } catch (Exception $e) {
-
-    // Display the error only in development environment
-    if (ENVIRONMENT == 'DEV') {
-         echo $e->getMessage();
-    } else {
-        // Todo : test this controller
-        require_once "controller/error.php";
-    }
+    error_log("Global error -> " . $e->getMessage());
+    require_once "controller/error.php";
 }

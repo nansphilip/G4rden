@@ -7,7 +7,6 @@
  */
 class Database
 {
-
     private static $connection;
 
     /**
@@ -34,8 +33,7 @@ class Database
 
             // Catch database connection errors
         } catch (PDOException $e) {
-            error_log("Database connection failed:" . $e->getMessage());
-            die("Database connection failed.");
+            throw new Exception("database -> " . $e->getMessage());
         }
     }
 
@@ -75,36 +73,21 @@ class Database
             // Return null if result is empty
             return null;
         } catch (PDOException $e) {
-            error_log("Query failed:" . $e->getMessage());
+            throw new Exception("queryAssoc -> " . $e->getMessage());
         }
     }
 
-    /**
-     * Prepares and executes a SQL query, and returns the result with a boolean
-     * @param string $sql
-     * @param array $bindList
-     * @return boolean
-     */
-    public static function queryAssocBool($sqlQuery, $bindVariableList = [])
-    {
+    public static function queryBool($sqlQuery, $bindVariableList = []) {
         try {
-            // If database connection doesn't exist, create it
-            if (!self::$connection) {
-                self::init();
+            $query = self::queryAssoc($sqlQuery, $bindVariableList);
+            
+            if (is_null($query)) {
+                return false;
             }
-            // Prepare the SQL query
-            $statement = self::$connection->prepare($sqlQuery);
-            // Bind the variables variable to the query
-            if ($bindVariableList != null) {
-                foreach ($bindVariableList as $key => $variable) {
-                    $statement->bindValue($key, $variable);
-                }
-            }
-            // Execute the query
-            $statement->execute();
-            return $statement;
+
+            return true;
         } catch (PDOException $e) {
-            error_log("Query failed:" . $e->getMessage());
+            throw new Exception("queryBool -> " . $e->getMessage());
         }
     }
 }
