@@ -27,7 +27,7 @@ if (isset($_POST['login'])) {
 
         // If the username does not exists, return null
         if (is_null($existingUser)) {
-            throw new Exception("User does not exist");
+            throw new Error("User does not exist");
         }
 
         // Check if the password is correct
@@ -35,7 +35,7 @@ if (isset($_POST['login'])) {
 
         // If the password is not correct, return null
         if (!$isPasswordCorrect) {
-            throw new Exception("Invalid password");
+            throw new Error("Invalid password");
         }
 
         // Add user data to the session
@@ -48,8 +48,8 @@ if (isset($_POST['login'])) {
 
         // Redirect to the home page
         header("Location: {$PATH}/index.php?p=message");
-    } catch (Exception $e) {
-        throw new Exception("Login Controller -> " . $e->getMessage());
+    } catch (Error $e) {
+        throw new Error("Login Controller -> " . $e->getMessage());
     }
 }
 

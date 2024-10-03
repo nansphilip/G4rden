@@ -39,9 +39,9 @@ try {
         require_once($controller);
     } else {
         // Throw an error
-        throw new Exception("404");
+        throw new Error("404");
     }
-} catch (Exception $e) {
+} catch (Error $e) {
     error_log("Global error -> " . $e->getMessage());
     require_once "controller/error.php";
 }

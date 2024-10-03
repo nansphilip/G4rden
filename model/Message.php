@@ -33,7 +33,7 @@ class Message
                 ':userId' => $this->userId
             ]);
         } catch (PDOException $e) {
-            throw new Exception("addMessage -> " . $e->getMessage());
+            throw new Error("addMessage -> " . $e->getMessage());
         }
     }
 
@@ -59,7 +59,7 @@ class Message
             }
             return $query[0];
         } catch (PDOException $e) {
-            throw new Exception("getMessageById -> " . $e->getMessage());
+            throw new Error("getMessageById -> " . $e->getMessage());
         }
     }
 
@@ -76,7 +76,7 @@ class Message
             ]);
             return $query;
         } catch (PDOException $e) {
-            throw new Exception("getMessagesByUserId -> " . $e->getMessage());
+            throw new Error("getMessagesByUserId -> " . $e->getMessage());
         }
     }
 
@@ -96,7 +96,7 @@ class Message
             ]);
             return $query;
         } catch (PDOException $e) {
-            throw new Exception("getMessagesByDateBetween -> " . $e->getMessage());
+            throw new Error("getMessagesByDateBetween -> " . $e->getMessage());
         }
     }
 
@@ -114,7 +114,7 @@ class Message
             ]);
             return $query;
         } catch (PDOException $e) {
-            throw new Exception("getMessagesByPeaceOfContent -> " . $e->getMessage());
+            throw new Error("getMessagesByPeaceOfContent -> " . $e->getMessage());
         }
     }
 
@@ -137,7 +137,7 @@ class Message
             $query = Database::queryAssoc($sql);
             return $query;
         } catch (PDOException $e) {
-            throw new Exception("getAllMessageJoinedToUser -> " . $e->getMessage());
+            throw new Error("getAllMessageJoinedToUser -> " . $e->getMessage());
         }
     }
 
@@ -152,7 +152,7 @@ class Message
             $query = Database::queryAssoc($sql);
             return $query;
         } catch (PDOException $e) {
-            throw new Exception("getAll -> " . $e->getMessage());
+            throw new Error("getAll -> " . $e->getMessage());
         }
     }
 
@@ -182,7 +182,7 @@ class Message
             }
             return $query[0];
         } catch (PDOException $e) {
-            throw new Exception("deleteMessage -> " . $e->getMessage());
+            throw new Error("deleteMessage -> " . $e->getMessage());
         }
     }
 }

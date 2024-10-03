@@ -29,8 +29,8 @@ if (isset($_POST['new_message'])) {
 try {
     $userList = User::getAll();
     $messageList = Message::getAllMessageJoinedToUser();
-} catch (Exception $e) {
-    throw new Exception("Message Controller -> " . $e->getMessage());
+} catch (Error $e) {
+    throw new Error("Message Controller -> " . $e->getMessage());
 }
 
 // List of variables to inject in the view

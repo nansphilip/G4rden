@@ -22,7 +22,7 @@ if (isset($_POST['register'])) {
 
         // If password is not ok, return null
         if (!(strlen($password) >= 8) || ($password != $passwordConfirm)) {
-            throw new Exception("Invalid password");
+            throw new Error("Invalid password");
         }
 
         // Hash the password
@@ -36,7 +36,7 @@ if (isset($_POST['register'])) {
 
         // If the username already exists, return null
         if (isset($existingUser)) {
-            throw new Exception("Username already exists");
+            throw new Error("Username already exists");
         }
 
         // Creates the user in the database
@@ -52,8 +52,8 @@ if (isset($_POST['register'])) {
 
         // Redirect to the home page
         header("Location: {$PATH}/index.php?p=message");
-    } catch (Exception $e) {
-        throw new Exception("Register Controller -> " . $e->getMessage());
+    } catch (Error $e) {
+        throw new Error("Register Controller -> " . $e->getMessage());
     }
 }
 

@@ -47,7 +47,7 @@ class User
                 ':userType' => $this->userType,
             ]);
         } catch (PDOException $e) {
-            throw new Exception("addUser -> " . $e->getMessage());
+            throw new Error("addUser -> " . $e->getMessage());
         }
     }
 
@@ -73,7 +73,7 @@ class User
             }
             return $query[0];
         } catch (PDOException $e) {
-            throw new Exception("getUserById -> " . $e->getMessage());
+            throw new Error("getUserById -> " . $e->getMessage());
         }
     }
 
@@ -93,7 +93,7 @@ class User
             }
             return $query[0];
         } catch (PDOException $e) {
-            throw new Exception("getUserByUsername -> " . $e->getMessage());
+            throw new Error("getUserByUsername -> " . $e->getMessage());
         }
     }
 
@@ -113,7 +113,7 @@ class User
             }
             return $query[0];
         } catch (PDOException $e) {
-            throw new Exception("getUsersByUserType -> " . $e->getMessage());
+            throw new Error("getUsersByUserType -> " . $e->getMessage());
         }
     }
 
@@ -128,7 +128,7 @@ class User
             $query = Database::queryAssoc($sql);
             return $query;
         } catch (PDOException $e) {
-            throw new Exception("getAll -> " . $e->getMessage());
+            throw new Error("getAll -> " . $e->getMessage());
         }
     }
 
@@ -158,7 +158,7 @@ class User
             }
             return $query[0];
         } catch (PDOException $e) {
-            throw new Exception("deleteUser -> " . $e->getMessage());
+            throw new Error("deleteUser -> " . $e->getMessage());
         }
     }
 }

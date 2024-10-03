@@ -3,7 +3,7 @@
 /**
  * Database class
  * A singleton class that instantiates a PDO connection to the database.
- * It also handles errors by throwing an exception.
+ * It also handles errors by throwing an Error.
  */
 class Database
 {
@@ -28,12 +28,12 @@ class Database
             // Create a new PDO connection
             self::$connection = new PDO($dsn, $user, $pass);
 
-            // Set the error mode to exception
-            self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            // Set the error mode to Error
+            self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_Error);
 
             // Catch database connection errors
         } catch (PDOException $e) {
-            throw new Exception("database -> " . $e->getMessage());
+            throw new Error("database -> " . $e->getMessage());
         }
     }
 
@@ -73,7 +73,7 @@ class Database
             // Return null if result is empty
             return null;
         } catch (PDOException $e) {
-            throw new Exception("queryAssoc -> " . $e->getMessage());
+            throw new Error("queryAssoc -> " . $e->getMessage());
         }
     }
 
@@ -87,7 +87,7 @@ class Database
 
             return true;
         } catch (PDOException $e) {
-            throw new Exception("queryBool -> " . $e->getMessage());
+            throw new Error("queryBool -> " . $e->getMessage());
         }
     }
 }
