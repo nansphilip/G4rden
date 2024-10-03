@@ -37,11 +37,11 @@ class Message
      * @param int $id
      * @return associated_array of the message
      */
-    public function getMessageById($id)
+    public function getMessageById()
     {
         $sql = "SELECT * FROM Message WHERE id = :id";
         $query = Database::queryAssoc($sql, [
-            ':id' => $id
+            ':id' => $this->id
         ]);
         return $query[0];
     }
@@ -80,11 +80,11 @@ class Message
      * @param int $userId
      * @return array of associated_arrays of messages
      */
-    public function getMessagesByUserId($userId)
+    public function getMessagesByUserId()
     {
         $sql = "SELECT * FROM Message WHERE userId = :userId";
         $query = Database::queryAssoc($sql, [
-            ':userId' => $userId
+            ':userId' => $this->userId
         ]);
         return $query;
     }
@@ -124,11 +124,11 @@ class Message
      * @param int $id
      * @return associated_array of the message
      */
-    public function deleteMessage($id)
+    public function deleteMessage()
     {
         $sql = "DELETE FROM Message WHERE id = :id";
         $query = Database::queryAssoc($sql, [
-            ':id' => $id
+            ':id' => $this->id
         ]);
         return $query[0];
     }

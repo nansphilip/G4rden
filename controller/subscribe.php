@@ -29,11 +29,13 @@ function createUser()
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Instantiate the user
-    $newUser = new User('', $lastname, $firstname, $username, $hashedPassword, 'USER');
-    $isUserAvailable = !is_null($newUser->getUserByUsername());
+    $newUserPrototype = new User('', $lastname, $firstname, $username, $hashedPassword, 'USER');
+
+    // Check if the username already exists
+    $newUser = $newUserPrototype->getUserByUsername();
 
     // If the username already exists, return null
-    if (!$isUserAvailable) {
+    if (is_null($newUser)) {
         error_log("Username already exists");
         return null;
     }

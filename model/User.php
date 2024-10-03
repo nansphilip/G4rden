@@ -81,19 +81,20 @@ class User
     {
         $sql = "SELECT * FROM User WHERE username = :username";
         $query = Database::queryAssoc($sql, [
-            ':username' => $username
+            ':username' => $this->username
         ]);
         return $query[0];
     }
+    
     /**
      * Gets all users by their userType.
      * @return array of associated_arrays of users
      */
-    public function getUsersByUserType($userType)
+    public function getUsersByUserType()
     {
         $sql = "SELECT * FROM User WHERE userType = :userType";
         $query = Database::queryAssoc($sql, [
-            ':userType' => $userType
+            ':userType' => $this->userType
         ]);
         return $query[0];
     }
@@ -122,11 +123,11 @@ class User
      * @param int $id
      * @return boolean if the user has been deleted
      */
-    public function deleteUser($id)
+    public function deleteUser()
     {
         $sql = "DELETE FROM User WHERE id = :id";
         $query = Database::queryAssocBool($sql, [
-            ':id' => $id
+            ':id' => $this->id
         ]);
         return $query;
     }
