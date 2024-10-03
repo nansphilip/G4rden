@@ -20,6 +20,9 @@ class Message
     // ======================= //
 
 
+    /**
+     * Adds a new message to the database.
+     */
     public function addMessage()
     {
         try {
@@ -34,11 +37,16 @@ class Message
         }
     }
 
+    
     // ======================= //
     // ===== Get methods ===== //
     // ======================= //
 
 
+    /**
+     * Gets a message by his id.
+     * @return associated_array of the message
+     */
     public function getMessageById()
     {
         try {
@@ -55,6 +63,10 @@ class Message
         }
     }
 
+    /**
+     * Gets all messages of an user by its id.
+     * @return array of associated_arrays of messages
+     */
     public function getMessagesByUserId()
     {
         try {
@@ -68,6 +80,12 @@ class Message
         }
     }
 
+    /**
+     * Gets all messages between two dates.
+     * @param string $startDate
+     * @param string $endDate
+     * @return array of associated_arrays of messages
+     */
     public function getMessagesByDateBetween($startDate, $endDate)
     {
         try {
@@ -82,6 +100,11 @@ class Message
         }
     }
 
+    /**
+     * Gets all messages with a word or a sentence in their content.
+     * @param string $stringOfContent
+     * @return array of associated_arrays of messages
+     */
     public static function getMessagesByPeaceOfContent($stringOfContent)
     {
         try {
@@ -95,6 +118,10 @@ class Message
         }
     }
 
+    /**
+     * Gets all messages associated to their user.
+     * @return array of associated_arrays of messages
+     */
     public static function getAllMessageJoinedToUser()
     {
         try {
@@ -114,6 +141,10 @@ class Message
         }
     }
 
+    /**
+     * Gets all messages.
+     * @return array of associated_arrays of messages
+     */
     public static function getAll()
     {
         try {
@@ -136,6 +167,9 @@ class Message
     // ========================== //
 
 
+    /**
+     * Deletes a message by its id.
+     */
     public function deleteMessage()
     {
         try {

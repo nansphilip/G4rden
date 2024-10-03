@@ -2,8 +2,8 @@
 
 ## Handle errors
 
-- [ ] Handle errors everywhere
-- [ ] Show errors in the view
+- [x] Handle errors everywhere
+- [x] Show errors in the view
 
 ## Ajax
 
@@ -16,4 +16,5 @@
 
 ## Models
 
-- [ ] Add php docs
+- [x] Add php docs
+- [ ] Move PATH .env variable to the index.php file

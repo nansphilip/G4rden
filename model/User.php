@@ -32,6 +32,9 @@ class User
     // ======================= //
 
 
+    /**
+     * Adds a new user to the database.
+     */
     public function addUser()
     {
         try {
@@ -54,6 +57,10 @@ class User
     // ======================= //
 
 
+    /**
+     * Gets a user by its id.
+     * @return associated_array of the user
+     */
     public function getUserById()
     {
         try {
@@ -70,6 +77,10 @@ class User
         }
     }
 
+    /**
+     * Gets a user by its username.
+     * @return associated_array of the user
+     */
     public function getUserByUsername()
     {
         try {
@@ -86,6 +97,10 @@ class User
         }
     }
 
+    /**
+     * Gets all users by their userType.
+     * @return array of associated_arrays of users
+     */
     public function getUsersByUserType()
     {
         try {
@@ -102,6 +117,10 @@ class User
         }
     }
 
+    /**
+     * Gets all users.
+     * @return array of associated_arrays of users
+     */
     public static function getAll()
     {
         try {
@@ -124,6 +143,9 @@ class User
     // ========================== //
 
 
+    /**
+     * Deletes a user by its id.
+     */
     public function deleteUser()
     {
         try {
