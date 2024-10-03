@@ -20,9 +20,13 @@ require_once "view/components/header.php";
         // print_r($userMessageList);
         ?>
     </pre>
-    <?php
-    require_once("view/components/reply_form.php");
-    ?>
+
+    <form method="post" action="">
+        <label for="reply">Répondre</label>
+        <textarea id="reply" name="reply" rows="3" cols="100" placeholder="Poste ta merde ici"></textarea>
+        <button type="submit" name="new_message">Répondre</button>
+    </form>
+
     <?php
     foreach ($userMessageList as $userMessage) {
         $username = $userMessage['username'];
