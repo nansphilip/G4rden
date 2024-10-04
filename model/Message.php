@@ -1,4 +1,9 @@
 <?php
+/**
+ * Message class
+ * A message has an ID, a content, a date and a userId.
+ * It also has methods to add, get, update and delete messages.
+ */
 class Message
 {
     public $id;

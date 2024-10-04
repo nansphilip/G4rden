@@ -48,7 +48,7 @@ if (isset($_POST['login'])) {
 
         // Redirect to the home page
         header("Location: {$PATH}/index.php?p=message");
-    } catch (Error $e) {
+    } catch (Throwable $e) {
         throw new Error("Login Controller -> " . $e->getMessage());
     }
 }

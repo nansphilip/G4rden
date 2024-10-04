@@ -6,7 +6,7 @@ export default class AsyncRouter {
         try {
             // Associative object of URLs
             const url = {
-                "last-user": "/index.php?a=last-user",
+                "last-user": "index.php?a=last-user",
             };
 
             // Fetch the data
@@ -15,9 +15,9 @@ export default class AsyncRouter {
                 headers: { "Content-Type": "application/json" },
             });
 
-            if (!response.ok) {
-                throw new Error("AsyncRouter -> " + response.status);
-            }
+            // if (!response.ok) {
+            //     throw new Error("AsyncRouter -> " + response.status);
+            // }
 
             // Parse the data
             const data = await response.json();

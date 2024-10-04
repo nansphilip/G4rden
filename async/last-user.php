@@ -1,22 +1,26 @@
 <?php
 // Last user script
 
-require_once "model/User.php";
+require_once "./model/User.php";
 
 try {
     $userList = User::getAll();
-    $lastUser = $userList[count($userList) - 1];
+    $userListLength = count($userList);
+    $lastUser = $userList[$userListLength - 1]['username'];
+
+    error_log("Last user : " . $lastUser);
+    error_log("Last user type : " . gettype($lastUser));
 
     echo json_encode([
         "status" => "ok",
         "message" => "Data fetched",
-        "data" => $lastUser['username']
+        "data" => $lastUser
     ]); 
 } catch (Throwable $e) {
-    // http_response_code(500);
     echo json_encode([
         "status" => "error",
-        "message" => "Login Controller -> " . $e->getMessage(),
+        "message" => "Last user script -> " . $e->getMessage(),
         "data" => null
     ]);
+    throw new Error("Last user script -> " . $e->getMessage());
 }

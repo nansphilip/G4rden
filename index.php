@@ -42,7 +42,7 @@ try {
         // Throw an error
         throw new Error("404");
     }
-} catch (Error $e) {
+} catch (Throwable $e) {
     error_log("Global error -> " . $e->getMessage());
     require_once "controller/error.php";
 }

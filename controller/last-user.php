@@ -2,8 +2,6 @@
 // Last user controller
 
 // Includes required models
-require_once "model/User.php";
-// $lastUser = Admin::getLastUser();
 
 // Prepare data for the view
 

@@ -37,7 +37,6 @@
 </head>
 
 <body>
-
     <header>
         <h1 class="logo-title"><?= "<a href={$PATH}/index.php?p=home>G4rden</a>" ?></h1>
         <nav class="nav-bar">
