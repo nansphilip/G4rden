@@ -32,18 +32,21 @@ if (isset($_POST['register'])) {
         $newUser = new User('', $lastname, $firstname, $username, $passwordHash, 'USER');
 
         // Check if the username already exists
-        $existingUser = $newUser->getUserByUsername();
+        $isAvailable = $newUser->getUserByUsername();
 
         // If the username already exists, return null
-        if (isset($existingUser)) {
+        if (isset($isAvailable)) {
             throw new Error("Username already exists");
         }
 
         // Creates the user in the database
         $newUser->addUser();
 
+        // Get the new user data from the database
+        $getNewUser = $newUser->getUserByUsername();
+
         // Add user data to the session
-        foreach ($existingUser as $props => $value) {
+        foreach ($getNewUser as $props => $value) {
             $_SESSION[$props] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
         }
 
