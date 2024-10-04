@@ -8,11 +8,24 @@ if (!isset($_SESSION['active'])) {
 // Includes required models
 require_once "model/User.php";
 
+$id = $_SESSION['id'];
+
+$userProfil = new User($id, '', '', '', '', '');
+$userData = $userProfil->getUserById();
+
+$lastname = $userData['lastname'];
+$firstname = $userData['firstname'];
+$username = $userData['username'];
+$passwordHash = $userData['passwordHash'];
+$userType = $userData['userType'];
+
+$user = new User($id, $lastname, $firstname, $username, $passwordHash, $userType);
 
 
 $varToInject = [
     "ENVIRONMENT" => $ENVIRONMENT,
-    "PATH" => $PATH
+    "PATH" => $PATH,
+    "userData" => $userData,
 ];
 
 // Set page meta data
