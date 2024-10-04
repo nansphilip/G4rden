@@ -42,8 +42,11 @@ if (isset($_POST['register'])) {
         // Creates the user in the database
         $newUser->addUser();
 
+        // Get the new user data from the database
+        $getNewUser = $newUser->getUserByUsername();
+
         // Add user data to the session
-        foreach ($existingUser as $props => $value) {
+        foreach ($getNewUser as $props => $value) {
             $_SESSION[$props] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
         }
 
