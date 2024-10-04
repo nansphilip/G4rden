@@ -30,6 +30,7 @@ if (isset($_POST['login'])) {
             throw new Error("User does not exist");
         }
 
+
         // Check if the password is correct
         $isPasswordCorrect = password_verify($password, $existingUser['passwordHash']);
 

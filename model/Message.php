@@ -156,6 +156,10 @@ class Message
         }
     }
 
+    /**
+     * @return mixed
+     */
+
 
     // ========================== //
     // ===== Update methods ===== //

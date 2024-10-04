@@ -23,6 +23,7 @@ class App
     public static $cssFiles;
     public static $jsFiles;
     public static $viewFile;
+    public static $profile;
 
     // Methods
 

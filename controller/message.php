@@ -6,9 +6,11 @@ if (!isset($_SESSION['active'])) {
     header("Location: {$PATH}/index.php?p=login");
 }
 
+
 // Includes required models
 require_once "model/User.php";
 require_once("model/Message.php");
+
 
 // Check if the form has been submitted
 if (isset($_POST['new_message'])) {
@@ -20,7 +22,8 @@ if (isset($_POST['new_message'])) {
     $formattedDate = $date->format('Y-m-d H:i:s');
     error_log("Date : " . $formattedDate);
 
-    $newMessage = new Message('', $message, $formattedDate, 1);
+
+    $newMessage = new Message('', $message, $formattedDate, 2 );
 
     $newMessage->addMessage();
 }

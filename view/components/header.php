@@ -46,6 +46,7 @@
             // Sets the navigation bar depending if the user is logged in or not
             if (isset($_SESSION['active'])) {
                 echo "<a href={$PATH}/index.php?p=message>Message</a>";
+                echo "<a href={$PATH}/index.php?p=profile>Profile</a>";
                 echo "<a href={$PATH}/index.php?p=logout>Logout</a>";
             } else {
                 echo "<a href={$PATH}/index.php?p=login>Login</a>";
