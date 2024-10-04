@@ -1,6 +1,3 @@
-<!-- User class -->
-<!-- Admin class that extends User class -->
-
 <?php
 /**
  * User class

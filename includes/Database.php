@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Database class
  * A singleton class that instantiates a PDO connection to the database.

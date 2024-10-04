@@ -29,7 +29,7 @@ if (isset($_POST['new_message'])) {
 try {
     $userList = User::getAll();
     $messageList = Message::getAllMessageJoinedToUser();
-} catch (Error $e) {
+} catch (Throwable $e) {
     throw new Error("Message Controller -> " . $e->getMessage());
 }
 
