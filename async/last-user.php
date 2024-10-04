@@ -4,23 +4,30 @@
 require_once "./model/User.php";
 
 try {
+    // Get all users
     $userList = User::getAll();
-    $userListLength = count($userList);
-    $lastUser = $userList[$userListLength - 1]['username'];
+    // Test errors with null
+    // $userList = null;
 
-    error_log("Last user : " . $lastUser);
-    error_log("Last user type : " . gettype($lastUser));
+    if (is_null($userList)) {
+        throw new Error("user not found");
+    }
 
+    // Select the last user
+    $lastUser = $userList[count($userList) - 1]['username'];
+
+    // Encode the data
     echo json_encode([
         "status" => "ok",
-        "message" => "Data fetched",
+        "message" => "Data fetched with success",
         "data" => $lastUser
-    ]); 
+    ]);
 } catch (Throwable $e) {
+    // Return an error to the client
     echo json_encode([
         "status" => "error",
-        "message" => "Last user script -> " . $e->getMessage(),
+        "message" => $e->getMessage(),
         "data" => null
     ]);
-    throw new Error("Last user script -> " . $e->getMessage());
 }
+?>

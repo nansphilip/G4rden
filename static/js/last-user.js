@@ -1,22 +1,18 @@
 import AsyncRouter from "/static/js/async-router.js";
 
 export const getLastUser = async () => {
-    try {
-        // Get the last user
-        const response = await AsyncRouter.get("last-user");
-        console.log(response);
+    // Get the last user
+    const {data, error} = await AsyncRouter.get("last-user");
 
-        // Create a new paragraph element with the user data
-        const pElement = document.createElement("p");
-        pElement.textContent = response.data;
+    // Create a new paragraph element with the user data
+    let pElement = document.createElement("p");
 
-        // Select the main element and append the new paragraph
-        const mainEl = document.querySelector("main");
-        mainEl.appendChild(pElement);
+    // Create a new paragraph element with the user data
+    data ? (pElement.textContent = data) : (pElement.textContent = error);
 
-    } catch (error) {
-        console.error(error);
-    }
+    // Select the main element and append the new paragraph
+    const mainEl = document.querySelector("main");
+    mainEl.appendChild(pElement);
 };
 
 // Add button listener, to execute the function

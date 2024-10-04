@@ -8,3 +8,4 @@
 ## Auth
 
 - [ ] Add a feedback for users if register ou login fails
+- [ ] Fix session issue when registering
