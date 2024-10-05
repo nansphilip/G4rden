@@ -9,3 +9,7 @@
 
 - [ ] Add a feedback for users if register ou login fails
 - [ ] Fix session issue when registering
+
+## Add message
+
+- [ ] Get the user id from the session when sending a message

@@ -1,4 +1,7 @@
 <?php
+$envFile = parse_ini_file(".env");
+$ENVIRONMENT = $envFile['ENV'];
+
 /**
  * Message class
  * A message has an ID, a content, a date and a userId.
@@ -31,6 +34,21 @@ class Message
     public function addMessage()
     {
         try {
+            // Get environment
+            $envFile = parse_ini_file(".env");
+            $ENVIRONMENT = $envFile['ENV'];
+
+            // Check if in production
+            if ($ENVIRONMENT == "PROD") {
+                $getRowCount = Database::queryAssoc("SELECT COUNT(*) FROM Message;");
+                $recordsAmount = $getRowCount[0]['COUNT(*)'];
+
+                // If records amount is >= 2000, throw an error to prevent the database from being overloaded
+                if ($recordsAmount >= 2000) {
+                    throw new Error("Records amount reached the maximum limit of 2000 messages.");
+                }
+            }
+
             $sql = "INSERT INTO Message (content, date, userId) VALUES (:content, :date, :userId)";
             Database::queryAssoc($sql, [
                 ':content' => $this->content,

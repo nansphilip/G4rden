@@ -20,7 +20,7 @@ if (isset($_POST['new_message'])) {
     $formattedDate = $date->format('Y-m-d H:i:s');
     error_log("Date : " . $formattedDate);
 
-    $newMessage = new Message('', $message, $formattedDate, 1);
+    $newMessage = new Message('', $message, $formattedDate, $_SESSION['id']);
 
     $newMessage->addMessage();
 }

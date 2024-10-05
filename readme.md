@@ -28,6 +28,7 @@ A minimalist PHP framework based on MVC pattern.
 
 ```
 # Environnement setup
+# DEV or PROD
 ENV=DEV
 
 # Server path if needed

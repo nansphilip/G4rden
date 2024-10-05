@@ -11,8 +11,6 @@ try {
     $ENVIRONMENT = $envFile['ENV'];
     $PATH = isset($envFile['PATH']) ? $envFile['PATH'] : '';
 
-    error_log("PATH: $PATH");
-
     // Imports
     require_once "includes/App.php";
     require_once "includes/Database.php";

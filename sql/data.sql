@@ -1,5 +1,3 @@
--- SQLBook: Code
-
 -- Inserts users
 INSERT INTO `User` (`lastname`, `firstname`, `username`, `passwordHash`, `userType`) VALUES
 ('Doe', 'John', 'DJohn', 'passwordAlice', 'USER'),
