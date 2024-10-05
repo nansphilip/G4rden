@@ -25,3 +25,7 @@
 ## Responsive
 
 - [ ] Adapt the layout to mobile
+
+## Check data validation
+
+- [ ] Check if every database insert is validated by `htmlspecialchars`

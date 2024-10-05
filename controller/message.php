@@ -13,7 +13,7 @@ require_once("model/Message.php");
 if (isset($_POST['new_message'])) {
 
     // Get the message
-    $message = $_POST['reply'];
+    $message = htmlspecialchars($_POST['reply'], ENT_QUOTES, 'UTF-8');
 
     // Get the date
     $date = new DateTime();
@@ -27,7 +27,7 @@ if (isset($_POST['new_message'])) {
 // Prepare data for the view
 try {
     $limit = 10;
-    $messageList = Message::getAllMessageJoinedToUser($limit);
+    $messageList = Message::getLastMessageJoinedToUser($limit);
 } catch (Throwable $e) {
     throw new Error("Message Controller -> " . $e->getMessage());
 }

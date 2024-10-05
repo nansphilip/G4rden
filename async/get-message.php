@@ -6,7 +6,7 @@ require_once "./model/Message.php";
 try {
     // Get all users
     $limit = 10;
-    $messageList = Message::getAllMessageJoinedToUser($limit);
+    $messageList = Message::getLastMessageJoinedToUser($limit);
 
     if (is_null($messageList)) {
         throw new Error("Cannot fetch messages");

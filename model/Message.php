@@ -142,10 +142,10 @@ class Message
     }
 
     /**
-     * Gets all messages associated to their user.
+     * Gets the 10 last messages associated to their user.
      * @return array of associated_arrays of messages
      */
-    public static function getAllMessageJoinedToUser($limit = 10)
+    public static function getLastMessageJoinedToUser($limit = 10)
     {
         try {
             $limit = (int)$limit;
@@ -156,12 +156,12 @@ class Message
                 Message.date as date
                 FROM Message
                 INNER JOIN User ON User.id = Message.userId
-                ORDER BY Message.date ASC
+                ORDER BY Message.date DESC
                 LIMIT $limit";
             $query = Database::queryAssoc($sql);
-            return $query;
+            return array_reverse($query);
         } catch (PDOException $e) {
-            throw new Error("getAllMessageJoinedToUser -> " . $e->getMessage());
+            throw new Error("getLastMessageJoinedToUser -> " . $e->getMessage());
         }
     }
 

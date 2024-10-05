@@ -38,7 +38,7 @@ require_once "view/components/header.php";
         <?php } ?>
     </div>
 
-    <form method="post" action="" class="bg-gray-light flex flex-column items-center gap-2 rounded-box">
+    <form id="addNewMessage" method="post" action="" class="bg-gray-light flex flex-column items-center gap-2 rounded-box">
         <label class="w-full bold" for="reply">Répondre</label>
         <textarea
             id="reply"
