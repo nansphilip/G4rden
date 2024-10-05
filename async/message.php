@@ -1,26 +1,22 @@
 <?php
-// Last user script
+// Message script
 
-require_once "./model/User.php";
+require_once "./model/Message.php";
 
 try {
     // Get all users
-    $userList = User::getAll();
-    // Test errors with null
-    // $userList = null;
+    $limit = 10;
+    $messageList = Message::getAllMessageJoinedToUser($limit);
 
-    if (is_null($userList)) {
-        throw new Error("Cannot fetch users");
+    if (is_null($messageList)) {
+        throw new Error("Cannot fetch messages");
     }
-
-    // Select the last user
-    $lastUser = $userList[count($userList) - 1]['username'];
 
     // Encode the data
     echo json_encode([
         "status" => "ok",
         "message" => "Data fetched with success",
-        "data" => $lastUser
+        "data" => $messageList
     ]);
 } catch (Throwable $e) {
     // Return an error to the client

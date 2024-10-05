@@ -2,7 +2,7 @@ import AsyncRouter from "/static/js/async-router.js";
 
 export const getLastUser = async () => {
     // Get the last user
-    const {data, error} = await AsyncRouter.get("last-user");
+    const { data, error } = await AsyncRouter.get("last-user");
 
     // Create a new paragraph element with the user data
     let pElement = document.createElement("p");

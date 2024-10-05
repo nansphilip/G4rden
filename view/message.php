@@ -16,17 +16,22 @@ require_once "view/components/header.php";
     </div>
 
     <div id="directChat" class="flex-1 flex flex-column gap-1 overflow-y-auto">
-        <?php
-        foreach ($userMessageList as $userMessage) {
+        <!-- Messages will be injected here -->
+        <?php foreach ($userMessageList as $userMessage) {
             $username = $userMessage['username'];
             $message = $userMessage['message'];
             // Todo : date en français ?
-            $date = date_format(new DateTime($userMessage['date']), 'j F Y');
+            $date = date_format(new DateTime($userMessage['date']), 'j M');
+            $time = date_format(new DateTime($userMessage['date']), 'H:i');
         ?>
             <div class="rounded-box">
                 <div class="flex flex-row justify-between">
                     <h3><?= $username; ?></h3>
-                    <p><?= $date; ?></p>
+                    <div class="flex flex-row items-center gap-1">
+                        <p><?= $date; ?></p>
+                        <p>•</p>
+                        <p><?= $time; ?></p>
+                    </div>
                 </div>
                 <p><?= $message; ?></p>
             </div>

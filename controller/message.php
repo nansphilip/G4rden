@@ -7,7 +7,6 @@ if (!isset($_SESSION['active'])) {
 }
 
 // Includes required models
-require_once "model/User.php";
 require_once("model/Message.php");
 
 // Check if the form has been submitted
@@ -27,8 +26,8 @@ if (isset($_POST['new_message'])) {
 
 // Prepare data for the view
 try {
-    $userList = User::getAll();
-    $messageList = Message::getAllMessageJoinedToUser();
+    $limit = 10;
+    $messageList = Message::getAllMessageJoinedToUser($limit);
 } catch (Throwable $e) {
     throw new Error("Message Controller -> " . $e->getMessage());
 }
@@ -39,8 +38,6 @@ $varToInject = [
     "PATH" => $PATH,
     "userMessageList" => $messageList
 ];
-
-
 
 // Set page meta data
 App::setPageTitle("Message");

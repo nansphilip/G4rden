@@ -145,18 +145,19 @@ class Message
      * Gets all messages associated to their user.
      * @return array of associated_arrays of messages
      */
-    public static function getAllMessageJoinedToUser()
+    public static function getAllMessageJoinedToUser($limit = 10)
     {
         try {
+            $limit = (int)$limit;
             $sql = "SELECT
-                    User.username as username,
-                    Message.id as id,
-                    Message.content as message,
-                    Message.date as date
-                    FROM Message
-                    INNER JOIN User
-                    ON User.id = Message.userId
-                    ORDER BY Message.date ASC";
+                User.username as username,
+                Message.id as id,
+                Message.content as message,
+                Message.date as date
+                FROM Message
+                INNER JOIN User ON User.id = Message.userId
+                ORDER BY Message.date ASC
+                LIMIT $limit";
             $query = Database::queryAssoc($sql);
             return $query;
         } catch (PDOException $e) {
