@@ -32,7 +32,6 @@ ENV=DEV
 
 # Server path if needed
 # ex: PATH=/MyProjects
-PATH=
 
 # MySQL Database
 MYSQL_HOST=localhost

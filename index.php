@@ -9,7 +9,9 @@ try {
     // Environment
     $envFile = parse_ini_file(".env");
     $ENVIRONMENT = $envFile['ENV'];
-    $PATH = $envFile['PATH'] ? $envFile['PATH'] : '';
+    $PATH = isset($envFile['PATH']) ? $envFile['PATH'] : '';
+
+    error_log("PATH: $PATH");
 
     // Imports
     require_once "includes/App.php";
