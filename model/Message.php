@@ -156,7 +156,7 @@ class Message
                     FROM Message
                     INNER JOIN User
                     ON User.id = Message.userId
-                    ORDER BY Message.date DESC";
+                    ORDER BY Message.date ASC";
             $query = Database::queryAssoc($sql);
             return $query;
         } catch (PDOException $e) {

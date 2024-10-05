@@ -55,10 +55,6 @@ footer {
     text-align: center;
 }
 
-button {
-    padding: 0;
-}
-
 .nav-bar {
     display: flex;
     flex-direction: row;
@@ -73,10 +69,12 @@ button {
 
 /* Components */
 .rounded-box {
-    margin-top: 1rem;
     padding: 0.5rem 1rem;
-
     border-radius: 0.5rem;
     border: 1px solid black;
     box-shadow: 1px 1px 3px hsl(0, 0%, 70%);
+}
+
+textarea {
+    resize: vertical;
 }

@@ -2,8 +2,8 @@
 
 ## Ajax
 
-- [ ] Create a router for Ajax requests
-- [ ] Create php files for Ajax requests
+- [x] Create a router for Ajax requests
+- [x] Create php files for Ajax requests
 
 ## Auth
 
@@ -12,4 +12,9 @@
 
 ## Add message
 
-- [ ] Get the user id from the session when sending a message
+- [x] Get the user id from the session when sending a message
+- [ ] Make submit new message process async
+
+## Arrow to top
+
+- [ ] Find a good use case for this

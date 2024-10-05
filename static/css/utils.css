@@ -18,10 +18,42 @@
     justify-content: space-between;
 }
 
+.items-center {
+    align-items: center;
+}
+
+.flex-1 {
+    flex: 1 1 0%;
+}
+
+.gap-1 {
+    gap: 0.5rem;
+}
+
 .gap-2 {
     gap: 1rem;
 }
 
 .pb-2 {
     padding-bottom: 1rem;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.w-fit-content {
+    width: fit-content;
+}
+
+.overflow-y-auto {
+    overflow-y: auto;
+}
+
+.overflow-y-hidden {
+    overflow-y: hidden;
+}
+
+.bold {
+    font-weight: bold;
 }

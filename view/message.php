@@ -9,39 +9,43 @@ require_once "view/components/header.php";
 
 
 
-<main>
-    <h2><?= App::$pageTitle; ?></h2>
-    <p>Your are consulting G4rden's chat. <a href="index.php?p=home">Click here to go back home.</a></p>
+<main class="flex flex-column gap-2 overflow-y-hidden">
+    <div>
+        <h2><?= App::$pageTitle; ?></h2>
+        <p>Your are consulting G4rden's chat. <a href="index.php?p=home">Click here to go back home.</a></p>
+    </div>
 
-    <pre>
+    <div id="directChat" class="flex-1 flex flex-column gap-1 overflow-y-auto">
         <?php
-        // print_r($userList);
-        // print_r($messageList);
-        // print_r($userMessageList);
+        foreach ($userMessageList as $userMessage) {
+            $username = $userMessage['username'];
+            $message = $userMessage['message'];
+            // Todo : date en français ?
+            $date = date_format(new DateTime($userMessage['date']), 'j F Y');
         ?>
-    </pre>
-
-    <form method="post" action="">
-        <label for="reply">Répondre</label>
-        <textarea id="reply" name="reply" rows="3" cols="100" placeholder="Poste ta merde ici"></textarea>
-        <button type="submit" name="new_message">Répondre</button>
-    </form>
-
-    <?php
-    foreach ($userMessageList as $userMessage) {
-        $username = $userMessage['username'];
-        $message = $userMessage['message'];
-        // Todo : date en français ?
-        $date = date_format(new DateTime($userMessage['date']), 'j F Y');
-    ?>
-        <div class="rounded-box">
-            <div class="flex flex-row justify-between">
-                <h3><?= $username; ?></h3>
-                <p><?= $date; ?></p>
+            <div class="rounded-box">
+                <div class="flex flex-row justify-between">
+                    <h3><?= $username; ?></h3>
+                    <p><?= $date; ?></p>
+                </div>
+                <p><?= $message; ?></p>
             </div>
-            <p><?= $message; ?></p>
-        </div>
-    <?php } ?>
+        <?php } ?>
+    </div>
+
+    <form method="post" action="" class="bg-gray-light flex flex-column items-center gap-2 rounded-box">
+        <label class="w-full bold" for="reply">Répondre</label>
+        <textarea
+            id="reply"
+            name="reply"
+            rows="3"
+            minlength="1"
+            maxlength="3000"
+            class="w-full"
+            placeholder="Écrire un message..."
+            required></textarea>
+        <button type="submit" class="w-fit-content" name="new_message">Répondre</button>
+    </form>
 
 </main>
 

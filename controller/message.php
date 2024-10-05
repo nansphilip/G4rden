@@ -13,15 +13,15 @@ require_once("model/Message.php");
 // Check if the form has been submitted
 if (isset($_POST['new_message'])) {
 
+    // Get the message
     $message = $_POST['reply'];
-    error_log("Message : " . $message);
 
+    // Get the date
     $date = new DateTime();
     $formattedDate = $date->format('Y-m-d H:i:s');
-    error_log("Date : " . $formattedDate);
 
+    // Add the message to the database
     $newMessage = new Message('', $message, $formattedDate, $_SESSION['id']);
-
     $newMessage->addMessage();
 }
 
@@ -48,5 +48,6 @@ App::setPageDescription("G4rden chat");
 App::setPageFavicon("world.png");
 
 // Load the view
-App::loadCssFiles(["utils"]);
+App::loadCssFiles(["utils", "color"]);
+App::loadJsFiles(["message"]);
 App::loadViewFile("message", $varToInject);

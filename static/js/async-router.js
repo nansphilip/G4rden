@@ -20,7 +20,7 @@ export default class AsyncRouter {
             // Return the data
             return { data };
         } catch (error) {
-            return { error: `An error occured: ${error.message}` };
+            return { error: `An error occurred: ${error.message}` };
         }
     }
 
