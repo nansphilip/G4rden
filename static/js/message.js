@@ -11,22 +11,47 @@ const refreshMessages = async () => {
     const { data, error } = await AsyncRouter.get("get-message");
 
     // Create a new paragraph element with the user data
-    if(!data) {
-        return chatContainerEl.innerHTML = error;
+    if (!data) {
+        return (chatContainerEl.innerHTML = error);
     }
 
-    let htmlMessageList = "";
-    
-    data.forEach(messageData => {
-        const { username, message, date } = messageData;
+    // Store the
+    const scrollBottomPosition = Math.round(chatContainerEl.scrollTop + chatContainerEl.clientHeight);
+    const scrollHeight = chatContainerEl.scrollHeight;
+    const isScrollAtBottom = scrollBottomPosition === scrollHeight;
 
-        const newDate = new Date(date);
-        const dateFormat = newDate.toLocaleDateString("fr-FR", { day: 'numeric', month: 'short' });
-        const timeFormat = newDate.toLocaleTimeString("fr-FR", { hour: '2-digit', minute: '2-digit' });
+    // Set an empty id list
+    const currentIdList = [];
+    // Get current messages id list
+    const currentMessageList = document.querySelectorAll("#directChat > div");
+    // Get current messages id list
+    if (currentMessageList.length > 0) {
+        currentMessageList.forEach((messageDiv) => {
+            currentIdList.push(messageDiv.getAttribute("data-id"));
+        });
+    }
 
-        const messageFormat =
-            `<div class="rounded-box">
-                <div class="flex flex-row justify-between">
+    // Add new messages if they does not already exist
+    data.forEach((messageData) => {
+        const { id, username, message, date } = messageData;
+
+        // Stringify the id
+        const newId = id.toString();
+
+        // If the new message is not in the current list, add it
+        if (!currentIdList.includes(newId)) {
+            // Format the date and time
+            const newDate = new Date(date);
+            const dateFormat = newDate.toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+            const timeFormat = newDate.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+
+            // Create the new message element
+            const newMessageEl = document.createElement("div");
+            newMessageEl.classList.add("rounded-box");
+            newMessageEl.setAttribute("data-id", newId);
+
+            // Create the new message content
+            const messageContent = `<div class="flex flex-row justify-between">
                     <h3>${username}</h3>
                     <div class="flex flex-row items-center gap-1">
                         <p>${dateFormat}</p>
@@ -34,32 +59,44 @@ const refreshMessages = async () => {
                         <p>${timeFormat}</p>
                     </div>
                 </div>
-                <p>${message}</p>
-            </div>`;
+                <p>${message}</p>`;
 
-        htmlMessageList += messageFormat;
+            // Insert content into the new message element
+            newMessageEl.innerHTML = messageContent;
+
+            // Add the new message to the chat container
+            chatContainerEl.appendChild(newMessageEl);
+        }
     });
 
-    chatContainerEl.innerHTML = htmlMessageList;
+    if (currentMessageList.length === 0) {
+        // On initial load, instantly scroll to the bottom
+        chatContainerEl.scrollTop = chatContainerEl.scrollHeight;
+    } else {
+        // If scroll position was at the bottom, scroll to the bottom
+        if (isScrollAtBottom) {
+            // On refresh, smoothly scroll to the bottom
+            chatContainerEl.scrollTo({
+                top: chatContainerEl.scrollHeight,
+                behavior: "smooth",
+            });
+        }
+    }
 };
 
-const everySecond = () => {
-    // Refresh messages every second
+// On load, insert first messages, and add a refresh every 5 seconds
+document.addEventListener("DOMContentLoaded", () => {
+    refreshMessages();
     setInterval(refreshMessages, 5000);
-};
-
-document.addEventListener("DOMContentLoaded", refreshMessages);
-document.addEventListener("DOMContentLoaded", everySecond);
-
+});
 
 // ================================ //
 // === Async submit new message === //
 // ================================ //
 
-
 const newMessageFormEl = document.querySelector("#addNewMessage");
 
-newMessageFormEl.addEventListener("submit", async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Get the message
@@ -69,62 +106,22 @@ newMessageFormEl.addEventListener("submit", async (e) => {
     const dateValue = new Date().toISOString();
 
     // Add the message to the database
-    const { data, error } = await AsyncRouter.post("post-message", { replyValue, dateValue });
+    const { message, error } = await AsyncRouter.post("post-message", { replyValue, dateValue });
 
-    // Create a new paragraph element with the user data
-    const newMessageEl = document.createElement("div");
-    newMessageEl.classList.add("rounded-box");
-
-    if (data) {
-        // Destructure the data
-        const { username, message, date } = data;
-
-        // Format the date and time
-        const dateFormat = new Date(date).toLocaleDateString("fr-FR", { day: 'numeric', month: 'short' });
-        const timeFormat = new Date(date).toLocaleTimeString("fr-FR", { hour: '2-digit', minute: '2-digit' });
-
-        // Create the new message content
-        const content =
-            `<div class="flex flex-row justify-between">
-                <h3>${username}</h3>
-                <div class="flex flex-row items-center gap-1">
-                    <p>${dateFormat}</p>
-                    <p>•</p>
-                    <p>${timeFormat}</p>
-                </div>
-            </div>
-            <p>${message}</p>`;
-
-        newMessageEl.innerHTML = content;
+    if (message) {
+        // Refresh messages
+        refreshMessages();
     } else {
+        // Insert an error message in the chat container
+        const newMessageEl = document.createElement("div");
+        newMessageEl.classList.add("rounded-box");
         newMessageEl.innerHTML = error;
+        chatContainerEl.appendChild(newMessageEl);
     }
-
-    // Add the new message to the chat container
-    chatContainerEl.appendChild(newMessageEl);
-
-    // Auto scroll to the bottom
-    autoScrollNewMessage();
 
     // Clear the input
     newMessageFormEl.reply.value = "";
-});
-
-
-// =========================== //
-// === Auto scroll feature === //
-// =========================== //
-
-
-const autoScrollOnLoad = () => {
-    chatContainerEl.scrollTop = chatContainerEl.scrollHeight;
 };
 
-const autoScrollNewMessage = () => {
-    chatContainerEl.scrollTo({
-        top: chatContainerEl.scrollHeight,
-        behavior: "smooth",
-    });
-};
-
-document.addEventListener("DOMContentLoaded", autoScrollOnLoad);
+// On submit, handle the submit to manage insertion asynchronously
+newMessageFormEl.addEventListener("submit", handleSubmit);

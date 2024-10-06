@@ -10,33 +10,33 @@ if (!isset($_SESSION['active'])) {
 require_once("model/Message.php");
 
 // Check if the form has been submitted
-if (isset($_POST['new_message'])) {
+// if (isset($_POST['new_message'])) {
 
-    // Get the message
-    $message = htmlspecialchars($_POST['reply'], ENT_QUOTES, 'UTF-8');
+//     // Get the message
+//     $message = htmlspecialchars($_POST['reply'], ENT_QUOTES, 'UTF-8');
 
-    // Get the date
-    $date = new DateTime();
-    $formattedDate = $date->format('Y-m-d H:i:s');
+//     // Get the date
+//     $date = new DateTime();
+//     $formattedDate = $date->format('Y-m-d H:i:s');
 
-    // Add the message to the database
-    $newMessage = new Message('', $message, $formattedDate, $_SESSION['id']);
-    $newMessage->addMessage();
-}
+//     // Add the message to the database
+//     $newMessage = new Message('', $message, $formattedDate, $_SESSION['id']);
+//     $newMessage->addMessage();
+// }
 
 // Prepare data for the view
-try {
-    $limit = 10;
-    $messageList = Message::getLastMessageJoinedToUser($limit);
-} catch (Throwable $e) {
-    throw new Error("Message Controller -> " . $e->getMessage());
-}
+// try {
+//     $limit = 10;
+//     $messageList = Message::getLastMessageJoinedToUser($limit);
+// } catch (Throwable $e) {
+//     throw new Error("Message Controller -> " . $e->getMessage());
+// }
 
 // List of variables to inject in the view
 $varToInject = [
     "ENVIRONMENT" => $ENVIRONMENT,
     "PATH" => $PATH,
-    "userMessageList" => $messageList
+    // "userMessageList" => $messageList
 ];
 
 // Set page meta data

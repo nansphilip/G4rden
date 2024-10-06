@@ -10,7 +10,6 @@ require_once("view/components/header.php");
 <main>
     <h2><?= App::$pageTitle; ?></h2>
     <p>Welcome to G4rden. <a href="index.php?p=message">Click here to chat.</a></p>
-    <p style="height: 2000px;">f</p>
 </main>
 
 <?php

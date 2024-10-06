@@ -5,7 +5,7 @@ require_once "./model/Message.php";
 
 try {
     // Get all users
-    $limit = 10;
+    $limit = 20;
     $messageList = Message::getLastMessageJoinedToUser($limit);
 
     if (is_null($messageList)) {

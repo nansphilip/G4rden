@@ -27,18 +27,12 @@ try {
     // Encode the data
     echo json_encode([
         "status" => "ok",
-        "message" => "Data saved with success",
-        "data" => [
-            "username" => $_SESSION['username'],
-            "message" => $replyValue,
-            "date" => $dateValue
-        ]
+        "message" => "Data saved with success"
     ]);
 } catch (Throwable $e) {
     // Return an error to the client
     echo json_encode([
         "status" => "error",
-        "message" => $e->getMessage(),
-        "data" => null
+        "message" => $e->getMessage()
     ]);
 }

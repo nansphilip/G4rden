@@ -1,7 +1,7 @@
 export default class AsyncRouter {
     static async post(url, params = {}) {
         try {
-            // Fetch the data
+            // Send the data
             const response = await fetch(`/index.php?a=${url}`, {
                 method: "POST",
                 headers: {
@@ -10,8 +10,8 @@ export default class AsyncRouter {
                 body: JSON.stringify(params),
             });
 
-            // Parse the data
-            const { status, message, data } = await response.json();
+            // Parse the response
+            const { status, message } = await response.json();
 
             // Throw an error if the server returns an error
             if (status === "error") {
@@ -19,7 +19,7 @@ export default class AsyncRouter {
             }
 
             // Return the data
-            return { data };
+            return { message };
         } catch (error) {
             return { error: `An error occurred: ${error.message}` };
         }
