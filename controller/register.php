@@ -72,5 +72,4 @@ App::setPageDescription("Welcome to G4rden");
 App::setPageFavicon("world.png");
 
 // Load the view
-App::loadCssFiles(["utils"]);
 App::loadViewFile("register", $varToInject);

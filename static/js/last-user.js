@@ -1,4 +1,4 @@
-import AsyncRouter from "/static/js/async-router.js";
+import AsyncRouter from "/static/js/AsyncRouter.js";
 
 export const getLastUser = async () => {
     // Get the last user

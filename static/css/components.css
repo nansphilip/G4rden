@@ -1,0 +1,35 @@
+.rounded-box {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1.5px solid black;
+    box-shadow: 4px 4px hsl(0, 0%, 80%);
+}
+
+.input-form {
+    font-size: 1rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.25rem;
+    border: 1.5px solid black;
+    box-shadow: 4px 4px hsl(0, 0%, 80%);
+}
+
+.input-form:focus, .input-form:active {
+    outline: none;
+}
+
+.submit-button {
+    font-weight: bold;
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 1.5px solid black;
+    box-shadow: 4px 4px hsl(0, 0%, 80%);
+
+    background-color: hsl(0, 0%, 95%);
+}
+
+.submit-button:hover {
+    cursor: pointer;
+    background-color: hsl(0, 0%, 90%);
+}
+

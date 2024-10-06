@@ -17,6 +17,5 @@ App::setPageDescription("G4rden last user created");
 App::setPageFavicon("world.png");
 
 // Load the view
-App::loadCssFiles(["utils"]);
 App::loadJsFiles(["last-user"]);
 App::loadViewFile("last-user", $varToInject);

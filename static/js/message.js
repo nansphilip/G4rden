@@ -1,4 +1,4 @@
-import AsyncRouter from "/static/js/async-router.js";
+import AsyncRouter from "/static/js/AsyncRouter.js";
 
 const chatContainerEl = document.querySelector("#directChat");
 
@@ -15,10 +15,10 @@ const refreshMessages = async () => {
         return (chatContainerEl.innerHTML = error);
     }
 
-    // Store the
+    // Store the scroll position
     const scrollBottomPosition = Math.round(chatContainerEl.scrollTop + chatContainerEl.clientHeight);
     const scrollHeight = chatContainerEl.scrollHeight;
-    const isScrollAtBottom = scrollBottomPosition === scrollHeight;
+    const isScrollAtBottom = scrollBottomPosition >= scrollHeight - 5;
 
     // Set an empty id list
     const currentIdList = [];
@@ -125,3 +125,24 @@ const handleSubmit = async (e) => {
 
 // On submit, handle the submit to manage insertion asynchronously
 newMessageFormEl.addEventListener("submit", handleSubmit);
+
+
+// ========================== //
+// === Scroll bar padding === //
+// ========================== //
+
+const togglePadding = () => {
+    // Get the scroll position
+    const isScrollBarVisible = chatContainerEl.scrollHeight > chatContainerEl.clientHeight;
+
+    // If the scroll position is at the top, add padding
+    if (isScrollBarVisible) {
+        chatContainerEl.style.paddingRight = "0.5rem";
+    } else {
+        chatContainerEl.style.paddingRight = "";
+    }
+};
+
+document.addEventListener("DOMContentLoaded", togglePadding);
+window.addEventListener("resize", togglePadding);
+chatContainerEl.addEventListener("scroll", togglePadding);

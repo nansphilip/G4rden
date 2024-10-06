@@ -8,7 +8,7 @@ require_once "view/components/header.php";
 
 <main>
     <h2><?= App::$pageTitle; ?></h2>
-    <button id="last_user_button">Get last user</button>
+    <button id="last_user_button" class="submit-button mb-2" type="button">Get last user</button>
 </main>
 
 <?php

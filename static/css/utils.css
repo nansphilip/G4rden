@@ -31,11 +31,24 @@
 }
 
 .gap-2 {
+    gap: 0.75rem;
+}
+
+.gap-3 {
     gap: 1rem;
 }
 
 .pb-2 {
     padding-bottom: 1rem;
+}
+
+.mb-2 {
+    margin-bottom: 1rem;
+}
+
+.padding-shadow, main {
+    padding-right: 4px;
+    padding-bottom: 4px;
 }
 
 .w-full {
@@ -56,4 +69,20 @@
 
 .bold {
     font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.font-sm {
+    font-size: 0.8rem;
+}
+
+.center {
+    text-align: center;
+}
+
+.border-box {
+    box-sizing: border-box;
 }
