@@ -1,6 +1,3 @@
-<!-- User class -->
-<!-- Admin class that extends User class -->
-
 <?php
 /**
  * User class
@@ -38,6 +35,21 @@ class User
     public function addUser()
     {
         try {
+            // Get environment
+            $envFile = parse_ini_file(".env");
+            $ENVIRONMENT = $envFile['ENV'];
+
+            // Check if in production
+            if ($ENVIRONMENT == "PROD") {
+                $getRowCount = Database::queryAssoc("SELECT COUNT(*) FROM User;");
+                $recordsAmount = $getRowCount[0]['COUNT(*)'];
+
+                // If records amount is >= 50, throw an error to prevent the database from being overloaded
+                if ($recordsAmount >= 50) {
+                    throw new Error("Records amount reached the maximum limit of 50 users.");
+                }
+            }
+
             $sql = "INSERT INTO User (lastname, firstname, username, passwordHash, userType) VALUES (:lastname, :firstname, :username, :passwordHash, :userType)";
             Database::queryAssoc($sql, [
                 ':lastname' => $this->lastname,

@@ -49,7 +49,7 @@ if (isset($_POST['login'])) {
 
         // Redirect to the home page
         header("Location: {$PATH}/index.php?p=message");
-    } catch (Error $e) {
+    } catch (Throwable $e) {
         throw new Error("Login Controller -> " . $e->getMessage());
     }
 }
@@ -66,5 +66,4 @@ App::setPageDescription("G4rden chat");
 App::setPageFavicon("world.png");
 
 // Load the view
-App::loadCssFiles(["utils"]);
 App::loadViewFile("login", $varToInject);

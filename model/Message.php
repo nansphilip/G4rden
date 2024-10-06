@@ -1,4 +1,12 @@
 <?php
+$envFile = parse_ini_file(".env");
+$ENVIRONMENT = $envFile['ENV'];
+
+/**
+ * Message class
+ * A message has an ID, a content, a date and a userId.
+ * It also has methods to add, get, update and delete messages.
+ */
 class Message
 {
     public $id;
@@ -26,6 +34,21 @@ class Message
     public function addMessage()
     {
         try {
+            // Get environment
+            $envFile = parse_ini_file(".env");
+            $ENVIRONMENT = $envFile['ENV'];
+
+            // Check if in production
+            if ($ENVIRONMENT == "PROD") {
+                $getRowCount = Database::queryAssoc("SELECT COUNT(*) FROM Message;");
+                $recordsAmount = $getRowCount[0]['COUNT(*)'];
+
+                // If records amount is >= 2000, throw an error to prevent the database from being overloaded
+                if ($recordsAmount >= 2000) {
+                    throw new Error("Records amount reached the maximum limit of 2000 messages.");
+                }
+            }
+
             $sql = "INSERT INTO Message (content, date, userId) VALUES (:content, :date, :userId)";
             Database::queryAssoc($sql, [
                 ':content' => $this->content,
@@ -119,25 +142,26 @@ class Message
     }
 
     /**
-     * Gets all messages associated to their user.
+     * Gets the 10 last messages associated to their user.
      * @return array of associated_arrays of messages
      */
-    public static function getAllMessageJoinedToUser()
+    public static function getLastMessageJoinedToUser($limit = 10)
     {
         try {
+            $limit = (int)$limit;
             $sql = "SELECT
-                    User.username as username,
-                    Message.id as id,
-                    Message.content as message,
-                    Message.date as date
-                    FROM Message
-                    INNER JOIN User
-                    ON User.id = Message.userId
-                    ORDER BY Message.date DESC";
+                User.username as username,
+                Message.id as id,
+                Message.content as message,
+                Message.date as date
+                FROM Message
+                INNER JOIN User ON User.id = Message.userId
+                ORDER BY Message.date DESC
+                LIMIT $limit";
             $query = Database::queryAssoc($sql);
-            return $query;
+            return array_reverse($query);
         } catch (PDOException $e) {
-            throw new Error("getAllMessageJoinedToUser -> " . $e->getMessage());
+            throw new Error("getLastMessageJoinedToUser -> " . $e->getMessage());
         }
     }
 

@@ -2,7 +2,7 @@
 // Error view
 ?>
 
-<main class="flex flex-column gap-2 justify-center">
+<main class="flex flex-column gap-3 justify-center">
     <h2>Error</h2>
     <pre>
         <?php

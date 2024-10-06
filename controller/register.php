@@ -32,10 +32,10 @@ if (isset($_POST['register'])) {
         $newUser = new User('', $lastname, $firstname, $username, $passwordHash, 'USER');
 
         // Check if the username already exists
-        $existingUser = $newUser->getUserByUsername();
+        $isAvailable = $newUser->getUserByUsername();
 
         // If the username already exists, return null
-        if (isset($existingUser)) {
+        if (isset($isAvailable)) {
             throw new Error("Username already exists");
         }
 
@@ -55,7 +55,7 @@ if (isset($_POST['register'])) {
 
         // Redirect to the home page
         header("Location: {$PATH}/index.php?p=message");
-    } catch (Error $e) {
+    } catch (Throwable $e) {
         throw new Error("Register Controller -> " . $e->getMessage());
     }
 }
@@ -72,5 +72,4 @@ App::setPageDescription("Welcome to G4rden");
 App::setPageFavicon("world.png");
 
 // Load the view
-App::loadCssFiles(["utils"]);
 App::loadViewFile("register", $varToInject);

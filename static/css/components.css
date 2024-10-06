@@ -1,0 +1,52 @@
+.rounded-box, .rounded-box-light {
+    padding: 0.8rem;
+    border-radius: var(--border-radius);
+    border: var(--border-width) solid var(--border-color);
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color);
+}
+
+.rounded-box-light {
+    border: var(--border-width) solid var(--border-color-light);
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color-light);
+}
+
+@media (max-width: 580px) {
+    .rounded-box {
+        padding: 0.5rem;
+    }
+}
+
+.input-form {
+    padding: 0.2rem 0.5rem;
+    text-wrap: wrap;
+    flex: 1 1 0%;
+    min-width: 150px;
+    border-radius: var(--border-radius-small);
+    border: var(--border-width) solid var(--border-color);
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color-light);
+}
+
+.input-form::placeholder {
+    color: var(--text-secondary);
+}
+
+.input-form:focus {
+    outline: none;
+}
+
+.submit-button {
+    font-weight: bold;
+    width: fit-content;
+    padding: 0.25rem 1rem;
+    border-radius: var(--border-radius);
+    border: var(--border-width) solid var(--border-color);
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color-light);
+    background-color: var(--white-color);
+    transition: background-color 150ms;
+}
+
+.submit-button:hover {
+    cursor: pointer;
+    background-color: var(--secondary-color-hover);
+    transition: background-color 150ms;
+}

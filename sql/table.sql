@@ -1,4 +1,3 @@
--- SQLBook: Code
 -- Creates user table
 CREATE TABLE `User` (
     `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,

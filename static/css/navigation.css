@@ -1,0 +1,91 @@
+/* Desktop nav */
+@media (min-width: 581px) {
+    .desktop-nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        align-items: center;
+        gap: 0.8rem;
+    }
+
+    .desktop-nav a {
+        text-decoration: none;
+        background-color: var(--white);
+
+        padding: 0.2rem 0.5rem;
+        border: var(--border-width) solid var(--border-color);
+        border-radius: var(--border-radius-small);
+        box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color);
+        transition: background-color 150ms;
+    }
+
+    .desktop-nav a:hover {
+        background-color: var(--secondary-color-hover);
+        transition: background-color 150ms;
+    }
+
+    /* Hide mobile nav */
+    .mobile-nav, .button-nav {
+        display: none;
+    }
+}
+
+/* Mobile nav */
+@media (max-width: 580px) {
+    .button-nav {
+        font-weight: bold;
+        background-color: var(--white);
+        
+        padding: 0.5rem 1rem;
+        border: var(--border-width) solid var(--border-color);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color);
+
+        transform: scale(1);
+        transition: transform 150ms;
+    }
+    .button-nav:focus {
+        background-color: var(--secondary-color-hover);
+    }
+    .button-nav:hover {
+        cursor: pointer;
+    }
+
+    .mobile-nav {
+        position: absolute;
+        right: 1rem;
+        top: 3.5rem;
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 0.5rem;
+
+        padding: 0.5rem;
+        background-color: var(--white);
+        border: var(--border-width) solid var(--border-color);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color);
+    }
+    .mobile-nav a {
+        text-decoration: none;
+        text-align: center;
+
+        width: 100%;
+        padding: 0.2rem 0.5rem;
+
+        box-shadow: var(--shadow-x-small) var(--shadow-y-small) var(--shadow-color);
+        background-color: var(--white);
+        border: var(--border-width) solid var(--border-color);
+        border-radius: var(--border-radius-small);
+    }
+    .mobile-nav a:focus {
+        background-color: var(--white);
+    }
+
+    /* Hide desktop nav */
+    .desktop-nav {
+        display: none;
+    }
+}
