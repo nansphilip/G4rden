@@ -45,6 +45,6 @@ App::setPageDescription("G4rden chat");
 App::setPageFavicon("world.png");
 
 // Load the view
-App::loadCssFiles(["utils", "color"]);
+App::loadCssFiles(["message", "utils", "color"]);
 App::loadJsFiles(["message"]);
 App::loadViewFile("message", $varToInject);

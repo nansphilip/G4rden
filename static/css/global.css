@@ -3,20 +3,57 @@
 /* Reset */
 html {
     height: 100%;
-    font-family: Inter, Arial, sans-serif;
-    font-size: 16px;
+    display: flex;
+    flex-direction: column;
 }
 
 body {
-    height: 100%;
-    margin: 0;
-
-    color: black;
-
+    overflow-y: auto;
+    flex: 1 1 0%;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+
+    font-family: Inter, Arial, sans-serif;
+    font-size: 16px;
+
+    margin: 0;
+    padding: 1rem 2rem;
+}
+
+header,
+main,
+footer {
+    max-width: 800px;
+    width: 100%;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+header h1 a {
+    text-decoration: none;
+    color: black;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    gap: 1rem;
+}
+
+main {
+    flex: 1 1 0%;
+}
+
+footer {
+    text-align: center;
 }
 
 h1,
@@ -28,53 +65,4 @@ h6,
 a,
 p {
     margin: 0;
-}
-
-/* Layout */
-header, main, footer {
-    width: 800px;
-}
-
-main {
-    flex: 1 1 0%;
-}
-
-/* Layout components */
-.logo-title * {
-    text-decoration: none;
-    color: black;
-}
-
-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-footer {
-    text-align: center;
-}
-
-.nav-bar {
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
-    align-items: center;
-    gap: 1rem;
-}
-
-.nav-bar a:hover {
-    color:red;
-}
-
-/* Components */
-.rounded-box {
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    border: 1px solid black;
-    box-shadow: 1px 1px 3px hsl(0, 0%, 70%);
-}
-
-textarea {
-    resize: vertical;
 }

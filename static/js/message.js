@@ -45,11 +45,11 @@ const refreshMessages = async () => {
 
 const everySecond = () => {
     // Refresh messages every second
-    setInterval(refreshMessages, 1000);
+    setInterval(refreshMessages, 5000);
 };
 
 document.addEventListener("DOMContentLoaded", refreshMessages);
-// document.addEventListener("DOMContentLoaded", everySecond);
+document.addEventListener("DOMContentLoaded", everySecond);
 
 
 // ================================ //

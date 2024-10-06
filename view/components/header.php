@@ -25,23 +25,14 @@
             echo "<link rel='stylesheet' href='$file'>";
         }
     } ?>
-
-    <?php // Scripts 
-    ?>
-    <script src="static/js/global.js"></script>
-    <?php if (is_array(App::$jsFiles)) {
-        foreach (App::$jsFiles as $file) {
-            echo "<script src='$file' type='module'></script>";
-        }
-    } ?>
 </head>
 
 <body>
     <header>
-        <h1 class="logo-title"><?= "<a href={$PATH}/index.php?p=home>G4rden</a>" ?></h1>
-        <nav class="nav-bar">
-            <?="<a href={$PATH}/index.php?p=home>Home</a>" ?>
-            <?="<a href={$PATH}/index.php?p=last-user>Last user</a>" ?>
+        <h1><?= "<a href={$PATH}/index.php?p=home>G4rden</a>" ?></h1>
+        <nav>
+            <?= "<a href={$PATH}/index.php?p=home>Home</a>" ?>
+            <?= "<a href={$PATH}/index.php?p=last-user>Last user</a>" ?>
             <?php
             // Sets the navigation bar depending if the user is logged in or not
             if (isset($_SESSION['active'])) {
@@ -52,5 +43,5 @@
                 echo "<a href={$PATH}/index.php?p=register>Register</a>";
             }
             ?>
-        </nav>
+        </nav=>
     </header>

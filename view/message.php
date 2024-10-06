@@ -7,8 +7,6 @@
 require_once "view/components/header.php";
 ?>
 
-
-
 <main class="flex flex-column gap-2 overflow-y-hidden">
     <div>
         <h2><?= App::$pageTitle; ?></h2>
@@ -40,15 +38,14 @@ require_once "view/components/header.php";
 
     <form id="addNewMessage" method="post" action="" class="bg-gray-light flex flex-column items-center gap-2 rounded-box">
         <label class="w-full bold" for="reply">Répondre</label>
-        <textarea
+        <input
             id="reply"
             name="reply"
-            rows="3"
             minlength="1"
             maxlength="3000"
             class="w-full"
             placeholder="Écrire un message..."
-            required></textarea>
+            required></input>
         <button type="submit" class="w-fit-content" name="new_message">Répondre</button>
     </form>
 
