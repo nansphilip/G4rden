@@ -1,7 +1,15 @@
-.bg-gray-light {
-    background-color: hsl(0, 0%, 95%);
+.text-primary {
+    color: var(--text-primary);
 }
 
-.text-gray {
-    color: hsl(0, 0%, 50%);
+.text-secondary {
+    color: var(--text-secondary);
+}
+
+.shadow-color {
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color);
+}
+
+.shadow-color-light {
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color-light);
 }

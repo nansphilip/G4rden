@@ -3,7 +3,6 @@
 ?>
 <nav class="desktop-nav">
     <?= "<a href={$PATH}/index.php?p=home>Home</a>" ?>
-    <?= "<a href={$PATH}/index.php?p=last-user>Last user</a>" ?>
     <?php
     // Sets the navigation bar depending if the user is logged in or not
     if (isset($_SESSION['active'])) {
@@ -22,7 +21,6 @@
 <button class="button-nav" type="button">Menu</button>
 <nav class="mobile-nav" style="display: none;">
     <?= "<a href={$PATH}/index.php?p=home>Home</a>" ?>
-    <?= "<a href={$PATH}/index.php?p=last-user>Last user</a>" ?>
     <?php
     // Sets the navigation bar depending if the user is logged in or not
     if (isset($_SESSION['active'])) {

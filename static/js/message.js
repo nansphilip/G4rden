@@ -47,7 +47,7 @@ const refreshMessages = async () => {
 
             // Create the new message element
             const newMessageEl = document.createElement("div");
-            newMessageEl.classList.add("rounded-box");
+            newMessageEl.classList.add("rounded-box-light");
             newMessageEl.setAttribute("data-id", newId);
 
             // Create the new message content

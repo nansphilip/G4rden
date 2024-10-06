@@ -17,7 +17,7 @@ require_once "view/components/header.php";
         <!-- Messages will be injected here -->
     </div>
 
-    <form id="addNewMessage" method="post" action="" class="flex flex-column gap-3 rounded-box">
+    <form id="addNewMessage" method="post" action="" class="flex flex-column gap-1 rounded-box">
         <label class="bold" for="reply">Répondre</label>
         <div class="flex flex-row gap-2">
             <input
@@ -25,10 +25,10 @@ require_once "view/components/header.php";
                 name="reply"
                 minlength="1"
                 maxlength="3000"
-                class="flex-1 border-box input-form"
+                class="input-form"
                 placeholder="Écrire un message..."
                 required></input>
-            <button type="submit" class="w-fit-content submit-button" name="new_message">Répondre</button>
+            <button type="submit" class="w-fit-content submit-button" name="new_message">↑</button>
         </div>
     </form>
 

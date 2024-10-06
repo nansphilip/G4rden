@@ -1,5 +1,5 @@
 #arrow_to_top {
-    background-color: hsl(0, 0%, 50%);
+    background-color: var(--primary-color);
     opacity: 0%;
 
     cursor: pointer;
@@ -10,14 +10,12 @@
     right: 4rem;
     z-index: 100;
 
-    font-family: Inter;
-    font-size: 1rem;
-    color: white;
+    color: var(--white);
 
     height: 3rem;
     width: 3rem;
 
-    border-radius: 5rem;
+    border-radius: var(--border-radius-full);
     border: none;
     
     transition: background-color 200ms;
@@ -25,7 +23,7 @@
 }
 
 #arrow_to_top:hover {
-    background-color: hsl(0, 0%, 70%);
+    background-color: var(--primary-color-hover);
 }
 
 #arrow_to_top:disabled {

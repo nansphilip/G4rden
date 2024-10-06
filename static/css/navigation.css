@@ -1,26 +1,27 @@
 /* Desktop nav */
-@media (min-width: 521px) {
+@media (min-width: 581px) {
     .desktop-nav {
         display: flex;
         flex-direction: row;
         justify-content: end;
         align-items: center;
-        gap: 0.5rem;
+        gap: 0.8rem;
     }
 
     .desktop-nav a {
         text-decoration: none;
-        background-color: white;
-        color: black;
+        background-color: var(--white);
 
         padding: 0.2rem 0.5rem;
-        border: 1.5px solid black;
-        border-radius: 0.5rem;
-        box-shadow: 4px 4px hsl(0, 0%, 80%);
+        border: var(--border-width) solid var(--border-color);
+        border-radius: var(--border-radius-small);
+        box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color);
+        transition: background-color 150ms;
     }
 
     .desktop-nav a:hover {
-        background-color: hsl(0, 0%, 95%);
+        background-color: var(--secondary-color-hover);
+        transition: background-color 150ms;
     }
 
     /* Hide mobile nav */
@@ -30,22 +31,21 @@
 }
 
 /* Mobile nav */
-@media (max-width: 520px) {
+@media (max-width: 580px) {
     .button-nav {
         font-weight: bold;
-        color: black;
-        background-color: white;
+        background-color: var(--white);
         
         padding: 0.5rem 1rem;
-        border: 1.5px solid black;
-        border-radius: 0.5rem;
-        box-shadow: 4px 4px hsl(0, 0%, 80%);
+        border: var(--border-width) solid var(--border-color);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color);
 
         transform: scale(1);
         transition: transform 150ms;
     }
     .button-nav:focus {
-        background-color: hsl(0, 0%, 95%);
+        background-color: var(--secondary-color-hover);
     }
     .button-nav:hover {
         cursor: pointer;
@@ -53,8 +53,8 @@
 
     .mobile-nav {
         position: absolute;
-        right: 2rem;
-        top: 4rem;
+        right: 1rem;
+        top: 3.5rem;
 
         display: flex;
         flex-direction: column;
@@ -63,27 +63,25 @@
         gap: 0.5rem;
 
         padding: 0.5rem;
-        background-color: white;
-        border: 1.5px solid black;
-        border-radius: 0.8rem;
-        box-shadow: 4px 4px hsl(0, 0%, 80%);
+        background-color: var(--white);
+        border: var(--border-width) solid var(--border-color);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color);
     }
     .mobile-nav a {
         text-decoration: none;
         text-align: center;
-        color: black;
 
         width: 100%;
-        box-sizing: border-box;
         padding: 0.2rem 0.5rem;
 
-        box-shadow: 2px 2px hsl(0, 0%, 80%);
-        background-color: white;
-        border: 1.5px solid black;
-        border-radius: 0.5rem;
+        box-shadow: var(--shadow-x-small) var(--shadow-y-small) var(--shadow-color);
+        background-color: var(--white);
+        border: var(--border-width) solid var(--border-color);
+        border-radius: var(--border-radius-small);
     }
     .mobile-nav a:focus {
-        background-color: hsl(0, 0%, 95%);
+        background-color: var(--white);
     }
 
     /* Hide desktop nav */

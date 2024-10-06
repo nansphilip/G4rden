@@ -5,7 +5,7 @@
 <button type="button" id="arrow_to_top" class="arrow_to_top">↑</button>
 
 <footer>
-    <p>G4rden - Made with ❤️ by <a target="_blank" href="https://github.com/nansphilip/G4rden">G4rden's Team.</a></p>
+    <p class="italic font-sm text-secondary">G4rden - Made by <a class="italic font-sm text-secondary" target="_blank" href="https://github.com/nansphilip/G4rden">G4rden's Team</a></p>
 </footer>
 
 <?php // Scripts 
