@@ -84,10 +84,10 @@ const refreshMessages = async () => {
     }
 };
 
-// On load, insert first messages, and add a refresh every 5 seconds
+// On load, insert first messages, and add a refresh every 2 seconds
 document.addEventListener("DOMContentLoaded", () => {
     refreshMessages();
-    setInterval(refreshMessages, 5000);
+    setInterval(refreshMessages, 2000);
 });
 
 // ================================ //
