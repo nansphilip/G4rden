@@ -1,7 +1,6 @@
-import AsyncRouter from "/static/js/profile.js";
+import AsyncRouter from "/static/js/AsyncRouter.js";
 
-// Récupérer les données de l'utilisateur par ID
-export const getUserById = async () => {
+const getUserById = async () => {
     try {
         // Recup le user by Id
         const { data, error } = await AsyncRouter.get("async/profile-update.php");
@@ -9,7 +8,7 @@ export const getUserById = async () => {
 
         // Vérif ou erreur
         if (data) {
-            pElement.textContent = Username: ${data.username};
+            pElement.textContent = `Username: ${data.username}`;
         } else {
             pElement.textContent = error;
         }
@@ -19,7 +18,7 @@ export const getUserById = async () => {
     }
 };
 // Basculer la zone d'édition
-const toggleButtonEdit = (field) => {
+export const toggleButtonEdit = (field) => {
     const displaySpan = document.getElementById(field + '-display'); // Utilise `field` au lieu de `username`
     const editDiv = document.getElementById(field + '-edit'); // Utilise `field` au lieu de `username`
 
@@ -33,7 +32,7 @@ const saveData = async (field) => {
     const inputValue = document.getElementById(field + '-input').value; // Utilise `field` pour récupérer la valeur de l'input
 
     try {
-        const { data, error } = await AsyncRouter.post("update-user", { [field]: inputValue });
+        const { data, error } = await AsyncRouter.post("/async/profile-update.php", { [field]: inputValue });
 
         if (data) {
             // Mettre à jour l'affichage avec la nouvelle valeur

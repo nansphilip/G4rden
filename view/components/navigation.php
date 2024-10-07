@@ -10,8 +10,10 @@
         echo "<a href={$PATH}/index.php?p=profile>Profile</a>";
         echo "<a href={$PATH}/index.php?p=logout>Logout</a>";
     } else {
-        echo "<a href={$PATH}/index.php?p=login>Login</a>";
-        echo "<a href={$PATH}/index.php?p=register>Register</a>";
+		?>
+        <a href=/index.php?p=login>Login</a>";
+        <a href=/index.php?p=register>Register</a>";
+	<?php
     }
     ?>
 </nav>

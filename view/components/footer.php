@@ -10,7 +10,7 @@
 
 <?php // Scripts 
 ?>
-<script src="static/js/global.js"></script>
+<script src="/static/js/global.js"></script>
 <?php if (is_array(App::$jsFiles)) {
     foreach (App::$jsFiles as $file) {
         echo "<script src='$file' type='module'></script>";

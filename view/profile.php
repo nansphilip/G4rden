@@ -32,8 +32,6 @@ require_once("view/components/header.php");
             </div>
         </div>
     <?php } ?>
-
-    <script src="static/js/profile.js"></script>
 </main>
 
 <?php
