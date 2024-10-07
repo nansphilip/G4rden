@@ -1,5 +1,4 @@
 <?php
-
 /**
  * App class
  * A minimalist PHP framework based on MVC pattern.
@@ -94,8 +93,8 @@ class App
 
             // End buffering, and return the output
             ob_end_flush();
-        } catch (Exception $e) {
-            throw new Exception("loadViewFile -> " . $e->getMessage());
+        } catch (Throwable $e) {
+            throw new Error("loadViewFile -> " . $e->getMessage());
         }
     }
 }

@@ -7,41 +7,30 @@
 require_once "view/components/header.php";
 ?>
 
+<main class="flex flex-column gap-3 overflow-y-hidden">
+    <div>
+        <h2><?= App::$pageTitle; ?></h2>
+        <p>Your are consulting G4rden's chat.</p>
+    </div>
 
+    <div id="directChat" class="flex-1 flex flex-column gap-2 overflow-y-auto padding-shadow">
+        <!-- Messages will be injected here -->
+    </div>
 
-<main>
-    <h2><?= App::$pageTitle; ?></h2>
-    <p>Your are consulting G4rden's chat. <a href="index.php?p=home">Click here to go back home.</a></p>
-
-    <pre>
-        <?php
-        // print_r($userList);
-        // print_r($messageList);
-        // print_r($userMessageList);
-        ?>
-    </pre>
-
-    <form method="post" action="">
-        <label for="reply">Répondre</label>
-        <textarea id="reply" name="reply" rows="3" cols="100" placeholder="Poste ta merde ici"></textarea>
-        <button type="submit" name="new_message">Répondre</button>
-    </form>
-
-    <?php
-    foreach ($userMessageList as $userMessage) {
-        $username = $userMessage['username'];
-        $message = $userMessage['message'];
-        // Todo : date en français ?
-        $date = date_format(new DateTime($userMessage['date']), 'j F Y');
-    ?>
-        <div class="rounded-box">
-            <div class="flex flex-row justify-between">
-                <h3><?= $username; ?></h3>
-                <p><?= $date; ?></p>
-            </div>
-            <p><?= $message; ?></p>
+    <form id="addNewMessage" method="post" action="" class="flex flex-column gap-1 rounded-box">
+        <label class="bold" for="reply">Répondre</label>
+        <div class="flex flex-row gap-2">
+            <input
+                id="reply"
+                name="reply"
+                minlength="1"
+                maxlength="3000"
+                class="input-form"
+                placeholder="Écrire un message..."
+                required></input>
+            <button type="submit" class="w-fit-content submit-button" name="new_message">↑</button>
         </div>
-    <?php } ?>
+    </form>
 
 </main>
 

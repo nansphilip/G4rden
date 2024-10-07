@@ -1,20 +1,31 @@
 # Todo
 
-## Handle errors
-
-- [x] Handle errors everywhere
-- [x] Show errors in the view
-
 ## Ajax
 
-- [ ] Create a router for Ajax requests
-- [ ] Create php files for Ajax requests
+- [x] Create a router for Ajax requests
+- [x] Create php files for Ajax requests
 
-## Frontend
+## Auth
 
-- [ ] Create different pages
+- [ ] Add a feedback for users if register ou login fails
+- [ ] Fix session issue when registering
 
-## Models
+## Add message
 
-- [x] Add php docs
-- [ ] Move PATH .env variable to the index.php file
+- [x] Get the user id from the session when sending a message
+- [ ] Make submit new message process async
+- [ ] Get only 10 last messages
+- [ ] Charge 10 more messages when reaching the top of the chat
+- [ ] Display date and time
+
+## Arrow to top
+
+- [ ] Find a good use case for this
+
+## Responsive
+
+- [ ] Adapt the layout to mobile
+
+## Check data validation
+
+- [ ] Check if every database insert is validated by `htmlspecialchars`

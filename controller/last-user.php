@@ -1,5 +1,5 @@
 <?php
-// Error controller
+// Last user controller
 
 // Includes required models
 
@@ -8,16 +8,14 @@
 // List of variables to inject in the view
 $varToInject = [
     "ENVIRONMENT" => $ENVIRONMENT,
-    "PATH" => $PATH,
-    "e" => $e,
+    "PATH" => $PATH
 ];
 
 // Set page meta data
-App::setPageTitle("Error");
-App::setPageDescription("G4rden error");
+App::setPageTitle("Last user");
+App::setPageDescription("G4rden last user created");
 App::setPageFavicon("world.png");
 
 // Load the view
-App::loadCssFiles(["utils"]);
-App::loadViewFile("error", $varToInject);
-?>
+App::loadJsFiles(["last-user"]);
+App::loadViewFile("last-user", $varToInject);

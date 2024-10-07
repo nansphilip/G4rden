@@ -1,9 +1,8 @@
 <?php
-
 /**
  * Database class
  * A singleton class that instantiates a PDO connection to the database.
- * It also handles errors by throwing an exception.
+ * It also handles errors by throwing an Error.
  */
 class Database
 {
@@ -18,7 +17,7 @@ class Database
         $env = parse_ini_file(".env");
 
         // Get environment variables
-        $dsn = "mysql:host=" . $env['MYSQL_HOST'] . ";dbname=" . $env['MYSQL_NAME'];
+        $dsn = "mysql:host=" . $env['MYSQL_HOST'] . ";port=" . $env['MYSQL_PORT'] . ";dbname=" . $env['MYSQL_NAME'];
         $user = $env['MYSQL_USER'];
         $pass = $env['MYSQL_PASS'];
 
@@ -28,12 +27,12 @@ class Database
             // Create a new PDO connection
             self::$connection = new PDO($dsn, $user, $pass);
 
-            // Set the error mode to exception
+            // Set the error mode to Error
             self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             // Catch database connection errors
         } catch (PDOException $e) {
-            throw new Exception("database -> " . $e->getMessage());
+            throw new Error("database -> " . $e->getMessage());
         }
     }
 
@@ -73,7 +72,7 @@ class Database
             // Return null if result is empty
             return null;
         } catch (PDOException $e) {
-            throw new Exception("queryAssoc -> " . $e->getMessage());
+            throw new Error("queryAssoc -> " . $e->getMessage());
         }
     }
 
@@ -87,7 +86,7 @@ class Database
 
             return true;
         } catch (PDOException $e) {
-            throw new Exception("queryBool -> " . $e->getMessage());
+            throw new Error("queryBool -> " . $e->getMessage());
         }
     }
 }

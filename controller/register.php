@@ -2,10 +2,8 @@
 // Register controller
 
 // Checks if the user is logged, else redirect to login page
-$env = parse_ini_file(".env");
-$PATH = $env['PATH'];
 if (isset($_SESSION['active'])) {
-    header('Location: ' . $PATH . 'index.php?p=message');
+    header("Location: {$PATH}/index.php?p=message");
 }
 
 // Includes required models
@@ -24,7 +22,7 @@ if (isset($_POST['register'])) {
 
         // If password is not ok, return null
         if (!(strlen($password) >= 8) || ($password != $passwordConfirm)) {
-            throw new Exception("Invalid password");
+            throw new Error("Invalid password");
         }
 
         // Hash the password
@@ -34,18 +32,21 @@ if (isset($_POST['register'])) {
         $newUser = new User('', $lastname, $firstname, $username, $passwordHash, 'USER');
 
         // Check if the username already exists
-        $existingUser = $newUser->getUserByUsername();
+        $isAvailable = $newUser->getUserByUsername();
 
         // If the username already exists, return null
-        if (isset($existingUser)) {
-            throw new Exception("Username already exists");
+        if (isset($isAvailable)) {
+            throw new Error("Username already exists");
         }
 
         // Creates the user in the database
         $newUser->addUser();
 
+        // Get the new user data from the database
+        $getNewUser = $newUser->getUserByUsername();
+
         // Add user data to the session
-        foreach ($existingUser as $props => $value) {
+        foreach ($getNewUser as $props => $value) {
             $_SESSION[$props] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
         }
 
@@ -53,13 +54,17 @@ if (isset($_POST['register'])) {
         $_SESSION['active'] = true;
 
         // Redirect to the home page
-        $env = parse_ini_file(".env");
-        $PATH = $env['PATH'];
-        header('Location: ' . $PATH . '/index.php?p=message');
-    } catch (Exception $e) {
-        throw new Exception("Register Controller -> " . $e->getMessage());
+        header("Location: {$PATH}/index.php?p=message");
+    } catch (Throwable $e) {
+        throw new Error("Register Controller -> " . $e->getMessage());
     }
 }
+
+// List of variables to inject in the view
+$varToInject = [
+    "ENVIRONMENT" => $ENVIRONMENT,
+    "PATH" => $PATH
+];
 
 // Set page meta data
 App::setPageTitle("Register");
@@ -67,5 +72,4 @@ App::setPageDescription("Welcome to G4rden");
 App::setPageFavicon("world.png");
 
 // Load the view
-App::loadCssFiles(["utils"]);
-App::loadViewFile("register");
+App::loadViewFile("register", $varToInject);

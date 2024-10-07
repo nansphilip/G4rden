@@ -2,10 +2,8 @@
 // Login controller
 
 // Checks if the user is logged, else redirect to login page
-$env = parse_ini_file(".env");
-$PATH = $env['PATH'];
 if (isset($_SESSION['active'])) {
-    header('Location: ' . $PATH . 'index.php?p=message');
+    header("Location: {$PATH}/index.php?p=login");
 }
 
 // Includes required models
@@ -29,7 +27,7 @@ if (isset($_POST['login'])) {
 
         // If the username does not exists, return null
         if (is_null($existingUser)) {
-            throw new Exception("User does not exist");
+            throw new Error("User does not exist");
         }
 
         // Check if the password is correct
@@ -37,7 +35,7 @@ if (isset($_POST['login'])) {
 
         // If the password is not correct, return null
         if (!$isPasswordCorrect) {
-            throw new Exception("Invalid password");
+            throw new Error("Invalid password");
         }
 
         // Add user data to the session
@@ -49,13 +47,17 @@ if (isset($_POST['login'])) {
         $_SESSION['active'] = true;
 
         // Redirect to the home page
-        $env = parse_ini_file(".env");
-        $PATH = $env['PATH'];
-        header('Location: ' . $PATH . '/index.php?p=message');
-    } catch (Exception $e) {
-        throw new Exception("Login Controller -> " . $e->getMessage());
+        header("Location: {$PATH}/index.php?p=message");
+    } catch (Throwable $e) {
+        throw new Error("Login Controller -> " . $e->getMessage());
     }
 }
+
+// List of variables to inject in the view
+$varToInject = [
+    "ENVIRONMENT" => $ENVIRONMENT,
+    "PATH" => $PATH
+];
 
 // Set page meta data
 App::setPageTitle("Login");
@@ -63,5 +65,4 @@ App::setPageDescription("G4rden chat");
 App::setPageFavicon("world.png");
 
 // Load the view
-App::loadCssFiles(["utils"]);
-App::loadViewFile("login");
+App::loadViewFile("login", $varToInject);

@@ -28,14 +28,15 @@ A minimalist PHP framework based on MVC pattern.
 
 ```
 # Environnement setup
+# DEV or PROD
 ENV=DEV
 
 # Server path if needed
 # ex: PATH=/MyProjects
-PATH=
 
 # MySQL Database
 MYSQL_HOST=localhost
+MYSQL_PORT=3306
 MYSQL_NAME=g4rden-db
 MYSQL_USER=g4rden-user
 MYSQL_PASS=g4rden-password
