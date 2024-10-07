@@ -161,6 +161,22 @@ class Message
     // ===== Update methods ===== //
     // ========================== //
 
+    /**
+     * Updates the username for all his messages
+     */
+    public function updateAllAuthorMessages($userId)
+    {
+        try {
+            $sql = "UPDATE Message SET userId = :newUserId WHERE userId = :userId";
+            $query = Database::queryBool($sql, [
+                ':newUserId' => $userId,
+                ':userId' => $this->userId
+            ]);
+            return $query;
+        } catch (PDOException $e) {
+            throw new Exception("deleteMessage -> " . $e->getMessage());
+        }
+    }
 
     // ========================== //
     // ===== Delete methods ===== //

@@ -1,6 +1,3 @@
-<!-- User class -->
-<!-- Admin class that extends User class -->
-
 <?php
 /**
  * User class
@@ -138,6 +135,7 @@ class User
     // ========================== //
 
 
+
     // ========================== //
     // ===== Delete methods ===== //
     // ========================== //
@@ -159,6 +157,21 @@ class User
             return $query[0];
         } catch (PDOException $e) {
             throw new Exception("deleteUser -> " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Deletes a user by its username.
+     */
+    public function deleteUserByUsername($username){
+        try {
+            $sql = "DELETE FROM User WHERE username = :username";
+            $query = Database::queryBool($sql, [
+                ':username' => $username
+            ]);
+            return $query;
+        } catch (PDOException $e) {
+            throw new Exception("deleteUserByUsername -> " . $e->getMessage());
         }
     }
 }
