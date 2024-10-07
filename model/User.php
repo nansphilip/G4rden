@@ -166,8 +166,6 @@ class User
     // ========================== //
 
 
-
-
     // ========================== //
     // ===== Delete methods ===== //
     // ========================== //
@@ -188,7 +186,7 @@ class User
             }
             return $query[0];
         } catch (PDOException $e) {
-            throw new Error("deleteUser -> " . $e->getMessage());
+            throw new Exception("deleteUser -> " . $e->getMessage());
         }
     }
 
