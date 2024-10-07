@@ -2,8 +2,9 @@
 <div class="justify-between margin-border">
    <h3>Supprimer un utilisateur</h3>
    <p>Entrez le nom de l'utilisateur à supprimer.</p>
-   <input type="text" class="margin" placeholder="Pseudo de l'utilisateur">
+   <input type="text" class="margin" id="inputUsername" placeholder="Pseudo de l'utilisateur">
    <button type="button" class="margin" id="deleteUser">Supprimer</button>
+   <div id="ajax"></div>
 </div>
 <div class="justify-between margin-border">
    <h3>Supprimer un message</h3>
