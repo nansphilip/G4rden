@@ -11,7 +11,7 @@ try {
     // $userList = null;
 
     if (is_null($userList)) {
-        throw new Error("user not found");
+        throw new Error("User not found");
     }
 
     // Selection du user de la session en cours
@@ -29,6 +29,10 @@ try {
         "data" => $currentUser
     ]);
 } catch (Throwable $e) {
+
+    // 
+    throw new Error("Profile update -> " . $e->getMessage());
+    
     // Return an error to the client
     echo json_encode([
         "status" => "error",

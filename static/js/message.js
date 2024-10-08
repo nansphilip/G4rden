@@ -97,6 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const newMessageFormEl = document.querySelector("#addNewMessage");
 
 const handleSubmit = async (e) => {
+    // Prevent the default form submission
     e.preventDefault();
 
     // Get the message
