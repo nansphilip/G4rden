@@ -26,5 +26,5 @@ CREATE TABLE `Message` (
     `content` TEXT(3000) NOT NULL,
     `date` datetime NOT NULL,
     `userId` int NOT NULL,
-    FOREIGN KEY (`userId`) REFERENCES `User` (`id`)
+    FOREIGN KEY (`userId`) REFERENCES `User` (`id`) ON DELETE CASCADE
 );
