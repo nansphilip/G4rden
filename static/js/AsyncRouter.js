@@ -11,7 +11,7 @@ export default class AsyncRouter {
             });
 
             // Parse the response
-            const { status, message } = await response.json();
+            const { status, message, data } = await response.json();
 
             // Throw an error if the server returns an error
             if (status === "error") {
@@ -19,7 +19,7 @@ export default class AsyncRouter {
             }
 
             // Return the data
-            return { message };
+            return { message, data };
         } catch (error) {
             return { error: `An error occurred: ${error.message}` };
         }

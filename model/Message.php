@@ -142,6 +142,26 @@ class Message
     }
 
     /**
+     * Gets all messages with a word or a sentence in their content 
+     * and with a specified user
+     * @param string $stringOfContent, $userId
+     * @return array of associated_arrays of messages
+     */
+    public static function getMessagesByUserAndContent($userId,$stringOfContent)
+    {
+        try {
+            $sql = "SELECT * FROM Message WHERE content LIKE :content AND userId = :userId";
+            $query = Database::queryAssoc($sql, [
+                ':content' => "%".$stringOfContent."%",
+                ':userId' => $userId
+            ]);
+            return $query;
+        } catch (PDOException $e) {
+            throw new Error("getMessagesByPeaceOfContent -> " . $e->getMessage());
+        }
+    }
+
+    /**
      * Gets the 10 last messages associated to their user.
      * @return array of associated_arrays of messages
      */
@@ -214,13 +234,10 @@ class Message
     {
         try {
             $sql = "DELETE FROM Message WHERE id = :id";
-            $query = Database::queryAssoc($sql, [
+            $query = Database::queryBool($sql, [
                 ':id' => $this->id
             ]);
-            if (is_null($query)) {
-                return null;
-            }
-            return $query[0];
+            return $query;
         } catch (PDOException $e) {
             throw new Error("deleteMessage -> " . $e->getMessage());
         }
