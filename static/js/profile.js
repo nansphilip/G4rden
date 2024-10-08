@@ -22,6 +22,7 @@ export const toggleButtonEdit = (field) => {
     const displaySpan = document.getElementById(field + '-display'); // Utilise `field` au lieu de `username`
     const editDiv = document.getElementById(field + '-edit'); // Utilise `field` au lieu de `username`
 
+
     // Cacher le span d'affichage et montrer la zone de texte
     displaySpan.style.display = 'none'; // Cache le span d'affichage
     editDiv.style.display = 'block'; // Affiche la zone d'édition
