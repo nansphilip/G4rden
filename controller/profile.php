@@ -34,6 +34,7 @@ App::setPageDescription("G4rden Profile");
 App::setPageFavicon("world.png");
 
 // Load the view
+App::loadJsFiles(["profile", "AsyncRouter"]);
 App::loadCssFiles(["utils"]);
 App::loadViewFile("profile", $varToInject);
 ?>

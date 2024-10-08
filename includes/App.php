@@ -50,7 +50,7 @@ class App
      */
     public static function setPageFavicon($favicon)
     {
-        self::$pageFavicon = "static/img/$favicon";
+        self::$pageFavicon = "/static/img/$favicon";
     }
 
     /**
@@ -60,7 +60,7 @@ class App
     public static function loadCssFiles($files)
     {
         foreach ($files as $file) {
-            self::$cssFiles[] = "static/css/$file.css";
+            self::$cssFiles[] = "/static/css/$file.css";
         }
     }
 
@@ -71,7 +71,7 @@ class App
     public static function loadJsFiles($files)
     {
         foreach ($files as $file) {
-            self::$jsFiles[] = "static/js/$file.js";
+            self::$jsFiles[] = "/static/js/$file.js";
         }
     }
 
