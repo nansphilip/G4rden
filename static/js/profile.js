@@ -1,30 +1,5 @@
 import AsyncRouter from "/static/js/AsyncRouter.js";
 
-
-
-// On devrait pas avoir besoin de cette fonction car on transmet l'id depuis la view
-// Ça évite de faire une requete à chaque fois
-
-// const getUserById = async () => {
-//     try {
-//         // Recup le user by Id
-//         const { data, error } = await AsyncRouter.get("async/profile-update.php");
-
-
-//         // Vérif ou erreur
-//         if (data) {
-//             pElement.textContent = `Username: ${data.username}`;
-//         } else {
-//             pElement.textContent = error;
-//         }
-
-//     } catch (error) {
-//         console.error("Error fetching user data:", error);
-//     }
-// };
-
-
-
 // Je ne pense pas que ce soit nécessaire de masquer le champ lorsque l'utilisateur arrve sur la page
 // car son but est de modifer des valeurs du profil directement.
 
@@ -39,14 +14,8 @@ import AsyncRouter from "/static/js/AsyncRouter.js";
 // };
 
 
-
-
 /*
 Instructions:
-
-1. Ajouter un écouteur d'événement au 'submit' de nouveau formulaire
-et prévenir de l'envoie classique (POST) avec `event.preventDefault()`.
-Je te recomande de faire un `console.log(event)` pour savoir ce que ça contient.
 
 2. Envoyer la nouvelle valeur du champ (username, firstname ou lastname)
 et avec l'id de l'utilisateur au serveur de manière asynchrone avec `AsyncRouter.post()`.
@@ -64,29 +33,27 @@ Si l'objet data est null, il faut renvoyer un message d'erreur.
 const sendData = (event) => {
 
     // Empêcher le formulaire de se soumettre
-    // Si tu mets pas ça, la requete POST est envoyée controleur correspondant à l'URL actuelle ("profile") et ça refresh la page 
     event.preventDefault();
 
-    console.log("Event:", event);
-    console.log("Form element:", event.target);
-    console.log("Input value:", event.target.querySelector("input").value);
-    console.log("User id:", event.target.querySelector("input").getAttribute("data-id"));
+    const profilDataUpdate = {
+        submitName: event.submitter.name,
+        inputValue: event.target.querySelector("input").value,
+        userId: event.target.querySelector("input").getAttribute("data-id"),
+    }
 
-    // const inputValue = document.getElementById(field + '-input').value; // Utilise `field` pour récupérer la valeur de l'input
+    try {
+        const { data, error } = await AsyncRouter.post("/async/profile-update.php", { [field]: inputValue });
 
-    // try {
-    //     const { data, error } = await AsyncRouter.post("/async/profile-update.php", { [field]: inputValue });
-
-    //     if (data) {
-    //         // Mettre à jour l'affichage avec la nouvelle valeur
-    //         document.getElementById(field + '-display').textContent = data[field]; // Met à jour le span d'affichage avec la nouvelle valeur
-    //         document.getElementById(field + '-edit').style.display = 'none'; // Cache la zone d'édition
-    //     } else {
-    //         console.error(error); // Gère les erreurs
-    //     }
-    // } catch (error) {
-    //     console.error("Error saving user data:", error); // Gère les erreurs lors de la sauvegarde
-    // }
+        if (data) {
+            // Mettre à jour l'affichage avec la nouvelle valeur
+            document.getElementById(field + '-display').textContent = data[field]; // Met à jour le span d'affichage avec la nouvelle valeur
+            document.getElementById(field + '-edit').style.display = 'none'; // Cache la zone d'édition
+        } else {
+            console.error(error); // Gère les erreurs
+        }
+    } catch (error) {
+        console.error("Error saving user data:", error); // Gère les erreurs lors de la sauvegarde
+    }
 };
 
 // Écouteur de bouton pour récupérer les données utilisateur
