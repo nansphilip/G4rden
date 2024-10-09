@@ -41,9 +41,20 @@ const sendData = async (event) => {
         userId: event.target.querySelector("input").getAttribute("data-id")
     }
 
+    console.log(profilDataUpdate)
+    // C'est bien un objet
+
     try {
-        const { profilDataUpdate, error } = await AsyncRouter.post("/async/profile-update.php", { [field]: inputValue });
-        console.log(profilDataUpdate);
+        // L'objet ci dessous est la réponse du serveur
+        // Les paramètres sont à mettre à la fin :
+        
+        // Pour l'adresse que l'on souhaite atteindre : /async/profile-update.php
+        // On met juste le nom du fichier, car le AsyncRouter complète l'adresse
+        // Follow mon curseur
+        const { data, error } = await AsyncRouter.post("profile-update", profilDataUpdate);
+
+        console.log(data, error);
+
         // if (profilDataUpdate) {
             // Mettre à jour l'affichage avec la nouvelle valeur
            // document.getElementById(field + '-display').textContent = data[field]; // Met à jour le span d'affichage avec la nouvelle valeur

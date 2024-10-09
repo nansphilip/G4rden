@@ -1,43 +1,52 @@
 <?php
-// Last user script
-session_start();
-
+// Profile update script
 require_once "./model/User.php";
 
-// try {
-    // Get all users
-    $userList = User::getAll($userId);
-    // Test errors with null
-    // $userList = null;
+try {
+    // Get JSON post data
+    $input = file_get_contents('php://input');
+    $data = json_decode($input, true);
 
-//    if (is_null($userList)) {
+    if (is_null($data)) {
+        throw new Error("No data provided");
+    }
+
+    // Parameters list
+    $paramList = ["inputValue", "submitName", "userId"];
+
+    // Sanitize data
+    foreach ($paramList as $param) {
+        if (!isset($data[$param])) throw new Error("A parameter is missing");
+        ${$param} = htmlspecialchars($data[$param], ENT_QUOTES, 'UTF-8');
+    }
+
+    // Update the user
+    
+    // A toi de jouer, il nous faut instancier un objet User
+    // ok, avec les anciennes infos yes 
+    // On veut savoir ce qu'on a en base
+    // Donc on crée un objet avec les old infos pour vérif le changement: oui
+    // ok push le doc et je reprend la suite je work j'ai du time
+    
+    if (is_null($data)) {
         throw new Error("User not found");
-//    }
-
-    // Selection du user de la session en cours
-    $userId = $_SESSION['user_id'];
-
-    $currentUser = User::getUserById();
-
-    // récupère le nom du user
-    $username = $currentUser['username'];
+    }
 
     // Encode the data
     echo json_encode([
         "status" => "ok",
         "message" => "Data fetched with success",
-        "data" => $currentUser
+        "data" => null
     ]);
-// } catch (Throwable $e) {
+} catch (Throwable $e) {
 
-    // 
-//    throw new Error("Profile update -> " . $e->getMessage());
-    
+    // Show the error message in the console
+    throw new Error("Profile update -> " . $e->getMessage());
+
     // Return an error to the client
-//   echo json_encode([
-//        "status" => "error",
- //       "message" => $e->getMessage(),
-//        "data" => null
- //   ]);
-//}
-?>
+    echo json_encode([
+        "status" => "error",
+        "message" => $e->getMessage(),
+        "data" => null
+    ]);
+}

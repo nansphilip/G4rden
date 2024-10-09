@@ -4,12 +4,12 @@
 require_once "./model/Message.php";
 
 try {
-    // Parameters list
-    $paramList = ["replyValue", "dateValue"];
-
     // Get JSON post data
     $input = file_get_contents('php://input');
     $data = json_decode($input, true);
+
+    // Parameters list
+    $paramList = ["replyValue", "dateValue"];
 
     // Sanitize data
     foreach ($paramList as $param) {
