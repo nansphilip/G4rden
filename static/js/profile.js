@@ -30,7 +30,7 @@ Si l'objet data est null, il faut renvoyer un message d'erreur.
 
 
 // Envoyer les données au serveur, traiter la réponse et afficher un feedback
-const sendData = (event) => {
+const sendData = async (event) => {
 
     // Empêcher le formulaire de se soumettre
     event.preventDefault();
@@ -38,22 +38,23 @@ const sendData = (event) => {
     const profilDataUpdate = {
         submitName: event.submitter.name,
         inputValue: event.target.querySelector("input").value,
-        userId: event.target.querySelector("input").getAttribute("data-id"),
+        userId: event.target.querySelector("input").getAttribute("data-id")
     }
 
     try {
-        const { data, error } = await AsyncRouter.post("/async/profile-update.php", { [field]: inputValue });
-
-        if (data) {
+        const { profilDataUpdate, error } = await AsyncRouter.post("/async/profile-update.php", { [field]: inputValue });
+        console.log(profilDataUpdate);
+        // if (profilDataUpdate) {
             // Mettre à jour l'affichage avec la nouvelle valeur
-            document.getElementById(field + '-display').textContent = data[field]; // Met à jour le span d'affichage avec la nouvelle valeur
-            document.getElementById(field + '-edit').style.display = 'none'; // Cache la zone d'édition
-        } else {
-            console.error(error); // Gère les erreurs
-        }
+           // document.getElementById(field + '-display').textContent = data[field]; // Met à jour le span d'affichage avec la nouvelle valeur
+            //document.getElementById(field + '-edit').style.display = 'none'; // Cache la zone d'édition
+        //} else {
+        //    console.error(error); // Gère les erreurs
+        //}
     } catch (error) {
         console.error("Error saving user data:", error); // Gère les erreurs lors de la sauvegarde
     }
+    
 };
 
 // Écouteur de bouton pour récupérer les données utilisateur
