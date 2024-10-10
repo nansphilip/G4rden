@@ -58,3 +58,4 @@ App::setPageFavicon("world.png");
 App::loadCssFiles(["message", "utils"]);
 App::loadJsFiles(["message"]);
 App::loadViewFile("sign_in", $varToInject);
+
