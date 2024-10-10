@@ -1,6 +1,11 @@
 <?php
 // Admin interface controller
 
+// Checks if the user is logged, else redirect to login page
+if (!isset($_SESSION['active'])) {
+    header("Location: {$PATH}/index.php?p=login");
+}
+
 // Includes required models
 
 // Prepare data for the view

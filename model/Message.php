@@ -218,7 +218,7 @@ class Message
             ]);
             return $query;
         } catch (PDOException $e) {
-            throw new Exception("deleteMessage -> " . $e->getMessage());
+            throw new Exception("updateAllAuthorMessages -> " . $e->getMessage());
         }
     }
 
@@ -240,6 +240,24 @@ class Message
             return $query;
         } catch (PDOException $e) {
             throw new Error("deleteMessage -> " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Deletes all messages of an user by its id
+     * @param string $userId
+     * @return bool
+     */
+    public static function deleteAllMessagesByUserId($userId)
+    {
+        try {
+            $sql = "DELETE FROM Message WHERE userId = :userId";
+            $query = Database::queryBool($sql, [
+                ':userId' => $userId
+            ]);
+            return $query;
+        } catch (PDOException $e) {
+            throw new Error("deleteAllMessagesByUserId -> " . $e->getMessage());
         }
     }
 }

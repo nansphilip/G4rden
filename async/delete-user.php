@@ -13,6 +13,8 @@ try {
     if(!isset($data['username'])) throw new Error("A parameter is missing");
     $username = htmlspecialchars($data['username'], ENT_QUOTES, 'UTF-8');
 
+    $selectValue = $data['selectValue'];
+
     // create the object user
     $userObject = new User('', '', '', $username, '', '');
 
@@ -20,19 +22,33 @@ try {
     //If username not found return message not found
     $user = $userObject->getUserByUsername();
     if (is_null($user)) {
-        $data = ['status' => 'error', 'message' => 'User not found for : ' . $username];
-    } else {
-        //Update all his messages with a user named "user_deleted"
-        $userId = $user['id'];
-        $data = updateMessages($userId);
+        throw new Error('User not found for : ' . $username);
+    }
+    $userId = $user['id'];
 
-        // Delete the user by its username
-        $delete = $userObject->deleteUserByUsername($username);
-        if ($delete) {
-            $data = ['status' => 'ok', 'message' => 'User deleted'];
-        } else {
-            $data = ['status' => 'error', 'message' => 'Error deleting user'];
+
+    //Case the messages will be deleted
+    if($selectValue == 'deleteMessages'){
+        if(!Message::deleteAllMessagesByUserId($userId)){
+            throw new Error('Error deleting all messages');
         }
+        $message = "All messages of user $username deleted.<br>";
+    }
+
+    //Case the messages will be anonymized
+    if($selectValue == 'updateMessages'){
+        //Update all his messages with a user named "user_deleted"
+        $data = updateMessages($userId);
+        $message = "All messages of user $username updated.<br>";
+    }
+    
+    // Delete the user by its username
+    $delete = $userObject->deleteUserByUsername($username);
+    if ($delete) {
+        $message .= "User deleted successfully.<br>";
+        $data = ['status' => 'ok', 'message' => $message];
+    } else {
+        throw new Error('Error deleting user');
     }
 
     // Encode the data
