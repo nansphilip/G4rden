@@ -29,19 +29,18 @@ Si l'objet data est null, il faut renvoyer un message d'erreur.
 */
 
 
-// Envoyer les données au serveur, traiter la réponse et afficher un feedback
+// Envoyer les données au serveur, traiter la réponse et affic²her un feedback
 const sendData = async (event) => {
 
     // Empêcher le formulaire de se soumettre
     event.preventDefault();
-
-    const profilDataUpdate = {
-        submitName: event.submitter.name,
-        inputValue: event.target.querySelector("input").value,
-        userId: event.target.querySelector("input").getAttribute("data-id")
+    let form = {
+        "username": event.target.querySelector("input#username").value,
+        "firstname": event.target.querySelector("input#firstname").value,
+        "lastname": event.target.querySelector("input#lastname").value,
     }
 
-    console.log(profilDataUpdate)
+    console.log(form)
     // C'est bien un objet
 
     try {
@@ -51,17 +50,14 @@ const sendData = async (event) => {
         // Pour l'adresse que l'on souhaite atteindre : /async/profile-update.php
         // On met juste le nom du fichier, car le AsyncRouter complète l'adresse
         // Follow mon curseur
-        const { data, error } = await AsyncRouter.post("profile-update", profilDataUpdate);
+        const response = await AsyncRouter.post("put-profile", form);
 
-        console.log(data, error);
+        if (response?.error) {
+            alert('Update failed');
+        } else {
+            alert('Update success');
+        }
 
-        // if (profilDataUpdate) {
-            // Mettre à jour l'affichage avec la nouvelle valeur
-           // document.getElementById(field + '-display').textContent = data[field]; // Met à jour le span d'affichage avec la nouvelle valeur
-            //document.getElementById(field + '-edit').style.display = 'none'; // Cache la zone d'édition
-        //} else {
-        //    console.error(error); // Gère les erreurs
-        //}
     } catch (error) {
         console.error("Error saving user data:", error); // Gère les erreurs lors de la sauvegarde
     }

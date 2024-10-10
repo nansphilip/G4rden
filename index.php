@@ -26,9 +26,9 @@ try {
         $page = $_GET['a'];
         // Select an async script
         $filePath = "async/$page.php";
-    } else {
-        // Default page
-        $filePath = "controller/home.php";
+//    } else {
+//        // Default page
+//        $filePath = "controller/home.php";
     }
 
     // Call the controller
