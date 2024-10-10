@@ -27,6 +27,7 @@ try {
     // On veut savoir ce qu'on a en base
     // Donc on crée un objet avec les old infos pour vérif le changement: oui
     // ok push le doc et je reprend la suite je work j'ai du time
+    $user = []
     
     if (is_null($data)) {
         throw new Error("User not found");
