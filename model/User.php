@@ -130,6 +130,22 @@ class User
     }
 
     /**
+     * Gets all users matching a username.
+     * @return array of associated_arrays of users
+     */
+    public static function getAllUsernamesByUsername($username){
+        try {
+            $sql = "SELECT username FROM User WHERE username LIKE :username";
+            $query = Database::queryAssoc($sql, [
+                ':username' => "%".$username."%"
+            ]);
+            return $query;
+        } catch (PDOException $e) {
+            throw new Error("getAllUsersByUsername -> " . $e->getMessage());
+        }
+    }
+
+    /**
      * Gets all users.
      * @return array of associated_arrays of users
      */
@@ -148,6 +164,8 @@ class User
     // ========================== //
     // ===== Update methods ===== //
     // ========================== //
+
+
 
 
     // ========================== //
@@ -173,11 +191,45 @@ class User
             throw new Error("deleteUser -> " . $e->getMessage());
         }
     }
+
+    /**
+     * Deletes a user by its username.
+     */
+    public function deleteUserByUsername($username){
+        try {
+            $sql = "DELETE FROM User WHERE username = :username";
+            $query = Database::queryBool($sql, [
+                ':username' => $username
+            ]);
+            return $query;
+        } catch (PDOException $e) {
+            throw new Exception("deleteUserByUsername -> " . $e->getMessage());
+        }
+    }
 }
 
 class Admin extends User
 {
     // Methods that require admin privileges
     // Ex: update user privileges
+
+    /**
+     * Updates the user type of a user
+     * @param string $userId
+     * @param string $userType
+     */
+    public function updateUserType($userId, $userType)
+    {
+        try {
+            $sql = "UPDATE User SET userType = :userType WHERE id = :userId";
+            $query = Database::queryBool($sql, [
+                ':userType' => $userType,
+                ':userId' => $userId
+            ]);
+            return $query;
+        } catch (PDOException $e) {
+            throw new Exception("updateUserType -> " . $e->getMessage());
+        }
+    }
 }
 ?>
