@@ -38,12 +38,16 @@ const sendData = async (event) => {
         "username": event.target.querySelector("input#username").value,
         "firstname": event.target.querySelector("input#firstname").value,
         "lastname": event.target.querySelector("input#lastname").value,
+        "password": event.target.querySelector("input#password").value,
+        "passwordConfirm": event.target.querySelector("input#passwordConfirm").value,
     }
 
     const formValues = {
         username: event.target.querySelector("input#username").value,
         firstname: event.target.querySelector("input#firstname").value,
         lastname: event.target.querySelector("input#lastname").value,
+        password: event.target.querySelector("input#password").value,
+        passwordConfirm: event.target.querySelector("input#passwordConfirm").value,
     };
 
     try {
@@ -60,9 +64,9 @@ const sendData = async (event) => {
 
     document.querySelector('form').addEventListener('submit', function (e) {
         const password = document.getElementById('password').value;
-        const confirm-password = document.getElementById('confirm-password').value;
+        const passwordConfirm = document.getElementById('confirm-password').value;
 
-        if (password !== confirm-password) {
+        if (password !== passwordConfirm) {
             e.preventDefault();
             alert("Password not match !")
         }

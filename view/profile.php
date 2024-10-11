@@ -32,11 +32,11 @@ require_once("view/components/header.php");
 					<br>
 					<label for="password" class="pb-1 pt-2">Password</label>
 					<br>
-					<input type="password" autocomplete="off" id="password" data-id="<?= $user->id; ?>" class="input-form" value="<?= $user->password; ?>">
+					<input type="password" autocomplete="off" id="password" data-id="<?= $user->id; ?>" class="input-form" value="<?= $user->passwordHash; ?>">
 					<br>
-					<label for="confirm-password" class="pb-1 pt-2">Confirm Password</label>
+					<label for="passwordConfirm" class="pb-1 pt-2">Confirm Password</label>
 					<br>
-					<input type="password" autocomplete="off" id="confirm-password" data-id="<?= $user->id; ?>" class="input-form" value="<?= $user->password;?>">
+					<input type="password" autocomplete="off" id="passwordConfirm" data-id="<?= $user->id; ?>" class="input-form" value="<?= $user->passwordHash;?>">
 				</div>
 				<div class="center">
 					<button type="submit" class="submit-button" name="update">Mettre à jour</button>
