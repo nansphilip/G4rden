@@ -70,7 +70,7 @@ const sendData = async (event) => {
             e.preventDefault();
             alert("Password not match !")
         }
-    }
+    })
     
 };
 
