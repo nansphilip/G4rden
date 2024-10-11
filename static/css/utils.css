@@ -50,7 +50,8 @@
     margin-bottom: 1rem;
 }
 
-.padding-shadow, main {
+.padding-shadow,
+main {
     padding-right: var(--shadow-x);
     padding-bottom: var(--shadow-y);
 }

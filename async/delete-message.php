@@ -8,14 +8,14 @@ try {
     $input = file_get_contents('php://input');
     $data = json_decode($input, true);
 
-    //Sanitize data 
-    if(!isset($data['idMessage'])) throw new Error("A parameter is missing");
+    // Sanitize data 
+    if (!isset($data['idMessage'])) throw new Error("A parameter is missing");
     $idMessage = htmlspecialchars($data['idMessage'], ENT_QUOTES, 'UTF-8');
 
-    // create the object message
+    // Create the object message
     $messageObject = new Message($idMessage, '', '', '');
 
-    //Verify that the message exists
+    // Verify that the message exists
     $message = $messageObject->getMessageById();
     if (is_null($message)) {
         throw new Error("Message not found");
@@ -38,4 +38,3 @@ try {
         "message" => $e->getMessage()
     ]);
 }
-?>

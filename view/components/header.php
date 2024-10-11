@@ -29,15 +29,6 @@
             echo "<link rel='stylesheet' href='$file'>";
         }
     } ?>
-
-    <?php // Scripts 
-    ?>
-    <script src="static/js/global.js"></script>
-    <?php if (is_array(App::$jsFiles)) {
-        foreach (App::$jsFiles as $file) {
-            echo "<script src='$file' defer></script>";
-        }
-    } ?>
 </head>
 
 <body>

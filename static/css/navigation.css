@@ -25,7 +25,8 @@
     }
 
     /* Hide mobile nav */
-    .mobile-nav, .button-nav {
+    .mobile-nav,
+    .button-nav {
         display: none;
     }
 }
@@ -35,7 +36,7 @@
     .button-nav {
         font-weight: bold;
         background-color: var(--white);
-        
+
         padding: 0.5rem 1rem;
         border: var(--border-width) solid var(--border-color);
         border-radius: var(--border-radius);

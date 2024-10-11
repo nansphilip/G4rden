@@ -11,13 +11,13 @@ body * {
     --black: black;
     --white: white;
     --white-hover: hsl(0, 0%, 95%);
-    
+
     --text-primary: hsl(175, 51%, 18%);
     --text-secondary: hsl(175, 10%, 46%);
 
     --primary-color: hsl(213, 38%, 50%);
     --primary-color-hover: hsl(213, 40%, 70%);
-    
+
     --secondary-color: hsl(193, 42%, 74%);
     --secondary-color-hover: hsl(195, 36%, 91%);
 

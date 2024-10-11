@@ -25,4 +25,3 @@ App::setPageFavicon("world.png");
 //App::loadCssFiles(["utils","admin_interface"]);
 App::loadJsFiles(["admin-interface"]);
 App::loadViewFile("admin-interface", $varToInject);
-?>

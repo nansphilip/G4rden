@@ -5,9 +5,9 @@ DROP USER 'g4rden-user' @'localhost';
 DROP DATABASE `g4rden-db`;
 
 -- Shows users privileges
-SHOW GRANTS FOR 'g4rden-user'@'localhost';
+SHOW GRANTS FOR 'g4rden-user' @'localhost';
 -- or for server
-SHOW GRANTS FOR 'g4rden-user'@'%';
+SHOW GRANTS FOR 'g4rden-user' @'%';
 
 -- Shows all tables for the database
 SHOW TABLES FROM `g4rden-db`;

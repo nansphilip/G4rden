@@ -126,7 +126,6 @@ const handleSubmit = async (e) => {
 // On submit, handle the submit to manage insertion asynchronously
 newMessageFormEl.addEventListener("submit", handleSubmit);
 
-
 // ========================== //
 // === Scroll bar padding === //
 // ========================== //

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * User class
  * An User has an ID, a username, a passwordHash and a userType.
@@ -133,11 +134,12 @@ class User
      * Gets all users matching a username.
      * @return array of associated_arrays of users
      */
-    public static function getAllUsernamesByUsername($username){
+    public static function getAllUsernamesByUsername($username)
+    {
         try {
             $sql = "SELECT username FROM User WHERE username LIKE :username";
             $query = Database::queryAssoc($sql, [
-                ':username' => "%".$username."%"
+                ':username' => "%" . $username . "%"
             ]);
             return $query;
         } catch (PDOException $e) {
@@ -193,7 +195,8 @@ class User
     /**
      * Deletes a user by its username.
      */
-    public function deleteUserByUsername($username){
+    public function deleteUserByUsername($username)
+    {
         try {
             $sql = "DELETE FROM User WHERE username = :username";
             $query = Database::queryBool($sql, [
@@ -230,4 +233,3 @@ class Admin extends User
         }
     }
 }
-?>

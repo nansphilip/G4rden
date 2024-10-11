@@ -18,4 +18,3 @@ App::setPageFavicon("world.png");
 
 // Load the view
 App::loadViewFile("home", $varToInject);
-?>

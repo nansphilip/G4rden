@@ -60,7 +60,7 @@ class Message
         }
     }
 
-    
+
     // ======================= //
     // ===== Get methods ===== //
     // ======================= //
@@ -147,12 +147,12 @@ class Message
      * @param string $stringOfContent, $userId
      * @return array of associated_arrays of messages
      */
-    public static function getMessagesByUserAndContent($userId,$stringOfContent)
+    public static function getMessagesByUserAndContent($userId, $stringOfContent)
     {
         try {
             $sql = "SELECT * FROM Message WHERE content LIKE :content AND userId = :userId";
             $query = Database::queryAssoc($sql, [
-                ':content' => "%".$stringOfContent."%",
+                ':content' => "%" . $stringOfContent . "%",
                 ':userId' => $userId
             ]);
             return $query;

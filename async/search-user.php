@@ -9,7 +9,7 @@ try {
     $data = json_decode($input, true);
 
     //Sanitize data 
-    if(!isset($data['username'])) throw new Error("A parameter is missing");
+    if (!isset($data['username'])) throw new Error("A parameter is missing");
     $username = htmlspecialchars($data['username'], ENT_QUOTES, 'UTF-8');
 
     // Get all users
@@ -18,7 +18,6 @@ try {
     if (is_null($usersList)) {
         throw new Error("Cannot fetch users");
     }
-
 
     // Encode the data
     echo json_encode([
@@ -34,4 +33,3 @@ try {
         "data" => null
     ]);
 }
-?>

@@ -20,4 +20,3 @@ App::setPageFavicon("world.png");
 // Load the view
 App::loadCssFiles(["utils"]);
 App::loadViewFile("error", $varToInject);
-?>

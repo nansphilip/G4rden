@@ -9,17 +9,17 @@ try {
     $input = file_get_contents('php://input');
     $data = json_decode($input, true);
 
-    //Sanitize data 
-    if(!isset($data['username'])) throw new Error("A parameter is missing");
+    // Sanitize data 
+    if (!isset($data['username'])) throw new Error("A parameter is missing");
     $username = htmlspecialchars($data['username'], ENT_QUOTES, 'UTF-8');
 
     $selectValue = $data['selectValue'];
 
-    // create the object user
+    // Create the object user
     $userObject = new User('', '', '', $username, '', '');
 
-    //Verify if the user exists
-    //If username not found return message not found
+    // Verify if the user exists
+    // If username not found return message not found
     $user = $userObject->getUserByUsername();
     if (is_null($user)) {
         throw new Error('User not found for : ' . $username);
@@ -27,21 +27,21 @@ try {
     $userId = $user['id'];
 
 
-    //Case the messages will be deleted
-    if($selectValue == 'deleteMessages'){
-        if(!Message::deleteAllMessagesByUserId($userId)){
+    // Case the messages will be deleted
+    if ($selectValue == 'deleteMessages') {
+        if (!Message::deleteAllMessagesByUserId($userId)) {
             throw new Error('Error deleting all messages');
         }
         $message = "All messages of user $username deleted.<br>";
     }
 
-    //Case the messages will be anonymized
-    if($selectValue == 'updateMessages'){
-        //Update all his messages with a user named "user_deleted"
+    // Case the messages will be anonymized
+    if ($selectValue == 'updateMessages') {
+        // Update all his messages with a user named "user_deleted"
         $data = updateMessages($userId);
         $message = "All messages of user $username updated.<br>";
     }
-    
+
     // Delete the user by its username
     $delete = $userObject->deleteUserByUsername($username);
     if ($delete) {
@@ -63,7 +63,7 @@ try {
 
 function updateMessages($userId)
 {
-    //Checks if the user has messages
+    // Checks if the user has messages
     $messageObject = new Message('', '', '', $userId);
     $messages = $messageObject->getMessagesByUserId();
     if (is_null($messages)) {
@@ -71,9 +71,9 @@ function updateMessages($userId)
         return $data;
     }
 
-    //Update all the user messages by setting new author to "deleted user"
+    // Update all the user messages by setting new author to "deleted user"
     $messageObject = new Message('', '', '', $userId);
-    //Create the user user_deleted (for the test, the userId is 6)
+    // Create the user user_deleted (for the test, the userId is 6)
     $update = $messageObject->updateAllAuthorMessages('6');
     if ($update) {
         $data = ['status' => 'ok', 'message' => 'Messages updated'];
@@ -83,5 +83,3 @@ function updateMessages($userId)
         return $data;
     }
 }
-
-?>

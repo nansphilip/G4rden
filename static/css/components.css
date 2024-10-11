@@ -1,4 +1,5 @@
-.rounded-box, .rounded-box-light {
+.rounded-box,
+.rounded-box-light {
     padding: 0.8rem;
     border-radius: var(--border-radius);
     border: var(--border-width) solid var(--border-color);
