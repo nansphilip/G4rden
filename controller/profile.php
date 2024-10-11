@@ -15,6 +15,28 @@ $id = $_SESSION['id'];
 $user = new User();
 $user->getUserById($id);
 
+if (isset($_POST['update'])) {
+    try {
+        // Field list to sanitize
+        $fieldList = ['password', 'passwordConfirm'];
+
+        // Sanitize data and destructure variables
+        foreach ($fieldList as $field) {
+            ${$field} = htmlspecialchars($_POST[$field], ENT_QUOTES, 'UTF-8');
+        }
+
+        // If password is not ok, return null
+        if (!(strlen($password) >= 8) || ($password != $passwordConfirm)) {
+            throw new Error("Invalid password");
+        }
+        // Hash the password
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+    } catch (Throwable $e) {
+        throw new Error("Register Controller -> " . $e->getMessage());
+    }
+}
+
+
 $varToInject = [
     "ENVIRONMENT" => $ENVIRONMENT,
     "PATH" => $PATH,

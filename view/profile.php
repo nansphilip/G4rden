@@ -22,7 +22,7 @@ require_once("view/components/header.php");
 					<br>
 					<input type="text" autocomplete="off" id="username" data-id="<?= $user->id; ?>" class="input-form" value="<?= $user->username; ?>">
 					<br>
-					<label for="firstname" class="pb-1 pt-2">Firstname</label>
+					<label for="firstname" class="pb-1 pt-2">Firstname</label>gi
 					<br>
 					<input type="text" autocomplete="off" id="firstname" data-id="<?= $user->id; ?>" class="input-form" value="<?= $user->firstname; ?>">
 					<br>
@@ -39,7 +39,7 @@ require_once("view/components/header.php");
 					<input type="password" autocomplete="off" id="confirm-password" data-id="<?= $user->id; ?>" class="input-form" value="<?= $user->password;?>">
 				</div>
 				<div class="center">
-					<button type="submit" class="submit-button">Mettre à jour</button>
+					<button type="submit" class="submit-button" name="update">Mettre à jour</button>
 				</div>
 			</form>
 		</div>
