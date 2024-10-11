@@ -10,6 +10,7 @@ const refreshMessages = async () => {
     // Get the messages
     const { data, error } = await AsyncRouter.get("get-message");
 
+    // TODO : make auto scroll possible when error is displayed
     // Create a new paragraph element with the user data
     if (!data) {
         return (chatContainerEl.innerHTML = error);
@@ -126,7 +127,6 @@ const handleSubmit = async (e) => {
 
 // On submit, handle the submit to manage insertion asynchronously
 newMessageFormEl.addEventListener("submit", handleSubmit);
-
 
 // ========================== //
 // === Scroll bar padding === //

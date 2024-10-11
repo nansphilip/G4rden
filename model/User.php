@@ -96,20 +96,6 @@ class User
         }
     }
 
-    public function update($username)
-    {
-        try {
-            $sql = "UPDATE User SET username = :username where id=:id";
-            $query = Database::queryAssoc($sql, [
-                ':id' => $this->id,
-                ':username' => $username
-            ]);
-
-        } catch (PDOException $e) {
-            throw new Error("update failed -> " . $e->getMessage());
-        }
-    }
-
     /**
      * Gets a user by its username.
      * @return associated_array of the user
@@ -170,7 +156,21 @@ class User
     // ===== Update methods ===== //
     // ========================== //
 
-    // Ok, go back php
+
+    public function updateUsername($username)
+    {
+        try {
+            $sql = "UPDATE User SET username = :username where id=:id";
+            $query = Database::queryAssoc($sql, [
+                ':id' => $this->id,
+                ':username' => $username
+            ]);
+            $this->username = $username;
+        } catch (PDOException $e) {
+            throw new Error("updateUsername -> " . $e->getMessage());
+        }
+    }
+
 
     // ========================== //
     // ===== Delete methods ===== //
