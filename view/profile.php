@@ -22,7 +22,7 @@ require_once("view/components/header.php");
 					<br>
 					<input type="text" autocomplete="off" id="username" data-id="<?= $user->id; ?>" class="input-form" value="<?= $user->username; ?>">
 					<br>
-					<label for="firstname" class="pb-1 pt-2">Firstname</label>gi
+					<label for="firstname" class="pb-1 pt-2">Firstname</label>
 					<br>
 					<input type="text" autocomplete="off" id="firstname" data-id="<?= $user->id; ?>" class="input-form" value="<?= $user->firstname; ?>">
 					<br>
