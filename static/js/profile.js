@@ -70,6 +70,8 @@ const sendData = async (event) => {
             e.preventDefault();
             alert("Password not match !")
         }
+
+
     })
     
 };
@@ -80,3 +82,24 @@ const sendData = async (event) => {
 
 
 document.addEventListener("submit", (event) => sendData(event));
+
+document.getElementById('view').addEventListener('click', function () {
+    var passwordField = document.getElementById('password');
+
+    // Basculer le type d'input entre "password" et "text"
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text'; // Afficher le mot de passe en clair
+    } else {
+        passwordField.type = 'password'; // Revenir au mot de passe masqué
+    }
+});
+document.getElementById('hide').addEventListener('click', function () {
+    var passwordField = document.getElementById('passwordConfirm');
+
+    // Basculer le type d'input entre "password" et "text"
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text'; // Afficher le mot de passe en clair
+    } else {
+        passwordField.type = 'password'; // Revenir au mot de passe masqué
+    }
+});

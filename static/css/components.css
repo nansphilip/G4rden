@@ -50,3 +50,14 @@
     background-color: var(--secondary-color-hover);
     transition: background-color 150ms;
 }
+
+.view-pw img {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    cursor: pointer;
+}
+
+.password {
+    position: relative;
+}
