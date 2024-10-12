@@ -13,7 +13,7 @@ try {
     }
 
     // Parameters list
-    $paramList = ["usernafme", "firstname", 'lastname'];
+    $paramList = ["username", "firstname", 'lastname', 'password', 'passwordConfirm'];
 
     // Sanitize data
     foreach ($paramList as $param) {
@@ -32,6 +32,7 @@ try {
 
     // Update the username
     $user->updateUsername($data["username"]);
+    $user->updateFirstname($data["firstname"]);
 
     // Encode the data
     echo json_encode([

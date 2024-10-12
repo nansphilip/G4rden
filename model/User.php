@@ -171,6 +171,20 @@ class User
         }
     }
 
+    public function updateFirstname($firstname)
+    {
+        try {
+            $sql = "UPDATE User SET firstname = :firstname where id=:id";
+            $query = Database::queryAssoc($sql, [
+                ':id' => $this->id,
+                ':firstname' => $firstname
+            ]);
+            $this->firstname = $firstname;
+        } catch (PDOException $e) {
+            throw new Error("updateFirstsname -> " . $e->getMessage());
+        }
+    }
+
 
     // ========================== //
     // ===== Delete methods ===== //
