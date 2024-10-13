@@ -42,7 +42,7 @@ const refreshMessages = async () => {
         if (!currentIdList.includes(newId)) {
             // Format the date and time
             const newDate = new Date(date);
-            const dateFormat = newDate.toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+            const dateFormat = newDate.toLocaleDateString("fr-FR", { day: "numeric", month: "long" });
             const timeFormat = newDate.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
 
             // Create the new message element
