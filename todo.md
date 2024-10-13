@@ -5,10 +5,15 @@
 - [ ] Add a feedback for users if register ou login fails
 - [ ] Fix session issue when registering
 
+- [ ] Add feedback for user
+  - [ ] Login/Register failed
+  - [ ] Send message failed
+  - [ ] Send subject failed
+
 ## Add message
 
 - [ ] Charge 10 more messages when reaching the top of the chat
-- [ ] Display date and time in French
+- [x] Display date and time in French
 
 ## Database
 
@@ -17,6 +22,27 @@
 - [ ] Add `email` column to `User` table
 - [ ] Make `email` and `username` constraints unique
 - [ ] Create table `Subject` and its `model`
+- [ ] Check database insert validated by `htmlspecialchars`
+
+## Errors
+
+- [ ] DEV environment
+
+  - [ ] Check models errors works
+  - [ ] Check controllers errors works
+  - [ ] Check async errors works
+  - [ ] Ckeck login/register
+
+- [ ] PROD environment
+
+  - [ ] Check "Something went wrong" page works
+  - [ ] Check "Page not found" page works
+  
+- [ ] FEEDBACKS for user
+  
+  - [ ] Login/Register failed
+  - [ ] Send message failed
+  - [ ] Send subject failed
 
 ## Projets
 
@@ -82,7 +108,9 @@ My ideas for the project (Nans):
 - [ ] `PHP Unit` for unit tests
 - [ ] `Travis CI`, `Gitlab` or `Jenkins` for continuous integration
 - [ ] `Official information` like addresses, social medias, etc...
+
 - [ ] `Ecoconception` tests with :
+
   - [ ] `DevTools`
   - [ ] `Lighthouse`
   - [ ] `WAVE`
@@ -92,6 +120,16 @@ My ideas for the project (Nans):
 ## Check security
 
 - [ ] Make "TODO" comments
-- [ ] Check prod error messages
 - [ ] Remove every console.log
 - [ ] Check database insert validated by `htmlspecialchars`
+
+- [ ] Check feedback for user
+
+  - [ ] Login/Register failed
+  - [ ] Send message failed
+  - [ ] Send subject failed
+
+- [ ] Check prod error messages
+
+  - [ ] Page not found
+  - [ ] Something went wrong
