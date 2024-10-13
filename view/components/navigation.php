@@ -7,6 +7,9 @@
     // Sets the navigation bar depending if the user is logged in or not
     if (isset($_SESSION['active'])) {
         echo "<a href={$PATH}/index.php?p=message>Message</a>";
+        if ($_SESSION['userType'] == 'ADMIN') {
+            echo "<a href={$PATH}/index.php?p=admin-interface>Admin interface</a>";
+        }
         echo "<a href={$PATH}/index.php?p=profile>Profile</a>";
         echo "<a href={$PATH}/index.php?p=logout>Logout</a>";
     } else {
@@ -27,6 +30,9 @@
     if (isset($_SESSION['active'])) {
         echo "<a href={$PATH}/index.php?p=message>Message</a>";
         echo "<a href={$PATH}/index.php?p=profile>Profile</a>";
+        if ($_SESSION['userType'] == 'ADMIN') {
+            echo "<a href={$PATH}/index.php?p=admin-interface>Admin interface</a>";
+        }
         echo "<a href={$PATH}/index.php?p=logout>Logout</a>";
     } else {
         echo "<a href={$PATH}/index.php?p=login>Login</a>";

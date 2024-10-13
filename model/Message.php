@@ -60,7 +60,7 @@ class Message
         }
     }
 
-    
+
     // ======================= //
     // ===== Get methods ===== //
     // ======================= //
@@ -142,6 +142,26 @@ class Message
     }
 
     /**
+     * Gets all messages with a word or a sentence in their content 
+     * and with a specified user
+     * @param string $stringOfContent, $userId
+     * @return array of associated_arrays of messages
+     */
+    public static function getMessagesByUserAndContent($userId, $stringOfContent)
+    {
+        try {
+            $sql = "SELECT * FROM Message WHERE content LIKE :content AND userId = :userId";
+            $query = Database::queryAssoc($sql, [
+                ':content' => "%" . $stringOfContent . "%",
+                ':userId' => $userId
+            ]);
+            return $query;
+        } catch (PDOException $e) {
+            throw new Error("getMessagesByPeaceOfContent -> " . $e->getMessage());
+        }
+    }
+
+    /**
      * Gets the 10 last messages associated to their user.
      * @return array of associated_arrays of messages
      */
@@ -189,6 +209,22 @@ class Message
     // ===== Update methods ===== //
     // ========================== //
 
+    /**
+     * Updates the username for all his messages
+     */
+    public function updateAllAuthorMessages($userId)
+    {
+        try {
+            $sql = "UPDATE Message SET userId = :newUserId WHERE userId = :userId";
+            $query = Database::queryBool($sql, [
+                ':newUserId' => $userId,
+                ':userId' => $this->userId
+            ]);
+            return $query;
+        } catch (PDOException $e) {
+            throw new Exception("updateAllAuthorMessages -> " . $e->getMessage());
+        }
+    }
 
     // ========================== //
     // ===== Delete methods ===== //
@@ -202,15 +238,30 @@ class Message
     {
         try {
             $sql = "DELETE FROM Message WHERE id = :id";
-            $query = Database::queryAssoc($sql, [
+            $query = Database::queryBool($sql, [
                 ':id' => $this->id
             ]);
-            if (is_null($query)) {
-                return null;
-            }
-            return $query[0];
+            return $query;
         } catch (PDOException $e) {
             throw new Error("deleteMessage -> " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Deletes all messages of an user by its id
+     * @param string $userId
+     * @return bool
+     */
+    public static function deleteAllMessagesByUserId($userId)
+    {
+        try {
+            $sql = "DELETE FROM Message WHERE userId = :userId";
+            $query = Database::queryBool($sql, [
+                ':userId' => $userId
+            ]);
+            return $query;
+        } catch (PDOException $e) {
+            throw new Error("deleteAllMessagesByUserId -> " . $e->getMessage());
         }
     }
 }

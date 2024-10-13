@@ -39,7 +39,7 @@ require_once("view/components/header.php");
                 </span>
                 <br>
                 <input type="password" autocomplete="off" id="password" data-id="<?= $user->id; ?>" class="input-form"
-                       value="<?= $user->passwordHash; ?>">
+                       value="Entrez votre mot de passe">
                 <br>
                 <label for="passwordConfirm" class="pb-1 pt-2">Confirm Password</label>
                 <span id="hide" class="view-pw" onclick="togglePasswordVisibility('password')">
@@ -47,12 +47,18 @@ require_once("view/components/header.php");
                 </span>
                 <br>
                 <input type="password" autocomplete="off" id="passwordConfirm" data-id="<?= $user->id; ?>"
-                       class="input-form" value="<?= $user->passwordHash; ?>">
+                       class="input-form" value="Confirmez votre mot de passe>">
             </div>
             <div class="center">
                 <button type="submit" class="submit-button" name="update">Mettre à jour</button>
             </div>
         </form>
+        <br>
+    </div>
+    <div id="mesMessages" class="flex flex-column gap-1 rounded-box mb-2">
+        <!-- Messages will be injected here -->
+        <h3>Mes messages</h3>
+        <p></p>
     </div>
 
 </main>

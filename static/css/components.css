@@ -51,6 +51,23 @@
     transition: background-color 150ms;
 }
 
+.suggestions {
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+    display: none; /* Masqué par défaut */
+    position: absolute; /* Pour superposer correctement */
+    background: white; /* Assurez-vous que le fond est blanc */
+    z-index: 1000; /* Assurez-vous que la liste est au-dessus des autres éléments */
+}
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+}
+.suggestion-item:hover {
+    background-color: #f0f0f0;
+}
+
 .view-pw img {
     width: 20px;
     height: 20px;

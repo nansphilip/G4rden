@@ -1,4 +1,5 @@
 import AsyncRouter from "/static/js/AsyncRouter.js";
+import {deleteMessageContent} from "./admin-interface";
 
 // Je ne pense pas que ce soit nécessaire de masquer le champ lorsque l'utilisateur arrve sur la page
 // car son but est de modifer des valeurs du profil directement.
@@ -51,7 +52,7 @@ const sendData = async (event) => {
     };
 
     try {
-        const { data, error } = await AsyncRouter.post("put-profile", formValues);
+        const {data, error} = await AsyncRouter.post("put-profile", formValues);
 
         if (!data) {
             throw new Error(error);
@@ -73,7 +74,7 @@ const sendData = async (event) => {
 
 
     })
-    
+
 };
 
 // Écouteur de bouton pour récupérer les données utilisateur
@@ -103,3 +104,39 @@ document.getElementById('hide').addEventListener('click', function () {
         passwordField.type = 'password'; // Revenir au mot de passe masqué
     }
 });
+
+// Récupération et affichage des messages par Id
+
+export const showAllMessages = async () => {
+    const {message, data, error} = await AsyncRouter.post("put-profile", {});
+    if (!message) {
+        messageContainer.innerHTML = "error: " + error;
+        return;
+    }
+
+    for (var i = 0; i < data.length; i++) {
+        const {id, content, date, userId} = data[i];
+        let idMessage = id;
+        // Create the new message element
+        const newMessageDiv = document.createElement("div");
+        newMessageDiv.classList.add("rounded-box-light");
+        newMessageDiv.setAttribute("id", "message-" + idMessage);
+
+        // Create the new message content
+        const messageContent = `<div class="flex flex-row justify-between">
+                    <h3>${username}</h3>
+                    <div class="flex flex-row items-center gap-1">
+                        <p>${dateFormat}</p>
+                        <p>•</p>
+                        <p>${timeFormat}</p>
+                    </div>
+                </div>
+                <p>${message}</p>`;
+
+        // Insert content into the new message element
+        newMessageDiv.innerHTML = messageContent;
+
+        // Add the new message to the message container
+        messageContainer.appendChild(newMessageDiv);
+    }
+};

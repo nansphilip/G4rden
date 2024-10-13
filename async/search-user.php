@@ -4,23 +4,26 @@
 require_once "./model/User.php";
 
 try {
-    // Get all users
-    $userList = User::getAll();
-    // Test errors with null
-    // $userList = null;
+    // Get JSON post data
+    $input = file_get_contents('php://input');
+    $data = json_decode($input, true);
 
-    if (is_null($userList)) {
+    //Sanitize data 
+    if (!isset($data['username'])) throw new Error("A parameter is missing");
+    $username = htmlspecialchars($data['username'], ENT_QUOTES, 'UTF-8');
+
+    // Get all users
+    $usersList = User::getAllUsernamesByUsername($username);
+
+    if (is_null($usersList)) {
         throw new Error("Cannot fetch users");
     }
-
-    // Select the last user
-    $lastUser = $userList[count($userList) - 1]['username'];
 
     // Encode the data
     echo json_encode([
         "status" => "ok",
         "message" => "Data fetched with success",
-        "data" => $lastUser
+        "data" => $usersList
     ]);
 } catch (Throwable $e) {
     // Return an error to the client

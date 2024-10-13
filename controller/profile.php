@@ -8,12 +8,15 @@ if (!isset($_SESSION['active'])) {
 // Includes required models
 require_once "model/User.php";
 
+
 // Get id from session
 $id = $_SESSION['id'];
 
 // Create a new user object from the id
 $user = new User();
 $user->getUserById($id);
+
+
 
 if (isset($_POST['update'])) {
     try {
@@ -35,6 +38,7 @@ if (isset($_POST['update'])) {
         throw new Error("Register Controller -> " . $e->getMessage());
     }
 }
+
 
 
 $varToInject = [

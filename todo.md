@@ -24,7 +24,7 @@
 
 ## Responsive
 
-- [ ] Adapt the layout to mobile
+- [x] Adapt the layout to mobile
 
 ## Check data validation
 
