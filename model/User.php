@@ -82,7 +82,7 @@ class User
                 ':id' => $id
             ]);
             if (is_null($query)) {
-                return null;
+                throw new Error("Unkown user with id -> " . $id);
             }
             $this->id = $query[0]['id'];
             $this->lastname = $query[0]['lastname'];

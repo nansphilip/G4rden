@@ -82,7 +82,7 @@ const sendData = async (event) => {
 // get_user_button.addEventListener("click", async () => await getUserById());
 
 
-document.addEventListener("submit", (event) => sendData(event));
+// document.addEventListener("submit", (event) => sendData(event));
 
 document.getElementById('view').addEventListener('click', function () {
     var passwordField = document.getElementById('password');
@@ -105,38 +105,3 @@ document.getElementById('hide').addEventListener('click', function () {
     }
 });
 
-// Récupération et affichage des messages par Id
-
-export const showAllMessages = async () => {
-    const {message, data, error} = await AsyncRouter.post("put-profile", {});
-    if (!message) {
-        messageContainer.innerHTML = "error: " + error;
-        return;
-    }
-
-    for (var i = 0; i < data.length; i++) {
-        const {id, content, date, userId} = data[i];
-        let idMessage = id;
-        // Create the new message element
-        const newMessageDiv = document.createElement("div");
-        newMessageDiv.classList.add("rounded-box-light");
-        newMessageDiv.setAttribute("id", "message-" + idMessage);
-
-        // Create the new message content
-        const messageContent = `<div class="flex flex-row justify-between">
-                    <h3>${username}</h3>
-                    <div class="flex flex-row items-center gap-1">
-                        <p>${dateFormat}</p>
-                        <p>•</p>
-                        <p>${timeFormat}</p>
-                    </div>
-                </div>
-                <p>${message}</p>`;
-
-        // Insert content into the new message element
-        newMessageDiv.innerHTML = messageContent;
-
-        // Add the new message to the message container
-        messageContainer.appendChild(newMessageDiv);
-    }
-};

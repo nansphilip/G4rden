@@ -16,21 +16,21 @@ require_once("view/components/header.php");
 
     <div class="pt-2 flex flex-column w-fit-content gap-2">
 
-        <form id="profile-edit" class="flex flex-column gap-2">
-            <div class="rounded-box" post="">
+        <form id="profile-edit" class="flex flex-column gap-2" action="index.php?p=profile" method="post">
+            <div class="rounded-box">
                 <label for="username" class="pb-1">Username</label>
                 <br>
-                <input type="text" autocomplete="off" id="username" data-id="<?= $user->id; ?>" class="input-form"
+                <input type="text" autocomplete="off" id="username" name="username" class="input-form"
                        value="<?= $user->username; ?>">
                 <br>
                 <label for="firstname" class="pb-1 pt-2">Firstname</label>
                 <br>
-                <input type="text" autocomplete="off" id="firstname" data-id="<?= $user->id; ?>" class="input-form"
+                <input type="text" autocomplete="off" id="firstname" name="firstname" class="input-form"
                        value="<?= $user->firstname; ?>">
                 <br>
                 <label for="lastname" class="pb-1 pt-2">Lastname</label>
                 <br>
-                <input type="text" autocomplete="off" id="lastname" data-id="<?= $user->id; ?>" class="input-form"
+                <input type="text" autocomplete="off" id="lastname" name="lastname" class="input-form"
                        value="<?= $user->lastname; ?>">
                 <br>
                 <label for="password" class="pb-1 pt-2">Password</label>
@@ -38,7 +38,7 @@ require_once("view/components/header.php");
                         <img src="static/img/view.png" alt="Afficher le mot de passe">
                 </span>
                 <br>
-                <input type="password" autocomplete="off" id="password" data-id="<?= $user->id; ?>" class="input-form"
+                <input type="password" autocomplete="off" id="password" name="password" class="input-form"
                        value="Entrez votre mot de passe">
                 <br>
                 <label for="passwordConfirm" class="pb-1 pt-2">Confirm Password</label>
@@ -46,22 +46,16 @@ require_once("view/components/header.php");
                         <img src="static/img/view.png" alt="Afficher le mot de passe">
                 </span>
                 <br>
-                <input type="password" autocomplete="off" id="passwordConfirm" data-id="<?= $user->id; ?>"
-                       class="input-form" value="Confirmez votre mot de passe>">
+                <input type="password" autocomplete="off" id="passwordConfirm" name="passwordConfirm"
+                       class="input-form" value="Confirmez votre mot de passe">
             </div>
             <div class="center">
-                <button type="submit" class="submit-button" name="update">Mettre à jour</button>
+                <input type="submit" class="submit-button" value="Mettre à jour"/>
             </div>
         </form>
         <br>
     </div>
-    <div id="mesMessages" class="flex flex-column gap-1 rounded-box mb-2">
-        <!-- Messages will be injected here -->
-        <h3>Mes messages</h3>
-        <p></p>
-    </div>
-
-</main>
+</main>²
 
 <?php
 // Includes the footer

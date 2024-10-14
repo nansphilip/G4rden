@@ -16,29 +16,39 @@ $id = $_SESSION['id'];
 $user = new User();
 $user->getUserById($id);
 
+$isPost = isset($_POST["username"]);
+if ($isPost) {
 
+    // TODO: check cohérence PWD avant mise à jour
+    // TODO: check cohérence formulaire (nom vide...)
 
-if (isset($_POST['update'])) {
-    try {
-        // Field list to sanitize
-        $fieldList = ['password', 'passwordConfirm'];
+    $user->updateUsername($_POST["username"]);
+    $user->updateFirstname($_POST["firstname"]);
 
-        // Sanitize data and destructure variables
-        foreach ($fieldList as $field) {
-            ${$field} = htmlspecialchars($_POST[$field], ENT_QUOTES, 'UTF-8');
-        }
-
-        // If password is not ok, return null
-        if (!(strlen($password) >= 8) || ($password != $passwordConfirm)) {
-            throw new Error("Invalid password");
-        }
-        // Hash the password
-        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-    } catch (Throwable $e) {
-        throw new Error("Register Controller -> " . $e->getMessage());
-    }
 }
 
+
+//if (isset($_POST['update'])) {
+//    try {
+//        // Field list to sanitize
+//        $fieldList = ['password', 'passwordConfirm'];
+//
+//        // Sanitize data and destructure variables
+//        foreach ($fieldList as $field) {
+//            ${$field} = htmlspecialchars($_POST[$field], ENT_QUOTES, 'UTF-8');
+//        }
+//
+//        // If password is not ok, return null
+//        if (!(strlen($password) >= 8) || ($password != $passwordConfirm)) {
+//            throw new Error("Invalid password");
+//        }
+//        // Hash the password
+//        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+//    } catch (Throwable $e) {
+//        throw new Error("Register Controller -> " . $e->getMessage());
+//    }
+//}
+  
 
 
 $varToInject = [
@@ -53,7 +63,6 @@ App::setPageDescription("G4rden Profile");
 App::setPageFavicon("world.png");
 
 // Load the view
-App::loadJsFiles(["profile", "AsyncRouter"]);
 App::loadCssFiles(["utils"]);
 App::loadViewFile("profile", $varToInject);
 ?>
