@@ -34,20 +34,21 @@ require_once("view/components/header.php");
                        value="<?= $user->lastname; ?>">
                 <br>
                 <label for="password" class="pb-1 pt-2">Password</label>
-                <span id="view" class="view-pw" onclick="togglePasswordVisibility('password')">
+                <span id="view" class="view-pw">
                         <img src="static/img/view.png" alt="Afficher le mot de passe">
                 </span>
                 <br>
                 <input type="password" autocomplete="off" id="password" name="password" class="input-form"
-                       value="Entrez votre mot de passe">
+                       placeholder="Entrez votre mot de passe">
                 <br>
                 <label for="passwordConfirm" class="pb-1 pt-2">Confirm Password</label>
-                <span id="hide" class="view-pw" onclick="togglePasswordVisibility('password')">
+                <span id="hide" class="view-pw">
                         <img src="static/img/view.png" alt="Afficher le mot de passe">
                 </span>
                 <br>
                 <input type="password" autocomplete="off" id="passwordConfirm" name="passwordConfirm"
-                       class="input-form" value="Confirmez votre mot de passe">
+                       class="input-form" class="input-form" placeholder="Confirmez votre mot de passe">
+            </div>
             </div>
             <div class="center">
                 <input type="submit" class="submit-button" value="Mettre à jour"/>
@@ -55,7 +56,7 @@ require_once("view/components/header.php");
         </form>
         <br>
     </div>
-</main>²
+</main>
 
 <?php
 // Includes the footer
