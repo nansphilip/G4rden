@@ -30,11 +30,11 @@
     --text-primary: hsl(175, 51%, 82%);
     --text-secondary: hsl(175, 10%, 54%);
 
-    --primary-color: hsl(213, 38%, 50%);
-    --primary-color-hover: hsl(213, 40%, 30%);
+    --primary-color: hsl(213, 66%, 45%);
+    --primary-color-hover: hsl(212, 70%, 25%);
 
-    --secondary-color: hsl(193, 42%, 36%);
-    --secondary-color-hover: hsl(195, 36%, 19%);
+    --secondary-color: hsl(213, 32%, 59%);
+    --secondary-color-hover: hsl(213, 22%, 45%);
 
     --border-color: var(--primary-color);
     --border-color-light: var(--primary-color-hover);
