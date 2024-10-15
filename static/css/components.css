@@ -1,4 +1,5 @@
-.rounded-box, .rounded-box-light {
+.rounded-box,
+.rounded-box-light {
     padding: 0.8rem;
     border-radius: var(--border-radius);
     border: var(--border-width) solid var(--border-color);
@@ -41,7 +42,7 @@
     border-radius: var(--border-radius);
     border: var(--border-width) solid var(--border-color);
     box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color-light);
-    background-color: var(--white-color);
+    background-color: var(--white);
     transition: background-color 150ms;
 }
 
@@ -49,4 +50,13 @@
     cursor: pointer;
     background-color: var(--secondary-color-hover);
     transition: background-color 150ms;
+}
+
+.notification-box {
+    background-color: var(--white);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    border: var(--border-width) solid var(--border-color);
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color);
 }

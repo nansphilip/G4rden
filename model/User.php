@@ -1,4 +1,5 @@
 <?php
+
 /**
  * User class
  * An User has an ID, a username, a passwordHash and a userType.
@@ -13,7 +14,7 @@ class User
     public $passwordHash;
     public $userType;
 
-    public function __construct($id, $lastname, $firstname, $username, $passwordHash, $userType)
+    public function __construct($id = null, $lastname = null, $firstname = null, $username = null, $passwordHash = null, $userType = null)
     {
         $this->id = $id;
         $this->lastname = $lastname;
@@ -73,16 +74,22 @@ class User
      * Gets a user by its id.
      * @return associated_array of the user
      */
-    public function getUserById()
+    public function getUserById($id)
     {
         try {
             $sql = "SELECT * FROM User WHERE id = :id";
             $query = Database::queryAssoc($sql, [
-                ':id' => $this->id
+                ':id' => $id
             ]);
             if (is_null($query)) {
-                return null;
+                throw new Error("Unkown user with id -> " . $id);
             }
+            $this->id = $query[0]['id'];
+            $this->lastname = $query[0]['lastname'];
+            $this->firstname = $query[0]['firstname'];
+            $this->username = $query[0]['username'];
+            $this->passwordHash = $query[0]['passwordHash'];
+            $this->userType = $query[0]['userType'];
             return $query[0];
         } catch (PDOException $e) {
             throw new Error("getUserById -> " . $e->getMessage());
@@ -150,6 +157,79 @@ class User
     // ========================== //
 
 
+    /**
+     * Updates a user by its id.
+     * @param string $username
+     */
+    public function updateUsername($username)
+    {
+        try {
+            $sql = "UPDATE User SET username = :username where id = :id";
+            $query = Database::queryAssoc($sql, [
+                ':id' => $this->id,
+                ':username' => $username
+            ]);
+            $this->username = $username;
+        } catch (PDOException $e) {
+            throw new Error("updateUsername -> " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Updates a user by its id.
+     * @param string $firstname
+     */
+    public function updateFirstname($firstname)
+    {
+        try {
+            $sql = "UPDATE User SET firstname = :firstname where id = :id";
+            $query = Database::queryAssoc($sql, [
+                ':id' => $this->id,
+                ':firstname' => $firstname
+            ]);
+            $this->firstname = $firstname;
+        } catch (PDOException $e) {
+            throw new Error("updateFirstsname -> " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Updates a user by its id.
+     * @param string $lastname
+     */
+    public function updateLastname($lastname)
+    {
+        try {
+            $sql = "UPDATE User SET lastname = :lastname where id = :id";
+            $query = Database::queryAssoc($sql, [
+                ':id' => $this->id,
+                ':lastname' => $lastname
+            ]);
+            $this->lastname = $lastname;
+        } catch (PDOException $e) {
+            throw new Error("updateLastname -> " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Updates a user by its id.
+     * @param string $passwordHash
+     */
+    public function updatePassword($passwordHash)
+    {
+        try{
+            $sql = "UPDATE User SET passwordHash = :passwordHash where id = :id";
+            $query = Database::queryAssoc($sql, [
+                ':id' => $this->id,
+                ':passwordHash' => $passwordHash
+            ]);
+            $this->passwordHash = $passwordHash;
+        } catch (PDOException $e) {
+            throw new Error("updatePassword -> " . $e->getMessage());
+        }
+    }
+
+
     // ========================== //
     // ===== Delete methods ===== //
     // ========================== //
@@ -180,4 +260,3 @@ class Admin extends User
     // Methods that require admin privileges
     // Ex: update user privileges
 }
-?>

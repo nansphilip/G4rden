@@ -10,6 +10,7 @@ $nonLoggedLinks = "
 ";
 $loggedLinks = "
     <a href={$PATH}/index.php?p=message>Message</a>
+    <a href={$PATH}/index.php?p=profile>Profile</a>
     <a href={$PATH}/index.php?p=logout>Logout</a>
 ";
 ?>
