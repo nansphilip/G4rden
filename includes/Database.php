@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Database class
  * A singleton class that instantiates a PDO connection to the database.
@@ -74,10 +75,11 @@ class Database
         }
     }
 
-    public static function queryBool($sqlQuery, $bindVariableList = []) {
+    public static function queryBool($sqlQuery, $bindVariableList = [])
+    {
         try {
             $query = self::queryAssoc($sqlQuery, $bindVariableList);
-            
+
             if (is_null($query)) {
                 return false;
             }

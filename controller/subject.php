@@ -17,4 +17,4 @@ App::setPageDescription("Welcome to G4rden'subjects");
 App::setPageFavicon("world.png");
 
 // Load the view
-App::loadViewFile("home", $varToInject);
+App::loadViewFile("subject", $varToInject);

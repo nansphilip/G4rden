@@ -10,7 +10,12 @@ $nonLoggedLinks = "
 ";
 $loggedLinks = "
     <a href={$PATH}/index.php?p=message>Message</a>
-    <a href={$PATH}/index.php?p=logout>Logout</a>
+    ";
+$logoutLink = "
+    <a href={$PATH}/index.php?p=logout>Logout</a>    
+";
+$adminLinks = "
+    <a href={$PATH}/index.php?p=admin-interface>Admin</a>
 ";
 ?>
 
@@ -23,6 +28,10 @@ $loggedLinks = "
     // Sets the navigation bar depending if the user is logged in or not
     if (isset($_SESSION['active'])) {
         echo $loggedLinks;
+        if ($_SESSION['userType'] == 'ADMIN') {
+            echo $adminLinks;
+        }
+        echo $logoutLink;
     } else {
         echo $nonLoggedLinks;
     }
@@ -42,8 +51,6 @@ $loggedLinks = "
         <svg style="display: none;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon">
             <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
         </svg>
-        <!-- <img src="/static/img/sun.png" alt="Toggle theme"> -->
-        <!-- <img src="/static/img/moon.png" style="display: none;" alt="Toggle theme"> -->
     </button>
 </nav>
 
@@ -57,6 +64,10 @@ $loggedLinks = "
     // Sets the navigation bar depending if the user is logged in or not
     if (isset($_SESSION['active'])) {
         echo $loggedLinks;
+        if ($_SESSION['userType'] == 'ADMIN') {
+            echo $adminLinks;
+        }
+        echo $logoutLink;
     } else {
         echo $nonLoggedLinks;
     }
