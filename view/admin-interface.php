@@ -13,6 +13,51 @@ require_once("view/components/header.php");
         <p>G4rden's admin interface.</p>
     </div>
 
+    <!--
+    
+    Yo Théo, solide pour l'autocompletion en JS !
+    Ça marche bien, seulement, ça provoque une requête à chaque lettre que l'on tape.
+
+    Le prof demande que le code soit optimisé. Je pense que tu vas pouvoir améliorer ça
+    hyper rapidement avec un élément fait pour cela : https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist
+
+    Process pour l'autocompletion :
+        - dans le controleur, tu récupères tous les noms d'utilisateurs dans un tableau
+
+        - avec une boucle foreach/endfor tu remplis le champ datalist avec les utilisateurs trouvés
+
+        ex: <?php foreach ($users as $user): ?>
+                <option value="<?= $user['username']; ?>"><?= $user['username']; ?></option>
+            <?php endforeach; ?>
+
+        - en JS, tu fais que les submits en asynchrone
+
+    Après cela, tu devrais avoir un JS beaucoup plus épuré et un serveur content de ne pas
+    recevoir trop de requêtes.
+
+    ------------------------------------------------------------------------------------------
+
+    Pour le CSS, j'ai merge les dernières modifications de main sur cette branche. Donc tu as
+    les styles pour tout ce qu'il faut.
+
+    Tu utiliseras probablement : components.css et utils.css. Mais n'hésite pas à ajouter une
+    feuille de style spécifique à ta page si besoin.
+    
+    Dans le fichier global.css, tu peux
+    retrouver des variables CSS qui sont disponibles partout et sont la base de 
+    notre thème de couleurs. C'est aussi ce qui permet d'avoir un thème clair
+    et un thème sombre.
+
+    ------------------------------------------------------------------------------------------
+
+    Pour le JS, tu peux essayer de factoriser ton code si tu en as envie. C'est plus pour
+    la beauté du code que pour la performance. Même si parfois, l'un entraine l'autre.
+
+    En tout cas, t'as rédigé un sacré morceau de code ! Bien joué !
+
+    -->
+        
+
     <!-- Delete a user -->
     <div class="flex flex-column gap-1 rounded-box mb-2">
         <h3>Supprimer un utilisateur</h3>
