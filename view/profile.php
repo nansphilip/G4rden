@@ -39,7 +39,7 @@ require_once("view/components/header.php");
                 </span>
                 <br>
                 <input type="password" autocomplete="off" id="password" name="password" class="input-form"
-                       placeholder="Entrez votre mot de passe">
+                       placeholder="Entrez votre nouveau password">
                 <br>
                 <label for="passwordConfirm" class="pb-1 pt-2">Confirm Password</label>
                 <span id="hide" class="view-pw">
@@ -47,9 +47,10 @@ require_once("view/components/header.php");
                 </span>
                 <br>
                 <input type="password" autocomplete="off" id="passwordConfirm" name="passwordConfirm"
-                       class="input-form" class="input-form" placeholder="Confirmez votre mot de passe">
+                       class="input-form" class="input-form" placeholder="Confirmez votre nouveau password">
             </div>
             </div>
+	<br>
             <div class="center">
                 <input type="submit" class="submit-button" value="Mettre à jour"/>
             </div>

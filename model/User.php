@@ -202,6 +202,34 @@ class User
         }
     }
 
+    public function updateLastname($lastname)
+    {
+        try {
+            $sql = "UPDATE User SET lastname = :firstname where id=:id";
+            $query = Database::queryAssoc($sql, [
+                ':id' => $this->id,
+                ':lastname' => $lastname
+            ]);
+            $this->lastname = $lastname;
+        } catch (PDOException $e) {
+            throw new Error("updateLastname -> " . $e->getMessage());
+        }
+    }
+
+    public function updatePassword($passwordHash)
+    {
+        try{
+            $sql = "UPDATE User SET passwordHash = :password where id=:id";
+            $query = Databae::queryAssoc($sql, [
+                ':id' => $this->id,
+                ':passwordHash' => $passwordHash
+            ]);
+            $this->passwordHash = $passwordHash;
+        } catch (PDOException $e) {
+            throw new Error("updatePassword -> " . $e->getMessage());
+        }
+    }
+
 
     // ========================== //
     // ===== Delete methods ===== //

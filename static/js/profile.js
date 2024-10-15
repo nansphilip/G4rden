@@ -76,32 +76,31 @@ Si l'objet data est null, il faut renvoyer un message d'erreur.
 //     })
 //
 // };
-//
-// // Écouteur de bouton pour récupérer les données utilisateur
-// // const get_user_button = document.querySelector("#get_user_button");
-// // get_user_button.addEventListener("click", async () => await getUserById());
-//
-//
-// // document.addEventListener("submit", (event) => sendData(event));
-//
-// document.getElementById('view').addEventListener('click', function () {
-//     var passwordField = document.getElementById('password');
-//
-//     // Basculer le type d'input entre "password" et "text"
-//     if (passwordField.type === 'password') {
-//         passwordField.type = 'text'; // Afficher le mot de passe en clair
-//     } else {
-//         passwordField.type = 'password'; // Revenir au mot de passe masqué
-//     }
-// });
-// document.getElementById('hide').addEventListener('click', function () {
-//     var passwordField = document.getElementById('passwordConfirm');
-//
-//     // Basculer le type d'input entre "password" et "text"
-//     if (passwordField.type === 'password') {
-//         passwordField.type = 'text'; // Afficher le mot de passe en clair
-//     } else {
-//         passwordField.type = 'password'; // Revenir au mot de passe masqué
-//     }
-// });
+
+// Écouteur de bouton pour récupérer les données utilisateur
+// const get_user_button = document.querySelector("#get_user_button");
+// get_user_button.addEventListener("click", async () => await getUserById());
+
+
+// document.addEventListener("submit", (event) => sendData(event));
+
+function togglePassword(password) {
+    console.log(`Toggling password for: ${'password'}`);
+    var passwordField = document.getElementById('password');
+
+    // Basculer le type d'input entre "password" et "text"
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text'; // Afficher le mot de passe en clair
+    } else {
+        passwordField.type = 'password'; // Revenir au mot de passe masqué
+    }
+}
+
+document.getElementById('view').addEventListener('click', function () {
+    togglePassword('password'); // Afficher/masquer le mot de passe principal
+});
+
+document.getElementById('hide').addEventListener('click', function () {
+    togglePassword('passwordConfirm');
+});
 

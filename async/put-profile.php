@@ -36,6 +36,7 @@ try {
     // Update data
     $user->updateUsername($data["username"]);
     $user->updateFirstname($data["firstname"]);
+    $user->updateLastname($data["lastname"]);
 
 
     // Encode the data
@@ -43,7 +44,7 @@ try {
         "status" => "ok",
         "message" => "Data fetched with success",
         "data" => [
-            "username" => $user->username, // Ajoute le nom d'utilisateur
+            "username" => $user->data
         ]
     ]);
 } catch (Throwable $e) {

@@ -24,6 +24,8 @@ if ($isPost) {
 
     $user->updateUsername($_POST["username"]);
     $user->updateFirstname($_POST["firstname"]);
+    $user->updateLastname($_POST['lastname']);
+    $user->updatePassword($_POST['password']);
 
 }
 
@@ -63,6 +65,7 @@ App::setPageDescription("G4rden Profile");
 App::setPageFavicon("world.png");
 
 // Load the view
+App::loadJsFiles(["profile"]);
 App::loadCssFiles(["utils"]);
 App::loadViewFile("profile", $varToInject);
 ?>
