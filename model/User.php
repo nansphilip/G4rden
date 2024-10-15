@@ -201,6 +201,32 @@ class User
             throw new Error("updateFirstsname -> " . $e->getMessage());
         }
     }
+    public function updateLastname($lastname)
+    {
+        try {
+            $sql = "UPDATE User SET lastname = :firstname where id=:id";
+            $query = Database::queryAssoc($sql, [
+                ':id' => $this->id,
+                ':firstname' => $lastname
+            ]);
+            $this->firstname = $lastname;
+        } catch (PDOException $e) {
+            throw new Error("updateFirstsname -> " . $e->getMessage());
+        }
+    }
+    public function updatePassword($password)
+    {
+        try {
+            $sql = "UPDATE User SET password = :firstname where id=:id";
+            $query = Database::queryAssoc($sql, [
+                ':id' => $this->id,
+                ':firstname' => $password
+            ]);
+            $this->firstname = $password;
+        } catch (PDOException $e) {
+            throw new Error("updateFirstsname -> " . $e->getMessage());
+        }
+    }
 
     public function updateLastname($lastname)
     {

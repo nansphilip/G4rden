@@ -32,19 +32,37 @@ try {
     // Create a new user object from the id
     $user = new User();
     $user->getUserById($id);
+    $messageUser = new Message('','','','');
+    $messageUser->userId = $id;
+    $messages = $messageUser->getMessagesByUserId();
+
+
+    if (empty($messages)) {
+        throw new Error("No messages found for this user.");
+    }
+
 
     // Update data
     $user->updateUsername($data["username"]);
     $user->updateFirstname($data["firstname"]);
     $user->updateLastname($data["lastname"]);
+    $user->updatePassword($data["password"]);
 
-
+    $data = [
+        "status" => "ok",
+        "message" => "Data fetched with success",
+        "data" => $messages
+    ];
     // Encode the data
     echo json_encode([
         "status" => "ok",
         "message" => "Data fetched with success",
         "data" => [
-            "username" => $user->data
+            "username" => $user->username, // Ajoute le nom d'utilisateur
+            "firstname" => $user->firstname,
+            "lastname" => $user->lastname,
+            "password" => $user->passwordHash,
+            "messages" => $messages // Ajoute les messages
         ]
     ]);
 } catch (Throwable $e) {
