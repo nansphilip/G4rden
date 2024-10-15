@@ -19,6 +19,7 @@ class App
     // Properties
     public static $pageTitle;
     public static $pageDescription;
+    public static $pageTheme;
     public static $pageFavicon;
     public static $cssFiles;
     public static $jsFiles;
@@ -42,6 +43,14 @@ class App
     public static function setPageDescription($description)
     {
         self::$pageDescription = $description;
+    }
+
+    /**
+     * Sets the page theme
+     * @param string $theme dark or null
+     */
+    public static function setPageTheme($theme) {
+        self::$pageTheme = $theme;
     }
 
     /**

@@ -1,5 +1,5 @@
 <?php
-// Last user controller
+// Subject controller
 
 // Includes required models
 
@@ -12,10 +12,9 @@ $varToInject = [
 ];
 
 // Set page meta data
-App::setPageTitle("Last user");
-App::setPageDescription("G4rden last user created");
+App::setPageTitle("Subjects");
+App::setPageDescription("Welcome to G4rden'subjects");
 App::setPageFavicon("world.png");
 
 // Load the view
-App::loadJsFiles(["last-user"]);
-App::loadViewFile("last-user", $varToInject);
+App::loadViewFile("subject", $varToInject);

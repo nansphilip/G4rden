@@ -3,7 +3,8 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+
+<html lang="fr" <?= (isset($_SESSION['theme']) && $_SESSION['theme'] === 'dark') ? 'class="dark"' : ''; ?>>
 
 <head>
     <meta charset="UTF-8">
