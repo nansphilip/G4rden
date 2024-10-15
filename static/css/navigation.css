@@ -9,7 +9,8 @@
         gap: 0.8rem;
     }
 
-    .desktop-nav a {
+    .desktop-nav a,
+    .icon-nav {
         text-decoration: none;
         padding: 0.2rem 0.5rem;
         background-color: var(--white);
@@ -19,18 +20,13 @@
         transition: background-color 150ms;
     }
 
-    .desktop-nav a:hover {
+    .desktop-nav a:hover,
+    .icon-nav:hover {
         background-color: var(--secondary-color-hover);
         transition: background-color 150ms;
     }
     
     .icon-nav {
-        background-color: var(--white);
-        padding: 0.2rem 0.5rem;
-        border: var(--border-width) solid var(--border-color);
-        border-radius: var(--border-radius-small);
-        box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color);
-
         align-self: stretch;
 
         display: flex;
@@ -42,12 +38,13 @@
         cursor: pointer;
     }
 
-    .icon-nav img, .icon-nav svg {
+    .icon {
         height: var(--font-size);
         width: var(--font-size);
         stroke: var(--text-primary);
         stroke-width: 2px;
         fill: none;
+        background-color: transparent;
     }
 
     /* Hide mobile nav */
