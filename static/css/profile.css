@@ -3,7 +3,7 @@
 }
 
 #closed-eye,
-#opened-eye {
+#opened-eye, #closed-eye1, #opened-eye1 {
     height: fit-content;
     width: fit-content;
     
@@ -21,7 +21,7 @@
 }
 
 #closed-eye:hover,
-#opened-eye:hover {
+#opened-eye:hover, #closed-eye1:hover, #opened-eye1:hover {
     background-color: var(--secondary-color-hover);
     transition: background-color 150ms;
 }
