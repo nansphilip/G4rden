@@ -57,3 +57,23 @@ const toggleEyes = () => {
 const toggleEyesButton = document.querySelector("#toggleEyes");
 toggleEyesButton.addEventListener("click", toggleEyes);
 
+const toggleEyes1 = () => {
+    const openedEye1 = document.querySelector("#opened-eye1");
+    const closedEye1 = document.querySelector("#closed-eye1");
+    const confirmPassword = document.querySelector("#confirmPassword");
+
+    if (confirmPassword.type === "password") {
+        confirmPassword.type = "text";
+        closedEye1.style.display = "none";
+        openedEye1.style.display = "";
+    } else {
+        confirmPassword.type = "password";
+        closedEye1.style.display = "";
+        openedEye1.style.display = "none";
+    }
+
+
+};
+
+const toggleEyesButton1 = document.querySelector("#toggleEyes1");
+toggleEyesButton1.addEventListener("click", toggleEyes1);
