@@ -1,6 +1,7 @@
 <?php
 // Home view
 ?>
+
 <?php
 // Includes the header
 require_once("view/components/header.php");
@@ -8,55 +9,90 @@ require_once("view/components/header.php");
 
 <main>
     <h2><?= App::$pageTitle; ?></h2>
-    <p>Your are consulting G4rden's profile. <a href="index.php?p=home">Click here to go back home.</a></p>
+    <p class="pb-4">Update your profile informations.</p>
 
-    <!-- Todo: donner des noms sur le boutons de chaque formulaire pour les récupérer dans le JS-->
-    <!-- Todo: transmettre l'id de l'utilisateur au JS dans un attribut HTML 'data-id' -->
-    <!-- autocomplete=off permet de ne pas voir le liste de proposition de text dans l'input -->
+    <div class="flex flex-row gap-2">
+        <div class="w-full flex flex-column gap-2">
+            <h3>Update your informations</h3>
+            <form action="" method="post" class="flex flex-column gap-2">
+                <div class="rounded-box flex flex-column gap-2">
+                    <div class="flex flex-column">
+                        <label for="username" class="bold">Username</label>
+                        <input type="text" autocomplete="off" id="username" name="username" class="input-form" placeholder="<?= $username; ?>">
+                    </div>
+                    <div class="flex flex-column">
+                        <label for="firstname" class="bold">Firstname</label>
+                        <input type="text" autocomplete="off" id="firstname" name="firstname" class="input-form" placeholder="<?= $firstname; ?>">
+                    </div>
+                    <div class="flex flex-column">
+                        <label for="lastname" class="bold">Lastname</label>
+                        <input type="text" autocomplete="off" id="lastname" name="lastname" class="input-form" placeholder="<?= $lastname; ?>">
+                    </div>
+                    <?php if (isset($notification) && $notification["title"] == "infoUpdated"): ?>
+                        <p class="italic bold font-sm"><?= $notification["message"] ?></p>
+                    <?php endif; ?>
+                </div>
+                <div class="center">
+                    <button type="submit" name="updateInfo" class="submit-button">Mettre à jour</button>
+                </div>
+            </form>
+        </div>
 
-    <div class="pt-2 flex flex-column w-fit-content gap-2">
+        <div class="w-full flex flex-column gap-2">
+            <h3>Update your password</h3>
+            <form action="" method="post" class="flex flex-column gap-2 h-full">
+                <div class="rounded-box flex flex-column gap-2 h-full">
+		                <div class="flex flex-column">
+			                <label for="password" class="bold">Password</label>
+			                <input type="password" name="password" id="password" placeholder="Password" class="input-form">
+			                <div id="toggleEyes">
+				                <button type="button" id="closed-eye">
+					                <svg class="icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+						                <path d="m15 18-.722-3.25" />
+						                <path d="M2 8a10.645 10.645 0 0 0 20 0" />
+						                <path d="m20 15-1.726-2.05" />
+						                <path d="m4 15 1.726-2.05" />
+						                <path d="m9 18 .722-3.25" />
+					                </svg>
+				                </button>
+				                <button type="button" id="opened-eye" style="display: none;">
+					                <svg class="icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+						                <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+						                <circle cx="12" cy="12" r="3" />
+					                </svg>
+				                </button>
+			                </div>
+	                	</div>
 
-        <form id="profile-edit" class="flex flex-column gap-2" action="index.php?p=profile" method="post">
-            <div class="rounded-box">
-                <label for="username" class="pb-1">Username</label>
-                <br>
-                <input type="text" autocomplete="off" id="username" name="username" class="input-form"
-                       value="<?= $user->username; ?>">
-                <br>
-                <label for="firstname" class="pb-1 pt-2">Firstname</label>
-                <br>
-                <input type="text" autocomplete="off" id="firstname" name="firstname" class="input-form"
-                       value="<?= $user->firstname; ?>">
-                <br>
-                <label for="lastname" class="pb-1 pt-2">Lastname</label>
-                <br>
-                <input type="text" autocomplete="off" id="lastname" name="lastname" class="input-form"
-                       value="<?= $user->lastname; ?>">
-                <br>
-                <label for="password" class="pb-1 pt-2">Password</label>
-                <span id="view" class="view-pw">
-                        <img src="static/img/view.png" alt="Afficher le mot de passe">
-                </span>
-                <br>
-                <input type="password" autocomplete="off" id="password" name="password" class="input-form"
-                       placeholder="Entrez votre nouveau password">
-                <br>
-                <label for="passwordConfirm" class="pb-1 pt-2">Confirm Password</label>
-                <span id="hide" class="view-pw">
-                        <img src="static/img/view.png" alt="Afficher le mot de passe">
-                </span>
-                <br>
-                <input type="password" autocomplete="off" id="passwordConfirm" name="passwordConfirm"
-                       class="input-form" class="input-form" placeholder="Confirmez votre nouveau password">
-            </div>
-            </div>
-	<br>
-            <div class="center">
-                <input type="submit" class="submit-button" value="Mettre à jour"/>
-            </div>
-        </form>
-        <br>
+		                <div class="flex flex-column">
+			                <label for="passwordConfirm" class="bold">Confirm password</label>
+			                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm password" class="input-form">
+			                <div id="toggleEyes1">
+				                <button type="button" id="closed-eye1">
+					                <svg class="icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+						                <path d="m15 18-.722-3.25" />
+						                <path d="M2 8a10.645 10.645 0 0 0 20 0" />
+						                <path d="m20 15-1.726-2.05" />
+						                <path d="m4 15 1.726-2.05" />
+						                <path d="m9 18 .722-3.25" />
+					                </svg>
+				                </button>
+				                <button type="button" id="opened-eye1" style="display: none;">
+					                <svg class="icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+						                <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+						                <circle cx="12" cy="12" r="3" />
+					                </svg>
+				                </button>
+			                </div>
+		                </div>
+                </div>
+                <div class="center">
+                    <button type="submit" name="updatePassword" class="submit-button">Mettre à jour</button>
+                </div>
+            </form>
+        </div>
     </div>
+
 </main>
 
 <?php

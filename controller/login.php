@@ -3,7 +3,7 @@
 
 // Checks if the user is logged, else redirect to login page
 if (isset($_SESSION['active'])) {
-    header("Location: {$PATH}/index.php?p=login");
+    header("Location: {$PATH}/index.php?p=message");
 }
 
 // Includes required models

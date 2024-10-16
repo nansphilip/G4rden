@@ -137,23 +137,6 @@ class User
     }
 
     /**
-     * Gets all users matching a username.
-     * @return array of associated_arrays of users
-     */
-    public static function getAllUsernamesByUsername($username)
-    {
-        try {
-            $sql = "SELECT username FROM User WHERE username LIKE :username";
-            $query = Database::queryAssoc($sql, [
-                ':username' => "%" . $username . "%"
-            ]);
-            return $query;
-        } catch (PDOException $e) {
-            throw new Error("getAllUsersByUsername -> " . $e->getMessage());
-        }
-    }
-
-    /**
      * Gets all users.
      * @return array of associated_arrays of users
      */
@@ -174,10 +157,14 @@ class User
     // ========================== //
 
 
+    /**
+     * Updates a user by its id.
+     * @param string $username
+     */
     public function updateUsername($username)
     {
         try {
-            $sql = "UPDATE User SET username = :username where id=:id";
+            $sql = "UPDATE User SET username = :username where id = :id";
             $query = Database::queryAssoc($sql, [
                 ':id' => $this->id,
                 ':username' => $username
@@ -188,10 +175,14 @@ class User
         }
     }
 
+    /**
+     * Updates a user by its id.
+     * @param string $firstname
+     */
     public function updateFirstname($firstname)
     {
         try {
-            $sql = "UPDATE User SET firstname = :firstname where id=:id";
+            $sql = "UPDATE User SET firstname = :firstname where id = :id";
             $query = Database::queryAssoc($sql, [
                 ':id' => $this->id,
                 ':firstname' => $firstname
@@ -201,37 +192,15 @@ class User
             throw new Error("updateFirstsname -> " . $e->getMessage());
         }
     }
-    public function updateLastname($lastname)
-    {
-        try {
-            $sql = "UPDATE User SET lastname = :firstname where id=:id";
-            $query = Database::queryAssoc($sql, [
-                ':id' => $this->id,
-                ':firstname' => $lastname
-            ]);
-            $this->firstname = $lastname;
-        } catch (PDOException $e) {
-            throw new Error("updateFirstsname -> " . $e->getMessage());
-        }
-    }
-    public function updatePassword($password)
-    {
-        try {
-            $sql = "UPDATE User SET password = :firstname where id=:id";
-            $query = Database::queryAssoc($sql, [
-                ':id' => $this->id,
-                ':firstname' => $password
-            ]);
-            $this->firstname = $password;
-        } catch (PDOException $e) {
-            throw new Error("updateFirstsname -> " . $e->getMessage());
-        }
-    }
 
+    /**
+     * Updates a user by its id.
+     * @param string $lastname
+     */
     public function updateLastname($lastname)
     {
         try {
-            $sql = "UPDATE User SET lastname = :firstname where id=:id";
+            $sql = "UPDATE User SET lastname = :lastname where id = :id";
             $query = Database::queryAssoc($sql, [
                 ':id' => $this->id,
                 ':lastname' => $lastname
@@ -242,11 +211,15 @@ class User
         }
     }
 
+    /**
+     * Updates a user by its id.
+     * @param string $passwordHash
+     */
     public function updatePassword($passwordHash)
     {
         try{
-            $sql = "UPDATE User SET passwordHash = :password where id=:id";
-            $query = Databae::queryAssoc($sql, [
+            $sql = "UPDATE User SET passwordHash = :passwordHash where id = :id";
+            $query = Database::queryAssoc($sql, [
                 ':id' => $this->id,
                 ':passwordHash' => $passwordHash
             ]);
@@ -277,23 +250,7 @@ class User
             }
             return $query[0];
         } catch (PDOException $e) {
-            throw new Exception("deleteUser -> " . $e->getMessage());
-        }
-    }
-
-    /**
-     * Deletes a user by its username.
-     */
-    public function deleteUserByUsername($username)
-    {
-        try {
-            $sql = "DELETE FROM User WHERE username = :username";
-            $query = Database::queryBool($sql, [
-                ':username' => $username
-            ]);
-            return $query;
-        } catch (PDOException $e) {
-            throw new Exception("deleteUserByUsername -> " . $e->getMessage());
+            throw new Error("deleteUser -> " . $e->getMessage());
         }
     }
 }
@@ -302,23 +259,4 @@ class Admin extends User
 {
     // Methods that require admin privileges
     // Ex: update user privileges
-
-    /**
-     * Updates the user type of a user
-     * @param string $userId
-     * @param string $userType
-     */
-    public function updateUserType($userId, $userType)
-    {
-        try {
-            $sql = "UPDATE User SET userType = :userType WHERE id = :userId";
-            $query = Database::queryBool($sql, [
-                ':userType' => $userType,
-                ':userId' => $userId
-            ]);
-            return $query;
-        } catch (PDOException $e) {
-            throw new Exception("updateUserType -> " . $e->getMessage());
-        }
-    }
 }

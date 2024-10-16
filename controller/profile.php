@@ -1,4 +1,5 @@
 <?php
+// Profile controller
 
 // Checks if the user is logged, else redirect to login page
 if (!isset($_SESSION['active'])) {
@@ -8,64 +9,75 @@ if (!isset($_SESSION['active'])) {
 // Includes required models
 require_once "model/User.php";
 
-
-// Get id from session
-$id = $_SESSION['id'];
-
-// Create a new user object from the id
+// Prepare data for the view
 $user = new User();
-$user->getUserById($id);
+$user->getUserById($_SESSION['id']);
 
-$isPost = isset($_POST["username"]);
-if ($isPost) {
+// Set notification
+$notification = null;
 
-    // TODO: check cohérence PWD avant mise à jour
-    // TODO: check cohérence formulaire (nom vide...)
+// If a form is submitted
+if(isset($_POST["updateInfo"])) {
 
-    $user->updateUsername($_POST["username"]);
-    $user->updateFirstname($_POST["firstname"]);
-    $user->updateLastname($_POST['lastname']);
-    $user->updatePassword($_POST['password']);
+    // Field list to sanitize
+    $fieldList = ['username', 'firstname', 'lastname'];
 
+    // Sanitize data and destructure variables
+    foreach ($fieldList as $field) {
+        ${$field} = htmlspecialchars($_POST[$field], ENT_QUOTES, 'UTF-8');
+    }
+
+    // Update data if it's different from the current data
+    if (!empty($username) && $username !== $user->username) { $user->updateUsername($username); }
+    if (!empty($firstname) && $firstname !== $user->firstname) { $user->updateFirstname($firstname); }
+    if (!empty($lastname) && $lastname !== $user->lastname) { $user->updateLastname($lastname); }
+
+    $notification = [
+        "title" => "infoUpdated",
+        "message" => "Vos informations ont été mises à jour."
+    ];
+
+} else if(isset($_POST["updatePassword"])) {
+
+    $fieldList = ['password', 'confirmPassword'];
+
+    foreach ($fieldList as $field) {
+        ${$field} = htmlspecialchars($_POST[$field], ENT_QUOTES, 'UTF-8');
+    }
+
+    // If password is not ok, return null
+    if (!(strlen($password) >= 8) || ($password != $confirmPassword)) {
+        throw new Error("Password not match");
+    }
+
+    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+    // Update data if it's different from the current data
+    if (!empty($passwordHash) && $passwordHash !== $user->passwordHash) { $user->updatePassword($passwordHash); }
+
+
+    $notification = [
+        "title" => "passwordUpdated",
+        "message" => "Vos informations ont été mises à jour."
+    ];
 }
 
-
-//if (isset($_POST['update'])) {
-//    try {
-//        // Field list to sanitize
-//        $fieldList = ['password', 'passwordConfirm'];
-//
-//        // Sanitize data and destructure variables
-//        foreach ($fieldList as $field) {
-//            ${$field} = htmlspecialchars($_POST[$field], ENT_QUOTES, 'UTF-8');
-//        }
-//
-//        // If password is not ok, return null
-//        if (!(strlen($password) >= 8) || ($password != $passwordConfirm)) {
-//            throw new Error("Invalid password");
-//        }
-//        // Hash the password
-//        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-//    } catch (Throwable $e) {
-//        throw new Error("Register Controller -> " . $e->getMessage());
-//    }
-//}
-  
-
-
+// List of variables to inject in the view
 $varToInject = [
     "ENVIRONMENT" => $ENVIRONMENT,
     "PATH" => $PATH,
-    "user" => $user,
+    "username" => $user->username,
+    "firstname" => $user->firstname,
+    "lastname" => $user->lastname,
+    "notification" => $notification
 ];
 
 // Set page meta data
 App::setPageTitle("Profile");
-App::setPageDescription("G4rden Profile");
+App::setPageDescription("Welcome to G4rden");
 App::setPageFavicon("world.png");
 
 // Load the view
+App::loadCssFiles(["profile", "utils"]);
 App::loadJsFiles(["profile"]);
-App::loadCssFiles(["utils"]);
 App::loadViewFile("profile", $varToInject);
-?>

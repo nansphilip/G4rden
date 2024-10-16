@@ -1,3 +1,4 @@
+-- SQLBook: Code
 -- Deletes the database user
 DROP USER 'g4rden-user' @'localhost';
 

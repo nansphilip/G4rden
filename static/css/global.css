@@ -1,13 +1,7 @@
 /* Global styles */
 
 /* Reset */
-html {
-    height: 100dvh;
-    display: flex;
-    flex-direction: column;
-}
-
-body * {
+:root {
     --black: black;
     --white: white;
     --white-hover: hsl(0, 0%, 95%);
@@ -23,32 +17,70 @@ body * {
 
     --border-color: var(--primary-color);
     --border-color-light: var(--primary-color-hover);
+
+    --shadow-color: var(--secondary-color);
+    --shadow-color-light: var(--secondary-color-hover);
+}
+
+:root.dark {
+    --black: white;
+    --white: black;
+    --white-hover: hsl(0, 0%, 5%);
+
+    --text-primary: hsl(175, 51%, 82%);
+    --text-secondary: hsl(175, 10%, 54%);
+
+    --primary-color: hsl(213, 66%, 45%);
+    --primary-color-hover: hsl(212, 70%, 25%);
+
+    --secondary-color: hsl(213, 32%, 59%);
+    --secondary-color-hover: hsl(213, 22%, 45%);
+
+    --border-color: var(--primary-color);
+    --border-color-light: var(--primary-color-hover);
+
+    --shadow-color: var(--secondary-color);
+    --shadow-color-light: var(--secondary-color-hover);
+}
+
+html {
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+body,
+body * {
+    --font-size: 16px;
+
     --border-width: 2px;
     --border-radius: 0.5rem;
     --border-radius-small: 0.25rem;
     --border-radius-full: 10rem;
 
-    --shadow-color: var(--secondary-color);
-    --shadow-color-light: var(--secondary-color-hover);
     --shadow-x: 4px;
     --shadow-y: 4px;
     --shadow-x-small: 2px;
     --shadow-y-small: 2px;
 
-    font-family: Inter, Arial, sans-serif;
-    font-size: 16px;
     box-sizing: border-box;
+    font-family: Inter, Arial, sans-serif;
+    font-size: var(--font-size);
     color: var(--text-primary);
+    background-color: var(--white);
 }
 
 @media (max-width: 580px) {
+    body,
     body * {
-        font-size: 14px;
+        --font-size: 14px;
 
         --shadow-x: 3px;
         --shadow-y: 3px;
         --shadow-x-small: 1.5px;
         --shadow-y-small: 1.5px;
+
+        font-size: var(--font-size);
     }
 }
 
@@ -80,6 +112,7 @@ footer {
 header {
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
 }
 

@@ -54,6 +54,10 @@
     padding-bottom: 1rem;
 }
 
+.pb-4 {
+    padding-bottom: 1.25rem;
+}
+
 .mb-2 {
     margin-bottom: 1rem;
 }
@@ -66,6 +70,10 @@ main {
 
 .w-full {
     width: 100%;
+}
+
+.h-full {
+    height: 100%;
 }
 
 .w-fit-content {
