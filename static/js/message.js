@@ -40,6 +40,9 @@ const refreshMessages = async () => {
 
         // If the new message is not in the current list, add it
         if (!currentIdList.includes(newId)) {
+
+            console.log("New message", content);
+
             // Format the date and time
             const newDate = new Date(date);
             const dateFormat = newDate.toLocaleDateString("fr-FR", { day: "numeric", month: "long" });
@@ -107,6 +110,8 @@ const handleSubmit = async (e) => {
 
     // Add the message to the database
     const { message, error } = await AsyncRouter.post("post-message", { replyValue, dateValue });
+
+    console.log("Message sent", message);
 
     if (message) {
         // Refresh messages
