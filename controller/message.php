@@ -6,9 +6,6 @@ if (!isset($_SESSION['active'])) {
     header("Location: {$PATH}/index.php?p=login");
 }
 
-// Includes required models
-require_once("model/Message.php");
-
 // List of variables to inject in the view
 $varToInject = [
     "ENVIRONMENT" => $ENVIRONMENT,

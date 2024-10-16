@@ -1,21 +1,21 @@
 <?php
 /**
  * User class
- * An User has an ID, a username, a passwordHash and a userType.
+ * An User has an userId, a username, a passwordHash and a userType.
  * It also has methods to add, get, update and delete users.
  */
 class User
 {
-    public $id;
+    public $userId;
     public $lastname;
     public $firstname;
     public $username;
     public $passwordHash;
     public $userType;
 
-    public function __construct($id, $lastname, $firstname, $username, $passwordHash, $userType)
+    public function __construct($userId = null, $lastname = null, $firstname = null, $username = null, $passwordHash = null, $userType = null)
     {
-        $this->id = $id;
+        $this->userId = $userId;
         $this->lastname = $lastname;
         $this->firstname = $firstname;
         $this->username = $username;
@@ -70,19 +70,26 @@ class User
 
 
     /**
-     * Gets a user by its id.
+     * Fill instance object with data from database
+     * @param $userId
      * @return associated_array of the user
      */
-    public function getUserById()
+    public function getUserById($userId)
     {
         try {
-            $sql = "SELECT * FROM User WHERE id = :id";
+            $sql = "SELECT * FROM User WHERE userId = :userId";
             $query = Database::queryAssoc($sql, [
-                ':id' => $this->id
+                ':userId' => $userId
             ]);
+            // If no result, return null
             if (is_null($query)) {
                 return null;
             }
+            // Set properties in instance object
+            foreach ($query as $key => $value) {
+                $this->$key = $value;
+            }
+            // Return instance object
             return $query[0];
         } catch (PDOException $e) {
             throw new Error("getUserById -> " . $e->getMessage());
@@ -90,19 +97,26 @@ class User
     }
 
     /**
-     * Gets a user by its username.
+     * Fill instance object with data from database
+     * @param $username
      * @return associated_array of the user
      */
-    public function getUserByUsername()
+    public function getUserByUsername($username)
     {
         try {
             $sql = "SELECT * FROM User WHERE username = :username";
             $query = Database::queryAssoc($sql, [
                 ':username' => $this->username
             ]);
+            // If no result, return null
             if (is_null($query)) {
                 return null;
             }
+            // Set properties in instance object
+            foreach ($query as $key => $value) {
+                $this->$key = $value;
+            }
+            // Return instance object
             return $query[0];
         } catch (PDOException $e) {
             throw new Error("getUserByUsername -> " . $e->getMessage());
@@ -156,14 +170,14 @@ class User
 
 
     /**
-     * Deletes a user by its id.
+     * Deletes a user by its userId.
      */
     public function deleteUser()
     {
         try {
-            $sql = "DELETE FROM User WHERE id = :id";
+            $sql = "DELETE FROM User WHERE userId = :userId";
             $query = Database::queryAssoc($sql, [
-                ':id' => $this->id
+                ':userId' => $this->userId
             ]);
             if (is_null($query)) {
                 return null;

@@ -15,6 +15,11 @@
 - [ ] Charge 10 more messages when reaching the top of the chat
 - [x] Display date and time in French
 
+## Modele
+
+- [ ] Instanciate a class with `$myModel = new Model();` and fill it with `myModel->myMethodById($id);`
+- [ ] Update model subject
+
 ## Database
 
 - [ ] Rename `id` to `userId` in `User` table

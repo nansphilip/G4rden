@@ -4,22 +4,24 @@ $ENVIRONMENT = $envFile['ENV'];
 
 /**
  * Message class
- * A message has an ID, a content, a date and a userId.
+ * A message has an messageId, a content, a date and a userId.
  * It also has methods to add, get, update and delete messages.
  */
 class Message
 {
-    public $id;
+    public $messageId;
     public $content;
     public $date;
     public $userId;
+    public $subjectId;
 
-    public function __construct($id, $content, $date, $userId)
+    public function __construct($messageId =null , $content = null, $date = null, $userId = null, $subjectId = null)
     {
-        $this->id = $id;
+        $this->messageId = $messageId;
         $this->content = $content;
         $this->date = $date;
         $this->userId = $userId;
+        $this->subjectId = $subjectId;
     }
 
 
@@ -67,19 +69,26 @@ class Message
 
 
     /**
-     * Gets a message by his id.
+     * Fill instance object with data from database
+     * @param $messageId
      * @return associated_array of the message
      */
-    public function getMessageById()
+    public function getMessageById($messageId)
     {
         try {
-            $sql = "SELECT * FROM Message WHERE id = :id";
+            $sql = "SELECT * FROM Message WHERE messageId = :messageId";
             $query = Database::queryAssoc($sql, [
-                ':id' => $this->id
+                ':messageId' => $messageId
             ]);
+            // If no result, return null
             if (is_null($query)) {
                 return null;
             }
+            // Set properties in instance object
+            foreach ($query as $key => $value) {
+                $this->$key = $value;
+            }
+            // Return instance object
             return $query[0];
         } catch (PDOException $e) {
             throw new Error("getMessageById -> " . $e->getMessage());
@@ -87,7 +96,7 @@ class Message
     }
 
     /**
-     * Gets all messages of an user by its id.
+     * Gets all messages of an user by its messageId.
      * @return array of associated_arrays of messages
      */
     public function getMessagesByUserId()
@@ -151,11 +160,11 @@ class Message
             $limit = (int)$limit;
             $sql = "SELECT
                 User.username as username,
-                Message.id as id,
+                Message.messageId as messageId,
                 Message.content as message,
                 Message.date as date
                 FROM Message
-                INNER JOIN User ON User.id = Message.userId
+                INNER JOIN User ON User.messageId = Message.userId
                 ORDER BY Message.date DESC
                 LIMIT $limit";
             $query = Database::queryAssoc($sql);
@@ -192,14 +201,14 @@ class Message
 
 
     /**
-     * Deletes a message by its id.
+     * Deletes a message by its messageId.
      */
     public function deleteMessage()
     {
         try {
-            $sql = "DELETE FROM Message WHERE id = :id";
+            $sql = "DELETE FROM Message WHERE messageId = :messageId";
             $query = Database::queryAssoc($sql, [
-                ':id' => $this->id
+                ':messageId' => $this->messageId
             ]);
             if (is_null($query)) {
                 return null;

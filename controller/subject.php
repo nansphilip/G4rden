@@ -4,6 +4,9 @@
 // Includes required models
 
 // Prepare data for the view
+if($_GET('subject')) {
+    error_log("Subject name: " . $_GET['subject']);
+}
 
 // List of variables to inject in the view
 $varToInject = [

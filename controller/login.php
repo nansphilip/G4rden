@@ -19,11 +19,9 @@ if (isset($_POST['login'])) {
             ${$field} = htmlspecialchars($_POST[$field], ENT_QUOTES, 'UTF-8');
         }
 
-        // Create the object newUser
-        $user = new User('', '', '', $username, '', '');
-
-        // Check if the username exists
-        $existingUser = $user->getUserByUsername();
+        // Create the object newUser, and check if the username exists
+        $user = new User();
+        $existingUser = $user->getUserByUsername($username);
 
         // If the username does not exists, return null
         if (is_null($existingUser)) {
