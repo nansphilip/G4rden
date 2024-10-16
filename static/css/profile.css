@@ -1,6 +1,9 @@
 #toggleEyes {
     position: absolute;
 }
+#toggleEyes1 {
+    position: absolute;
+}
 
 #closed-eye,
 #opened-eye, #closed-eye1, #opened-eye1 {

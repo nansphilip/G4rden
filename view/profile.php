@@ -67,8 +67,8 @@ require_once("view/components/header.php");
 		                <div class="flex flex-column">
 			                <label for="passwordConfirm" class="bold">Confirm password</label>
 			                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm password" class="input-form">
-			                <div id="toggleEyes">
-				                <button type="button" id="closed-eye">
+			                <div id="toggleEyes1">
+				                <button type="button" id="closed-eye1">
 					                <svg class="icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
 						                <path d="m15 18-.722-3.25" />
 						                <path d="M2 8a10.645 10.645 0 0 0 20 0" />
@@ -77,7 +77,7 @@ require_once("view/components/header.php");
 						                <path d="m9 18 .722-3.25" />
 					                </svg>
 				                </button>
-				                <button type="button" id="opened-eye" style="display: none;">
+				                <button type="button" id="opened-eye1" style="display: none;">
 					                <svg class="icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
 						                <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
 						                <circle cx="12" cy="12" r="3" />
