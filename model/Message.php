@@ -15,7 +15,7 @@ class Message
     public $userId;
     public $subjectId;
 
-    public function __construct($messageId =null , $content = null, $date = null, $userId = null, $subjectId = null)
+    public function __construct($messageId = null, $content = null, $date = null, $userId = null, $subjectId = null)
     {
         $this->messageId = $messageId;
         $this->content = $content;
@@ -51,18 +51,19 @@ class Message
                 }
             }
 
-            $sql = "INSERT INTO Message (content, date, userId) VALUES (:content, :date, :userId)";
+            $sql = "INSERT INTO Message (content, date, userId, subjectId) VALUES (:content, :date, :userId, :subjectId)";
             Database::queryAssoc($sql, [
                 ':content' => $this->content,
                 ':date' => $this->date,
-                ':userId' => $this->userId
+                ':userId' => $this->userId,
+                ':subjectId' => $this->subjectId
             ]);
         } catch (PDOException $e) {
             throw new Error("addMessage -> " . $e->getMessage());
         }
     }
 
-    
+
     // ======================= //
     // ===== Get methods ===== //
     // ======================= //
@@ -161,10 +162,10 @@ class Message
             $sql = "SELECT
                 User.username as username,
                 Message.messageId as messageId,
-                Message.content as message,
+                Message.content as content,
                 Message.date as date
                 FROM Message
-                INNER JOIN User ON User.messageId = Message.userId
+                INNER JOIN User ON User.userId = Message.userId
                 ORDER BY Message.date DESC
                 LIMIT $limit";
             $query = Database::queryAssoc($sql);

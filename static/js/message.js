@@ -33,10 +33,10 @@ const refreshMessages = async () => {
 
     // Add new messages if they does not already exist
     data.forEach((messageData) => {
-        const { id, username, message, date } = messageData;
+        const { messageId, username, content, date } = messageData;
 
         // Stringify the id
-        const newId = id.toString();
+        const newId = toString(messageId);
 
         // If the new message is not in the current list, add it
         if (!currentIdList.includes(newId)) {
@@ -59,7 +59,7 @@ const refreshMessages = async () => {
                         <p>${timeFormat}</p>
                     </div>
                 </div>
-                <p>${message}</p>`;
+                <p>${content}</p>`;
 
             // Insert content into the new message element
             newMessageEl.innerHTML = messageContent;

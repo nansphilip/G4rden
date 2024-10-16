@@ -1,4 +1,5 @@
 <?php
+
 /**
  * User class
  * An User has an userId, a username, a passwordHash and a userType.
@@ -106,7 +107,7 @@ class User
         try {
             $sql = "SELECT * FROM User WHERE username = :username";
             $query = Database::queryAssoc($sql, [
-                ':username' => $this->username
+                ':username' => $username
             ]);
             // If no result, return null
             if (is_null($query)) {
@@ -194,4 +195,3 @@ class Admin extends User
     // Methods that require admin privileges
     // Ex: update user privileges
 }
-?>

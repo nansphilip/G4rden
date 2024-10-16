@@ -20,8 +20,10 @@ try {
     $date = new DateTime($dateValue);
     $formattedDate = $date->format('Y-m-d H:i:s');
 
+    error_log("Formatted date: " . $formattedDate);
+
     // Add the message to the database
-    $newMessage = new Message('', $replyValue, $formattedDate, $_SESSION['id']);
+    $newMessage = new Message('', $replyValue, $formattedDate, $_SESSION['id'], null);
     $newMessage->addMessage();
 
     // Encode the data

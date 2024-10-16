@@ -7,9 +7,9 @@
 require_once("view/components/header.php");
 ?>
 
-<main>
+<main class="overflow-x-hidden">
     <h2><?= App::$pageTitle; ?></h2>
-    <pre>
+    <pre class="wrap">
         <?php
         if ($e->getMessage() === "404") {
             print_r("Oh no... This page doesn't exist.");
