@@ -3,7 +3,7 @@ import AsyncRouter from "/static/js/AsyncRouter.js";
 const arrowButtonEl = document.querySelector("#arrow_to_top");
 
 // Toggles the button visibility
-const toggleButtonVisibility = () => {
+const toggleArrowButtonVisibility = () => {
     // From 100px
     if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
         // Display the button
@@ -24,10 +24,10 @@ const backToTop = () => {
     });
 };
 
-window.addEventListener("load", toggleButtonVisibility);
+window.addEventListener("load", toggleArrowButtonVisibility);
 
 // On scroll, toggle the button visibility
-window.addEventListener("scroll", toggleButtonVisibility);
+window.addEventListener("scroll", toggleArrowButtonVisibility);
 
 // On click, scroll to top
 arrowButtonEl.addEventListener("click", backToTop);

@@ -34,7 +34,7 @@ const setToggleButtonPosition = () => {
 };
 
 document.addEventListener("DOMContentLoaded", () => setToggleButtonPosition());
-
+window.addEventListener("resize", () => setToggleButtonPosition());
 // Toggle eye button
 const toggleEyes = () => {
     const openedEye = document.querySelector("#opened-eye");
@@ -56,6 +56,7 @@ const toggleEyes = () => {
 
 const toggleEyesButton = document.querySelector("#toggleEyes");
 toggleEyesButton.addEventListener("click", toggleEyes);
+
 
 const toggleEyes1 = () => {
     const openedEye1 = document.querySelector("#opened-eye1");

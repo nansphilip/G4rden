@@ -112,4 +112,12 @@
     .desktop-nav {
         display: none;
     }
+    .icon {
+        height: var(--font-size);
+        width: var(--font-size);
+        stroke: var(--text-primary);
+        stroke-width: 2px;
+        fill: none;
+        background-color: transparent;
+    }
 }

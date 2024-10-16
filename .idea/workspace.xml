@@ -5,45 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0244ddc-9250-4c08-95a8-6870a1f46673" name="Changes" comment="k">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/6207292e-b94d-4da3-aa7d-6f260d3d99d9.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/6207292e-b94d-4da3-aa7d-6f260d3d99d9/storage_v2/_src_/schema/g4rden-db.48MyAA.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/async/post-theme.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/Subject.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/css/profile.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/moon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/sun.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/subject.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/async/last-user.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/last-user.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/subject.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/App.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/App.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/Database.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/Database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phpinfo.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sql/fixtures.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql/fixtures.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sql/reset.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql/reset.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sql/setup.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql/setup.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/components.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/components.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/global.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/css/navigation.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/navigation.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/utils.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/utils.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/global.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/global.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/last-user.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/message.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/message.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo.md" beforeDir="false" afterPath="$PROJECT_DIR$/todo.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/components/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/components/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/components/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/components/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/components/navigation.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/components/navigation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/last-user.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/view/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/profile.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,7 +43,7 @@
     "PHP Remote Debug.Unnamed.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "Merging feature/profile",
+    "git-widget-placeholder": "feature/profile",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/fdacunto/Desktop/Cours Flo/ProjetG4/G4rden",
     "node.js.detected.package.eslint": "true",

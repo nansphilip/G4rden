@@ -11,7 +11,7 @@ require_once("view/components/header.php");
     <h2><?= App::$pageTitle; ?></h2>
     <p class="pb-4">Update your profile informations.</p>
 
-    <div class="flex flex-row gap-2">
+    <div class="flex flex-row flex-wrap gap-2">
         <div class="w-full flex flex-column gap-2">
             <h3>Update your informations</h3>
             <form action="" method="post" class="flex flex-column gap-2">
