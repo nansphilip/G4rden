@@ -5,7 +5,7 @@ require_once "./model/Message.php";
 
 try {
     // Parameters list
-    $paramList = ["replyValue", "dateValue"];
+    $paramList = ["content", "date"];
 
     // Get JSON post data
     $input = file_get_contents('php://input');
@@ -17,22 +17,26 @@ try {
         ${$param} = htmlspecialchars($data[$param], ENT_QUOTES, 'UTF-8');
     }
 
-    $date = new DateTime($dateValue);
-    $formattedDate = $date->format('Y-m-d H:i:s');
+    $dateTime = new DateTime($date);
+    $formattedDate = $dateTime->format('Y-m-d H:i:s');
 
     // Add the message to the database
-    $newMessage = new Message('', $replyValue, $formattedDate, $_SESSION['userId'], null);
-    $newMessage->addMessage();
+    $newMessage = new Message();
+    $newMessage->addMessage($content, $formattedDate, $_SESSION['userId']);
+
+    $databaseMessage = $newMessage->fillMessageById($newMessage->messageId);
 
     // Encode the data
     echo json_encode([
         "status" => "ok",
-        "message" => "Data saved with success"
+        "message" => "Data saved with success",
+        "data" => $databaseMessage
     ]);
 } catch (Throwable $e) {
     // Return an error to the client
     echo json_encode([
         "status" => "error",
-        "message" => $e->getMessage()
+        "message" => $e->getMessage(),
+        "data" => null
     ]);
 }

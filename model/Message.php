@@ -31,9 +31,10 @@ class Message
 
 
     /**
-     * Adds a new message to the database.
+     * Adds a new message to the database, updates the instance object with the new message and returns it.
+     * @return array of associated_arrays of messages
      */
-    public function addMessage()
+    public function addMessage($content, $date, $userId, $subjectId = null)
     {
         try {
             // Get environment
@@ -51,13 +52,23 @@ class Message
                 }
             }
 
+            // Insert the message in the database
             $sql = "INSERT INTO Message (content, date, userId, subjectId) VALUES (:content, :date, :userId, :subjectId)";
             Database::queryAssoc($sql, [
-                ':content' => $this->content,
-                ':date' => $this->date,
-                ':userId' => $this->userId,
-                ':subjectId' => $this->subjectId
+                ':content' => $content,
+                ':date' => $date,
+                ':userId' => $userId,
+                ':subjectId' => $subjectId
             ]);
+
+            // Get the last inserted id
+            $lastInsertId = Database::lastInsertId();
+
+            // Get the current inserted message
+            $query = self::getAndFillMessageById($lastInsertId);
+
+            // Return the current user
+            return $query;
         } catch (PDOException $e) {
             throw new Error("addMessage -> " . $e->getMessage());
         }
@@ -70,7 +81,7 @@ class Message
 
 
     /**
-     * Fill instance object with data from database
+     * Get the message and return it
      * @param $messageId
      * @return associated_array of the message
      */
@@ -85,11 +96,7 @@ class Message
             if (is_null($query)) {
                 return null;
             }
-            // Set properties in instance object
-            foreach ($query as $key => $value) {
-                $this->$key = $value;
-            }
-            // Return instance object
+            // Return associated array of message
             return $query[0];
         } catch (PDOException $e) {
             throw new Error("getMessageById -> " . $e->getMessage());
@@ -97,7 +104,28 @@ class Message
     }
 
     /**
-     * Gets all messages of an user by its messageId.
+     * Get the message, fill the current instance of object and return an associated array of the message
+     * @param $messageId
+     * @return associated_array of the message
+     */
+    public function getAndFillMessageById($messageId)
+    {
+        try {
+            // Get the current user
+            $query = $this->getMessageById($messageId);
+            // Set properties in instance object
+            foreach ($query as $key => $value) {
+                $this->$key = $value;
+            }
+            // Return associated array of message
+            return $query[0];
+        } catch (PDOException $e) {
+            throw new Error("getMessageById -> " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Gets all messages of an user by its messageId
      * @return array of associated_arrays of messages
      */
     public function getMessagesByUserId()
@@ -114,7 +142,7 @@ class Message
     }
 
     /**
-     * Gets all messages between two dates.
+     * Gets all messages between two dates
      * @param string $startDate
      * @param string $endDate
      * @return array of associated_arrays of messages
@@ -134,7 +162,7 @@ class Message
     }
 
     /**
-     * Gets all messages with a word or a sentence in their content.
+     * Gets all messages with a word or a sentence in their content
      * @param string $stringOfContent
      * @return array of associated_arrays of messages
      */
@@ -152,7 +180,7 @@ class Message
     }
 
     /**
-     * Gets the 10 last messages associated to their user.
+     * Gets the 10 last messages associated to their user
      * @return array of associated_arrays of messages
      */
     public static function getLastMessageJoinedToUser($limit = 10)
@@ -176,7 +204,7 @@ class Message
     }
 
     /**
-     * Gets all messages.
+     * Gets all messages
      * @return array of associated_arrays of messages
      */
     public static function getAll()

@@ -11,7 +11,7 @@ const refreshMessages = async () => {
     const { data, error } = await AsyncRouter.get("get-message");
 
     // Create a new paragraph element with the user data
-    if (!data) {
+    if (error) {
         return (chatContainerEl.innerHTML = error);
     }
 
@@ -103,17 +103,15 @@ const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Get the message
-    const replyValue = newMessageFormEl.reply.value;
+    const content = newMessageFormEl.reply.value;
 
     // Get the date
-    const dateValue = new Date().toISOString();
+    const date = new Date().toISOString();
 
     // Add the message to the database
-    const { message, error } = await AsyncRouter.post("post-message", { replyValue, dateValue });
+    const { data, error } = await AsyncRouter.post("post-message", { content, date });
 
-    console.log("Message sent", message);
-
-    if (message) {
+    if (data) {
         // Refresh messages
         refreshMessages();
     } else {

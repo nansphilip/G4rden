@@ -22,7 +22,6 @@ if (isset($_POST['login'])) {
         // Create the object newUser, and check if the username exists
         $user = new User();
         $existingUser = $user->getUserByUsername($username);
-        error_log("Existing user: " . $existingUser);
 
         // If the username does not exists, return null
         if (is_null($existingUser)) {

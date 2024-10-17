@@ -29,7 +29,7 @@ if (isset($_POST['register'])) {
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
         // Instantiate the user, and check if the username already exists
-        $newUser = new User('', $lastname, $firstname, $username, $passwordHash, 'USER');
+        $newUser = new User();
         $isAvailable = $newUser->getUserByUsername($username);
 
         // If the username already exists, return null
@@ -38,13 +38,10 @@ if (isset($_POST['register'])) {
         }
 
         // Creates the user in the database
-        $newUser->addUser();
-
-        // Get the new user data from the database
-        $getNewUser = $newUser->getUserByUsername($username);
+        $newUser->addUser($lastname, $firstname, $username, $passwordHash);
 
         // Add user data to the session
-        foreach ($getNewUser as $props => $value) {
+        foreach ($newUser as $props => $value) {
             $_SESSION[$props] = $value;
         }
 

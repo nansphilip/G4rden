@@ -33,7 +33,7 @@ class User
     /**
      * Adds a new user to the database.
      */
-    public function addUser()
+    public function addUser($lastname, $firstname, $username, $passwordHash, $userType = 'USER')
     {
         try {
             // Get environment
@@ -51,14 +51,24 @@ class User
                 }
             }
 
+            // Insert the message in the database
             $sql = "INSERT INTO User (lastname, firstname, username, passwordHash, userType) VALUES (:lastname, :firstname, :username, :passwordHash, :userType)";
             Database::queryAssoc($sql, [
-                ':lastname' => $this->lastname,
-                ':firstname' => $this->firstname,
-                ':username' => $this->username,
-                ':passwordHash' => $this->passwordHash,
-                ':userType' => $this->userType,
+                ':lastname' => $lastname,
+                ':firstname' => $firstname,
+                ':username' => $username,
+                ':passwordHash' => $passwordHash,
+                ':userType' => $userType,
             ]);
+
+            // Get the last inserted id
+            $lastInsertId = Database::lastInsertId();
+
+            // Get the current inserted message
+            $query = self::getAndFillUserById($lastInsertId);
+
+            // Return the current user
+            return $query;
         } catch (PDOException $e) {
             throw new Error("addUser -> " . $e->getMessage());
         }
@@ -71,26 +81,36 @@ class User
 
 
     /**
-     * Fill instance object with data from database
-     * @param $userId
+     * Get the user and return it
      * @return associated_array of the user
      */
     public function getUserById($userId)
     {
+        $sql = "SELECT * FROM User WHERE userId = :userId";
+        $query = Database::queryAssoc($sql, [
+            ':userId' => $userId
+        ]);
+        // If no result, return null
+        if (is_null($query)) {
+            return null;
+        }
+        // Return associated array of user
+        return $query[0];
+    }
+
+    /**
+     * Get the user, fill the current instance of object and return it
+     */
+    public function getAndFillUserById($userId)
+    {
         try {
-            $sql = "SELECT * FROM User WHERE userId = :userId";
-            $query = Database::queryAssoc($sql, [
-                ':userId' => $userId
-            ]);
-            // If no result, return null
-            if (is_null($query)) {
-                return null;
-            }
+            // Get the current user
+            $query = $this->getUserById($userId);
             // Set properties in instance object
             foreach ($query as $key => $value) {
                 $this->$key = $value;
             }
-            // Return instance object
+            // Return associated array of user
             return $query[0];
         } catch (PDOException $e) {
             throw new Error("getUserById -> " . $e->getMessage());
@@ -98,7 +118,7 @@ class User
     }
 
     /**
-     * Fill instance object with data from database
+     * Get the user and return it
      * @param $username
      * @return associated_array of the user
      */
@@ -113,16 +133,14 @@ class User
             if (is_null($query)) {
                 return null;
             }
-            // Set properties in instance object
-            foreach ($query as $key => $value) {
-                $this->$key = $value;
-            }
             // Return instance object
             return $query[0];
         } catch (PDOException $e) {
             throw new Error("getUserByUsername -> " . $e->getMessage());
         }
     }
+
+
 
     /**
      * Gets all users by their userType.
