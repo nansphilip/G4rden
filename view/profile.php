@@ -85,6 +85,9 @@ require_once("view/components/header.php");
 				                </button>
 			                </div>
 		                </div>
+                    <?php if (isset($notification) && $notification["title"] == "passwordUpdated"): ?>
+		                <p class="italic bold font-sm"><?= $notification["message"] ?></p>
+                    <?php endif; ?>
                 </div>
                 <div class="center">
                     <button type="submit" name="updatePassword" class="submit-button">Mettre à jour</button>

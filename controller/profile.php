@@ -58,7 +58,7 @@ if(isset($_POST["updateInfo"])) {
 
     $notification = [
         "title" => "passwordUpdated",
-        "message" => "Vos informations ont été mises à jour."
+        "message" => "Votre mot de passe a été mis à jour."
     ];
 }
 
