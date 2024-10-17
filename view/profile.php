@@ -14,7 +14,7 @@ require_once("view/components/header.php");
     <div class="flex flex-row flex-wrap gap-2">
         <div class="w-full flex flex-column gap-2">
             <h3>Update your informations</h3>
-            <form action="" method="post" class="flex flex-column gap-2">
+            <form action="" method="post" class="flex flex-column gap-2 ">
                 <div class="rounded-box flex flex-column gap-2">
                     <div class="flex flex-column">
                         <label for="username" class="bold">Username</label>

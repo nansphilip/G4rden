@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0244ddc-9250-4c08-95a8-6870a1f46673" name="Changes" comment="k">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/navigation.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/navigation.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/global.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/global.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/profile.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/components/navigation.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/components/navigation.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,33 +36,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "PHP Remote Debug.Unnamed.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "feature/profile",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/fdacunto/Desktop/Cours Flo/ProjetG4/G4rden",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "editing.templates",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;PHP Remote Debug.Unnamed.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/profile&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/fdacunto/Desktop/Cours Flo/ProjetG4/G4rden&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editing.templates&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ],
-    "GitStage.ChangesTree.GroupingKeys": [
-      "directory",
-      "module",
-      "repository"
+    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;,
+      &quot;repository&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Unnamed" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug" nameIsGenerated="true" filter_connections="NOT_FILTER">
       <method v="2" />
@@ -104,6 +102,9 @@
       <workItem from="1728973787533" duration="1560000" />
       <workItem from="1729000093412" duration="3844000" />
       <workItem from="1729061085842" duration="12759000" />
+      <workItem from="1729147288267" duration="319000" />
+      <workItem from="1729172452121" duration="13000" />
+      <workItem from="1729173709827" duration="749000" />
     </task>
     <servers />
   </component>
@@ -119,7 +120,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/controller/profile.php</url>
-          <line>11</line>
+          <line>53</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

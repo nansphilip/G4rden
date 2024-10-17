@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="@localhost">
-  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.52">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.53">
     <root id="1">
       <DefaultCasing>lower/lower</DefaultCasing>
       <DefaultEngine>InnoDB</DefaultEngine>
@@ -33,24 +33,24 @@
     </table>
     <column id="9" parent="7" name="id">
       <AutoIncrement>24</AutoIncrement>
-      <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="10" parent="7" name="content">
-      <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
+      <StoredType>text|0s</StoredType>
     </column>
     <column id="11" parent="7" name="date">
-      <DasType>datetime|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
+      <StoredType>datetime|0s</StoredType>
     </column>
     <column id="12" parent="7" name="userId">
-      <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <foreign-key id="13" parent="7" name="message_ibfk_1">
       <ColNames>userId</ColNames>
@@ -73,35 +73,35 @@
     </key>
     <column id="17" parent="8" name="id">
       <AutoIncrement>7</AutoIncrement>
-      <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="18" parent="8" name="firstname">
-      <DasType>varchar(50)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
+      <StoredType>varchar(50)|0s</StoredType>
     </column>
     <column id="19" parent="8" name="lastname">
-      <DasType>varchar(50)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
+      <StoredType>varchar(50)|0s</StoredType>
     </column>
     <column id="20" parent="8" name="username">
-      <DasType>varchar(50)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
+      <StoredType>varchar(50)|0s</StoredType>
     </column>
     <column id="21" parent="8" name="passwordHash">
-      <DasType>varchar(255)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
+      <StoredType>varchar(255)|0s</StoredType>
     </column>
     <column id="22" parent="8" name="userType">
-      <DasType>enum(&apos;USER&apos;, &apos;ADMIN&apos;)|0e</DasType>
       <DefaultExpression>&apos;USER&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>6</Position>
+      <StoredType>enum(&apos;USER&apos;, &apos;ADMIN&apos;)|0e</StoredType>
     </column>
     <index id="23" parent="8" name="PRIMARY">
       <ColNames>id</ColNames>
