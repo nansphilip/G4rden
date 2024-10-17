@@ -24,19 +24,27 @@ try {
     $newMessage = new Message();
     $newMessage->addMessage($content, $formattedDate, $_SESSION['userId']);
 
-    $databaseMessage = $newMessage->fillMessageById($newMessage->messageId);
-
     // Encode the data
     echo json_encode([
         "status" => "ok",
         "message" => "Data saved with success",
-        "data" => $databaseMessage
+        "data" => $newMessage
     ]);
 } catch (Throwable $e) {
+    // Get environment
+    $envFile = parse_ini_file(".env");
+    $ENVIRONMENT = $envFile['ENV'];
+
+    // Check if in production
+    if ($ENVIRONMENT == "DEV") {
+        // Throw an error for debugging
+        throw new Error($e->getMessage());
+    }
+
     // Return an error to the client
     echo json_encode([
         "status" => "error",
-        "message" => $e->getMessage(),
+        "message" => "cannot add messages",
         "data" => null
     ]);
 }

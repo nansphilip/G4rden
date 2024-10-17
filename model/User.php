@@ -1,9 +1,8 @@
 <?php
 
 /**
- * User class
- * An User has an userId, a username, a passwordHash and a userType.
- * It also has methods to add, get, update and delete users.
+ * Class User
+ * Represents a user in the system.
  */
 class User
 {
@@ -14,6 +13,15 @@ class User
     public $passwordHash;
     public $userType;
 
+    /**
+     * User constructor.
+     * @param int|null $userId The ID of the user.
+     * @param string|null $lastname The user's last name.
+     * @param string|null $firstname The user's first name.
+     * @param string|null $username The username.
+     * @param string|null $passwordHash The hashed password.
+     * @param string|null $userType The type of user (default: 'USER').
+     */
     public function __construct($userId = null, $lastname = null, $firstname = null, $username = null, $passwordHash = null, $userType = null)
     {
         $this->userId = $userId;
@@ -24,14 +32,19 @@ class User
         $this->userType = $userType;
     }
 
-
     // ======================= //
     // ===== Add methods ===== //
     // ======================= //
 
-
     /**
-     * Adds a new user to the database.
+     * Adds a new user to the database and fill the current instance of object.
+     * @param string $lastname The user's last name.
+     * @param string $firstname The user's first name.
+     * @param string $username The username.
+     * @param string $passwordHash The hashed password.
+     * @param string $userType The type of user (default: 'USER').
+     * @return array|null Information about the added user.
+     * @throws Error If an error occurs during the addition.
      */
     public function addUser($lastname, $firstname, $username, $passwordHash, $userType = 'USER')
     {
@@ -42,8 +55,8 @@ class User
 
             // Check if in production
             if ($ENVIRONMENT == "PROD") {
-                $getRowCount = Database::queryAssoc("SELECT COUNT(*) FROM User;");
-                $recordsAmount = $getRowCount[0]['COUNT(*)'];
+                $getRowCount = Database::queryAssoc("SELECT COUNT(*) as recordsAmount FROM User;");
+                $recordsAmount = $getRowCount[0]['recordsAmount'];
 
                 // If records amount is >= 50, throw an error to prevent the database from being overloaded
                 if ($recordsAmount >= 50) {
@@ -63,52 +76,59 @@ class User
 
             // Get the last inserted id
             $lastInsertId = Database::lastInsertId();
-
             // Get the current inserted message
-            $query = self::getAndFillUserById($lastInsertId);
-
+            $userArray = $this->getUserById($lastInsertId);
+            // Fill the current instance of object
+            $this->fillUserInstance($userArray);
             // Return the current user
-            return $query;
+            return $userArray;
         } catch (PDOException $e) {
             throw new Error("addUser -> " . $e->getMessage());
         }
     }
 
+    // ======================= //
+    // ===== Fill methods ==== //
+    // ======================= //
+
+    /**
+     * Fills the instance of the object with user data.
+     * @param array $userArray Associative array containing the user's data.
+     * @throws Error If an error occurs during the filling of the instance.
+     */
+    public function fillUserInstance($userArray)
+    {
+        try {
+            // Set properties in instance object
+            foreach ($userArray as $key => $value) {
+                $this->$key = $value;
+            }
+        } catch (PDOException $e) {
+            throw new Error("fillUserInstance -> " . $e->getMessage());
+        }
+    }
 
     // ======================= //
     // ===== Get methods ===== //
     // ======================= //
 
-
     /**
-     * Get the user and return it
-     * @return associated_array of the user
+     * Retrieves a user by their ID.
+     * @param int $userId The user's ID.
+     * @return array|null The user's data or null if the user is not found.
+     * @throws Error If an error occurs during retrieval.
      */
     public function getUserById($userId)
     {
-        $sql = "SELECT * FROM User WHERE userId = :userId";
-        $query = Database::queryAssoc($sql, [
-            ':userId' => $userId
-        ]);
-        // If no result, return null
-        if (is_null($query)) {
-            return null;
-        }
-        // Return associated array of user
-        return $query[0];
-    }
-
-    /**
-     * Get the user, fill the current instance of object and return it
-     */
-    public function getAndFillUserById($userId)
-    {
         try {
-            // Get the current user
-            $query = $this->getUserById($userId);
-            // Set properties in instance object
-            foreach ($query as $key => $value) {
-                $this->$key = $value;
+            // Get message
+            $sql = "SELECT * FROM User WHERE userId = :userId";
+            $query = Database::queryAssoc($sql, [
+                ':userId' => $userId
+            ]);
+            // If no result, return null
+            if (is_null($query)) {
+                return null;
             }
             // Return associated array of user
             return $query[0];
@@ -118,9 +138,10 @@ class User
     }
 
     /**
-     * Get the user and return it
-     * @param $username
-     * @return associated_array of the user
+     * Retrieves a user by their username.
+     * @param string $username The username.
+     * @return array|null The user's data or null if the user is not found.
+     * @throws Error If an error occurs during retrieval.
      */
     public function getUserByUsername($username)
     {
@@ -140,70 +161,39 @@ class User
         }
     }
 
-
-
-    /**
-     * Gets all users by their userType.
-     * @return array of associated_arrays of users
-     */
-    public function getUsersByUserType()
-    {
-        try {
-            $sql = "SELECT * FROM User WHERE userType = :userType";
-            $query = Database::queryAssoc($sql, [
-                ':userType' => $this->userType
-            ]);
-            if (is_null($query)) {
-                return null;
-            }
-            return $query[0];
-        } catch (PDOException $e) {
-            throw new Error("getUsersByUserType -> " . $e->getMessage());
-        }
-    }
-
-    /**
-     * Gets all users.
-     * @return array of associated_arrays of users
-     */
-    public static function getAll()
-    {
-        try {
-            $sql = "SELECT * FROM User";
-            $query = Database::queryAssoc($sql);
-            return $query;
-        } catch (PDOException $e) {
-            throw new Error("getAll -> " . $e->getMessage());
-        }
-    }
-
-
     // ========================== //
     // ===== Update methods ===== //
     // ========================== //
-
 
     // ========================== //
     // ===== Delete methods ===== //
     // ========================== //
 
-
     /**
-     * Deletes a user by its userId.
+     * Deletes a user by their ID.
+     * @param int $userId The user's ID.
+     * @return array|null The data of the deleted user or null if the user is not found.
+     * @throws Error If an error occurs during deletion.
      */
-    public function deleteUser()
+    public function deleteUserById($userId)
     {
         try {
-            $sql = "DELETE FROM User WHERE userId = :userId";
-            $query = Database::queryAssoc($sql, [
-                ':userId' => $this->userId
-            ]);
-            if (is_null($query)) {
+            // Check if the user exists
+            $userArray = $this->getUserById($userId);
+            // Return null if the user doesn't exist
+            if (is_null($userArray)) {
                 return null;
             }
-            return $query[0];
+            // Prepare the SQL query
+            $sql = "DELETE FROM User WHERE userId = :userId";
+            // Delete the user
+            Database::queryAssoc($sql, [
+                ':userId' => $userId
+            ]);
+            // Return the deleted user
+            return $userArray;
         } catch (PDOException $e) {
-            throw new Error("deleteUser -> " . $e->getMessage());
+            throw new Error("deleteUserById -> " . $e->getMessage());
         }
     }
 }

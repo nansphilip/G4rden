@@ -8,7 +8,7 @@ const chatContainerEl = document.querySelector("#directChat");
 
 const refreshMessages = async () => {
     // Get the messages
-    const { data, error } = await AsyncRouter.get("get-message");
+    const { data, error } = await AsyncRouter.post("message/get-message", { subject: null });
 
     // Create a new paragraph element with the user data
     if (error) {
@@ -33,25 +33,26 @@ const refreshMessages = async () => {
 
     // Add new messages if they does not already exist
     data.forEach((messageData) => {
-        const { messageId, username, content, date } = messageData;
+        const { userId, messageId, username, content, date } = messageData;
 
         // Stringify the id
-        const newId = toString(messageId);
+        const stringMessageId = messageId.toString();
 
         // If the new message is not in the current list, add it
-        if (!currentIdList.includes(newId)) {
-
-            console.log("New message", content);
+        if (!currentIdList.includes(stringMessageId)) {
 
             // Format the date and time
             const newDate = new Date(date);
             const dateFormat = newDate.toLocaleDateString("fr-FR", { day: "numeric", month: "long" });
             const timeFormat = newDate.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
 
-            // Create the new message element
+            // Get user id form view
+            const currentUserId = chatContainerEl.getAttribute("data-user-id");
+
+            // Create the new message element, display message on the right if the user is the current user, else on the left
             const newMessageEl = document.createElement("div");
-            newMessageEl.classList.add("rounded-box-light");
-            newMessageEl.setAttribute("data-id", newId);
+            newMessageEl.classList.add("rounded-box-light", currentUserId === userId.toString() ? "right-message" : "left-message");
+            newMessageEl.setAttribute("data-id", stringMessageId);
 
             // Create the new message content
             const messageContent = `<div class="flex flex-row justify-between">
@@ -109,7 +110,7 @@ const handleSubmit = async (e) => {
     const date = new Date().toISOString();
 
     // Add the message to the database
-    const { data, error } = await AsyncRouter.post("post-message", { content, date });
+    const { data, error } = await AsyncRouter.post("message/post-message", { content, date });
 
     if (data) {
         // Refresh messages
@@ -128,7 +129,6 @@ const handleSubmit = async (e) => {
 
 // On submit, handle the submit to manage insertion asynchronously
 newMessageFormEl.addEventListener("submit", handleSubmit);
-
 
 // ========================== //
 // === Scroll bar padding === //

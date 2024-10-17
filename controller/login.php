@@ -28,8 +28,11 @@ if (isset($_POST['login'])) {
             throw new Error("User does not exist");
         }
 
+        // Fill the current instance of object
+        $user->fillUserInstance($existingUser);
+
         // Check if the password is correct
-        $isPasswordCorrect = password_verify($password, $existingUser['passwordHash']);
+        $isPasswordCorrect = password_verify($password, $user->passwordHash);
 
         // If the password is not correct, return null
         if (!$isPasswordCorrect) {
@@ -37,7 +40,7 @@ if (isset($_POST['login'])) {
         }
 
         // Add user data to the session
-        foreach ($existingUser as $props => $value) {
+        foreach ($user as $props => $value) {
             $_SESSION[$props] = $value;
         }
 

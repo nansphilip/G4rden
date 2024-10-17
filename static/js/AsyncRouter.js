@@ -13,8 +13,6 @@ export default class AsyncRouter {
             // Parse the response
             const { status, message, data } = await response.json();
 
-            console.log("Data", data);
-
             // Throw an error if the server returns an error
             if (status === "error") {
                 throw new Error(message);
@@ -31,7 +29,7 @@ export default class AsyncRouter {
         try {
             // Fetch the data
             const response = await fetch(`/index.php?a=${url}`, {
-                method: "GET",
+                method: "GET"
             });
 
             // Parse the data

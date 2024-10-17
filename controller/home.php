@@ -2,13 +2,17 @@
 // Home controller
 
 // Includes required models
+require_once("model/Subject.php");
 
 // Prepare data for the view
+$subject = new Subject();
+$subjectList = $subject->getLastSubjectsByLastActivity();
 
 // List of variables to inject in the view
 $varToInject = [
     "ENVIRONMENT" => $ENVIRONMENT,
-    "PATH" => $PATH
+    "PATH" => $PATH,
+    "subjectList" => $subjectList
 ];
 
 // Set page meta data

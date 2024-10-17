@@ -67,7 +67,6 @@ body * {
     font-family: Inter, Arial, sans-serif;
     font-size: var(--font-size);
     color: var(--text-primary);
-    background-color: var(--white);
 }
 
 @media (max-width: 580px) {
@@ -94,6 +93,7 @@ body {
 
     margin: 0;
     padding: 1rem 2rem;
+    background-color: var(--white);
 }
 
 @media (max-width: 580px) {

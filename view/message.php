@@ -13,7 +13,7 @@ require_once "view/components/header.php";
         <p>Your are consulting G4rden's chat.</p>
     </div>
 
-    <div id="directChat" class="flex-1 flex flex-column gap-2 overflow-y-auto padding-shadow">
+    <div id="directChat" data-user-id="<?= $_SESSION['userId'] ?>" class="flex-1 flex flex-column gap-2 overflow-y-auto padding-shadow">
         <!-- Messages will be injected here -->
     </div>
 
