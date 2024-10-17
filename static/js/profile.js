@@ -55,7 +55,8 @@ const toggleEyes = () => {
 };
 
 const toggleEyesButton = document.querySelector("#toggleEyes");
-toggleEyesButton.addEventListener("click", toggleEyes);
+toggleEyesButton.addEventListener("mouseenter", toggleEyes);
+toggleEyesButton.addEventListener("mouseleave", toggleEyes);
 
 
 const toggleEyes1 = () => {
@@ -77,4 +78,5 @@ const toggleEyes1 = () => {
 };
 
 const toggleEyesButton1 = document.querySelector("#toggleEyes1");
-toggleEyesButton1.addEventListener("click", toggleEyes1);
+toggleEyesButton1.addEventListener("mouseenter", toggleEyes1);
+toggleEyesButton1.addEventListener("mouseleave", toggleEyes1);
