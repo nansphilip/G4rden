@@ -23,7 +23,6 @@
     <link rel="stylesheet" href="static/css/utils.css">
     <link rel="stylesheet" href="static/css/components.css">
     <link rel="stylesheet" href="static/css/navigation.css">
-    <link rel="stylesheet" href="static/css/color.css">
     <link rel="stylesheet" href="static/css/arrow_to_top.css">
     <?php if (is_array(App::$cssFiles)) {
         foreach (App::$cssFiles as $file) {
