@@ -42,9 +42,24 @@ const refreshMessages = async () => {
         if (!currentIdList.includes(stringMessageId)) {
 
             // Format the date and time
-            const newDate = new Date(date);
-            const dateFormat = newDate.toLocaleDateString("fr-FR", { day: "numeric", month: "long" });
-            const timeFormat = newDate.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+            const newDate = new Date(date + "Z"); // Z to indicate UTC +0 timezone
+
+            const options = {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+                hour: "numeric",
+                minute: "2-digit",
+                timeZone: timezoneConfig
+            };
+
+            // Convert time to local time
+            const dateTimeFormat = new Intl.DateTimeFormat("fr-FR", options);
+            const [{ value: day },,{ value: month },,{ value: year },,{ value: hour },,{ value: minute }] = dateTimeFormat.formatToParts(newDate);
+    
+            // Display date and time
+            const formattedDate = `${day} ${month} ${year}`;
+            const formattedTime = `${hour}h${minute}`;
 
             // Get user id form view
             const currentUserId = chatContainerEl.getAttribute("data-user-id");
@@ -58,9 +73,9 @@ const refreshMessages = async () => {
             const messageContent = `<div class="flex flex-row justify-between">
                     <h3>${username}</h3>
                     <div class="flex flex-row items-center gap-1">
-                        <p>${dateFormat}</p>
+                        <p>${formattedDate}</p>
                         <p>•</p>
-                        <p>${timeFormat}</p>
+                        <p>${formattedTime}</p>
                     </div>
                 </div>
                 <p>${content}</p>`;
@@ -106,11 +121,11 @@ const handleSubmit = async (e) => {
     // Get the message
     const content = newMessageFormEl.reply.value;
 
-    // Get the date
+    // Get the date in UTC +0 timezone
     const date = new Date().toISOString();
 
     // Add the message to the database
-    const { data, error } = await AsyncRouter.post("message/post-message", { content, date });
+    const { data, error } = await AsyncRouter.post("message/add-message", { content, date });
 
     if (data) {
         // Refresh messages
@@ -130,22 +145,3 @@ const handleSubmit = async (e) => {
 // On submit, handle the submit to manage insertion asynchronously
 newMessageFormEl.addEventListener("submit", handleSubmit);
 
-// ========================== //
-// === Scroll bar padding === //
-// ========================== //
-
-const togglePadding = () => {
-    // Get the scroll position
-    const isScrollBarVisible = chatContainerEl.scrollHeight > chatContainerEl.clientHeight;
-
-    // If the scroll position is at the top, add padding
-    if (isScrollBarVisible) {
-        chatContainerEl.style.paddingRight = "0.5rem";
-    } else {
-        chatContainerEl.style.paddingRight = "";
-    }
-};
-
-document.addEventListener("DOMContentLoaded", togglePadding);
-window.addEventListener("resize", togglePadding);
-chatContainerEl.addEventListener("scroll", togglePadding);

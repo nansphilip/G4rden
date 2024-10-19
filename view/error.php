@@ -8,7 +8,7 @@ require_once("view/components/header.php");
 ?>
 
 <main class="overflow-x-hidden">
-    <h2><?= App::$pageTitle; ?></h2>
+    <h2 class="bold"><?= App::$pageTitle; ?></h2>
     <pre class="wrap">
         <?php
         if ($e->getMessage() === "404") {

@@ -1,5 +1,6 @@
-.rounded-box, .rounded-box-light {
-    padding: 0.8rem;
+.rounded-box,
+.rounded-box-light {
+    padding: 0.6rem 0.8rem;
     border-radius: var(--border-radius);
     border: var(--border-width) solid var(--border-color);
     box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color);
@@ -11,14 +12,34 @@
 }
 
 @media (max-width: 580px) {
-    .rounded-box {
-        padding: 0.5rem;
+    .rounded-box,
+    .rounded-box-light {
+        padding: 0.4rem 0.6rem;
     }
+}
+
+.rounded-subject {
+    list-style: none;
+    padding: 0;
+
+    border-radius: var(--border-radius);
+    border: var(--border-width) solid var(--border-color);
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color);
+}
+
+.rounded-subject > a {
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+}
+
+.rounded-subject > a > div {
+    padding: 0.7rem;
 }
 
 .right-message {
     margin-left: 2rem;
-    background-color: var(--secondary-color-hover);
+    background-color: var(--white-hover);
 }
 
 .left-message {

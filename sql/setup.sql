@@ -23,7 +23,7 @@ CREATE TABLE `User` (
 -- Creates subject table
 CREATE TABLE `Subject` (
     `subjectId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `name` VARCHAR(50) NOT NULL,
+    `name` VARCHAR(50) NOT NULL UNIQUE,
     `description` TEXT(3000) NOT NULL,
     `isValidated` BOOLEAN NOT NULL DEFAULT FALSE, -- a subject created by an user must be validated by an admin
     `userId` INT NOT NULL,

@@ -2,7 +2,6 @@
 // Navigation links
 $commonLinks = "
     <a href={$PATH}/index.php?p=home>Home</a>
-    <a href={$PATH}/index.php?p=subject>Subjects</a>
 ";
 $nonLoggedLinks = "
     <a href={$PATH}/index.php?p=register>Register</a>
@@ -17,7 +16,7 @@ $loggedLinks = "
 <?php
 // Desktop navigation bar
 ?>
-<nav class="desktop-nav">
+<nav class="desktop-nav padding-shadow">
     <?php
     echo $commonLinks;
     // Sets the navigation bar depending if the user is logged in or not

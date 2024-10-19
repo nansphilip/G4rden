@@ -8,7 +8,7 @@ require_once("view/components/header.php");
 ?>
 
 <main>
-    <h2><?= App::$pageTitle; ?></h2>
+    <h2 class="bold"><?= App::$pageTitle; ?></h2>
     <p class="pb-2">Register by filling the form below.</p>
 
     <form action="" method="post" class="flex flex-column gap-3 items-center">
@@ -34,7 +34,7 @@ require_once("view/components/header.php");
                 <input class="input-form" name="passwordConfirm" type="password" required>
             </div>
 
-            <p class="center italic font-sm text-secondary">Already have an account? <a class="font-sm text-secondary" href="index.php?p=login">Login</a></p>
+            <p class="center italic text-sm text-secondary">Already have an account? <a class="text-sm text-secondary" href="index.php?p=login">Login</a></p>
         </div>
 
         <button type="submit" class="submit-button" name="register">Register</button>

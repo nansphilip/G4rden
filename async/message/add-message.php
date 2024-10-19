@@ -17,8 +17,11 @@ try {
         ${$param} = htmlspecialchars($data[$param], ENT_QUOTES, 'UTF-8');
     }
 
+    // Get date in UTC +0 timezone
     $dateTime = new DateTime($date);
     $formattedDate = $dateTime->format('Y-m-d H:i:s');
+
+    error_log("Date: $formattedDate");
 
     // Add the message to the database
     $newMessage = new Message();

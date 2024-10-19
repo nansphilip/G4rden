@@ -8,7 +8,7 @@ require_once("view/components/header.php");
 ?>
 
 <main>
-    <h2><?= App::$pageTitle; ?></h2>
+    <h2 class="bold"><?= App::$pageTitle; ?></h2>
     <p class="pb-2">Enter your username and your password to login.</p>
 
     <form action="" method="post" class="flex flex-column gap-3 items-center py-2">
@@ -21,7 +21,7 @@ require_once("view/components/header.php");
                 <label class="bold" for="password">Password</label>
                 <input class="input-form" name="password" type="password" required>
             </div>
-            <p class="center italic font-sm text-secondary">Not registered yet? <a class="font-sm text-secondary" href="index.php?p=register">Register</a></p>
+            <p class="center italic text-sm text-secondary">Not registered yet? <a class="text-sm text-secondary" href="index.php?p=register">Register</a></p>
         </div>
 
         <button type="submit" class="submit-button" name="login">Login</button>

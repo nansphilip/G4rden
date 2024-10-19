@@ -146,7 +146,7 @@ class Message
             $limit = (int)$limit;
 
             // Check if the subject is null
-            $sebjectSql = is_null($subject) ? '' : 'AND Message.subjectId = :subjectId';
+            $sebjectSql = is_null($subject) ? 'AND Message.subjectId IS NULL' : 'AND Message.subjectId = :subjectId';
             $arrayToPrepare = is_null($subject) ? [] : [':subjectId' => $subject];
 
             // Get the last messages joined with them users

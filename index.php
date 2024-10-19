@@ -11,6 +11,11 @@ try {
     $ENVIRONMENT = $envFile['ENV'];
     $PATH = isset($envFile['PATH']) ? $envFile['PATH'] : '';
 
+    // Set the timezone
+    date_default_timezone_set('Europe/Paris');
+    // Set the locale
+    setlocale(LC_TIME, 'fr_FR.UTF-8');
+
     // Imports
     require_once "includes/App.php";
     require_once "includes/Database.php";

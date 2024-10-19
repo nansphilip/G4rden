@@ -147,29 +147,29 @@ class Subject
 
             // Récupérer les derniers messages pour chaque sujet
             $sql = "SELECT
-                    s.subjectId,
-                    s.name,
-                    s.description,
-                    s.isValidated,
-                    s.userId AS subjectCreatorId,
-                    su.username AS subjectCreator,
-                    m.content AS lastMessage,
-                    m.date AS lastMessageDate,
-                    u.username AS lastMessageAuthor
-                FROM Subject s
-                INNER JOIN User su ON s.userId = su.userId
+                    Sjt.subjectId,
+                    Sjt.name,
+                    Sjt.description,
+                    Sjt.isValidated,
+                    Sjt.userId AS creatorId,
+                    User1.username AS creatorName,
+                    Message.content AS lastMessage,
+                    Message.date AS lastMessageDate,
+                    User2.username AS lastMessageAuthor
+                FROM Subject Sjt
+                INNER JOIN User User1 ON Sjt.userId = User1.userId
                 LEFT JOIN (
-                    SELECT m1.subjectId, m1.content, m1.userId, m1.date
-                    FROM Message m1
+                    SELECT Msg2.subjectId, Msg2.content, Msg2.userId, Msg2.date
+                    FROM Message Msg2
                     INNER JOIN (
                         SELECT subjectId, MAX(date) AS max_date
                         FROM Message
                         GROUP BY subjectId
-                    ) m2 ON m1.subjectId = m2.subjectId AND m1.date = m2.max_date
-                ) m ON s.subjectId = m.subjectId
-                LEFT JOIN User u ON m.userId = u.userId
-                WHERE s.isValidated = 1
-                ORDER BY m.date DESC
+                    ) Msg3 ON Msg2.subjectId = Msg3.subjectId AND Msg2.date = Msg3.max_date
+                ) Message ON Sjt.subjectId = Message.subjectId
+                LEFT JOIN User User2 ON Message.userId = User2.userId
+                WHERE Sjt.isValidated = 1
+                ORDER BY Message.date DESC
                 LIMIT {$limit}
             ";
 

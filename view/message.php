@@ -7,9 +7,9 @@
 require_once "view/components/header.php";
 ?>
 
-<main class="flex flex-column gap-3 overflow-y-hidden">
-    <div>
-        <h2><?= App::$pageTitle; ?></h2>
+<main class="flex flex-column overflow-y-hidden">
+    <div class="mb-2">
+        <h2 class="bold"><?= App::$pageTitle; ?></h2>
         <p>Your are consulting G4rden's chat.</p>
     </div>
 
@@ -17,22 +17,23 @@ require_once "view/components/header.php";
         <!-- Messages will be injected here -->
     </div>
 
-    <form id="addNewMessage" method="post" action="" class="flex flex-column gap-1 rounded-box">
-        <label class="bold" for="reply">Répondre</label>
-        <div class="flex flex-row gap-2">
-            <input
-                id="reply"
-                name="reply"
-                minlength="1"
-                maxlength="3000"
-                class="input-form"
-                placeholder="Écrire un message..."
-                required></input>
-            <button type="submit" class="w-fit-content submit-button" name="new_message">↑</button>
-        </div>
-    </form>
-
-</main>
+    <div class="padding-shadow">
+        <form id="addNewMessage" method="post" action="" class="mt-2 flex flex-column gap-1 rounded-box">
+            <label class="bold" for="reply">Répondre</label>
+            <div class="flex pb-1 flex-row gap-2">
+                <input
+                    id="reply"
+                    name="reply"
+                    minlength="1"
+                    maxlength="3000"
+                    class="input-form"
+                    placeholder="Écrire un message..."
+                    required>
+                </input>
+                <button type="submit" class="w-fit-content submit-button" name="new_message">↑</button>
+            </div>
+        </form>
+    </div>
 
 <?php
 // Includes the footer

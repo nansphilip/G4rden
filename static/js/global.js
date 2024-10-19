@@ -1,33 +1,45 @@
 import AsyncRouter from "/static/js/AsyncRouter.js";
 
+// =========================== //
+// === Arrow to top button === //
+// =========================== //
+
+const elementList = [document.querySelector("body"), document.querySelector("main")];
 const arrowButtonEl = document.querySelector("#arrow_to_top");
 
 // Toggles the button visibility
-const toggleButtonVisibility = () => {
-    // From 100px
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-        // Display the button
-        arrowButtonEl.disabled = false;
-        arrowButtonEl.style.opacity = "100%";
-    } else {
-        // Hide the button
-        arrowButtonEl.disabled = true;
-        arrowButtonEl.style.opacity = "0%";
-    }
+const toggleArrowButtonVisibility = () => {
+    // From 10px
+    elementList.forEach((el) => {
+        if (el.scrollTop > 10) {
+            // Display the button
+            arrowButtonEl.disabled = false;
+            arrowButtonEl.style.opacity = "100%";
+        } else {
+            // Hide the button
+            arrowButtonEl.disabled = true;
+            arrowButtonEl.style.opacity = "0%";
+        }
+    });
 };
 
 // Scrolls to top
 const backToTop = () => {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth",
+    elementList.forEach((el) => {
+        el.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
     });
 };
 
-window.addEventListener("load", toggleButtonVisibility);
+// On load, toggle the button visibility
+window.addEventListener("load", toggleArrowButtonVisibility);
 
 // On scroll, toggle the button visibility
-window.addEventListener("scroll", toggleButtonVisibility);
+elementList.forEach((el) => {
+    el.addEventListener("scroll", toggleArrowButtonVisibility);
+});
 
 // On click, scroll to top
 arrowButtonEl.addEventListener("click", backToTop);
@@ -76,3 +88,38 @@ const toggleDarkMode = async () => {
 
 // On click, toggle dark mode
 toggleButtonEl.addEventListener("click", async () => await toggleDarkMode());
+
+// ========================== //
+// === Scroll bar padding === //
+// ========================== //
+
+const scrollableElementList = [
+    document.querySelector("main"),
+    document.querySelector("#directChat")
+];
+
+const toggleScrollBarPadding = () => {
+    scrollableElementList.forEach((el) => {
+        if (!el) return;
+
+        // Get the scroll position
+        const isScrollBarVisible = el.scrollHeight > el.clientHeight;
+
+        // If the scroll position is at the top, add padding
+        if (isScrollBarVisible) {
+            el.style.paddingRight = "0.5rem";
+        } else {
+            el.style.paddingRight = "";
+        }
+    });
+};
+
+// On load or resize, check if the scroll bar is visible
+document.addEventListener("DOMContentLoaded", toggleScrollBarPadding);
+window.addEventListener("resize", toggleScrollBarPadding);
+
+// On scroll, check if the scroll bar is visible
+scrollableElementList.forEach((el) => {
+    if (!el) return;
+    el.addEventListener("scroll", toggleScrollBarPadding);
+});
