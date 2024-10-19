@@ -1,23 +1,22 @@
 <?php
 // Navigation links
 $commonLinks = "
-    <a href={$PATH}/index.php?p=home>Home</a>
-    <a href={$PATH}/index.php?p=subject>Subjects</a>
+    <a href={$PATH}/index.php?p=home>Accueil</a>
 ";
 $nonLoggedLinks = "
-    <a href={$PATH}/index.php?p=register>Register</a>
-    <a href={$PATH}/index.php?p=login>Login</a>
+    <a href={$PATH}/index.php?p=register>Inscription</a>
+    <a href={$PATH}/index.php?p=login>Connexion</a>
 ";
 $loggedLinks = "
     <a href={$PATH}/index.php?p=message>Message</a>
-    <a href={$PATH}/index.php?p=logout>Logout</a>
+    <a href={$PATH}/index.php?p=logout>Déconnexion</a>
 ";
 ?>
 
 <?php
 // Desktop navigation bar
 ?>
-<nav class="desktop-nav">
+<nav class="desktop-nav padding-shadow">
     <?php
     echo $commonLinks;
     // Sets the navigation bar depending if the user is logged in or not
@@ -27,8 +26,8 @@ $loggedLinks = "
         echo $nonLoggedLinks;
     }
     ?>
-    <button class="icon-nav" id="toggleTheme">
-        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun">
+    <button class="icon-nav toggleTheme" >
+        <svg class="icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="4" />
             <path d="M12 2v2" />
             <path d="M12 20v2" />
@@ -39,11 +38,9 @@ $loggedLinks = "
             <path d="m6.34 17.66-1.41 1.41" />
             <path d="m19.07 4.93-1.41 1.41" />
         </svg>
-        <svg style="display: none;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon">
+        <svg class="icon" style="display: none;" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
         </svg>
-        <!-- <img src="/static/img/sun.png" alt="Toggle theme"> -->
-        <!-- <img src="/static/img/moon.png" style="display: none;" alt="Toggle theme"> -->
     </button>
 </nav>
 
@@ -61,6 +58,22 @@ $loggedLinks = "
         echo $nonLoggedLinks;
     }
     ?>
+    <button class="icon-nav toggleTheme">
+        <svg class="icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2" />
+            <path d="M12 20v2" />
+            <path d="m4.93 4.93 1.41 1.41" />
+            <path d="m17.66 17.66 1.41 1.41" />
+            <path d="M2 12h2" />
+            <path d="M20 12h2" />
+            <path d="m6.34 17.66-1.41 1.41" />
+            <path d="m19.07 4.93-1.41 1.41" />
+        </svg>
+        <svg class="icon" style="display: none;" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+        </svg>
+    </button>
 </nav>
 
 <script>

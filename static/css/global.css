@@ -8,6 +8,7 @@
 
     --text-primary: hsl(175, 51%, 18%);
     --text-secondary: hsl(175, 10%, 46%);
+    --text-alert: hsl(0, 60%, 50%);
 
     --primary-color: hsl(213, 38%, 50%);
     --primary-color-hover: hsl(213, 40%, 70%);
@@ -24,11 +25,12 @@
 
 :root.dark {
     --black: white;
-    --white: black;
-    --white-hover: hsl(0, 0%, 5%);
+    --white: hsl(0, 0%, 5%);
+    --white-hover: hsl(0, 0%, 10%);
 
     --text-primary: hsl(175, 51%, 82%);
     --text-secondary: hsl(175, 10%, 54%);
+    --text-alert: hsl(0, 40%, 50%);
 
     --primary-color: hsl(213, 66%, 45%);
     --primary-color-hover: hsl(212, 70%, 25%);
@@ -49,8 +51,7 @@ html {
     flex-direction: column;
 }
 
-body,
-body * {
+body {
     --font-size: 16px;
 
     --border-width: 2px;
@@ -62,42 +63,41 @@ body * {
     --shadow-y: 4px;
     --shadow-x-small: 2px;
     --shadow-y-small: 2px;
-
-    box-sizing: border-box;
-    font-family: Inter, Arial, sans-serif;
-    font-size: var(--font-size);
-    color: var(--text-primary);
-    background-color: var(--white);
 }
 
 @media (max-width: 580px) {
-    body,
-    body * {
+    body {
         --font-size: 14px;
 
         --shadow-x: 3px;
         --shadow-y: 3px;
         --shadow-x-small: 1.5px;
         --shadow-y-small: 1.5px;
-
-        font-size: var(--font-size);
     }
 }
 
 body {
-    overflow-y: auto;
     flex: 1 1 0%;
     display: flex;
     flex-direction: column;
+    justify-content: start;
     align-items: center;
+    align-content: stretch;
     gap: 1rem;
 
     margin: 0;
-    padding: 1rem 2rem;
+    padding: 1rem 2rem 0.5rem 2rem;
+
+    background-color: var(--white);
+    box-sizing: border-box;
+    font-family: Inter, Arial, sans-serif;
+    font-size: var(--font-size);
+    color: var(--text-primary);
 }
 
 @media (max-width: 580px) {
     body {
+        font-size: var(--font-size);
         padding: 0.5rem 1rem;
     }
 }
@@ -128,6 +128,17 @@ footer {
     text-align: center;
 }
 
+button,
+input {
+    font-family: Inter, Arial, sans-serif;
+    color: var(--text-primary);
+}
+
+a:link,
+a:visited {
+    color: var(--text-primary);
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
     width: 7px;
@@ -151,10 +162,15 @@ h4,
 h5,
 h6,
 a,
-p {
+p,
+ul {
+    font-weight: normal;
     margin: 0;
+    font-size: var(--font-size);
+    color: var(--text-primary);
 }
 
+h1,
 h1 * {
     font-size: 2rem;
 }

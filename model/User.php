@@ -1,21 +1,30 @@
 <?php
+
 /**
- * User class
- * An User has an ID, a username, a passwordHash and a userType.
- * It also has methods to add, get, update and delete users.
+ * Class User
+ * Represents a user in the system.
  */
 class User
 {
-    public $id;
+    public $userId;
     public $lastname;
     public $firstname;
     public $username;
     public $passwordHash;
     public $userType;
 
-    public function __construct($id, $lastname, $firstname, $username, $passwordHash, $userType)
+    /**
+     * User constructor.
+     * @param int|null $userId The ID of the user.
+     * @param string|null $lastname The user's last name.
+     * @param string|null $firstname The user's first name.
+     * @param string|null $username The username.
+     * @param string|null $passwordHash The hashed password.
+     * @param string|null $userType The type of user (default: 'USER').
+     */
+    public function __construct($userId = null, $lastname = null, $firstname = null, $username = null, $passwordHash = null, $userType = null)
     {
-        $this->id = $id;
+        $this->userId = $userId;
         $this->lastname = $lastname;
         $this->firstname = $firstname;
         $this->username = $username;
@@ -23,16 +32,21 @@ class User
         $this->userType = $userType;
     }
 
-
     // ======================= //
     // ===== Add methods ===== //
     // ======================= //
 
-
     /**
-     * Adds a new user to the database.
+     * Adds a new user to the database and fill the current instance of object.
+     * @param string $lastname The user's last name.
+     * @param string $firstname The user's first name.
+     * @param string $username The username.
+     * @param string $passwordHash The hashed password.
+     * @param string $userType The type of user (default: 'USER').
+     * @return array|null Information about the added user.
+     * @throws Error If an error occurs during the addition.
      */
-    public function addUser()
+    public function addUser($lastname, $firstname, $username, $passwordHash, $userType = 'USER')
     {
         try {
             // Get environment
@@ -41,8 +55,8 @@ class User
 
             // Check if in production
             if ($ENVIRONMENT == "PROD") {
-                $getRowCount = Database::queryAssoc("SELECT COUNT(*) FROM User;");
-                $recordsAmount = $getRowCount[0]['COUNT(*)'];
+                $getRowCount = Database::queryAssoc("SELECT COUNT(*) as recordsAmount FROM User;");
+                $recordsAmount = $getRowCount[0]['recordsAmount'];
 
                 // If records amount is >= 50, throw an error to prevent the database from being overloaded
                 if ($recordsAmount >= 50) {
@@ -50,39 +64,73 @@ class User
                 }
             }
 
+            // Insert the message in the database
             $sql = "INSERT INTO User (lastname, firstname, username, passwordHash, userType) VALUES (:lastname, :firstname, :username, :passwordHash, :userType)";
             Database::queryAssoc($sql, [
-                ':lastname' => $this->lastname,
-                ':firstname' => $this->firstname,
-                ':username' => $this->username,
-                ':passwordHash' => $this->passwordHash,
-                ':userType' => $this->userType,
+                ':lastname' => $lastname,
+                ':firstname' => $firstname,
+                ':username' => $username,
+                ':passwordHash' => $passwordHash,
+                ':userType' => $userType,
             ]);
+
+            // Get the last inserted id
+            $lastInsertId = Database::lastInsertId();
+            // Get the current inserted message
+            $userArray = $this->getUserById($lastInsertId);
+            // Fill the current instance of object
+            $this->fillUserInstance($userArray);
+            // Return the current user
+            return $userArray;
         } catch (PDOException $e) {
             throw new Error("addUser -> " . $e->getMessage());
         }
     }
 
+    // ======================= //
+    // ===== Fill methods ==== //
+    // ======================= //
+
+    /**
+     * Fills the instance of the object with user data.
+     * @param array $userArray Associative array containing the user's data.
+     * @throws Error If an error occurs during the filling of the instance.
+     */
+    public function fillUserInstance($userArray)
+    {
+        try {
+            // Set properties in instance object
+            foreach ($userArray as $key => $value) {
+                $this->$key = $value;
+            }
+        } catch (PDOException $e) {
+            throw new Error("fillUserInstance -> " . $e->getMessage());
+        }
+    }
 
     // ======================= //
     // ===== Get methods ===== //
     // ======================= //
 
-
     /**
-     * Gets a user by its id.
-     * @return associated_array of the user
+     * Retrieves a user by their ID.
+     * @param int $userId The user's ID.
+     * @return array|null The user's data or null if the user is not found.
+     * @throws Error If an error occurs during retrieval.
      */
-    public function getUserById()
+    public function getUserById($userId)
     {
         try {
-            $sql = "SELECT * FROM User WHERE id = :id";
+            // Get message
+            $sql = "SELECT * FROM User WHERE userId = :userId";
             $query = Database::queryAssoc($sql, [
-                ':id' => $this->id
+                ':userId' => $userId
             ]);
+            // If no result, return null
             if (is_null($query)) {
                 return null;
             }
+            // Return associated array of user
             return $query[0];
         } catch (PDOException $e) {
             throw new Error("getUserById -> " . $e->getMessage());
@@ -90,87 +138,62 @@ class User
     }
 
     /**
-     * Gets a user by its username.
-     * @return associated_array of the user
+     * Retrieves a user by their username.
+     * @param string $username The username.
+     * @return array|null The user's data or null if the user is not found.
+     * @throws Error If an error occurs during retrieval.
      */
-    public function getUserByUsername()
+    public function getUserByUsername($username)
     {
         try {
             $sql = "SELECT * FROM User WHERE username = :username";
             $query = Database::queryAssoc($sql, [
-                ':username' => $this->username
+                ':username' => $username
             ]);
+            // If no result, return null
             if (is_null($query)) {
                 return null;
             }
+            // Return instance object
             return $query[0];
         } catch (PDOException $e) {
             throw new Error("getUserByUsername -> " . $e->getMessage());
         }
     }
 
-    /**
-     * Gets all users by their userType.
-     * @return array of associated_arrays of users
-     */
-    public function getUsersByUserType()
-    {
-        try {
-            $sql = "SELECT * FROM User WHERE userType = :userType";
-            $query = Database::queryAssoc($sql, [
-                ':userType' => $this->userType
-            ]);
-            if (is_null($query)) {
-                return null;
-            }
-            return $query[0];
-        } catch (PDOException $e) {
-            throw new Error("getUsersByUserType -> " . $e->getMessage());
-        }
-    }
-
-    /**
-     * Gets all users.
-     * @return array of associated_arrays of users
-     */
-    public static function getAll()
-    {
-        try {
-            $sql = "SELECT * FROM User";
-            $query = Database::queryAssoc($sql);
-            return $query;
-        } catch (PDOException $e) {
-            throw new Error("getAll -> " . $e->getMessage());
-        }
-    }
-
-
     // ========================== //
     // ===== Update methods ===== //
     // ========================== //
-
 
     // ========================== //
     // ===== Delete methods ===== //
     // ========================== //
 
-
     /**
-     * Deletes a user by its id.
+     * Deletes a user by their ID.
+     * @param int $userId The user's ID.
+     * @return array|null The data of the deleted user or null if the user is not found.
+     * @throws Error If an error occurs during deletion.
      */
-    public function deleteUser()
+    public function deleteUserById($userId)
     {
         try {
-            $sql = "DELETE FROM User WHERE id = :id";
-            $query = Database::queryAssoc($sql, [
-                ':id' => $this->id
-            ]);
-            if (is_null($query)) {
+            // Check if the user exists
+            $userArray = $this->getUserById($userId);
+            // Return null if the user doesn't exist
+            if (is_null($userArray)) {
                 return null;
             }
-            return $query[0];
+            // Prepare the SQL query
+            $sql = "DELETE FROM User WHERE userId = :userId";
+            // Delete the user
+            Database::queryAssoc($sql, [
+                ':userId' => $userId
+            ]);
+            // Return the deleted user
+            return $userArray;
         } catch (PDOException $e) {
-            throw new Error("deleteUser -> " . $e->getMessage());
+            throw new Error("deleteUserById -> " . $e->getMessage());
         }
     }
 }
@@ -180,4 +203,3 @@ class Admin extends User
     // Methods that require admin privileges
     // Ex: update user privileges
 }
-?>

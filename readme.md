@@ -14,19 +14,18 @@ A minimalist PHP framework based on MVC pattern.
 - Allow `PHP PDO extension` :
   - Find your PHP installation directory
   - Rename `pdo.ini-development` to `pdo.ini`
-  - Open `pdo.ini`: uncomment `extension=pdo_mysql` and `extension_dir = "ext"`
+  - Open `pdo.ini`: uncomment `extension=intl`, `extension=pdo_mysql` and `extension_dir = "ext"`
 
 1. Database
 
-- Create a database and an user with privileges (follow `/sql/database.sql`)
-- Add tables (follow `/sql/tables.sql`)
-- Insert data into tables (follow `/sql/data.sql`)
+- Create a database, user with privileges and add tables by following `/sql/setup.sql`
+- Insert fixtures into tables by following `/sql/fixtures.sql`
 
 1. Files
 
 - Add an `.env` file with the following content:
 
-```
+```env
 # Environnement setup
 # DEV or PROD
 ENV=DEV
@@ -44,13 +43,23 @@ MYSQL_PASS=g4rden-password
 
 1. Run the project
 
-```
+```bash
 php -S localhost:8000
 ```
 
 ## Production
 
 Work in progress...
+
+
+## Fixtures
+
+There is two types of users.
+
+| Username | Password   | User type |
+| -------- | ---------- | --------- |
+| mdubois  | User1234!  | User      |
+| pmartin  | Admin1234! | Admin     |
 
 ## Conventions
 

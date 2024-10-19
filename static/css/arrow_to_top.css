@@ -1,7 +1,4 @@
 #arrow_to_top {
-    background-color: var(--primary-color);
-    opacity: 0%;
-
     cursor: pointer;
     padding: none;
 
@@ -10,20 +7,26 @@
     right: 4rem;
     z-index: 100;
 
-    color: var(--white);
-
-    height: 3rem;
-    width: 3rem;
-
-    border-radius: var(--border-radius-full);
-    border: none;
+    height: 2.5rem;
+    width: 2.5rem;
     
-    transition: background-color 200ms;
-    transition: opacity 200ms;
+    opacity: 0%;
+    font-weight: bold;
+    
+    color: var(--text-primary);
+    border-radius: var(--border-radius-full);
+    border: var(--border-width) solid var(--border-color);
+    background-color: var(--white);
+    
+    transform: translate(0px, 0px);
+    box-shadow: calc(var(--shadow-x) * 0.75) calc(var(--shadow-y) * 0.75) var(--shadow-color);
+    transition: all 150ms;
 }
 
 #arrow_to_top:hover {
-    background-color: var(--primary-color-hover);
+    transform: translate(calc(var(--shadow-x) * 0.25), calc(var(--shadow-y) * 0.25));
+    box-shadow: calc(var(--shadow-x) * 0.5) calc(var(--shadow-y) * 0.5) var(--shadow-color);
+    transition: all 150ms;
 }
 
 #arrow_to_top:disabled {

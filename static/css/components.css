@@ -1,5 +1,6 @@
-.rounded-box, .rounded-box-light {
-    padding: 0.8rem;
+.rounded-box,
+.rounded-box-light {
+    padding: 0.6rem 0.8rem;
     border-radius: var(--border-radius);
     border: var(--border-width) solid var(--border-color);
     box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color);
@@ -11,9 +12,48 @@
 }
 
 @media (max-width: 580px) {
-    .rounded-box {
-        padding: 0.5rem;
+    .rounded-box,
+    .rounded-box-light {
+        padding: 0.4rem 0.6rem;
     }
+}
+
+.rounded-subject {
+    list-style: none;
+    padding: 0;
+
+    border-radius: var(--border-radius);
+    border: var(--border-width) solid var(--border-color);
+
+    position: relative;
+    transform: translate(0px, 0px);
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color);
+    transition: all 150ms;
+}
+
+.rounded-subject:hover {
+    transform: translate(calc(var(--shadow-x) / 3), calc(var(--shadow-y) / 3));
+    box-shadow: calc(var(--shadow-x) / 3 * 2) calc(var(--shadow-y) / 3 * 2) var(--shadow-color);
+    transition: all 150ms;
+}
+
+.rounded-subject > a {
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+}
+
+.rounded-subject > a > div {
+    padding: 0.7rem;
+}
+
+.right-message {
+    margin-left: 2rem;
+    background-color: var(--white-hover);
+}
+
+.left-message {
+    margin-right: 2rem;
 }
 
 .input-form {
@@ -24,6 +64,7 @@
     border-radius: var(--border-radius-small);
     border: var(--border-width) solid var(--border-color);
     box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color-light);
+    background-color: var(--white);
 }
 
 .input-form::placeholder {
@@ -40,13 +81,25 @@
     padding: 0.25rem 1rem;
     border-radius: var(--border-radius);
     border: var(--border-width) solid var(--border-color);
-    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color-light);
     background-color: var(--white-color);
-    transition: background-color 150ms;
+
+    position: relative;
+    transform: translate(0px, 0px);
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color-light);
+    transition: all 150ms;
 }
 
 .submit-button:hover {
     cursor: pointer;
-    background-color: var(--secondary-color-hover);
-    transition: background-color 150ms;
+
+    transform: translate(calc(var(--shadow-x) / 3), calc(var(--shadow-y) / 3));
+    box-shadow: calc(var(--shadow-x) / 3 * 2) calc(var(--shadow-y) / 3 * 2) var(--shadow-color-light);
+    transition: all 150ms;
+}
+
+.blur-gradient {
+    height: 2rem;
+    width: 100%;
+    position: absolute;
+    background: linear-gradient(to bottom, var(--white), hsla(0, 0%, 0%, 0));
 }
