@@ -52,7 +52,7 @@ elementList.forEach((el) => {
 arrowButtonEl.addEventListener("click", backToTop);
 
 // Toggle dark mode
-const toggleButtonElList = document.querySelectorAll(".toggleTheme");
+const toggleButtonElList = document.querySelectorAll(".toggle-theme");
 const rootEl = document.documentElement;
 
 const toggleDarkMode = () => {

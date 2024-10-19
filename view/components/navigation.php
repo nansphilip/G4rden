@@ -26,7 +26,7 @@ $loggedLinks = "
         echo $nonLoggedLinks;
     }
     ?>
-    <button class="icon-nav toggleTheme" >
+    <button class="icon-nav toggle-theme" >
         <svg class="icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="4" />
             <path d="M12 2v2" />
@@ -58,7 +58,7 @@ $loggedLinks = "
         echo $nonLoggedLinks;
     }
     ?>
-    <button class="icon-nav toggleTheme">
+    <button class="icon-nav toggle-theme">
         <svg class="icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="4" />
             <path d="M12 2v2" />

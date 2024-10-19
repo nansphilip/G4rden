@@ -149,3 +149,21 @@ const handleSubmit = async (e) => {
 // On submit, handle the submit to manage insertion asynchronously
 newMessageFormEl.addEventListener("submit", handleSubmit);
 
+// ======================= //
+// ===== Blur effect ===== //
+// ======================= //
+
+const blurGradientWidth = () => {
+    const blurGradientEl = document.querySelector(".blur-gradient");
+    const chatContainerEl = document.querySelector("#chatContainer");
+
+    // Get the width of the chat container
+    const chatContainerWidth = chatContainerEl.clientWidth;
+
+    // Set the width of the blur gradient
+    blurGradientEl.style.width = `${chatContainerWidth}px`;
+};
+
+// On load and resize, set the width of the blur gradient
+document.addEventListener("DOMContentLoaded", blurGradientWidth);
+window.addEventListener("resize", blurGradientWidth);
