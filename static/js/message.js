@@ -22,7 +22,7 @@ const refreshMessages = async () => {
     // Store the scroll position
     const scrollBottomPosition = Math.round(chatContainerEl.scrollTop + chatContainerEl.clientHeight);
     const scrollHeight = chatContainerEl.scrollHeight;
-    const isScrollAtBottom = scrollBottomPosition >= scrollHeight - 5;
+    const isScrollAtBottom = scrollBottomPosition >= scrollHeight - 30;
 
     // Set an empty id list
     const currentIdList = [];

@@ -21,6 +21,11 @@ require_once("view/components/header.php");
                 <label class="bold" for="password">Mot de passe</label>
                 <input class="input-form" name="password" type="password" required>
             </div>
+            <?php if (isset($notification)): ?>
+                <div class="flex flex-row justify-center pt-1 text-alert">
+                    <p class="italic bold font-sm center"><?= $notification ?></p>
+                </div>
+            <?php endif; ?>
         </div>
 
         <div class="flex flex-column items-center gap-2">

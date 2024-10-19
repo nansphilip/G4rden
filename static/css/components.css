@@ -98,7 +98,7 @@
 }
 
 .blur-gradient {
-    height: 1rem;
+    height: 2rem;
     width: 100%;
     position: absolute;
     background: linear-gradient(to bottom, var(--white), hsla(0, 0%, 0%, 0));

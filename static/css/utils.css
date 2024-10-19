@@ -124,6 +124,10 @@
     font-size: 1.2rem;
 }
 
+.text-alert {
+    color : var(--text-alert);
+}
+
 .center {
     text-align: center;
 }

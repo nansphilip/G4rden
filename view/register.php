@@ -33,6 +33,11 @@ require_once("view/components/header.php");
                 <label class="bold" for="passwordConfirm">Confirmer le mot de passe</label>
                 <input class="input-form" name="passwordConfirm" type="password" required>
             </div>
+            <?php if (isset($notification)): ?>
+                <div class="flex flex-row justify-center pt-1">
+                    <p class="italic bold font-sm center text-alert"><?= $notification ?></p>
+                </div>
+            <?php endif; ?>
         </div>
 
         <div class="flex flex-column items-center gap-2">

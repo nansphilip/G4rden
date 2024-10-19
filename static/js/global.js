@@ -52,13 +52,11 @@ elementList.forEach((el) => {
 arrowButtonEl.addEventListener("click", backToTop);
 
 // Toggle dark mode
-const toggleButtonEl = document.querySelector("#toggleTheme");
+const toggleButtonElList = document.querySelectorAll(".toggleTheme");
+const rootEl = document.documentElement;
 
-const toggleDarkMode = async () => {
-    // const iconElList = document.querySelectorAll(".icon-nav img")
-    const iconElList = document.querySelectorAll(".icon-nav svg");
+const toggleDarkMode = () => {
     const documentAllElList = document.querySelectorAll("body *");
-    const rootEl = document.documentElement;
 
     // Remove transitions
     documentAllElList.forEach((el) => {
@@ -76,9 +74,18 @@ const toggleDarkMode = async () => {
     });
 
     // Toggle icon
+    toggleIcons();
+};
+
+const toggleIcons = async () => {
+    const iconElList = document.querySelectorAll(".icon-nav svg");
+    
+    // Toggle icon
     if (rootEl.classList.contains("dark")) {
         iconElList[0].style.display = "none";
         iconElList[1].style.display = "";
+        iconElList[2].style.display = "none";
+        iconElList[3].style.display = "";
         const { status, message } = await AsyncRouter.post("post-theme", { theme: "dark" });
         if (status === "error") {
             throw new Error(message);
@@ -86,6 +93,8 @@ const toggleDarkMode = async () => {
     } else {
         iconElList[0].style.display = "";
         iconElList[1].style.display = "none";
+        iconElList[2].style.display = "";
+        iconElList[3].style.display = "none";
         const { status, message } = await AsyncRouter.post("post-theme", { theme: "" });
         if (status === "error") {
             throw new Error(message);
@@ -93,8 +102,12 @@ const toggleDarkMode = async () => {
     }
 };
 
+window.addEventListener("load", toggleIcons);
+
 // On click, toggle dark mode
-toggleButtonEl.addEventListener("click", async () => await toggleDarkMode());
+toggleButtonElList.forEach((el) => {
+    el.addEventListener("click", toggleDarkMode);
+});
 
 // ========================== //
 // === Scroll bar padding === //
@@ -104,7 +117,7 @@ const scrollableElementList = [
     document.querySelector("#subjectContainer"),
     document.querySelector("#chatContainer"),
     document.querySelector("#loginForm"),
-    document.querySelector("#registerForm")
+    document.querySelector("#registerForm"),
 ];
 
 const toggleScrollBarPadding = () => {

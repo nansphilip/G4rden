@@ -9,8 +9,8 @@ if (isset($_SESSION['active'])) {
 // Includes required models
 require_once("model/User.php");
 
-// TODO: set notifications
-
+// Set notification
+$notification = null;
 
 // Check if a form has been submitted
 if (isset($_POST['login'])) {
@@ -53,14 +53,19 @@ if (isset($_POST['login'])) {
         // Redirect to the home page
         header("Location: {$PATH}/index.php?p=message");
     } catch (Throwable $e) {
-        throw new Error("Login Controller -> " . $e->getMessage());
+        if ($e->getMessage() === "User does not exist" || $e->getMessage() === "Invalid password") {
+            $notification = "Identifiants incorrects.";
+        } else if ($ENVIRONMENT == "DEV") {
+            throw new Error("Login Controller -> " . $e->getMessage());
+        }
     }
 }
 
 // List of variables to inject in the view
 $varToInject = [
     "ENVIRONMENT" => $ENVIRONMENT,
-    "PATH" => $PATH
+    "PATH" => $PATH,
+    "notification" => $notification
 ];
 
 // Set page meta data
