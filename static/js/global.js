@@ -4,13 +4,18 @@ import AsyncRouter from "/static/js/AsyncRouter.js";
 // === Arrow to top button === //
 // =========================== //
 
-const elementList = [document.querySelector("body"), document.querySelector("main")];
+const elementList = [
+    document.querySelector("body"),
+    document.querySelector("main"),
+    document.querySelector("#subjectContainer"),
+];
 const arrowButtonEl = document.querySelector("#arrow_to_top");
 
 // Toggles the button visibility
 const toggleArrowButtonVisibility = () => {
     // From 10px
     elementList.forEach((el) => {
+        if (!el) return;
         if (el.scrollTop > 10) {
             // Display the button
             arrowButtonEl.disabled = false;
@@ -25,6 +30,7 @@ const toggleArrowButtonVisibility = () => {
 
 // Scrolls to top
 const backToTop = () => {
+    if (!elementList) return;
     elementList.forEach((el) => {
         el.scrollTo({
             top: 0,
@@ -38,6 +44,7 @@ window.addEventListener("load", toggleArrowButtonVisibility);
 
 // On scroll, toggle the button visibility
 elementList.forEach((el) => {
+    if (!el) return;
     el.addEventListener("scroll", toggleArrowButtonVisibility);
 });
 
@@ -57,11 +64,11 @@ const toggleDarkMode = async () => {
     documentAllElList.forEach((el) => {
         el.style.transition = "0ms";
     });
-    document.body.scrollHeight; // Forces chronologicookiesListl repaint
+    document.body.scrollHeight; // Used to forces chronologic script processing
 
     // Toggle dark mode
     rootEl.classList.toggle("dark");
-    document.body.scrollHeight; // Forces chronologicookiesListl repaint
+    document.body.scrollHeight; // Used to forces chronologic script processing
 
     // Restore transitions
     documentAllElList.forEach((el) => {
@@ -94,8 +101,10 @@ toggleButtonEl.addEventListener("click", async () => await toggleDarkMode());
 // ========================== //
 
 const scrollableElementList = [
-    document.querySelector("main"),
-    document.querySelector("#directChat")
+    document.querySelector("#subjectContainer"),
+    document.querySelector("#chatContainer"),
+    document.querySelector("#loginForm"),
+    document.querySelector("#registerForm")
 ];
 
 const toggleScrollBarPadding = () => {

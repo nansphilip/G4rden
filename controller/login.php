@@ -9,6 +9,9 @@ if (isset($_SESSION['active'])) {
 // Includes required models
 require_once("model/User.php");
 
+// TODO: set notifications
+
+
 // Check if a form has been submitted
 if (isset($_POST['login'])) {
     try {
@@ -61,8 +64,8 @@ $varToInject = [
 ];
 
 // Set page meta data
-App::setPageTitle("Login");
-App::setPageDescription("G4rden chat");
+App::setPageTitle("Se connecter" . " • G4rden");
+App::setPageDescription("Se connecter sur le forum G4rden.");
 App::setPageFavicon("world.png");
 
 // Load the view

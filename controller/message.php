@@ -13,8 +13,8 @@ $varToInject = [
 ];
 
 // Set page meta data
-App::setPageTitle("Message");
-App::setPageDescription("G4rden chat");
+App::setPageTitle("Chat général" . " • G4rden");
+App::setPageDescription("Chat général sur le forum G4rden.");
 App::setPageFavicon("world.png");
 
 // Load the view

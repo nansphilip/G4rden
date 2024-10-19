@@ -7,28 +7,31 @@
 require_once("view/components/header.php");
 ?>
 
-<main>
-    <h2 class="bold"><?= App::$pageTitle; ?></h2>
-    <p class="pb-2">Enter your username and your password to login.</p>
+<main class="flex flex-column overflow-y-hidden">
+    <h2 class="bold">Se connecter</h2>
+    <p class="mb-2">Entrez votre pseudo et votre mot de passe pour vous connecter.</p>
 
-    <form action="" method="post" class="flex flex-column gap-3 items-center py-2">
-        <div class="rounded-box flex flex-column gap-3 w-full">
-            <div class="flex justify-between gap-2 items-center flex-wrap">
-                <label class="bold" for="username">Username</label>
-                <input class="input-form" name="username" type="text" required>
+    <form action="" id="loginForm" method="post" class="flex flex-column gap-3 padding-shadow overflow-y-auto">
+        <div class="flex flex-column gap-2 rounded-box pt-1 pb-2">
+            <div class="flex flex-column gap-1">
+                <label class="bold" for="username">Pseudo</label>
+                <input class="input-form" name="username" type="text" required autofocus>
             </div>
-            <div class="flex justify-between gap-2 items-center flex-wrap">
-                <label class="bold" for="password">Password</label>
+            <div class="flex flex-column gap-1">
+                <label class="bold" for="password">Mot de passe</label>
                 <input class="input-form" name="password" type="password" required>
             </div>
-            <p class="center italic text-sm text-secondary">Not registered yet? <a class="text-sm text-secondary" href="index.php?p=register">Register</a></p>
         </div>
 
-        <button type="submit" class="submit-button" name="login">Login</button>
+        <div class="flex flex-column items-center gap-2">
+            <p class="italic text-sm text-secondary">Pas encore inscrit ? <a class="text-sm text-secondary" href="index.php?p=register">S'inscrire</a></p>
+            <button type="submit" class="submit-button" name="login">Se connecter</button>
+        </div>
     </form>
-</main>
 
-<?php
-// Includes the footer
-require_once("view/components/footer.php");
-?>
+    <div class="flex-1"></div>
+
+    <?php
+    // Includes the footer
+    require_once("view/components/footer.php");
+    ?>

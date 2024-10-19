@@ -1,6 +1,10 @@
 import AsyncRouter from "/static/js/AsyncRouter.js";
 
-const chatContainerEl = document.querySelector("#directChat");
+// Get the chat container
+const chatContainerEl = document.querySelector("#chatContainer");
+
+// Get the subject id
+const subjectId = chatContainerEl.getAttribute("data-subject-id");
 
 // ============================== //
 // === Async refresh messages === //
@@ -8,7 +12,7 @@ const chatContainerEl = document.querySelector("#directChat");
 
 const refreshMessages = async () => {
     // Get the messages
-    const { data, error } = await AsyncRouter.post("message/get-message", { subject: null });
+    const { data, error } = await AsyncRouter.post("message/get-message", { subjectId });
 
     // Create a new paragraph element with the user data
     if (error) {
@@ -23,7 +27,7 @@ const refreshMessages = async () => {
     // Set an empty id list
     const currentIdList = [];
     // Get current messages id list
-    const currentMessageList = document.querySelectorAll("#directChat > div");
+    const currentMessageList = document.querySelectorAll("#chatContainer > div");
     // Get current messages id list
     if (currentMessageList.length > 0) {
         currentMessageList.forEach((messageDiv) => {
@@ -125,7 +129,7 @@ const handleSubmit = async (e) => {
     const date = new Date().toISOString();
 
     // Add the message to the database
-    const { data, error } = await AsyncRouter.post("message/add-message", { content, date });
+    const { data, error } = await AsyncRouter.post("message/add-message", { content, date, subjectId });
 
     if (data) {
         // Refresh messages

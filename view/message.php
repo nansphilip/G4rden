@@ -8,12 +8,15 @@ require_once "view/components/header.php";
 ?>
 
 <main class="flex flex-column overflow-y-hidden">
-    <div class="mb-2">
-        <h2 class="bold"><?= App::$pageTitle; ?></h2>
-        <p>Your are consulting G4rden's chat.</p>
-    </div>
+    <h2 class="bold">Chat général</h2>
+    <p class="mb-2">Vous êtes sur le chat général de G4rden. Soyez respectueux envers nos jardiniers et amateurs de plantes.</p>
 
-    <div id="directChat" data-user-id="<?= $_SESSION['userId'] ?>" class="flex-1 flex flex-column gap-2 overflow-y-auto padding-shadow">
+    <div
+        id="chatContainer"
+        data-user-id="<?= $_SESSION['userId'] ?>"
+        data-subject-id="null"
+        class="flex-1 flex flex-column gap-2 overflow-y-auto padding-shadow">
+        <div class="blur-gradient"></div>
         <!-- Messages will be injected here -->
     </div>
 
@@ -28,14 +31,15 @@ require_once "view/components/header.php";
                     maxlength="3000"
                     class="input-form"
                     placeholder="Écrire un message..."
-                    required>
+                    required
+                    autofocus>
                 </input>
                 <button type="submit" class="w-fit-content submit-button" name="new_message">↑</button>
             </div>
         </form>
     </div>
 
-<?php
-// Includes the footer
-require_once "view/components/footer.php";
-?>
+    <?php
+    // Includes the footer
+    require_once "view/components/footer.php";
+    ?>
