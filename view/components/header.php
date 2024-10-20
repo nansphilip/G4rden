@@ -35,5 +35,6 @@
 <body>
     <header>
         <h1><?= "<a href={$PATH}/index.php?p=home>G4rden</a>" ?></h1>
+        <img src="static/img/world.png" alt="Logo" class="logo">
         <?php require_once "view/components/navigation.php"; ?>
     </header>

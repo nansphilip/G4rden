@@ -34,7 +34,7 @@ const setToggleButtonPosition = () => {
 };
 
 document.addEventListener("DOMContentLoaded", () => setToggleButtonPosition());
-
+window.addEventListener("resize", () => setToggleButtonPosition());
 // Toggle eye button
 const toggleEyes = () => {
     const openedEye = document.querySelector("#opened-eye");
@@ -51,11 +51,13 @@ const toggleEyes = () => {
         openedEye.style.display = "none";
     }
 
-    
+
 };
 
 const toggleEyesButton = document.querySelector("#toggleEyes");
-toggleEyesButton.addEventListener("click", toggleEyes);
+toggleEyesButton.addEventListener("mouseenter", toggleEyes);
+toggleEyesButton.addEventListener("mouseleave", toggleEyes);
+
 
 const toggleEyes1 = () => {
     const openedEye1 = document.querySelector("#opened-eye1");
@@ -76,4 +78,5 @@ const toggleEyes1 = () => {
 };
 
 const toggleEyesButton1 = document.querySelector("#toggleEyes1");
-toggleEyesButton1.addEventListener("click", toggleEyes1);
+toggleEyesButton1.addEventListener("mouseenter", toggleEyes1);
+toggleEyesButton1.addEventListener("mouseleave", toggleEyes1);

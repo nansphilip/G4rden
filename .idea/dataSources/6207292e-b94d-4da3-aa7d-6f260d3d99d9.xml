@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="@localhost">
-  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.53">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.52">
     <root id="1">
       <DefaultCasing>lower/lower</DefaultCasing>
       <DefaultEngine>InnoDB</DefaultEngine>
@@ -1013,7 +1013,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Charset>utf8mb4</Charset>
     </collation>
     <schema id="288" parent="1" name="g4rden-db">
-      <LastIntrospectionLocalTimestamp>2024-10-14.06:38:44</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-10-20.10:57:59</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="289" parent="1" name="information_schema">
@@ -1060,28 +1060,29 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
     <column id="300" parent="298" name="id">
-      <AutoIncrement>36</AutoIncrement>
+      <AutoIncrement>1</AutoIncrement>
+      <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StoredType>int|0s</StoredType>
     </column>
     <column id="301" parent="298" name="content">
+      <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StoredType>text|0s</StoredType>
     </column>
     <column id="302" parent="298" name="date">
+      <DasType>datetime|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StoredType>datetime|0s</StoredType>
     </column>
     <column id="303" parent="298" name="userId">
+      <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StoredType>int|0s</StoredType>
     </column>
     <foreign-key id="304" parent="298" name="message_ibfk_1">
       <ColNames>userId</ColNames>
+      <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
@@ -1100,36 +1101,36 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="308" parent="299" name="id">
-      <AutoIncrement>8</AutoIncrement>
+      <AutoIncrement>1</AutoIncrement>
+      <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StoredType>int|0s</StoredType>
     </column>
     <column id="309" parent="299" name="firstname">
+      <DasType>varchar(50)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StoredType>varchar(50)|0s</StoredType>
     </column>
     <column id="310" parent="299" name="lastname">
+      <DasType>varchar(50)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StoredType>varchar(50)|0s</StoredType>
     </column>
     <column id="311" parent="299" name="username">
+      <DasType>varchar(50)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StoredType>varchar(50)|0s</StoredType>
     </column>
     <column id="312" parent="299" name="passwordHash">
+      <DasType>varchar(255)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
-      <StoredType>varchar(255)|0s</StoredType>
     </column>
     <column id="313" parent="299" name="userType">
+      <DasType>enum(&apos;USER&apos;, &apos;ADMIN&apos;)|0e</DasType>
       <DefaultExpression>&apos;USER&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>6</Position>
-      <StoredType>enum(&apos;USER&apos;, &apos;ADMIN&apos;)|0e</StoredType>
     </column>
     <index id="314" parent="299" name="PRIMARY">
       <ColNames>id</ColNames>

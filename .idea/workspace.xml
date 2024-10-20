@@ -5,9 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0244ddc-9250-4c08-95a8-6870a1f46673" name="Changes" comment="k">
-      <change beforePath="$PROJECT_DIR$/controller/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6207292e-b94d-4da3-aa7d-6f260d3d99d9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/6207292e-b94d-4da3-aa7d-6f260d3d99d9.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/global.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/utils.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/utils.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/img/world.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/world.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/components/navigation.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/components/navigation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/components/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/components/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/profile.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +47,7 @@
     "PHP Remote Debug.Unnamed.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "feature/profile",
+    "git-widget-placeholder": "feature/profile-new",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/fdacunto/Desktop/Cours Flo/ProjetG4/G4rden",
     "node.js.detected.package.eslint": "true",
@@ -63,10 +69,25 @@
     ]
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Dacfl\Desktop\ProjetG4\G4rden\static\img" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Database Script.reset.sql">
+    <configuration name="reset.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/sql/reset.sql" />
+      <script-mode>FILE</script-mode>
+      <method v="2" />
+    </configuration>
     <configuration name="Unnamed" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug" nameIsGenerated="true" filter_connections="NOT_FILTER">
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Database Script.reset.sql" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -117,7 +138,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/controller/profile.php</url>
-          <line>53</line>
+          <line>51</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
