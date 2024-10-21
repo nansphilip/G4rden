@@ -65,4 +65,6 @@ App::setPageDescription("G4rden chat");
 App::setPageFavicon("world.png");
 
 // Load the view
+App::loadCssFiles(["togglePassword"]);
+App::loadJsFiles(["togglePassword"]);
 App::loadViewFile("login", $varToInject);

@@ -74,6 +74,6 @@ App::setPageDescription("Welcome to G4rden");
 App::setPageFavicon("world.png");
 
 // Load the view
-App::loadCssFiles(["profile", "utils"]);
-App::loadJsFiles(["profile"]);
+App::loadCssFiles(["togglePassword", "utils"]);
+App::loadJsFiles(["togglePassword"]);
 App::loadViewFile("profile", $varToInject);
