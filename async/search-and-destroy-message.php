@@ -35,27 +35,6 @@ try {
         "message" => "Data fetched with success",
         "data" => $messagesTab
     ];
-    // create the object user
-    // $userObject = new User('', '', '', $username, '', '');
-
-    // Verify if the user exists
-    // If username not found return message not found
-    // $user = $userObject->getUserByUsername();
-    // if (is_null($user)) {
-    //     $data = ['status' => 'error', 'message' => 'User not found for : ' . $username];
-    // } else {
-    //     //Update all his messages with a user named "user_deleted"
-    //     $userId = $user['id'];
-    //     $data = updateMessages($userId);
-
-    //     // Delete the user by its username
-    //     $delete = $userObject->deleteUserByUsername($username);
-    //     if ($delete) {
-    //         $data = ['status' => 'ok', 'message' => 'User deleted'];
-    //     } else {
-    //         $data = ['status' => 'error', 'message' => 'Error deleting user'];
-    //     }
-    // }
 
     // Encode the data
     echo json_encode($data);

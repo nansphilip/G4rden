@@ -131,19 +131,17 @@ class User
     }
 
     /**
-     * Gets all users matching a username.
+     * Gets all users username except for anonymous users, for the admin interface.
      * @return array of associated_arrays of users
      */
-    public static function getAllUsernamesByUsername($username)
+    public static function getAllUsernames()
     {
         try {
-            $sql = "SELECT username FROM User WHERE username LIKE :username";
-            $query = Database::queryAssoc($sql, [
-                ':username' => "%" . $username . "%"
-            ]);
+            $sql = "SELECT username FROM User WHERE username NOT LIKE 'anonymous-%'";
+            $query = Database::queryAssoc($sql);
             return $query;
         } catch (PDOException $e) {
-            throw new Error("getAllUsersByUsername -> " . $e->getMessage());
+            throw new Error("getAllUsernames -> " . $e->getMessage());
         }
     }
 
@@ -167,6 +165,63 @@ class User
     // ===== Update methods ===== //
     // ========================== //
 
+    /**
+     * Update the user firstname
+     * @param string $firstname 
+     * @return bool
+     */
+    public function updateFirstname($firstname)
+    {
+        try {
+            $sql = "UPDATE User SET firstname = :firstname WHERE id = :id";
+            $query = Database::queryBool($sql, [
+                ':firstname' => $firstname,
+                ':id' => $this->id
+            ]);
+            return $query;
+        } catch (PDOException $e) {
+            throw new Error("updateFirstname -> " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Update all the user informations to null 
+     * and his username by anonymous-[random number]
+     * @param string $userId
+     * @param string $username
+     * @return bool
+     */
+    public function updateUserInfoBeforeDelete($userId,$username)
+    {
+        try {
+            $sql = "UPDATE User SET username = :username, lastname = 'deleted', firstname = 'deleted',
+            passwordHash = 'deleted'
+            WHERE id = :id";
+            $query = Database::queryBool($sql, [':username' => $username, ':id' => $userId]);
+            return $query;
+        } catch (PDOException $e) {
+            throw new Error("updateUserInfoBeforeDelete -> " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Update a username
+     * @param string $username
+     * @return bool
+     */
+    public function updateUsername($username)
+    {
+        try {
+            $sql = "UPDATE User SET username = :username WHERE id = :id";
+            $query = Database::queryBool($sql, [
+                ':username' => $username,
+                ':id' => $this->id
+            ]);
+            return $query;
+        } catch (PDOException $e) {
+            throw new Error("updateUsername -> " . $e->getMessage());
+        }
+    }
 
     // ========================== //
     // ===== Delete methods ===== //

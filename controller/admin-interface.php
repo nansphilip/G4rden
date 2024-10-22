@@ -7,13 +7,22 @@ if (!isset($_SESSION['active'])) {
 }
 
 // Includes required models
+require_once "./model/User.php";
 
 // Prepare data for the view
+$usersList = User::getAllUsernames();
+$datalist = "";
+//For each username in databse, add an option to the datalist
+foreach($usersList as $user){
+    $username = $user['username'];
+    $datalist .= "<option value=\"$username\"></option>";
+}
 
 // List of variables to inject in the view
 $varToInject = [
     "ENVIRONMENT" => $ENVIRONMENT,
     "PATH" => $PATH,
+    "LIST_USERNAMES" => $datalist,
 ];
 
 // Set page meta data

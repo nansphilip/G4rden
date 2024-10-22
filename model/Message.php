@@ -150,7 +150,7 @@ class Message
     public static function getMessagesByUserAndContent($userId, $stringOfContent)
     {
         try {
-            $sql = "SELECT * FROM Message WHERE content LIKE :content AND userId = :userId";
+            $sql = "SELECT * FROM Message WHERE content LIKE :content AND userId = :userId ORDER BY date DESC";
             $query = Database::queryAssoc($sql, [
                 ':content' => "%" . $stringOfContent . "%",
                 ':userId' => $userId

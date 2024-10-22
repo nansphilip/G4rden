@@ -26,9 +26,7 @@ require_once("view/components/header.php");
 
         - avec une boucle foreach/endfor tu remplis le champ datalist avec les utilisateurs trouvés
 
-        ex: <?php foreach ($users as $user): ?>
-                <option value="<?= $user['username']; ?>"><?= $user['username']; ?></option>
-            <?php endforeach; ?>
+       
 
         - en JS, tu fais que les submits en asynchrone
 
@@ -63,10 +61,11 @@ require_once("view/components/header.php");
         <h3>Supprimer un utilisateur</h3>
         <p>Entrez le nom de l'utilisateur à supprimer.</p>
         <div style="position: relative;"> <!-- Positionner le conteneur -->
-            <input type="text" id="searchDeleteUser" placeholder="Pseudo de l'utilisateur" />
-            <div id="suggestionsDeleteUser" class="suggestions"></div>
+            <input list="datalist" id="searchDeleteUser" placeholder="Pseudo de l'utilisateur" />
+            <datalist id="datalist">
+                <?php echo $LIST_USERNAMES; ?>
+            </datalist>
         </div>
-        <!-- <input type="text" class="margin w-fit-content" id="inputUsername" placeholder="Pseudo de l'utilisateur"> -->
         <label for="selectDeleteMessage" class="bold">Messages de l'utilisateur: </label>
         <select class="margin w-fit-content" id="selectDeleteMessage">
             <option value="updateMessages">Conserver ses messages en anonymisant leur auteur</option>
@@ -75,18 +74,18 @@ require_once("view/components/header.php");
         <button type="button" class="margin w-fit-content" id="deleteUser">Supprimer</button>
         <div id="consoleMessage"></div>
     </div>
-    <!-- Test de recherche user avec propositions -->
 
 
     <!-- Delete a message -->
     <div class="flex flex-column gap-1 rounded-box mb-2">
         <h3>Supprimer un message</h3>
         <p>Entrez le nom de l'utilisateur</p>
-        <div style="position: relative;"> <!-- Positionner le conteneur -->
-            <input type="text" id="searchDeleteMessage" placeholder="Pseudo de l'utilisateur" />
-            <div id="suggestionsDeleteMessage" class="suggestions"></div>
+        <div style="position: relative;">
+            <input list="datalist" id="searchDeleteMessage" name="searchDeleteMessage" placeholder="Pseudo de l'utilisateur" />
+            <datalist id="datalist">
+                <?php echo $LIST_USERNAMES; ?>
+            </datalist>
         </div>
-        <!-- <input type="text" class="margin w-fit-content" id="usernameMessage" placeholder="Pseudo de l'utilisateur"> -->
         <p>Entrez un mot clé du message à rechercher.</p>
         <input type="text" class="margin w-fit-content" id="inputMessage" placeholder="Mot clé">
         <button type="button" class="margin w-fit-content" id="searchMessage">Rechercher</button>
@@ -100,11 +99,12 @@ require_once("view/components/header.php");
     <div class="flex flex-column gap-1 rounded-box mb-2">
         <h3>Modifier les privilèges d'un utilisateur</h3>
         <p>Entrez le nom de l'utilisateur</p>
-        <div style="position: relative;"> <!-- Positionner le conteneur -->
-            <input type="text" id="searchChangeType" placeholder="Pseudo de l'utilisateur" />
-            <div id="suggestionsChangeType" class="suggestions"></div>
+        <div style="position: relative;">
+            <input list="datalist" id="searchChangeType" placeholder="Pseudo de l'utilisateur" />
+            <datalist id="datalist">
+                <?php echo $LIST_USERNAMES; ?>
+            </datalist>
         </div>
-        <!-- <input type="text" class="margin w-fit-content" id="usernameChangeType" placeholder="Pseudo de l'utilisateur"> -->
         <p>Choisissez le nouveau privilège</p>
         <select class="margin w-fit-content" id="selectChangeType">
             <option value="USER">Utilisateur</option>

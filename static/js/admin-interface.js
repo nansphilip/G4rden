@@ -24,72 +24,6 @@ async function waitSeconds(seconds) {
     await wait(seconds * 1000);
 }
 
-// ======================================== //
-// ===== Propose username suggestions ===== //
-// ======================================== //
-
-/* Function that propose username suggestions to the user, and put them in a div below
-for each letter entered, it searches for users matching the username in the database */
-export const searchUser = async (inputElement, suggestionElement) => {
-    // Point to each input field and get its value
-    const search = document.getElementById(inputElement);
-    const username = search.value.toLowerCase();
-    // Point to the div to put suggestions
-    const suggestions = document.getElementById(suggestionElement);
-
-    // Checks if the input has at least one character
-    if (username.length > 0) {
-        // Get all users matching the username
-        const { data, error } = await AsyncRouter.post("search-user", { username });
-        // Clear the suggestions div
-        suggestions.innerHTML = "";
-        // If data is not null, display the usernames suggestions
-        if (data) {
-            data.forEach((user) => {
-                // Create the suggestion div for each user
-                const suggestion = document.createElement("div");
-                suggestion.classList.add("suggestion-item");
-                suggestion.innerHTML = user.username;
-                // Add event listener to each suggestion div to input the username in the input field when the user click on it
-                suggestion.addEventListener("click", async () => {
-                    search.value = user.username;
-                    suggestions.style.display = "none";
-                });
-                suggestions.appendChild(suggestion);
-            });
-            // Display the div suggestion
-            suggestions.style.display = "block";
-        } else {
-            // If no data, hide the div suggestions
-            suggestions.style.display = "none";
-            console.log(error);
-        }
-    } else {
-        // Hide the suggestion div if the input is empty
-        suggestions.style.display = "none";
-    }
-};
-
-// Listener on each input field to search user and put suggestions on the div below
-const allInput = {
-    searchDeleteUser: "suggestionsDeleteUser",
-    searchDeleteMessage: "suggestionsDeleteMessage",
-    searchChangeType: "suggestionsChangeType",
-};
-for (const [input, suggestion] of Object.entries(allInput)) {
-    const inputSearchUser = document.getElementById(input);
-    inputSearchUser.addEventListener("input", async () => await searchUser(input, suggestion));
-}
-
-// Listener on each suggestion div to close them when the user click on document
-document.addEventListener("click", async () => {
-    const allSuggestions = ["suggestionsDeleteUser", "suggestionsDeleteMessage", "suggestionsChangeType"];
-    allSuggestions.forEach((suggestion) => {
-        const suggestions = document.getElementById(suggestion);
-        suggestions.style.display = "none";
-    });
-});
-
 // ========================== //
 // ===== Delete a user  ===== //
 // ========================== //
@@ -119,9 +53,9 @@ export const deleteUser = async () => {
 const buttonDelete = document.querySelector("#deleteUser");
 buttonDelete.addEventListener("click", async () => await deleteUser());
 
-// ========================== //
-// ==== Delete a message ==== //
-// ========================== //
+// =========================== //
+// ==== Show all messages ==== //
+// =========================== //
 
 /* Function that display all messages of a user, and allow the user to delete a message
 by clicking on the delete button on the right of each message*/
@@ -191,7 +125,7 @@ buttonSearch.addEventListener("click", async () => await showAllMessages());
 // ===== Delete a message ===== //
 // ============================ //
 
-// Function that delete a message when the user click on the delete button
+// Function that delete a message when the user click on the delete button "X"
 export const deleteMessageContent = async (idMessage) => {
     const messageContainer = document.querySelector("#messages-container");
 
