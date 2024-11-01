@@ -13,10 +13,9 @@ $varToInject = [
 ];
 
 // Set page meta data
-App::setPageTitle("Error");
-App::setPageDescription("G4rden error");
-App::setPageFavicon("world.png");
+App::setPageTitle("Une erreur est survenue..." . " • G4rden");
+App::setPageDescription("Une erreur est survenue sur G4rden.");
+App::setPageFavicon("leaf.png");
 
 // Load the view
-App::loadCssFiles(["utils"]);
 App::loadViewFile("error", $varToInject);

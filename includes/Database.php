@@ -75,18 +75,27 @@ class Database
         }
     }
 
-    public static function queryBool($sqlQuery, $bindVariableList = [])
+    /**
+     * Returns the last inserted id
+     * @return int
+     */
+    public static function lastInsertId()
     {
-        try {
-            $query = self::queryAssoc($sqlQuery, $bindVariableList);
-
-            if (is_null($query)) {
-                return false;
-            }
-
-            return true;
-        } catch (PDOException $e) {
-            throw new Error("queryBool -> " . $e->getMessage());
-        }
+        return self::$connection->lastInsertId();
     }
+
+    // public static function queryBool($sqlQuery, $bindVariableList = [])
+    // {
+    //     try {
+    //         $query = self::queryAssoc($sqlQuery, $bindVariableList);
+
+    //         if (is_null($query)) {
+    //             return false;
+    //         }
+
+    //         return true;
+    //     } catch (PDOException $e) {
+    //         throw new Error("queryBool -> " . $e->getMessage());
+    //     }
+    // }
 }

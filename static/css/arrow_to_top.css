@@ -1,7 +1,4 @@
 #arrow_to_top {
-    background-color: var(--primary-color);
-    opacity: 0%;
-
     cursor: pointer;
     padding: none;
 
@@ -10,20 +7,24 @@
     right: 4rem;
     z-index: 100;
 
-    color: var(--white);
-
-    height: 3rem;
-    width: 3rem;
-
+    height: 2.5rem;
+    width: 2.5rem;
+    
+    opacity: 0%;
+    font-weight: bold;
+    
+    color: var(--text-primary);
     border-radius: var(--border-radius-full);
     border: none;
-
+    
     transition: background-color 200ms;
     transition: opacity 200ms;
 }
 
 #arrow_to_top:hover {
-    background-color: var(--primary-color-hover);
+    transform: translate(calc(var(--shadow-x) * 0.25), calc(var(--shadow-y) * 0.25));
+    box-shadow: calc(var(--shadow-x) * 0.5) calc(var(--shadow-y) * 0.5) var(--shadow-color);
+    transition: all 150ms;
 }
 
 #arrow_to_top:disabled {

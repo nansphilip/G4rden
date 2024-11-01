@@ -29,7 +29,7 @@ export default class AsyncRouter {
         try {
             // Fetch the data
             const response = await fetch(`/index.php?a=${url}`, {
-                method: "GET",
+                method: "GET"
             });
 
             // Parse the data
@@ -46,8 +46,4 @@ export default class AsyncRouter {
             return { error: `An error occurred: ${error.message}` };
         }
     }
-
-    static async update(url, params = {}) {}
-
-    static async delete(url, params = {}) {}
 }

@@ -12,19 +12,31 @@ GRANT ALL PRIVILEGES ON `g4rden-db`.* TO 'g4rden-user' @'localhost';
 
 -- Creates user table
 CREATE TABLE `User` (
-    `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `firstname` varchar(50) NOT NULL,
-    `lastname` varchar(50) NOT NULL,
-    `username` varchar(50) NOT NULL UNIQUE,
-    `passwordHash` varchar(255) NOT NULL,
+    `userId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `firstname` VARCHAR(50) NOT NULL,
+    `lastname` VARCHAR(50) NOT NULL,
+    `username` VARCHAR(50) NOT NULL UNIQUE,
+    `passwordHash` VARCHAR(255) NOT NULL,
     `userType` ENUM('USER', 'ADMIN') NOT NULL DEFAULT 'USER'
+);
+
+-- Creates subject table
+CREATE TABLE `Subject` (
+    `subjectId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(50) NOT NULL UNIQUE,
+    `description` TEXT(3000) NOT NULL,
+    `isValidated` BOOLEAN NOT NULL DEFAULT FALSE, -- a subject created by an user must be validated by an admin
+    `userId` INT NOT NULL,
+    FOREIGN KEY (`userId`) REFERENCES `User` (`userId`) ON DELETE CASCADE
 );
 
 -- Creates message table
 CREATE TABLE `Message` (
-    `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `messageId` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `content` TEXT(3000) NOT NULL,
-    `date` datetime NOT NULL,
-    `userId` int NOT NULL,
-    FOREIGN KEY (`userId`) REFERENCES `User` (`id`) ON DELETE CASCADE
+    `date` TIMESTAMP NOT NULL,
+    `userId` INT NOT NULL,
+    `subjectId` INT, -- null is for general chat, not null is for subject chat
+    FOREIGN KEY (`userId`) REFERENCES `User` (`userId`) ON DELETE CASCADE,
+    FOREIGN KEY (`subjectId`) REFERENCES `Subject` (`subjectId`) ON DELETE CASCADE
 );
