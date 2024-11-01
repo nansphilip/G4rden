@@ -15,7 +15,7 @@ class User
 
     /**
      * User constructor.
-     * @param int|null $userId The ID of the user.
+     * @param int|null $userId The userId of the user.
      * @param string|null $lastname The user's last name.
      * @param string|null $firstname The user's first name.
      * @param string|null $username The username.
@@ -54,7 +54,7 @@ class User
             $ENVIRONMENT = $envFile['ENV'];
 
             // Check if in production
-            if ($ENVIRONMENT == "PROD") {
+            if ($ENVIRONMENT !== "DEV") {
                 $getRowCount = Database::queryAssoc("SELECT COUNT(*) as recordsAmount FROM User;");
                 $recordsAmount = $getRowCount[0]['recordsAmount'];
 
@@ -74,7 +74,7 @@ class User
                 ':userType' => $userType,
             ]);
 
-            // Get the last inserted id
+            // Get the last inserted userId
             $lastInsertId = Database::lastInsertId();
             // Get the current inserted message
             $userArray = $this->getUserById($lastInsertId);
@@ -113,8 +113,8 @@ class User
     // ======================= //
 
     /**
-     * Retrieves a user by their ID.
-     * @param int $userId The user's ID.
+     * Retrieves a user by their userId.
+     * @param int $userId The user's userId.
      * @return array|null The user's data or null if the user is not found.
      * @throws Error If an error occurs during retrieval.
      */
@@ -165,13 +165,91 @@ class User
     // ===== Update methods ===== //
     // ========================== //
 
+
+    /**
+     * Updates a user by its userId.
+     * @param string $username
+     */
+    public function updateUsername($username)
+    {
+        try {
+            $sql = "UPDATE User SET username = :username where userId = :userId";
+            Database::queryAssoc($sql, [
+                ':userId' => $this->userId,
+                ':username' => $username
+            ]);
+            // Update the current instance of object
+            $this->username = $username;
+        } catch (PDOException $e) {
+            throw new Error("updateUsername -> " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Updates a user by its userId.
+     * @param string $firstname
+     */
+    public function updateFirstname($firstname)
+    {
+        try {
+            $sql = "UPDATE User SET firstname = :firstname where userId = :userId";
+            Database::queryAssoc($sql, [
+                ':userId' => $this->userId,
+                ':firstname' => $firstname
+            ]);
+            // Update the current instance of object
+            $this->firstname = $firstname;
+        } catch (PDOException $e) {
+            throw new Error("updateFirstname -> " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Updates a user by its userId.
+     * @param string $lastname
+     */
+    public function updateLastname($lastname)
+    {
+        try {
+            $sql = "UPDATE User SET lastname = :lastname where userId = :userId";
+            Database::queryAssoc($sql, [
+                ':userId' => $this->userId,
+                ':lastname' => $lastname
+            ]);
+            // Update the current instance of object
+            $this->lastname = $lastname;
+        } catch (PDOException $e) {
+            throw new Error("updateLastname -> " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Updates a user by its userId.
+     * @param string $passwordHash
+     */
+    public function updatePassword($passwordHash)
+    {
+        try{
+            $sql = "UPDATE User SET passwordHash = :passwordHash where userId = :userId";
+            Database::queryAssoc($sql, [
+                ':userId' => $this->userId,
+                ':passwordHash' => $passwordHash
+            ]);
+            // Update the current instance of object
+            $this->passwordHash = $passwordHash;
+        } catch (PDOException $e) {
+            throw new Error("updatePassword -> " . $e->getMessage());
+        }
+    }
+
+
     // ========================== //
     // ===== Delete methods ===== //
     // ========================== //
 
     /**
-     * Deletes a user by their ID.
-     * @param int $userId The user's ID.
+     * Deletes a user by their userId.
+     * @param int $userId The user's userId.
      * @return array|null The data of the deleted user or null if the user is not found.
      * @throws Error If an error occurs during deletion.
      */

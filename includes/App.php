@@ -6,7 +6,7 @@
  * // Set page meta data
  * App::setPageTitle("Home");
  * App::setPageDescription("Welcome to G4rden");
- * App::setPageFavicon("world.png");
+ * App::setPageFavicon("leaf.png");
  *
  * // Load the view
  * App::loadCssFiles(["home", "global"]);

@@ -41,7 +41,7 @@ try {
     $ENVIRONMENT = $envFile['ENV'];
 
     // Check if in production
-    if ($ENVIRONMENT == "DEV") {
+    if ($ENVIRONMENT === "DEV") {
         // Throw an error for debugging
         throw new Error($e->getMessage());
     }
