@@ -70,7 +70,7 @@ if (isset($_POST["updateInfo"])) {
             "message" => "Votre mot de passe a été mis à jour."
         ];
     } catch (Throwable $e) {
-        if ($ENVIRONMENT == "DEV") {
+        if ($ENVIRONMENT === "DEV") {
             throw new Error("Profile Controller -> " . $e->getMessage());
         }
         $notification = [

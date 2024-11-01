@@ -11,6 +11,7 @@
     
     --text-success: hsl(120, 61%, 35%);
     --text-alert: hsl(0, 60%, 50%);
+    --text-alert-hover: hsl(0, 60%, 85%);
 
     --primary-color: hsl(213, 38%, 50%);
     --primary-color-hover: hsl(213, 40%, 70%);
@@ -35,6 +36,7 @@
 
     --text-success: hsl(120, 61%, 65%);
     --text-alert: hsl(0, 40%, 50%);
+    --text-alert-hover: hsl(0, 40%, 25%);
 
     --primary-color: hsl(213, 66%, 45%);
     --primary-color-hover: hsl(212, 70%, 25%);

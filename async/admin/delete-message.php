@@ -1,39 +1,37 @@
 <?php
-// Message script
 
+//Require the models
 require_once "./model/Message.php";
 
 try {
-    // Parameters list
-    $paramList = ["subjectId"];
-
     // Get JSON post data
     $input = file_get_contents('php://input');
     $data = json_decode($input, true);
 
     // Sanitize data
+    $paramList = ["messageId"];
     foreach ($paramList as $param) {
         if (!isset($data[$param])) throw new Error("A parameter is missing");
         ${$param} = htmlspecialchars($data[$param], ENT_QUOTES, 'UTF-8');
     }
 
-    $subject = $subjectId === "null" ? null : $subjectId;
-
-    // Get all users
-    $limit = 20;
+    // Verify that the message exists
     $message = new Message();
-    $messageList = $message->getLastMessageJoinedToUser($subject, $limit);
-
-    // If no messages are found, throw an error
-    if (is_null($messageList)) {
-        throw new Error("Message list is empty");
+    $messageData = $message->getMessageById($messageId);
+    if (is_null($messageData)) {
+        throw new Error("Message not found");
     }
+
+    // Delete the message
+    $message->deleteMessageById($messageId);
 
     // Encode the data
     echo json_encode([
-        "status" => "ok",
-        "message" => "Data fetched with success",
-        "data" => $messageList
+        'status' => 'ok',
+        'message' => 'Message deleted',
+        'data' => [
+            'messageId' => $messageId
+        ]
     ]);
 } catch (Throwable $e) {
     // Get environment
@@ -49,7 +47,7 @@ try {
     // Return an error to the client
     echo json_encode([
         "status" => "error",
-        "message" => "can't fetch messages",
+        "message" => "can't delete message",
         "data" => null
     ]);
 }

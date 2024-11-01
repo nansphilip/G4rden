@@ -75,7 +75,7 @@ const refreshMessages = async () => {
 
             // Create the new message content
             const messageContent = `<div class="flex flex-row justify-between">
-                    <h3>${username}</h3>
+                    <h3 class="bold">${username}</h3>
                     <div class="flex flex-row items-center gap-1">
                         <p>${formattedDate}</p>
                         <p>•</p>

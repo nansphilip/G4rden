@@ -10,10 +10,12 @@ $nonLoggedLinks = "
 $loggedLinks = "
     <a href={$PATH}/index.php?p=message>Message</a>
     <a href={$PATH}/index.php?p=profile>Profil</a>
-    <a href={$PATH}/index.php?p=logout>Déconnexion</a>
 ";
 $adminLinks = "
     <a href={$PATH}/index.php?p=admin-interface>Admin</a>
+";
+$logoutLink = "
+    <a href={$PATH}/index.php?p=logout>Déconnexion</a>
 ";
 ?>
 
@@ -26,7 +28,7 @@ $adminLinks = "
     // Sets the navigation bar depending if the user is logged in or not
     if (isset($_SESSION['active'])) {
         echo $loggedLinks;
-        if ($_SESSION['userType'] == 'ADMIN') {
+        if ($_SESSION['userType'] === 'ADMIN') {
             echo $adminLinks;
         }
         echo $logoutLink;
@@ -34,7 +36,7 @@ $adminLinks = "
         echo $nonLoggedLinks;
     }
     ?>
-    <button class="icon-nav toggle-theme" >
+    <button class="icon-nav toggle-theme">
         <svg class="icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="4" />
             <path d="M12 2v2" />
@@ -62,7 +64,7 @@ $adminLinks = "
     // Sets the navigation bar depending if the user is logged in or not
     if (isset($_SESSION['active'])) {
         echo $loggedLinks;
-        if ($_SESSION['userType'] == 'ADMIN') {
+        if ($_SESSION['userType'] === 'ADMIN') {
             echo $adminLinks;
         }
         echo $logoutLink;

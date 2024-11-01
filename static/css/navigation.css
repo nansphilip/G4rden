@@ -1,5 +1,5 @@
 /* Desktop nav */
-@media (min-width: 680px) {
+@media (min-width: 740px) {
     .desktop-nav {
         height: fit-content;
         display: flex;
@@ -59,7 +59,7 @@
 }
 
 /* Mobile nav */
-@media (max-width: 680px) {
+@media (max-width: 740px) {
     .button-nav {
         font-weight: bold;
         background-color: var(--white);

@@ -56,6 +56,10 @@
     gap: 1rem;
 }
 
+.gap-4 {
+    gap: 1.5rem;
+}
+
 .pl-0 {
     padding-left: 0;
 }
@@ -76,8 +80,20 @@
     padding-top: 0.5rem;
 }
 
+.pointer:hover {
+    cursor: pointer;
+}
+
+.mt-1 {
+    margin-top: 0.5rem;
+}
+
 .mt-2 {
     margin-top: 1rem;
+}
+
+.mb-1 {
+    margin-bottom: 0.5rem;
 }
 
 .mb-2 {

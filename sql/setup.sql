@@ -8,7 +8,7 @@ USE `g4rden-db`;
 CREATE USER 'g4rden-user' @'localhost' IDENTIFIED BY 'g4rden-password';
 
 -- Gives to the user all privileges on the database
-GRANT ALL PRIVILEGES ON `g4rden-db`.* TO 'g4rden-user' @'localhost';
+GRANT ALL PRIVILEGES ON `g4rden-db`.* TO 'g4rden-user'@'localhost';
 
 -- Creates user table
 CREATE TABLE `User` (

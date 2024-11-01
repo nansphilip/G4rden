@@ -15,10 +15,12 @@
     
     color: var(--text-primary);
     border-radius: var(--border-radius-full);
-    border: none;
+    border: var(--border-width) solid var(--border-color);
+    background-color: var(--white);
     
-    transition: background-color 200ms;
-    transition: opacity 200ms;
+    transform: translate(0px, 0px);
+    box-shadow: calc(var(--shadow-x) * 0.75) calc(var(--shadow-y) * 0.75) var(--shadow-color);
+    transition: all 150ms;
 }
 
 #arrow_to_top:hover {

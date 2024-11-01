@@ -133,95 +133,60 @@ class Message
     }
 
     /**
-     * Gets all messages of an user by its id.
-     * @return array of associated_arrays of messages
-     */
-    public function getMessagesByUserId()
-    {
-        try {
-            $sql = "SELECT * FROM Message WHERE userId = :userId";
-            $query = Database::queryAssoc($sql, [
-                ':userId' => $this->userId
-            ]);
-            return $query;
-        } catch (PDOException $e) {
-            throw new Error("getMessagesByUserId -> " . $e->getMessage());
-        }
-    }
-
-    /**
-     * Gets all messages between two dates.
-     * @param string $startDate
-     * @param string $endDate
-     * @return array of associated_arrays of messages
-     */
-    public function getMessagesByDateBetween($startDate, $endDate)
-    {
-        try {
-            $sql = "SELECT * FROM Message WHERE date BETWEEN :startDate AND :endDate";
-            $query = Database::queryAssoc($sql, [
-                ':startDate' => $startDate,
-                ':endDate' => $endDate
-            ]);
-            return $query;
-        } catch (PDOException $e) {
-            throw new Error("getMessagesByDateBetween -> " . $e->getMessage());
-        }
-    }
-
-    /**
      * Gets all messages with a word or a sentence in their content.
-     * @param string $stringOfContent
-     * @return array of associated_arrays of messages
+     * @param string $stringOfContent The string to search for in the message content.
+     * @param int $limit The maximum number of messages to retrieve.
+     * @return array|null An array of associative arrays of messages or null if no messages are found.
+     * @throws Error If an error occurs during retrieval.
      */
-    public static function getMessagesByPeaceOfContent($stringOfContent)
+    public function getMessagesByPieceOfContent($stringOfContent, $limit = 10)
     {
         try {
-            $sql = "SELECT * FROM Message WHERE content LIKE :content";
+            // Limit de maximum amount of messages
+            $limit = (int)$limit;
+
+            $sql = "SELECT 
+                Message.messageId AS messageId,
+                Message.content AS content,
+                Message.date AS date,
+                User.username AS username,
+                User.userId AS userId
+                FROM Message
+                INNER JOIN User ON User.userId = Message.userId
+                WHERE content
+                LIKE :content
+                LIMIT $limit";
+
+            // Prepare the SQL query
             $query = Database::queryAssoc($sql, [
-                ':content' => $stringOfContent
+                ':content' => '%' . $stringOfContent . '%'
             ]);
+            // If no result, return null
+            if (is_null($query)) {
+                return null;
+            }
+            // Return associated array of message
             return $query;
         } catch (PDOException $e) {
-            throw new Error("getMessagesByPeaceOfContent -> " . $e->getMessage());
+            throw new Error("getMessagesByPieceOfContent -> " . $e->getMessage());
         }
     }
 
     /**
-     * Gets all messages with a word or a sentence in their content 
-     * and with a specified user
-     * @param string $stringOfContent, $userId
-     * @return array of associated_arrays of messages
-     */
-    public static function getMessagesByUserAndContent($userId, $stringOfContent)
-    {
-        try {
-            $sql = "SELECT * FROM Message WHERE content LIKE :content AND userId = :userId ORDER BY date DESC";
-            $query = Database::queryAssoc($sql, [
-                ':content' => "%" . $stringOfContent . "%",
-                ':userId' => $userId
-            ]);
-            return $query;
-        } catch (PDOException $e) {
-            throw new Error("getMessagesByPeaceOfContent -> " . $e->getMessage());
-        }
-    }
-
-    /**
-     * Retrieves the latest messages from a subject, associated with them users, ordered by date.
-     * @param string $subject The subject of the messages.
+     * Retrieves the latest messages from a subject, associated with their users, ordered by date.
+     * @param string|null $subject The subject of the messages. If null, retrieves messages with no subject.
      * @param int $limit The maximum number of messages to retrieve.
      * @return array|null The latest messages or null if no messages are found.
      * @throws Error If an error occurs during retrieval.
      */
-    public static function getLastMessageJoinedToUser($subject, $limit = 10)
+    public function getLastMessageJoinedToUser($subject, $limit = 10)
     {
         try {
             // Limit de maximum amount of messages
             $limit = (int)$limit;
 
             // Check if the subject is null
-            $sebjectSql = is_null($subject) ? 'AND Message.subjectId IS NULL' : 'AND Message.subjectId = :subjectId';
+            $subjectSql = is_null($subject) ? 'AND Message.subjectId IS NULL' : 'AND Message.subjectId = :subjectId';
             $arrayToPrepare = is_null($subject) ? [] : [':subjectId' => $subject];
 
             // Get the last messages joined with them users
@@ -233,7 +198,7 @@ class Message
                 User.userId AS userId
                 FROM Message
                 INNER JOIN User ON User.userId = Message.userId
-                {$sebjectSql}
+                {$subjectSql}
                 ORDER BY Message.date DESC
                 LIMIT $limit";
 
@@ -251,27 +216,6 @@ class Message
     }
 
     // ========================== //
-    // ===== Update methods ===== //
-    // ========================== //
-
-    /**
-     * Updates the username for all his messages
-     */
-    public function updateAllAuthorMessages($userId)
-    {
-        try {
-            $sql = "UPDATE Message SET userId = :newUserId WHERE userId = :userId";
-            $query = Database::queryBool($sql, [
-                ':newUserId' => $userId,
-                ':userId' => $this->userId
-            ]);
-            return $query;
-        } catch (PDOException $e) {
-            throw new Exception("updateAllAuthorMessages -> " . $e->getMessage());
-        }
-    }
-
-    // ========================== //
     // ===== Delete methods ===== //
     // ========================== //
 
@@ -281,7 +225,7 @@ class Message
      * @return array|null The data of the deleted message or null if the message is not found.
      * @throws Error If an error occurs during deletion.
      */
-    public function deleteMessage($messageId)
+    public function deleteMessageById($messageId)
     {
         try {
             // Check if the message exists
@@ -299,25 +243,7 @@ class Message
             // Return the deleted message
             return $messageArray;
         } catch (PDOException $e) {
-            throw new Error("deleteMessage -> " . $e->getMessage());
-        }
-    }
-
-    /**
-     * Deletes all messages of an user by its id
-     * @param string $userId
-     * @return bool
-     */
-    public static function deleteAllMessagesByUserId($userId)
-    {
-        try {
-            $sql = "DELETE FROM Message WHERE userId = :userId";
-            $query = Database::queryBool($sql, [
-                ':userId' => $userId
-            ]);
-            return $query;
-        } catch (PDOException $e) {
-            throw new Error("deleteAllMessagesByUserId -> " . $e->getMessage());
+            throw new Error("deleteMessageById -> " . $e->getMessage());
         }
     }
 }

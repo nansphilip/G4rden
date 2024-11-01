@@ -161,30 +161,14 @@ class User
         }
     }
 
-
-    /**
-     * Gets all users username except for anonymous users, for the admin interface.
-     * @return array of associated_arrays of users
-     */
-    public static function getAllUsernames()
-    {
-        try {
-            $sql = "SELECT username FROM User WHERE username NOT LIKE 'anonymous-%'";
-            $query = Database::queryAssoc($sql);
-            return $query;
-        } catch (PDOException $e) {
-            throw new Error("getAllUsernames -> " . $e->getMessage());
-        }
-    }
-
     // ========================== //
     // ===== Update methods ===== //
     // ========================== //
 
-
     /**
      * Updates a user by its userId.
-     * @param string $username
+     * @param string $username The new username.
+     * @throws Error If an error occurs during the update.
      */
     public function updateUsername($username)
     {
@@ -203,7 +187,8 @@ class User
 
     /**
      * Updates a user by its userId.
-     * @param string $firstname
+     * @param string $firstname The new first name.
+     * @throws Error If an error occurs during the update.
      */
     public function updateFirstname($firstname)
     {
@@ -220,10 +205,10 @@ class User
         }
     }
 
-
     /**
      * Updates a user by its userId.
-     * @param string $lastname
+     * @param string $lastname The new last name.
+     * @throws Error If an error occurs during the update.
      */
     public function updateLastname($lastname)
     {
@@ -242,7 +227,8 @@ class User
 
     /**
      * Updates a user by its userId.
-     * @param string $passwordHash
+     * @param string $passwordHash The new hashed password.
+     * @throws Error If an error occurs during the update.
      */
     public function updatePassword($passwordHash)
     {
@@ -258,27 +244,92 @@ class User
             throw new Error("updatePassword -> " . $e->getMessage());
         }
     }
+}
+
+/**
+ * Class Admin
+ * Represents an admin user in the system.
+ */
+class Admin extends User
+{
+    // ======================= //
+    // ===== Get methods ===== //
+    // ======================= //
 
     /**
-     * Update all the user informations to null 
-     * and his username by anonymous-[random number]
-     * @param string $userId
-     * @param string $username
-     * @return bool
+     * Gets all users' usernames except for anonymous users, for the admin interface.
+     * @return array|null An array of usernames or null if no users are found.
+     * @throws Error If an error occurs during retrieval.
      */
-    public function updateUserInfoBeforeDelete($userId, $username)
+    public function getAllUsername()
     {
         try {
-            $sql = "UPDATE User SET username = :username, lastname = 'deleted', firstname = 'deleted',
-            passwordHash = 'deleted'
-            WHERE id = :id";
-            $query = Database::queryBool($sql, [':username' => $username, ':id' => $userId]);
-            return $query;
+            $sql = "SELECT username FROM User WHERE username NOT LIKE 'anonymized-%'";
+            $query = Database::queryAssoc($sql);
+            // If no result, return null
+            if (is_null($query)) {
+                return null;
+            }
+            // Extract the username from the associative array
+            $usernameList = [];
+            foreach ($query as $user) {
+                $usernameList[] = $user['username'];
+            }
+            // Return instance object
+            return $usernameList;
         } catch (PDOException $e) {
-            throw new Error("updateUserInfoBeforeDelete -> " . $e->getMessage());
+            throw new Error("getAllUsername -> " . $e->getMessage());
         }
     }
 
+    // ========================== //
+    // ===== Update methods ===== //
+    // ========================== //
+
+    /**
+     * Updates the user type of a user.
+     * @param int $userId The ID of the user.
+     * @param string $userType The new user type.
+     * @throws Exception If an error occurs during the update.
+     */
+    public function updateUserType($userId, $userType)
+    {
+        try {
+            $sql = "UPDATE User SET userType = :userType WHERE userId = :userId";
+            Database::queryAssoc($sql, [
+                ':userType' => $userType,
+                ':userId' => $userId
+            ]);
+        } catch (PDOException $e) {
+            throw new Exception("updateUserType -> " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Anonymizes a user by their userId.
+     * @param int $userId The ID of the user.
+     * @param string $anonymizedUsername The anonymized username.
+     * @throws Error If an error occurs during the anonymisation.
+     */
+    public function anonymiseUser($userId, $anonymizedUsername)
+    {
+        try {
+            $sql = "UPDATE User
+                SET 
+                    username = :username,
+                    lastname = 'anonymized',
+                    firstname = 'anonymized',
+                    passwordHash = 'anonymized',
+                    userType = 'USER'
+                WHERE userId = :userId";
+            Database::queryAssoc($sql, [
+                ':username' => $anonymizedUsername,
+                ':userId' => $userId
+            ]);
+        } catch (PDOException $e) {
+            throw new Error("anonymiseUser -> " . $e->getMessage());
+        }
+    }
 
     // ========================== //
     // ===== Delete methods ===== //
@@ -308,48 +359,7 @@ class User
             // Return the deleted user
             return $userArray;
         } catch (PDOException $e) {
-            throw new Error("deleteUser -> " . $e->getMessage());
-        }
-    }
-
-    /**
-     * Deletes a user by its username.
-     */
-    public function deleteUserByUsername($username)
-    {
-        try {
-            $sql = "DELETE FROM User WHERE username = :username";
-            $query = Database::queryBool($sql, [
-                ':username' => $username
-            ]);
-            return $query;
-        } catch (PDOException $e) {
-            throw new Exception("deleteUserByUsername -> " . $e->getMessage());
-        }
-    }
-}
-
-class Admin extends User
-{
-    // Methods that require admin privileges
-    // Ex: update user privileges
-
-    /**
-     * Updates the user type of a user
-     * @param string $userId
-     * @param string $userType
-     */
-    public function updateUserType($userId, $userType)
-    {
-        try {
-            $sql = "UPDATE User SET userType = :userType WHERE id = :userId";
-            $query = Database::queryBool($sql, [
-                ':userType' => $userType,
-                ':userId' => $userId
-            ]);
-            return $query;
-        } catch (PDOException $e) {
-            throw new Exception("updateUserType -> " . $e->getMessage());
+            throw new Error("deleteUserById -> " . $e->getMessage());
         }
     }
 }

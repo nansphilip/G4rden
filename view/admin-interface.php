@@ -7,115 +7,99 @@
 require_once("view/components/header.php");
 ?>
 
-<main class="flex flex-column gap-3">
+<main class="flex flex-column gap-4 overflow-y-auto padding-shadow">
     <div>
-        <h2><?= App::$pageTitle; ?></h2>
-        <p>G4rden's admin interface.</p>
+        <h2 class="bold"><?= App::$pageTitle; ?></h2>
+        <p>G4rden's admin dashboard.</p>
     </div>
 
-    <!--
-    
-    Yo Théo, solide pour l'autocompletion en JS !
-    Ça marche bien, seulement, ça provoque une requête à chaque lettre que l'on tape.
-
-    Le prof demande que le code soit optimisé. Je pense que tu vas pouvoir améliorer ça
-    hyper rapidement avec un élément fait pour cela : https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist
-
-    Process pour l'autocompletion :
-        - dans le controleur, tu récupères tous les noms d'utilisateurs dans un tableau
-
-        - avec une boucle foreach/endfor tu remplis le champ datalist avec les utilisateurs trouvés
-
-       
-
-        - en JS, tu fais que les submits en asynchrone
-
-    Après cela, tu devrais avoir un JS beaucoup plus épuré et un serveur content de ne pas
-    recevoir trop de requêtes.
-
-    ------------------------------------------------------------------------------------------
-
-    Pour le CSS, j'ai merge les dernières modifications de main sur cette branche. Donc tu as
-    les styles pour tout ce qu'il faut.
-
-    Tu utiliseras probablement : components.css et utils.css. Mais n'hésite pas à ajouter une
-    feuille de style spécifique à ta page si besoin.
-    
-    Dans le fichier global.css, tu peux
-    retrouver des variables CSS qui sont disponibles partout et sont la base de 
-    notre thème de couleurs. C'est aussi ce qui permet d'avoir un thème clair
-    et un thème sombre.
-
-    ------------------------------------------------------------------------------------------
-
-    Pour le JS, tu peux essayer de factoriser ton code si tu en as envie. C'est plus pour
-    la beauté du code que pour la performance. Même si parfois, l'un entraine l'autre.
-
-    En tout cas, t'as rédigé un sacré morceau de code ! Bien joué !
-
-    -->
-        
-
-    <!-- Delete a user -->
-    <div class="flex flex-column gap-1 rounded-box mb-2">
-        <h3>Supprimer un utilisateur</h3>
-        <p>Entrez le nom de l'utilisateur à supprimer.</p>
-        <div style="position: relative;"> <!-- Positionner le conteneur -->
-            <input list="datalist" id="searchDeleteUser" placeholder="Pseudo de l'utilisateur" />
-            <datalist id="datalist">
-                <?php echo $LIST_USERNAMES; ?>
-            </datalist>
-        </div>
-        <label for="selectDeleteMessage" class="bold">Messages de l'utilisateur: </label>
-        <select class="margin w-fit-content" id="selectDeleteMessage">
-            <option value="updateMessages">Conserver ses messages en anonymisant leur auteur</option>
-            <option value="deleteMessages">Supprimer tous ses messages</option>
-        </select>
-        <button type="button" class="margin w-fit-content" id="deleteUser">Supprimer</button>
-        <div id="consoleMessage"></div>
+    <div>
+        <h3 class="bold mb-1">Modifier les privilèges d'un utilisateur</h3>
+        <form name="updateType" class="rounded-box flex flex-column gap-3">
+            <div class="flex flex-column gap-1">
+                <label for="selectUsernameForUpdateType">Rechercher un utilisateur</label>
+                <input
+                    class="input-form"
+                    list="datalist"
+                    id="selectUsernameForUpdateType"
+                    placeholder="Pseudo de l'utilisateur"
+                    required />
+                <datalist id="datalist">
+                    <?php foreach ($usernameList as $username) : ?>
+                        <option value="<?= $username; ?>"></option>
+                    <?php endforeach; ?>
+                </datalist>
+            </div>
+            <div class="flex flex-column gap-1">
+                <label for="selectTypeForUpdateType">Sélectionner un niveau de privilèges</label>
+                <select id="selectTypeForUpdateType" class="input-form pointer" required>
+                    <option value="USER">Utilisateur</option>
+                    <option value="ADMIN">Administrateur</option>
+                </select>
+                <div id="feedbackForUpdateType" class="italic bold font-sm w-full center text-success"></div>
+                <div class="flex justify-center">
+                    <button type="submit" class="submit-button">Modifier</button>
+                </div>
+            </div>
+        </form>
     </div>
 
-
-    <!-- Delete a message -->
-    <div class="flex flex-column gap-1 rounded-box mb-2">
-        <h3>Supprimer un message</h3>
-        <p>Entrez le nom de l'utilisateur</p>
-        <div style="position: relative;">
-            <input list="datalist" id="searchDeleteMessage" name="searchDeleteMessage" placeholder="Pseudo de l'utilisateur" />
-            <datalist id="datalist">
-                <?php echo $LIST_USERNAMES; ?>
-            </datalist>
-        </div>
-        <p>Entrez un mot clé du message à rechercher.</p>
-        <input type="text" class="margin w-fit-content" id="inputMessage" placeholder="Mot clé">
-        <button type="button" class="margin w-fit-content" id="searchMessage">Rechercher</button>
-
-        <div id="messages-container" class="flex-1 flex flex-column gap-2 overflow-y-auto padding-shadow">
-            <!-- Messages will be injected here -->
-        </div>
+    <div>
+        <h3 class="bold mb-1">Supprimer un utilisateur</h3>
+        <form name="deleteUser" class="rounded-box flex flex-column gap-3">
+            <div class="flex flex-column gap-1">
+                <label for="searchDeleteUser">Rechercher un utilisateur</label>
+                <input
+                    class="input-form"
+                    list="datalist"
+                    id="searchDeleteUser"
+                    placeholder="Pseudo de l'utilisateur"
+                    required />
+                <datalist id="datalist">
+                    <?php foreach ($usernameList as $username) : ?>
+                        <option value="<?= $username; ?>"></option>
+                    <?php endforeach; ?>
+                </datalist>
+            </div>
+            <div class="flex flex-column gap-1">
+                <label for="selectDeleteUser">Action à réaliser</label>
+                <select id="selectDeleteUser" class="input-form pointer" required>
+                    <option value="anonymisation">Conserver ses messages et anonymiser leur auteur</option>
+                    <option value="deletion">Supprimer ses messages et supprimer leur auteur</option>
+                </select>
+                <div id="feedbackForDeleteUser" class="italic bold font-sm w-full center text-success"></div>
+                <div class="flex justify-center">
+                    <button type="submit" name="deleteUser" class="submit-button mt-1">Supprimer</button>
+                </div>
+            </div>
+        </form>
     </div>
 
-    <!-- Change the userType of a user -->
-    <div class="flex flex-column gap-1 rounded-box mb-2">
-        <h3>Modifier les privilèges d'un utilisateur</h3>
-        <p>Entrez le nom de l'utilisateur</p>
-        <div style="position: relative;">
-            <input list="datalist" id="searchChangeType" placeholder="Pseudo de l'utilisateur" />
-            <datalist id="datalist">
-                <?php echo $LIST_USERNAMES; ?>
-            </datalist>
-        </div>
-        <p>Choisissez le nouveau privilège</p>
-        <select class="margin w-fit-content" id="selectChangeType">
-            <option value="USER">Utilisateur</option>
-            <option value="ADMIN">Administrateur</option>
-        </select>
-        <button type="button" class="margin w-fit-content" id="changeUserType">Modifier</button>
-        <div id="consoleUserType"></div>
+    <div>
+        <h3 class="bold mb-1">Supprimer un message</h3>
+        <form name="deleteMessage" class="rounded-box flex flex-column gap-3">
+            <div class="flex flex-column gap-1">
+                <label for="selectForDeleteMessage">Entrez un mot clé du message à rechercher</label>
+                <input
+                    type="text"
+                    class="input-form"
+                    id="selectForDeleteMessage"
+                    placeholder="Mot clé"
+                    required />
+                <div class="flex justify-center">
+                    <button type="submit" class="submit-button mt-1">Rechercher</button>
+                </div>
+                <div id="feedbackForDeleteMessage" class="italic bold font-sm w-full center text-success"></div>
+            </div>
+            <div id="messageContainerForDeleteMessage" name="deleteMessage" class="flex-1 flex flex-column gap-2 overflow-y-auto padding-shadow">
+                <!-- Messages will be injected here -->
+            </div>
+        </form>
     </div>
-</main>
 
-<?php
-// Includes the footer
-require_once("view/components/footer.php");
-?>
+    <div class="flex-1"></div>
+
+    <?php
+    // Includes the footer
+    require_once("view/components/footer.php");
+    ?>
