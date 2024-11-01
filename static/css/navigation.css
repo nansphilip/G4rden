@@ -13,27 +13,29 @@
     .icon-nav {
         text-decoration: none;
         padding: 0.2rem 0.5rem;
-        background-color: var(--white);
         border: var(--border-width) solid var(--border-color);
         border-radius: var(--border-radius-small);
+        background-color: var(--white);
+
+        position: relative;
+        transform: translate(0px, 0px);
         box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color);
-        transition: background-color 150ms;
+        transition: all 150ms;
     }
 
-    .desktop-nav a:hover,
-    .icon-nav:hover {
+    .desktop-nav a:hover {
         background-color: var(--secondary-color-hover);
         transition: background-color 150ms;
     }
-    
+
     .icon-nav {
         align-self: stretch;
-
+        
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    
+
     .icon-nav:hover {
         cursor: pointer;
     }
@@ -77,12 +79,12 @@
 
     .mobile-nav {
         position: absolute;
+        z-index: 10;
         right: 1rem;
         top: 3.5rem;
 
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
         justify-content: center;
         gap: 0.5rem;
 
@@ -92,24 +94,48 @@
         border-radius: var(--border-radius);
         box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color);
     }
-    .mobile-nav a {
+
+    .mobile-nav a,
+    .icon-nav {
         text-decoration: none;
         text-align: center;
 
-        width: 100%;
-        padding: 0.2rem 0.5rem;
+        padding: 0.4rem 0.5rem;
 
         box-shadow: var(--shadow-x-small) var(--shadow-y-small) var(--shadow-color);
         background-color: var(--white);
         border: var(--border-width) solid var(--border-color);
         border-radius: var(--border-radius-small);
     }
-    .mobile-nav a:focus {
+    
+    .mobile-nav a:focus,
+    .icon-nav:focus {
         background-color: var(--white);
     }
 
     /* Hide desktop nav */
     .desktop-nav {
         display: none;
+    }
+
+    .icon-nav {
+        align-self: stretch;
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .icon-nav:hover {
+        cursor: pointer;
+    }
+
+    .icon {
+        height: var(--font-size);
+        width: var(--font-size);
+        stroke: var(--text-primary);
+        stroke-width: 2px;
+        fill: none;
+        background-color: transparent;
     }
 }
