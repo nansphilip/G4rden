@@ -50,7 +50,7 @@ class Message
             $ENVIRONMENT = $envFile['ENV'];
 
             // Check if in production
-            if ($ENVIRONMENT == "PROD") {
+            if ($ENVIRONMENT !== "DEV") {
                 $getRowCount = Database::queryAssoc("SELECT COUNT(*) as recordsAmount FROM Message;");
                 $recordsAmount = $getRowCount[0]['recordsAmount'];
 

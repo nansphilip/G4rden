@@ -72,7 +72,7 @@ $varToInject = [
 // Set page meta data
 App::setPageTitle("S'inscrire" . " • G4rden");
 App::setPageDescription("S'inscrire sur le forum G4rden." . " • G4rden");
-App::setPageFavicon("world.png");
+App::setPageFavicon("leaf.png");
 
 // Load the view
 App::loadCssFiles(["togglePassword"]);

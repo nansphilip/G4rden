@@ -1,30 +1,29 @@
 function moveAllEyesButton() {
-    const password = document.querySelectorAll("input[type=password]");
+    const passwordInputList = document.querySelectorAll("input[type=password]");
 
-    password.forEach((password) => {
-        const eye = password.parentNode.querySelectorAll("#toggleEyes")[0];
-        move(password, eye);
+    passwordInputList.forEach((passwordInput) => {
+        const eye = passwordInput.parentNode.querySelectorAll(".toggleEyes")[0];
+        move(passwordInput, eye);
     });
 }
 
 const setToggleButtonPosition = () => {
-    const password = document.querySelectorAll("input[type=password]");
+    const passwordInputList = document.querySelectorAll("input[type=password]");
 
-    password.forEach((password) => {
-
+    passwordInputList.forEach((passwordInput) => {
         const toggleEyes = document.createElement("div");
-        toggleEyes.setAttribute("id", "toggleEyes");
+        toggleEyes.setAttribute("class", "toggleEyes");
+
         const closedEye = document.createElement("button");
-        closedEye.setAttribute("id", "closed-eye");
+        closedEye.setAttribute("class", "closed-eye");
         closedEye.setAttribute("type", "button");
         toggleEyes.appendChild(closedEye);
+
         const openedEye = document.createElement("button");
-        openedEye.setAttribute("id", "opened-eye");
+        openedEye.setAttribute("class", "opened-eye");
         openedEye.setAttribute("type", "button");
         openedEye.setAttribute("style", "display: none;");
         toggleEyes.appendChild(openedEye);
-
-
 
         const svgClosedEye = createSvg(closedEye);
         appendPath("m15 18-.722-3.25", svgClosedEye);
@@ -32,16 +31,22 @@ const setToggleButtonPosition = () => {
         appendPath("m20 15-1.726-2.05", svgClosedEye);
         appendPath("m4 15 1.726-2.05", svgClosedEye);
         appendPath("m9 18 .722-3.25", svgClosedEye);
+
         const svgOpenedEye = createSvg(openedEye);
-        appendPath("M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0", svgOpenedEye);
-        const iconCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        appendPath(
+            "M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0",
+            svgOpenedEye
+        );
+
+        const iconCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         iconCircle.setAttribute("cx", "12");
         iconCircle.setAttribute("cy", "12");
         iconCircle.setAttribute("r", "3");
         svgOpenedEye.appendChild(iconCircle);
-        password.parentNode.appendChild(toggleEyes);
-        toggleEyes.addEventListener("mouseover", () => show(password, toggleEyes));
-        toggleEyes.addEventListener("mouseout", () => hide(password, toggleEyes));
+        passwordInput.parentNode.appendChild(toggleEyes);
+
+        toggleEyes.addEventListener("mouseover", () => show(passwordInput, toggleEyes));
+        toggleEyes.addEventListener("mouseout", () => hide(passwordInput, toggleEyes));
     });
     moveAllEyesButton();
 };
@@ -61,18 +66,20 @@ function move(password, eye) {
     eye.style.left = `${passwordLeft + passwordWidth - toggleEyesWidth - 8}px`;
 }
 
-document.addEventListener("DOMContentLoaded", () => setToggleButtonPosition());
+window.addEventListener("load", () => setToggleButtonPosition());
 window.addEventListener("resize", () => moveAllEyesButton());
 
 const show = (password, eye) => {
     toggleEyes(password, eye, true);
-}
+};
+
 const hide = (password, eye) => {
     toggleEyes(password, eye, false);
-}
+};
+
 const toggleEyes = (password, eye, show) => {
-    const openedEye = eye.querySelector("#opened-eye");
-    const closedEye = eye.querySelector("#closed-eye");
+    const openedEye = eye.querySelector(".opened-eye");
+    const closedEye = eye.querySelector(".closed-eye");
 
     if (show) {
         password.type = "text";
@@ -83,12 +90,10 @@ const toggleEyes = (password, eye, show) => {
         closedEye.style.display = "";
         openedEye.style.display = "none";
     }
-
-
 };
 
 function createSvg(closedEye) {
-    const svgClosedEye = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    const svgClosedEye = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svgClosedEye.setAttribute("class", "icon");
     svgClosedEye.setAttribute("viewBox", "0 0 24 24");
     svgClosedEye.setAttribute("stroke-linecap", "round");
@@ -98,7 +103,7 @@ function createSvg(closedEye) {
 }
 
 function appendPath(value, svg) {
-    const iconPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    const iconPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
     iconPath.setAttribute("d", value);
     svg.appendChild(iconPath);
 }

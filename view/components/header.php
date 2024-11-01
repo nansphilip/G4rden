@@ -34,7 +34,9 @@
 
 <body class="overflow-x-hidden overflow-y-hidden">
     <header>
-        <h1><?= "<a class='bold' href={$PATH}/index.php?p=home>G4rden</a>" ?></h1>
-        <img src="static/img/world.png" alt="Logo" class="logo">
+        <div class="flex flex-row gap-1">
+            <h1><?= "<a class='bold' href={$PATH}/index.php?p=home>G4rden</a>" ?></h1>
+            <img src="static/img/leaf.png" alt="Logo" class="logo">
+        </div>
         <?php require_once "view/components/navigation.php"; ?>
     </header>

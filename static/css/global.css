@@ -8,6 +8,8 @@
 
     --text-primary: hsl(175, 51%, 18%);
     --text-secondary: hsl(175, 10%, 46%);
+    
+    --text-success: hsl(120, 61%, 35%);
     --text-alert: hsl(0, 60%, 50%);
 
     --primary-color: hsl(213, 38%, 50%);
@@ -30,6 +32,8 @@
 
     --text-primary: hsl(175, 51%, 82%);
     --text-secondary: hsl(175, 10%, 54%);
+
+    --text-success: hsl(120, 61%, 65%);
     --text-alert: hsl(0, 40%, 50%);
 
     --primary-color: hsl(213, 66%, 45%);
@@ -45,11 +49,8 @@
     --shadow-color-light: var(--secondary-color-hover);
 }
 .logo {
-    position: absolute;
-    left : 62rem;
-    top : 1rem;
     height: 2rem;
-    width: auto;
+    width: 2rem;
 }
 
 html {

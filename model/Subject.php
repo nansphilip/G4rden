@@ -50,7 +50,7 @@ class Subject
             $ENVIRONMENT = $envFile['ENV'];
 
             // Check if in production
-            if ($ENVIRONMENT == "PROD") {
+            if ($ENVIRONMENT !== "DEV") {
                 $getRowCount = Database::queryAssoc("SELECT COUNT(*) as recordsAmount FROM Subject;");
                 $recordsAmount = $getRowCount[0]['recordsAmount'];
 

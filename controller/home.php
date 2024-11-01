@@ -58,7 +58,7 @@ $varToInject = [
 // Set page meta data
 App::setPageTitle("Accueil" . " • G4rden");
 App::setPageDescription("Bienvenu sur G4rden, le forum des plantes.");
-App::setPageFavicon("world.png");
+App::setPageFavicon("leaf.png");
 
 // Load the view
 App::loadViewFile("home", $varToInject);

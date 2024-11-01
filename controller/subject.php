@@ -38,7 +38,7 @@ $varToInject = [
 // Set page meta data
 App::setPageTitle("Sujets : " . $subject->name . " • G4rden");
 App::setPageDescription("Sujets de discussions sur le forum G4rden.");
-App::setPageFavicon("world.png");
+App::setPageFavicon("leaf.png");
 
 // Load the view
 App::loadJsFiles(["message"]);

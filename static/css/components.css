@@ -103,12 +103,3 @@
     position: absolute;
     background: linear-gradient(to bottom, var(--white), hsla(0, 0%, 0%, 0));
 }
-
-.notification-box {
-    background-color: var(--white);
-    color: var(--white);
-    padding: 0.5rem 1rem;
-    border-radius: var(--border-radius);
-    border: var(--border-width) solid var(--border-color);
-    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-color);
-}

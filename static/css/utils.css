@@ -30,9 +30,17 @@
     flex: 1 1 0%;
 }
 
-@media (max-width: 580px) {
-    .flex-wrap {
-        flex-wrap: wrap;
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.flex-row-to-col {
+    flex-direction: column;
+}
+
+@media (min-width: 780px) {
+    .flex-row-to-col {
+        flex-direction: row;
     }
 }
 
@@ -134,8 +142,12 @@
     font-size: 1.2rem;
 }
 
+.text-success {
+    color: var(--text-success);
+}
+
 .text-alert {
-    color : var(--text-alert);
+    color: var(--text-alert);
 }
 
 .center {
