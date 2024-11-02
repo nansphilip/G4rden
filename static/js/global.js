@@ -114,6 +114,7 @@ toggleButtonElList.forEach((el) => {
 // ========================== //
 
 const scrollableElementList = [
+    document.querySelector("main"),
     document.querySelector("#subjectContainer"),
     document.querySelector("#chatContainer"),
     document.querySelector("#loginForm"),

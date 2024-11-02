@@ -129,7 +129,7 @@ export const displayMessageFromContent = async (event) => {
                 </div>
                 <p>${content}</p>
             </div>
-            <button type="button" class="delete-button">❌</button>`;
+            <button type="button" class="delete-button" aria-label="Delete message">❌</button>`; // Added aria-label for accessibility
 
         // Insert content into the new message element
         newMessageEl.innerHTML = messageContent;

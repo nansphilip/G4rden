@@ -35,8 +35,8 @@
 <body class="overflow-x-hidden overflow-y-hidden">
     <header>
         <div class="flex flex-row gap-1">
-            <h1><?= "<a class='bold' href={$PATH}/index.php?p=home>G4rden</a>" ?></h1>
-            <img src="static/img/leaf.png" alt="Logo" class="logo">
+            <h1><?= "<a class='bold' href={$PATH}/index.php?p=home aria-label='G4rden Home'>G4rden</a>" ?></h1>
+            <img src="static/img/leaf.png" alt="Logo" class="logo" aria-label="G4rden Logo">
         </div>
         <?php require_once "view/components/navigation.php"; ?>
     </header>

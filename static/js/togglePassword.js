@@ -17,12 +17,16 @@ const setToggleButtonPosition = () => {
         const closedEye = document.createElement("button");
         closedEye.setAttribute("class", "closed-eye");
         closedEye.setAttribute("type", "button");
+        closedEye.setAttribute("name", "closed-eye");
+        closedEye.setAttribute("aria-label", "Show password");
         toggleEyes.appendChild(closedEye);
 
         const openedEye = document.createElement("button");
         openedEye.setAttribute("class", "opened-eye");
         openedEye.setAttribute("type", "button");
         openedEye.setAttribute("style", "display: none;");
+        openedEye.setAttribute("name", "opened-eye");
+        openedEye.setAttribute("aria-label", "Hide password");
         toggleEyes.appendChild(openedEye);
 
         const svgClosedEye = createSvg(closedEye);
@@ -68,6 +72,8 @@ function move(password, eye) {
 
 window.addEventListener("load", () => setToggleButtonPosition());
 window.addEventListener("resize", () => moveAllEyesButton());
+window.addEventListener("mousemove", () => moveAllEyesButton());
+window.addEventListener("touchmove", () => moveAllEyesButton());
 
 const show = (password, eye) => {
     toggleEyes(password, eye, true);

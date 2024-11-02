@@ -11,14 +11,14 @@ require_once "view/components/header.php";
     <h2 class="bold">Chat général</h2>
     <p class="mb-2">Vous êtes sur le chat général de G4rden. Soyez respectueux envers nos jardiniers et amateurs de plantes.</p>
 
-    <div
+    <section
         id="chatContainer"
         data-user-id="<?= $_SESSION['userId'] ?>"
         data-subject-id="null"
         class="flex-1 flex flex-column gap-2 overflow-y-auto padding-shadow">
         <div class="blur-gradient"></div>
         <!-- Messages will be injected here -->
-    </div>
+    </section>
 
     <div class="padding-shadow">
         <form id="addNewMessage" method="post" action="" class="mt-2 flex flex-column gap-1 rounded-box">
@@ -32,9 +32,10 @@ require_once "view/components/header.php";
                     class="input-form"
                     placeholder="Écrire un message..."
                     required
-                    autofocus>
+                    autofocus
+                    aria-label="Écrire un message">
                 </input>
-                <button type="submit" class="w-fit-content submit-button" name="new_message">↑</button>
+                <button type="submit" class="w-fit-content submit-button" name="new_message" aria-label="Envoyer le message">↑</button>
             </div>
         </form>
     </div>

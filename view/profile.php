@@ -18,22 +18,22 @@ require_once("view/components/header.php");
                 <div class="rounded-box flex flex-column gap-2">
                     <div class="flex flex-column">
                         <label for="username" class="bold">Username</label>
-                        <input type="text" autocomplete="off" id="username" name="username" class="input-form" placeholder="<?= $username; ?>">
+                        <input type="text" autocomplete="off" id="username" name="username" class="input-form" placeholder="<?= $username; ?>" aria-label="Username">
                     </div>
                     <div class="flex flex-column">
                         <label for="firstname" class="bold">Firstname</label>
-                        <input type="text" autocomplete="off" id="firstname" name="firstname" class="input-form" placeholder="<?= $firstname; ?>">
+                        <input type="text" autocomplete="off" id="firstname" name="firstname" class="input-form" placeholder="<?= $firstname; ?>" aria-label="Firstname">
                     </div>
                     <div class="flex flex-column">
                         <label for="lastname" class="bold">Lastname</label>
-                        <input type="text" autocomplete="off" id="lastname" name="lastname" class="input-form" placeholder="<?= $lastname; ?>">
+                        <input type="text" autocomplete="off" id="lastname" name="lastname" class="input-form" placeholder="<?= $lastname; ?>" aria-label="Lastname">
                     </div>
                     <?php if (isset($notification) && $notification["title"] === "infoUpdated"): ?>
                         <p class="italic bold font-sm w-full center text-success"><?= $notification["message"] ?></p>
                     <?php endif; ?>
                 </div>
                 <div class="center">
-                    <button type="submit" name="updateInfo" class="submit-button">Mettre à jour</button>
+                    <button type="submit" name="updateInfo" class="submit-button" aria-label="Mettre à jour les informations">Mettre à jour</button>
                 </div>
             </form>
         </div>
@@ -44,11 +44,11 @@ require_once("view/components/header.php");
                 <div class="rounded-box flex flex-column gap-2">
                     <div class="flex flex-column">
                         <label for="password" class="bold">Password</label>
-                        <input type="password" name="password" id="password" placeholder="Password" class="input-form">
+                        <input type="password" name="password" id="password" placeholder="Password" class="input-form" aria-label="Password">
                     </div>
                     <div class="flex flex-column">
                         <label for="confirmPassword" class="bold">Confirm password</label>
-                        <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm password" class="input-form">
+                        <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm password" class="input-form" aria-label="Confirm password">
                     </div>
                     <?php if (isset($notification) && $notification["title"] === "passwordUpdated"): ?>
                         <div class="h-full flex items-center">
@@ -57,7 +57,7 @@ require_once("view/components/header.php");
                     <?php endif; ?>
                 </div>
                 <div class="center">
-                    <button type="submit" name="updatePassword" class="submit-button">Mettre à jour</button>
+                    <button type="submit" name="updatePassword" class="submit-button" aria-label="Mettre à jour le mot de passe">Mettre à jour</button>
                 </div>
             </form>
         </div>

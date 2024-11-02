@@ -1,28 +1,28 @@
 <?php
 // Navigation links
 $commonLinks = "
-    <a href={$PATH}/index.php?p=home>Accueil</a>
+    <a href={$PATH}/index.php?p=home aria-label='Accueil'>Accueil</a>
 ";
 $nonLoggedLinks = "
-    <a href={$PATH}/index.php?p=register>Inscription</a>
-    <a href={$PATH}/index.php?p=login>Connexion</a>
+    <a href={$PATH}/index.php?p=register aria-label='Inscription'>Inscription</a>
+    <a href={$PATH}/index.php?p=login aria-label='Connexion'>Connexion</a>
 ";
 $loggedLinks = "
-    <a href={$PATH}/index.php?p=message>Message</a>
-    <a href={$PATH}/index.php?p=profile>Profil</a>
+    <a href={$PATH}/index.php?p=message aria-label='Message'>Message</a>
+    <a href={$PATH}/index.php?p=profile aria-label='Profil'>Profil</a>
 ";
 $adminLinks = "
-    <a href={$PATH}/index.php?p=admin-interface>Admin</a>
+    <a href={$PATH}/index.php?p=admin-interface aria-label='Admin'>Admin</a>
 ";
 $logoutLink = "
-    <a href={$PATH}/index.php?p=logout>Déconnexion</a>
+    <a href={$PATH}/index.php?p=logout aria-label='Déconnexion'>Déconnexion</a>
 ";
 ?>
 
 <?php
 // Desktop navigation bar
 ?>
-<nav class="desktop-nav padding-shadow">
+<nav class="desktop-nav padding-shadow" aria-label="Desktop Navigation">
     <?php
     echo $commonLinks;
     // Sets the navigation bar depending if the user is logged in or not
@@ -36,7 +36,7 @@ $logoutLink = "
         echo $nonLoggedLinks;
     }
     ?>
-    <button class="icon-nav toggle-theme">
+    <button type="button" class="icon-nav toggle-theme" aria-label="Toggle Theme Color">
         <svg class="icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="4" />
             <path d="M12 2v2" />
@@ -57,8 +57,8 @@ $logoutLink = "
 <?php
 // Mobile navigation bar
 ?>
-<button class="button-nav" type="button">Menu</button>
-<nav class="mobile-nav" style="display: none;">
+<button class="button-nav" type="button" aria-label="Toggle Mobile Menu">Menu</button>
+<nav class="mobile-nav" style="display: none;" aria-label="Mobile Navigation">
     <?php
     echo $commonLinks;
     // Sets the navigation bar depending if the user is logged in or not
@@ -72,7 +72,7 @@ $logoutLink = "
         echo $nonLoggedLinks;
     }
     ?>
-    <button class="icon-nav toggle-theme">
+    <button type="button" class="icon-nav toggle-theme" aria-label="Toggle Theme Color">
         <svg class="icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="4" />
             <path d="M12 2v2" />

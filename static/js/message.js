@@ -72,6 +72,7 @@ const refreshMessages = async () => {
             const newMessageEl = document.createElement("div");
             newMessageEl.classList.add("rounded-box-light", currentUserId === userId.toString() ? "right-message" : "left-message");
             newMessageEl.setAttribute("data-id", stringMessageId);
+            newMessageEl.setAttribute("aria-label", `Message from ${username} on ${formattedDate} at ${formattedTime}`);
 
             // Create the new message content
             const messageContent = `<div class="flex flex-row justify-between">

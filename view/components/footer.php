@@ -1,9 +1,9 @@
 <?php // Footer for each page ?>
 
-<button type="button" id="arrow_to_top" class="arrow_to_top">↑</button>
+<button type="button" id="arrow_to_top" class="arrow_to_top" aria-label="Scroll to Top">↑</button>
 
 <footer class="mt-2">
-    <p class="italic text-sm text-secondary">G4rden - Made by <a class="italic text-sm text-secondary" target="_blank" href="https://github.com/nansphilip/G4rden">G4rden's Team</a></p>
+    <p class="italic text-sm text-secondary">G4rden - Made by <a class="italic text-sm text-secondary" target="_blank" href="https://github.com/nansphilip/G4rden" aria-label="G4rden's Team GitHub">G4rden's Team</a></p>
 </footer>
 
 </main>
