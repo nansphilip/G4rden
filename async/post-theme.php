@@ -32,9 +32,20 @@ try {
         "message" => "Data saved with success"
     ]);
 } catch (Throwable $e) {
+    // Get environment
+    $envFile = parse_ini_file(".env");
+    $ENVIRONMENT = $envFile['ENV'];
+
+    // Check if in production
+    if ($ENVIRONMENT === "DEV") {
+        // Throw an error for debugging
+        throw new Error($e->getMessage());
+    }
+
     // Return an error to the client
     echo json_encode([
         "status" => "error",
-        "message" => $e->getMessage()
+        "message" => "can't toggle dark theme",
+        "data" => null
     ]);
 }

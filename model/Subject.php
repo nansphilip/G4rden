@@ -139,7 +139,7 @@ class Subject
      * @return array|null An array of subjects with their last activity details, or null if no results are found.
      * @throws Error If an error occurs during the query execution.
      */
-    public static function getLastSubjectsByLastActivity($limit = 10)
+    public function getLastSubjectsByLastActivity($limit = 10)
     {
         try {
             // Limiter le nombre maximum de sujets

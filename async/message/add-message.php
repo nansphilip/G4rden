@@ -48,7 +48,7 @@ try {
     // Return an error to the client
     echo json_encode([
         "status" => "error",
-        "message" => "cannot add messages",
+        "message" => "can't add messages",
         "data" => null
     ]);
 }

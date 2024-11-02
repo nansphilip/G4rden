@@ -1,33 +1,23 @@
 <?php
-// Message script
 
+//Require the models
 require_once "./model/Message.php";
 
 try {
-    // Parameters list
-    $paramList = ["subjectId"];
-
     // Get JSON post data
     $input = file_get_contents('php://input');
     $data = json_decode($input, true);
 
     // Sanitize data
+    $paramList = ["pieceOfMessage"];
     foreach ($paramList as $param) {
         if (!isset($data[$param])) throw new Error("A parameter is missing");
         ${$param} = htmlspecialchars($data[$param], ENT_QUOTES, 'UTF-8');
     }
 
-    $subject = $subjectId === "null" ? null : $subjectId;
-
-    // Get all users
-    $limit = 20;
+    // Create the user object
     $message = new Message();
-    $messageList = $message->getLastMessageJoinedToUser($subject, $limit);
-
-    // If no messages are found, throw an error
-    if (is_null($messageList)) {
-        throw new Error("Message list is empty");
-    }
+    $messageList = $message->getMessagesByPieceOfContent($pieceOfMessage);
 
     // Encode the data
     echo json_encode([

@@ -133,20 +133,60 @@ class Message
     }
 
     /**
-     * Retrieves the latest messages from a subject, associated with them users, ordered by date.
-     * @param string $subject The subject of the messages.
+     * Gets all messages with a word or a sentence in their content.
+     * @param string $stringOfContent The string to search for in the message content.
+     * @param int $limit The maximum number of messages to retrieve.
+     * @return array|null An array of associative arrays of messages or null if no messages are found.
+     * @throws Error If an error occurs during retrieval.
+     */
+    public function getMessagesByPieceOfContent($stringOfContent, $limit = 10)
+    {
+        try {
+            // Limit de maximum amount of messages
+            $limit = (int)$limit;
+
+            $sql = "SELECT 
+                Message.messageId AS messageId,
+                Message.content AS content,
+                Message.date AS date,
+                User.username AS username,
+                User.userId AS userId
+                FROM Message
+                INNER JOIN User ON User.userId = Message.userId
+                WHERE content
+                LIKE :content
+                LIMIT $limit";
+
+            // Prepare the SQL query
+            $query = Database::queryAssoc($sql, [
+                ':content' => '%' . $stringOfContent . '%'
+            ]);
+            // If no result, return null
+            if (is_null($query)) {
+                return null;
+            }
+            // Return associated array of message
+            return $query;
+        } catch (PDOException $e) {
+            throw new Error("getMessagesByPieceOfContent -> " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Retrieves the latest messages from a subject, associated with their users, ordered by date.
+     * @param string|null $subject The subject of the messages. If null, retrieves messages with no subject.
      * @param int $limit The maximum number of messages to retrieve.
      * @return array|null The latest messages or null if no messages are found.
      * @throws Error If an error occurs during retrieval.
      */
-    public static function getLastMessageJoinedToUser($subject, $limit = 10)
+    public function getLastMessageJoinedToUser($subject, $limit = 10)
     {
         try {
             // Limit de maximum amount of messages
             $limit = (int)$limit;
 
             // Check if the subject is null
-            $sebjectSql = is_null($subject) ? 'AND Message.subjectId IS NULL' : 'AND Message.subjectId = :subjectId';
+            $subjectSql = is_null($subject) ? 'AND Message.subjectId IS NULL' : 'AND Message.subjectId = :subjectId';
             $arrayToPrepare = is_null($subject) ? [] : [':subjectId' => $subject];
 
             // Get the last messages joined with them users
@@ -158,7 +198,7 @@ class Message
                 User.userId AS userId
                 FROM Message
                 INNER JOIN User ON User.userId = Message.userId
-                {$sebjectSql}
+                {$subjectSql}
                 ORDER BY Message.date DESC
                 LIMIT $limit";
 
@@ -176,10 +216,6 @@ class Message
     }
 
     // ========================== //
-    // ===== Update methods ===== //
-    // ========================== //
-
-    // ========================== //
     // ===== Delete methods ===== //
     // ========================== //
 
@@ -189,7 +225,7 @@ class Message
      * @return array|null The data of the deleted message or null if the message is not found.
      * @throws Error If an error occurs during deletion.
      */
-    public function deleteMessage($messageId)
+    public function deleteMessageById($messageId)
     {
         try {
             // Check if the message exists
@@ -207,7 +243,7 @@ class Message
             // Return the deleted message
             return $messageArray;
         } catch (PDOException $e) {
-            throw new Error("deleteMessage -> " . $e->getMessage());
+            throw new Error("deleteMessageById -> " . $e->getMessage());
         }
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * App class
  * A minimalist PHP framework based on MVC pattern.

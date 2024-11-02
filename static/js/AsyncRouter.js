@@ -46,8 +46,4 @@ export default class AsyncRouter {
             return { error: `An error occurred: ${error.message}` };
         }
     }
-
-    static async update(url, params = {}) {}
-
-    static async delete(url, params = {}) {}
 }

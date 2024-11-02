@@ -1,4 +1,3 @@
-
 -- Inserts users and admins
 -- Passwords clear and hashed for tests
 -- User1234! -> $2y$10$rilirX9f6DY2sRlI4Bv0E.cUP0G72Q4f.w6qREcCRc/TwIiH3hn8C
@@ -243,7 +242,7 @@ INSERT INTO `Message` (`content`, `date`, `userId`, `subjectId`) VALUES
 ('Assurez-vous qu\'ils reçoivent assez de pollinisation.', FROM_UNIXTIME(1692229600), 10, 6),
 ('Je cultive mes fraises en intérieur, mais elles ne donnent rien.', FROM_UNIXTIME(1692236800), 1, 6),
 ('Sans lumière directe du soleil, la floraison sera limitée.', FROM_UNIXTIME(1692244000), 2, 6),
-('Quelles engrais naturels utilisez-vous pour les fraises ?', FROM_UNIXTIME(1692251200), 3, 6),
+('Quels engrais naturels utilisez-vous pour les fraises ?', FROM_UNIXTIME(1692251200), 3, 6),
 ('Le purin d\'ortie ou du compost maison fonctionnent bien.', FROM_UNIXTIME(1692258400), 4, 6),
 -- Subject 7
 ('L\'élagage favorise une meilleure production de fruits.', FROM_UNIXTIME(1692265600), 5, 7),
@@ -259,7 +258,7 @@ INSERT INTO `Message` (`content`, `date`, `userId`, `subjectId`) VALUES
 ('Mon cerisier a des branches cassées, dois-je les tailler ?', FROM_UNIXTIME(1692337600), 5, 7),
 ('Oui, cela évitera la propagation de maladies.', FROM_UNIXTIME(1692344800), 6, 7),
 ('Quand dois-je tailler mon prunier ?', FROM_UNIXTIME(1692352000), 7, 7),
-('Tailler les pruniers après la récolte pour éviter les infections.', FROM_UNIXTIME(1692359200), 8, 7),
+('Taillez les pruniers après la récolte pour éviter les infections.', FROM_UNIXTIME(1692359200), 8, 7),
 ('Est-il utile de tailler tous les ans ?', FROM_UNIXTIME(1692366400), 9, 7),
 ('Oui, une taille régulière permet d\'équilibrer la production de fruits.', FROM_UNIXTIME(1692373600), 10, 7),
 ('Mon figuier produit peu, que faire ?', FROM_UNIXTIME(1692380800), 1, 7),

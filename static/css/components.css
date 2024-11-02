@@ -97,6 +97,32 @@
     transition: all 150ms;
 }
 
+.delete-button {
+    height: 2rem;
+    width: 2rem;
+    
+    border: var(--border-width) solid var(--text-alert);
+    border-radius: var(--border-radius);
+    background-color: var(--white);
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    position: relative;
+    transform: translate(0px, 0px);
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--text-alert-hover);
+    transition: all 150ms;
+}
+
+.delete-button:hover {
+    cursor: pointer;
+
+    transform: translate(calc(var(--shadow-x) / 3), calc(var(--shadow-y) / 3));
+    box-shadow: calc(var(--shadow-x) / 3 * 2) calc(var(--shadow-y) / 3 * 2) var(--text-alert-hover);
+    transition: all 150ms;
+}
+
 .blur-gradient {
     height: 2rem;
     width: 100%;

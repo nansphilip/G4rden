@@ -56,7 +56,7 @@ if (isset($_POST['register'])) {
     } catch (Throwable $e) {
         if ($e->getMessage() === "Username already exists" || $e->getMessage() === "Invalid password") {
             $notification = "Identifiants incorrects.";
-        } else if ($ENVIRONMENT == "DEV") {
+        } else if ($ENVIRONMENT === "DEV") {
             throw new Error("Register Controller -> " . $e->getMessage());
         }
     }

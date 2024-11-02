@@ -55,7 +55,7 @@ if (isset($_POST['login'])) {
     } catch (Throwable $e) {
         if ($e->getMessage() === "User does not exist" || $e->getMessage() === "Invalid password") {
             $notification = "Identifiants incorrects.";
-        } else if ($ENVIRONMENT == "DEV") {
+        } else if ($ENVIRONMENT === "DEV") {
             throw new Error("Login Controller -> " . $e->getMessage());
         }
     }

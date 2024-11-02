@@ -83,19 +83,4 @@ class Database
     {
         return self::$connection->lastInsertId();
     }
-
-    // public static function queryBool($sqlQuery, $bindVariableList = [])
-    // {
-    //     try {
-    //         $query = self::queryAssoc($sqlQuery, $bindVariableList);
-
-    //         if (is_null($query)) {
-    //             return false;
-    //         }
-
-    //         return true;
-    //     } catch (PDOException $e) {
-    //         throw new Error("queryBool -> " . $e->getMessage());
-    //     }
-    // }
 }
