@@ -18,7 +18,7 @@ class Database
         $env = parse_ini_file(".env");
 
         // Get environment variables
-        $dsn = "mysql:host=" . $env['MYSQL_HOST'] . ";port=" . $env['MYSQL_PORT'] . ";dbname=" . $env['MYSQL_NAME'];
+        $dsn = "mysql:host=" . $env['MYSQL_HOST'] . ";port=" . $env['MYSQL_PORT'] . ";dbname=" . $env['MYSQL_NAME'] . ";charset=utf8mb4";
         $user = $env['MYSQL_USER'];
         $pass = $env['MYSQL_PASS'];
 
